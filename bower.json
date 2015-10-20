@@ -1,0 +1,27 @@
+{
+  "name": "bbCompass",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hell0again/bbCompass",
+  "authors": [
+    "hell0again <hell00again@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "jquery-simplecolorpicker": "~0.3.0",
+    "js-base64": "~2.1.9",
+    "pako": "~0.2.8",
+    "uuid": "~2.0.1"
+  }
+}

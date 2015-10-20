@@ -1,0 +1,40 @@
+// see http://eslint.org/docs/rules/
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "strict": [2, "function"],
+        "no-undef": 2,
+        "no-console": 0,
+
+        "no-redeclare": 1,
+
+        // ケツカンマ。OK
+        "comma-dangle": [0, "never"],
+
+        // e.g. if () {};
+        "no-extra-semi": 1,
+
+        // 未使用変数。varは警告、仮引数はOK
+        "no-unused-vars": [1, {"vars": "all", "args": "none"}],
+
+        // キー前後のspace。
+        "key-spacing": [0, {
+            "beforeColon": false,
+            "afterColon": true,
+            "mode": "minimum",
+        }],
+
+        // ブロック内宣言。OK
+        "no-inner-declarations": [0, "functions"],
+
+        "arrow-parens": [2, "always"]
+    }
+}
+
