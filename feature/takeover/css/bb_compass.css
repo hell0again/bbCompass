@@ -1,0 +1,600 @@
+body{
+    background-color:#F0F0F0;
+    background-image:url("../image/bg.png");
+    -webkit-text-size-adjust:100%;
+}
+
+h1,h3{
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMjA0LCAyMDQsIDIwNCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9InJnYmEoMjA0LCAyMDQsIDIwNCwgMC45KSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiIC8+PC9zdmc+");
+    background-image:-webkit-gradient(linear, left center, right center, color-stop(0%, rgb(204, 204, 204)), color-stop(100%, rgba(204, 204, 204, 0.9)));
+    background-image:linear-gradient(to right, rgba(204,204,204,1), rgba(204,204,204,0.9));
+}
+
+div.caption {
+    position:relative;
+    background:url("../image/bbtexture.png");
+}
+
+header span#viewsw {
+    position:absolute;
+    display:none;
+    color:white;
+    background-color:#000066;
+    right:20px;
+    top:0.2em;
+    padding:0.3em;
+    border-radius:5px;
+    font-size:50%;
+    box-shadow:0px 2px 4px gray;
+}
+
+@media only screen and (min-width : 850px) { 
+    /* メニュー部 */
+    div.menutitle{
+        width:95%;
+        min-width:50em;
+        margin-left:auto;
+        margin-right:auto;
+        border-top-left-radius:10px;
+        border-top-right-radius:10px;
+        background-color:#000066;
+        box-shadow:0px 2px 4px gray;
+        -webkit-box-shadow:0px 2px 4px gray;
+        overflow:hidden;
+    }
+
+    nav {
+        display:none;
+    }
+
+    div.menutitle span#titletext{
+        float:left;
+        color:white;
+        font-size:26px;
+        margin-left:0.5em;
+    }
+
+    div.menutitle span#menusw_on,div.menutitle span#menusw_off{
+        float:right;
+        margin-right:0.5em;
+        color:white;
+        font-size:26px;
+        text-decoration:underline;
+        cursor:pointer;
+    }
+
+    div.menutitle span#menusw_on{
+        display:none;
+    }
+
+    div.ribbonmenu{
+        width:95%;
+        min-width:50em;
+        margin-left:auto;
+        margin-right:auto;
+        margin-bottom:30px;
+    }
+
+    div.menucell{
+        height:15em;
+    }
+
+    div.menusubcell#subcell_graph{
+        float:left;
+        width: 100%;
+        margin-left: -10.6em;
+        margin-right: -21.3em;
+    }
+
+    div.menucell#menu_map,div.menucell#menu_cont,div.menucell#menu_view{
+        display:block;
+        width: 10.5em;
+    }
+
+    div.menucell#menu_graph{
+        margin-left:10.6em;
+        margin-right:21.3em;
+    }
+
+    /* 設置部 */
+    div#map_area .formtext{
+        max-width:8em;
+    }
+
+    #lst_layer{
+        width:7em;
+        white-space: nowrap;
+    }
+
+    #lst_object{
+        width:6em;
+        white-space: nowrap;
+    }
+
+    /* 制御部 */
+    #obj_area{
+        float:left;
+        width:100%;
+        margin-right:-3.4em;
+        margin-left:0.2em;
+        margin-top:0.3em;
+    }
+
+    #obj_cont{
+        text-align:center;
+        float:left;
+        width:3em;
+        margin-right:0.2em;
+        margin-top:0.3em;
+    }
+
+    #obj_cont button{
+        margin-top:0.2em;
+        margin-bottom:0.2em;
+    }
+}
+
+@media only screen and (max-width : 849px) { 
+    body {
+        margin-top:75px;
+    }
+
+    header {
+        position:fixed;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:75px;
+        z-index:999;
+        background-color:#F0F0F0;
+        background-image:url("../image/bg.png");
+        transform-origin:0px 0px;
+        -ms-transform-origin:0px 0px;
+        -webkit-transform-origin:0px 0px;
+    }
+
+    header h1 {
+        font-size:1.9em;
+        height:75px;
+        margin:0px;
+        margin-bottom:-30px;
+        overflow:hidden;
+    }
+
+    /* メニュー部 */
+    div.menutitle {
+        display:none;
+    }
+
+    nav {
+        width:100%;
+        height:28px;
+        background-color:white;
+        border-bottom:2px solid #000066;
+    }
+
+    nav div.menutab {
+        float:left;
+        background-color:#000066;
+        border:1px solid #000066;
+        border-radius: 5px 5px 0 0;
+        position:relative;
+        top:2px;
+        width:8em;
+        height:25px;
+        text-align:center;
+        color:white;
+        overflow:hidden;
+        margin:0 5px;
+    }
+
+    nav>div.menutab>span {
+        vertical-align:middle;
+    }
+
+    nav div.menutab:nth-child(2n) {
+        margin:0 5px;
+    }
+
+    nav div.selected{
+        background-color:white;
+        color:#000066;
+    }
+
+    div.ribbonmenu {
+        position:fixed;
+        top:75px;left:0px;
+        width:100%;
+        margin-left:0;
+        margin-right:0;
+        z-index:999;
+        transform-origin:0px -75px;
+        -ms-transform-origin:0px -75px;
+        -webkit-transform-origin:0px -75px;
+    }
+
+    div.menucell {
+        height:20em;
+    }
+
+    div.menusubcell#subcell_graph{
+        width: 100%;
+        display:none;
+    }
+
+    div.menucell#menu_map,div.menucell#menu_cont{
+        float:left;
+        width: 49%;
+    }
+
+    div#menu_view {
+       display:none;
+    }
+
+    div.ribbonmenu button {
+        width:70%;
+        height:30px;
+        margin-top:5px;
+        margin-bottom:5px;
+    }
+
+    div.ribbonmenu select, div.ribbonmenu input {
+        margin-top:5px;
+        margin-bottom:5px;
+        padding:0.2em;
+        font-size:100%;
+    }
+
+    div.name{
+        padding-top:0.2em;
+        padding-bottom:0.2em;
+    }
+
+    /* 設置部 */
+    div#map_area .formtext{
+        min-width:70%;
+    }
+
+    #lst_layer{
+        min-width:70%;
+        white-space: nowrap;
+    }
+
+    /* 制御部 */
+    #lst_object{
+        width:55%;
+        white-space: nowrap;
+    }
+
+    #obj_area{
+        float:left;
+        width:100%;
+        margin-right:-45%;
+        margin-left:0.2em;
+        margin-top:0.3em;
+    }
+
+    #obj_cont{
+        text-align:center;
+        float:left;
+        width:40%;
+        margin-right:0.2em;
+        margin-top:0.3em;
+    }
+}
+
+/* 設置部共通 */
+div#objsel_area {
+    float:left;
+    width:100%;
+    margin-right:-12em;
+}
+
+div#objselector {
+    position:relative;
+    background-color:#FFFFFF;
+    border:1px solid gainsboro;
+    margin:0.3em;
+    margin-right:12em;
+    height:12em;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+div#objselector div.option{
+    float:left;
+    width:50px;
+    height:50px;
+    text-align:center;
+    font-size:9pt;
+}
+
+div.setobj{
+    float:left;
+    margin:0.3em;
+    width:11.3em;
+}
+
+div.setobj.hidden{
+    display:none;
+}
+
+div.title{
+    font-weight:bold;
+}
+
+div.item{
+    padding:0.3em;
+    clear:both;
+    overflow:hidden;
+}
+
+
+.formtext{
+    margin:0px;
+    max-width:7em;
+}
+
+.colorpick{
+    margin:0px;
+    width:5em;
+}
+
+.formlst{
+    margin:0px;
+    max-width:7em;
+    white-space: nowrap;
+}
+
+div#objpoint .formtext{
+    max-width:5em;
+}
+
+div.name{
+    text-align:right;
+    line-height:22px;
+    margin-top:0.3em;
+    margin-left:0.2em;
+    min-width:3em;
+    clear:both;
+    float:left;
+}
+
+div.form{
+    margin-right:0.2em;
+    margin-top:5px;
+    float:left;
+}
+
+div.ptname{
+    text-align:right;
+    line-height:22px;
+    margin-top:0.3em;
+    margin-left:0.2em;
+    min-width:4em;
+    clear:both;
+    float:left;
+}
+
+div.submitbtn{
+    padding:0.3em;
+    clear:both;
+    text-align:center;
+}
+
+/* マップ部共通 */
+div.map_selector{
+    text-align:left;
+    margin-top:0.3em;
+}
+
+select#map > option{
+    background-color:white;
+}
+
+select#map > option.union,select#map.union{
+    background-color:gold;
+}
+
+select#map > option.event,select#map.event{
+    background-color:turquoise ;
+}
+
+select#map > option.scramble,select#map.scramble{
+    background-color:lightcoral;
+}
+
+#map_area,#layer_area{
+    margin:0.3em;
+}
+
+
+/* 表示部共通 */
+div#cursorselector {
+    margin-top:0.3em;
+    margin-bottom:0.3em;
+    text-align:center;
+}
+
+div#cursorselector > div{
+    float:left;
+    min-width:4em;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+}
+
+/* canvasまわり */
+div#LoadArea{
+    position:relative;
+}
+
+canvas#BBCompass{
+    border:1px solid black;
+    background-color:rgba(240,240,240,0.8);
+    -ms-touch-action: double-tap-zoom;
+}
+
+div#CanvasArea{
+    position:relative;
+    text-align:center;
+    overflow:scroll;
+    margin:10px auto;
+}
+
+div.ContextMenu{
+    position:absolute;
+    border:1px solid gray;
+    background-color:#F0F0F0;
+    -webkit-box-shadow:2px 2px 3px gray;
+    box-shadow:2px 2px 3px gray;
+    cursor:default;
+    width:12em;
+    display:none;
+    z-index:1;
+}
+
+div.ContextChild{
+    position:absolute;
+    border:1px solid gray;
+    background-color:#F0F0F0;
+    -webkit-box-shadow:2px 2px 3px gray;
+    box-shadow:2px 2px 3px gray;
+    width:12em;
+    display:none;
+    z-index:2;
+}
+
+div.ContextMenu ul{
+    position:relative;
+    margin:2px;
+    padding:0px;
+    border:none;
+    list-style-type: none; 
+}
+
+div.ContextMenu div.Spacer{
+    position:absolute;
+    left:30px;
+    width:1px;
+    height:100%;
+    border-left:1px solid gainsboro;
+    border-right:1px solid white;
+    color:transparent;
+    padding-top:2px;
+    padding-bottom:2px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+div.ContextMenu div.hrdiv{
+    position:relative;
+    margin-left:30px;
+    border:none;
+}
+
+div.ContextMenu div.hrdiv hr{
+    clear:both;
+    margin-top:5px;
+    margin-bottom:5px;
+    border:none;
+    border-top:1px solid gainsboro;
+    border-bottom:1px solid white;
+}
+
+div.ContextMenu ul li{
+    position:relative;
+    margin:0px;
+    margin-left:3px;
+    margin-right:3px;
+    padding:2px;
+    border: 1px solid transparent;
+}
+
+div.ContextMenu ul li:hover{
+    background-color:rgba(224,255,255,0.2);
+    border:1px solid lightskyblue;
+    border-radius:3px;
+}
+
+div.ContextMenu ul li:before{
+    width:30px;
+    display:inline-block;
+    content:".";
+    visibility:hidden;
+}
+
+div.ContextMenu ul li.checked:before{
+    width:30px;
+    display:inline-block;
+    visibility:visible;
+    content:url("../image/checked.gif");
+}
+
+div.ContextMenu ul li.hasChild:after{
+    float:right;
+    width:1em;
+    display: inline-block;
+    content:url("../image/haschild.gif");
+}
+
+div.ContextMenu ul li.disabled{
+    color:gray;
+}
+
+div#Loading{
+    text-align:center;
+    position:absolute;
+    border:1px solid black;
+    background-color:white;
+    width:120px;
+    height:80px;
+    margin-top:-40px;
+    margin-left:-60px;
+    padding:5px;
+    top:50%;
+    left:50%;
+    display:none;
+}
+
+/* 作業スペース */
+#WorkArea{
+    display:none;
+}
+
+/* メッセージなど */
+#Copyright{
+    text-align:center;
+    margin:0px auto;
+}
+
+#Address{
+    clear:both;
+    text-align:right;
+}
+
+textarea#changelog{
+    width:90%;
+}
+
+/* 画面幅が広い場合変更履歴と謝辞等を左右に分けて配置*/
+@media only screen and (min-width : 850px) { 
+    #Changes{
+        position:relative;
+        float:right;
+        width:28em;
+        z-index:1;
+    }
+
+    #Thanks_Attention{
+        position:relative;
+        float:left;
+        margin-right:-28em;
+        width:100%;
+    }
+
+    #Thanks,#Attention{
+        margin-right:30em;
+    }
+}
