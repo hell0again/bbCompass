@@ -902,6 +902,77 @@ class BB_ndsensor extends BB_base {
 }
 
 //
+//BB_vsensorオブジェクト
+//
+class BB_vsensor extends BB_base {
+    constructor(_bbObj, _text, _radiusa, _radiusb, _color, _mode, _callback) {
+        super(_bbObj);
+        if (_color===undefined) {_color='rgb(153, 0, 255)';}
+        if (_mode===undefined)  {_mode='A';}
+        this.id = UUID.v1();
+
+        this.type="vsensor";
+        this._text=_text;
+        this._radiusa=_radiusa;
+        this._radiusb=_radiusb;
+        this._color=_color;
+        this._mode=_mode;
+
+        //描画して登録。初期座標は偵察半径分ずらす
+        this.draw();
+        var px_rad = bbobj.meter_to_pixel(this._radiusa);
+        this.move(px_rad, px_rad);
+        this.regist();
+        if (typeof(_callback) === "function"){_callback.apply(this);};
+    };
+
+    draw() {
+        var px_rad,modecolor,
+            obj = this;
+
+        if (this._mode == 'A') {
+            px_rad = bbobj.meter_to_pixel(this._radiusa);
+            modecolor='#66FF66';
+        } else {
+            px_rad = bbobj.meter_to_pixel(this._radiusb);
+            modecolor='#00FFFF';
+        }
+
+        var area = this._ourJc.circle(0, 0, px_rad, this._color, false).opacity(1).layer(this.id);
+        this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.5).layer(this.id);
+        this._ourJc.circle(0, 0, ptsize, this._color, true).layer(this.id).color('#FFFFFF');
+        this._ourJc.text(this._text, 0, 20)
+               .align('center').layer(this.id).color('#FFFFFF').font('15px sans-serif');
+
+        var moderect = this._ourJc.rect(-7, -25, 14, 17, modecolor, true).layer(this.id);
+        var modetext = this._ourJc.text(this._mode, 0, -12)
+                       .align('center').layer(this.id).color('#000000').font('15px sans-serif');
+
+        clickfunc = () => {
+            obj.modechg.apply(obj);
+            return false;
+        };
+
+        moderect.click(clickfunc);
+        modetext.click(clickfunc);
+        area.dblclick(clickfunc);
+
+        this._ourJc.layer(this.id).draggable();
+        return this;
+    };
+
+    modechg() {
+        if (this._mode == 'A') {
+            this._mode = 'B';
+        } else {
+            this._mode = 'A';
+        }
+        this.redraw();
+        return false;
+    }
+}
+
+//
 //BB_howitzerオブジェクト
 //
 class BB_howitzer extends BB_base {
@@ -2277,11 +2348,11 @@ export default class BB {
 
         var visible = false,
             px_rad = bbobj.meter_to_pixel(radius),
-            area   = this.jcanvas.circle(x, y, px_rad, color, true)
+            area   = this._ourJc.circle(x, y, px_rad, color, true)
                                  .opacity(0.3).visible(visible).level(1),
-            line   = this.jcanvas.circle(x, y, px_rad, color, false)
+            line   = this._ourJc.circle(x, y, px_rad, color, false)
                                  .opacity(1).visible(visible).level(1),
-            hooker = this.jcanvas.circle(x, y, hookrad, 'rgba(0,0,0,0)', true)
+            hooker = this._ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true)
                                  .level(3).name("searchers");
 
         if (test) {
@@ -2324,6 +2395,10 @@ export default class BB {
 
     add_ndsensor(string, radius, color, _callback) {
         return new BB_ndsensor(this, string, radius, color, _callback);
+    }
+
+    add_vsensor(string, radiusa, radiusb, color, mode, _callback) {
+        return new BB_vsensor(this, string, radiusa, radiusb, color, mode, _callback);
     }
 
     add_howitzer(string, radius1, radius2, radius3, color, _callback) {

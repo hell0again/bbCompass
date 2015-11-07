@@ -40,6 +40,9 @@ $(document).ready(function() {
     $("#lst_ndsensor").change(function() {
         $("#name_ndsensor").val($("#lst_ndsensor option:selected").text());
     });
+    $("#lst_vsensor").change(function() {
+        $("#name_vsensor").val($("#lst_vsensor option:selected").text());
+    });
     $("#lst_howitzer").change(function() {
         $("#name_howitzer").val($("#lst_howitzer option:selected").text());
     });
@@ -234,6 +237,9 @@ $(document).ready(function() {
     });
     $("#submit_ndsensor").bind('click', function(e) {
         set_ndsensor();
+    });
+    $("#submit_vsensor").bind('click', function(e) {
+        set_vsensor();
     });
     $("#submit_howitzer").bind('click', function(e) {
         set_howitzer();
@@ -738,6 +744,25 @@ function set_ndsensor() {
     }
 }
 
+//Vセンサー
+function set_vsensor() {
+    if(! $("#lst_vsensor").val()) {return;}
+    if(! $("#col_vsensor").val()) {return;}
+
+    var param = eval($("#lst_vsensor").val());
+
+    var obj = bbobj.add_vsensor($("#name_vsensor").val(),
+                                param[0], param[1],
+                                $("#col_vsensor").val(),'A');
+
+    if (obj) {
+        add_object(obj.id, coalesce_name(obj));
+        obj.move($("#"+DivName).scrollLeft(),$("#"+DivName).scrollTop());
+        obj.mousedown(function(){$("#lst_object").val(obj.id);return false;});
+        closeNav();
+    }
+}
+
 //砲撃
 function set_howitzer() {
     if (!$("#lst_howitzer").val()) {
@@ -1209,6 +1234,10 @@ function coalesce_name(obj) {
 
             case 'ndsensor':
                 name = "(ND)";
+                break;
+
+            case 'vsensor':
+                name = "(Vセンサー)";
                 break;
 
             case 'howitzer':
