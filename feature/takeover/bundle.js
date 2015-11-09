@@ -1008,7 +1008,7 @@
 	    }
 
 	    //
-	    //BB_howitzerオブジェクト
+	    //BB_vsensorオブジェクト
 	    //
 
 	    _createClass(BB_ndsensor, [{
@@ -1087,8 +1087,95 @@
 	    return BB_ndsensor;
 	})(BB_base);
 
-	var BB_howitzer = (function (_BB_base9) {
-	    _inherits(BB_howitzer, _BB_base9);
+	var BB_vsensor = (function (_BB_base9) {
+	    _inherits(BB_vsensor, _BB_base9);
+
+	    function BB_vsensor(_bbObj, _text, _radiusa, _radiusb, _color, _mode, _callback) {
+	        _classCallCheck(this, BB_vsensor);
+
+	        _get(Object.getPrototypeOf(BB_vsensor.prototype), 'constructor', this).call(this, _bbObj);
+	        if (_color === undefined) {
+	            _color = 'rgb(153, 0, 255)';
+	        }
+	        if (_mode === undefined) {
+	            _mode = 'A';
+	        }
+	        this.id = _uuid2['default'].v1();
+
+	        this.type = "vsensor";
+	        this._text = _text;
+	        this._radiusa = _radiusa;
+	        this._radiusb = _radiusb;
+	        this._color = _color;
+	        this._mode = _mode;
+
+	        //描画して登録。初期座標は偵察半径分ずらす
+	        this.draw();
+	        var px_rad = _bbObj.meter_to_pixel(this._radiusa);
+	        this.move(px_rad, px_rad);
+	        this.regist();
+	        if (typeof _callback === "function") {
+	            _callback.apply(this);
+	        };
+	    }
+
+	    //
+	    //BB_howitzerオブジェクト
+	    //
+
+	    _createClass(BB_vsensor, [{
+	        key: 'draw',
+	        value: function draw() {
+	            var px_rad,
+	                modecolor,
+	                obj = this;
+
+	            if (this._mode == 'A') {
+	                px_rad = this._bbObj.meter_to_pixel(this._radiusa);
+	                modecolor = '#66FF66';
+	            } else {
+	                px_rad = this._bbObj.meter_to_pixel(this._radiusb);
+	                modecolor = '#00FFFF';
+	            }
+
+	            var area = this._ourJc.circle(0, 0, px_rad, this._color, false).opacity(1).layer(this.id);
+	            this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.5).layer(this.id);
+	            this._ourJc.circle(0, 0, this._bbObj.ptsize, this._color, true).layer(this.id).color('#FFFFFF');
+	            this._ourJc.text(this._text, 0, 20).align('center').layer(this.id).color('#FFFFFF').font('15px sans-serif');
+
+	            var moderect = this._ourJc.rect(-7, -25, 14, 17, modecolor, true).layer(this.id);
+	            var modetext = this._ourJc.text(this._mode, 0, -12).align('center').layer(this.id).color('#000000').font('15px sans-serif');
+
+	            var clickfunc = function clickfunc() {
+	                obj.modechg.apply(obj);
+	                return false;
+	            };
+
+	            moderect.click(clickfunc);
+	            modetext.click(clickfunc);
+	            area.dblclick(clickfunc);
+
+	            this._ourJc.layer(this.id).draggable();
+	            return this;
+	        }
+	    }, {
+	        key: 'modechg',
+	        value: function modechg() {
+	            if (this._mode == 'A') {
+	                this._mode = 'B';
+	            } else {
+	                this._mode = 'A';
+	            }
+	            this.redraw();
+	            return false;
+	        }
+	    }]);
+
+	    return BB_vsensor;
+	})(BB_base);
+
+	var BB_howitzer = (function (_BB_base10) {
+	    _inherits(BB_howitzer, _BB_base10);
 
 	    function BB_howitzer(_bbObj, _text, _radius1, _radius2, _radius3, _color, _callback) {
 	        _classCallCheck(this, BB_howitzer);
@@ -1228,8 +1315,8 @@
 	    return BB_howitzer;
 	})(BB_base);
 
-	var BB_bunker = (function (_BB_base10) {
-	    _inherits(BB_bunker, _BB_base10);
+	var BB_bunker = (function (_BB_base11) {
+	    _inherits(BB_bunker, _BB_base11);
 
 	    function BB_bunker(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bunker);
@@ -1278,8 +1365,8 @@
 	    return BB_bunker;
 	})(BB_base);
 
-	var BB_sentry = (function (_BB_base11) {
-	    _inherits(BB_sentry, _BB_base11);
+	var BB_sentry = (function (_BB_base12) {
+	    _inherits(BB_sentry, _BB_base12);
 
 	    function BB_sentry(_bbObj, _text, _color, _callback) {
 	        var _this8 = this;
@@ -1383,8 +1470,8 @@
 	    return BB_sentry;
 	})(BB_base);
 
-	var BB_aerosentry = (function (_BB_base12) {
-	    _inherits(BB_aerosentry, _BB_base12);
+	var BB_aerosentry = (function (_BB_base13) {
+	    _inherits(BB_aerosentry, _BB_base13);
 
 	    function BB_aerosentry(_bbObj, _text, _color, _callback) {
 	        var _this10 = this;
@@ -1447,8 +1534,8 @@
 	    return BB_aerosentry;
 	})(BB_base);
 
-	var BB_bomber = (function (_BB_base13) {
-	    _inherits(BB_bomber, _BB_base13);
+	var BB_bomber = (function (_BB_base14) {
+	    _inherits(BB_bomber, _BB_base14);
 
 	    function BB_bomber(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bomber);
@@ -1553,8 +1640,8 @@
 	    return BB_bomber;
 	})(BB_base);
 
-	var BB_bascout = (function (_BB_base14) {
-	    _inherits(BB_bascout, _BB_base14);
+	var BB_bascout = (function (_BB_base15) {
+	    _inherits(BB_bascout, _BB_base15);
 
 	    function BB_bascout(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bascout);
@@ -1657,8 +1744,8 @@
 	    return BB_bascout;
 	})(BB_base);
 
-	var BB_icon = (function (_BB_base15) {
-	    _inherits(BB_icon, _BB_base15);
+	var BB_icon = (function (_BB_base16) {
+	    _inherits(BB_icon, _BB_base16);
 
 	    function BB_icon(_bbObj, _text, _file, _color, _callback) {
 	        var _this13 = this;
@@ -1720,8 +1807,8 @@
 	    return BB_icon;
 	})(BB_base);
 
-	var BB_waft = (function (_BB_base16) {
-	    _inherits(BB_waft, _BB_base16);
+	var BB_waft = (function (_BB_base17) {
+	    _inherits(BB_waft, _BB_base17);
 
 	    function BB_waft(_bbObj, _text, _file, _color, _callback) {
 	        var _this14 = this;
@@ -1819,8 +1906,8 @@
 	    return BB_waft;
 	})(BB_base);
 
-	var BB_freehand = (function (_BB_base17) {
-	    _inherits(BB_freehand, _BB_base17);
+	var BB_freehand = (function (_BB_base18) {
+	    _inherits(BB_freehand, _BB_base18);
 
 	    function BB_freehand(_bbObj, _text, _color) {
 	        _classCallCheck(this, BB_freehand);
@@ -2077,10 +2164,11 @@
 	                    }
 	                }
 
-	                //ターレットは個別のオブジェクトとして扱われていないため
+	                ////ターレットと索敵施設は個別のオブジェクトとして扱われていないため
 	                //nameを利用したグループで別途チェックを行う
 	                if (!result) {
-	                    var targets = jc(".turrets").elements;
+	                    var targets = Array.prototype.concat(jc(".turrets").elements, jc(".searchers").elements);
+
 	                    for (var i = 0; i < targets.length; i++) {
 	                        result = targets[i].isPointIn(x, y);
 	                        if (result) {
@@ -2536,10 +2624,60 @@
 	        }
 
 	        //
-	        //オブジェクト描画
+	        //索敵装置配置
 	        //
 	    }, {
+	        key: 'put_searcher',
+	        value: function put_searcher(x, y, radius, hookrad, color, test) {
+	            if (x === undefined) {
+	                return undefined;
+	            }
+	            if (y === undefined) {
+	                return undefined;
+	            }
+	            if (radius === undefined) {
+	                return undefined;
+	            }
+	            if (hookrad === undefined) {
+	                hookrad = 8;
+	            }
+	            if (color === undefined) {
+	                color = 'rgb(153, 255, 255)';
+	            }
+	            if (test === undefined) {
+	                test = false;
+	            }
+
+	            var visible = false,
+	                px_rad = this.meter_to_pixel(radius),
+	                area = this.ourJc.circle(x, y, px_rad, color, true).opacity(0.3).visible(visible).level(1),
+	                line = this.ourJc.circle(x, y, px_rad, color, false).opacity(1).visible(visible).level(1),
+	                hooker = this.ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true).level(3).name("searchers");
+
+	            if (test) {
+	                hooker.color('rgba(255,255,255,1)').level('top');
+	            }
+
+	            hooker.mouseover(function () {
+	                area.visible(true);
+	                line.visible(true);
+	            });
+	            hooker.mouseout(function () {
+	                area.visible(visible);
+	                line.visible(visible);
+	            });
+	            hooker.click(function () {
+	                visible = !visible;
+	                area.visible(visible);
+	                line.visible(visible);
+	            });
+	        }
+	    }, {
 	        key: 'add_scout',
+
+	        //
+	        //オブジェクト描画
+	        //
 	        value: function add_scout(string, radius, length, duration, color, _callback) {
 	            return new BB_scout(this, string, radius, length, duration, color, _callback);
 	        }
@@ -2562,6 +2700,11 @@
 	        key: 'add_ndsensor',
 	        value: function add_ndsensor(string, radius, color, _callback) {
 	            return new BB_ndsensor(this, string, radius, color, _callback);
+	        }
+	    }, {
+	        key: 'add_vsensor',
+	        value: function add_vsensor(string, radiusa, radiusb, color, mode, _callback) {
+	            return new BB_vsensor(this, string, radiusa, radiusb, color, mode, _callback);
 	        }
 	    }, {
 	        key: 'add_howitzer',
@@ -5372,6 +5515,27 @@
 	                            })();
 	                            break;
 
+	                        case 0x17:
+	                            (function () {
+	                                //vsensor
+	                                var color = buff.getCol(),
+	                                    rada = buff.getUint16(),
+	                                    radb = buff.getUint16(),
+	                                    mode = buff.getUint8(),
+	                                    pos = buff.getPos();
+
+	                                if (mode == 0) {
+	                                    mode = 'A';
+	                                } else {
+	                                    mode = 'B';
+	                                }
+
+	                                obj = bbobj.add_vsensor(objname, rada, radb, color, mode, function () {
+	                                    this.moveTo(pos.x, pos.y).redraw();
+	                                });
+	                            })();
+	                            break;
+
 	                        case 0x21:
 	                            (function () {
 	                                //howitzer
@@ -5579,6 +5743,19 @@
 	                        objdata = objdata.concat(BufferView.setInt16(obj._radius));
 	                        objdata = objdata.concat(BufferView.setPos(obj.position()));
 	                        objdata = objdata.concat(BufferView.setFloat32(obj.rotAngle()));
+	                        break;
+
+	                    case 'vsensor':
+	                        objdata.unshift(0x17);
+	                        objdata = objdata.concat(setCol(obj._color));
+	                        objdata = objdata.concat(setInt16(obj._radiusa));
+	                        objdata = objdata.concat(setInt16(obj._radiusb));
+	                        if (obj._mode == 'A') {
+	                            objdata = objdata.concat(setInt8(0));
+	                        } else {
+	                            objdata = objdata.concat(setInt8(1));
+	                        }
+	                        objdata = objdata.concat(setPos(obj.position()));
 	                        break;
 
 	                    case 'howitzer':
@@ -14166,6 +14343,9 @@
 	    (0, _jquery2['default'])("#lst_ndsensor").change(function () {
 	        (0, _jquery2['default'])("#name_ndsensor").val((0, _jquery2['default'])("#lst_ndsensor option:selected").text());
 	    });
+	    (0, _jquery2['default'])("#lst_vsensor").change(function () {
+	        (0, _jquery2['default'])("#name_vsensor").val((0, _jquery2['default'])("#lst_vsensor option:selected").text());
+	    });
 	    (0, _jquery2['default'])("#lst_howitzer").change(function () {
 	        (0, _jquery2['default'])("#name_howitzer").val((0, _jquery2['default'])("#lst_howitzer option:selected").text());
 	    });
@@ -14352,6 +14532,9 @@
 	    });
 	    (0, _jquery2['default'])("#submit_ndsensor").bind('click', function (e) {
 	        set_ndsensor();
+	    });
+	    (0, _jquery2['default'])("#submit_vsensor").bind('click', function (e) {
+	        set_vsensor();
 	    });
 	    (0, _jquery2['default'])("#submit_howitzer").bind('click', function (e) {
 	        set_howitzer();
@@ -14706,9 +14889,20 @@
 	            jsonpCallback: "stageData",
 	            success: function success(data, status) {
 	                chgCanvasAreaSize();
-	                var turretData = data["turret"];
-	                for (i = 0; i < turretData.length; i++) {
-	                    bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, turretData[i][4]);
+
+	                if ("turret" in data) {
+	                    var turretData = data["turret"];
+	                    for (i = 0; i < turretData.length; i++) {
+	                        //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
+	                        bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, turretData[i][4]);
+	                    }
+	                }
+	                if ("searcher" in data) {
+	                    var searcherData = data["searcher"];
+	                    for (i = 0; i < searcherData.length; i++) {
+	                        //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
+	                        bbobj.put_searcher(searcherData[i][0], searcherData[i][1], searcherData[i][2], turretCircle, undefined, searcherData[i][3]);
+	                    }
 	                }
 	                if (callback !== undefined) {
 	                    callback.call();
@@ -14829,6 +15023,30 @@
 	    }
 
 	    var obj = bbobj.add_ndsensor((0, _jquery2['default'])("#name_ndsensor").val(), (0, _jquery2['default'])("#lst_ndsensor").val(), (0, _jquery2['default'])("#col_ndsensor").val());
+
+	    if (obj) {
+	        add_object(obj.id, coalesce_name(obj));
+	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.mousedown(function () {
+	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            return false;
+	        });
+	        closeNav();
+	    }
+	}
+
+	//Vセンサー
+	function set_vsensor() {
+	    if (!(0, _jquery2['default'])("#lst_vsensor").val()) {
+	        return;
+	    }
+	    if (!(0, _jquery2['default'])("#col_vsensor").val()) {
+	        return;
+	    }
+
+	    var param = eval((0, _jquery2['default'])("#lst_vsensor").val());
+
+	    var obj = bbobj.add_vsensor((0, _jquery2['default'])("#name_vsensor").val(), param[0], param[1], (0, _jquery2['default'])("#col_vsensor").val(), 'A');
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
@@ -15305,6 +15523,10 @@
 
 	            case 'ndsensor':
 	                name = "(ND)";
+	                break;
+
+	            case 'vsensor':
+	                name = "(Vセンサー)";
 	                break;
 
 	            case 'howitzer':
