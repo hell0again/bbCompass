@@ -589,10 +589,10 @@ function chg_map(callback) {
                 jsonpCallback: "stageData",
                 success: function(data, status) {
                     chgCanvasAreaSize();
-                    
+
                     if ("turret" in data) {
                         var turretData = data["turret"];
-                        for(i=0;i<turretData.length;i++) {
+                        for (i = 0; i < turretData.length; i++) {
                             //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
                             bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2],
                                 turretSpec[turretData[i][3]][0],
@@ -603,7 +603,7 @@ function chg_map(callback) {
                     }
                     if ("searcher" in data) {
                         var searcherData = data["searcher"];
-                        for(i=0;i<searcherData.length;i++) {
+                        for (i = 0; i < searcherData.length; i++) {
                             //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
                             bbobj.put_searcher(searcherData[i][0], searcherData[i][1],
                                 searcherData[i][2],
@@ -746,19 +746,26 @@ function set_ndsensor() {
 
 //Vセンサー
 function set_vsensor() {
-    if(! $("#lst_vsensor").val()) {return;}
-    if(! $("#col_vsensor").val()) {return;}
+    if (!$("#lst_vsensor").val()) {
+        return;
+    }
+    if (!$("#col_vsensor").val()) {
+        return;
+    }
 
     var param = eval($("#lst_vsensor").val());
 
     var obj = bbobj.add_vsensor($("#name_vsensor").val(),
-                                param[0], param[1],
-                                $("#col_vsensor").val(),'A');
+        param[0], param[1],
+        $("#col_vsensor").val(), 'A');
 
     if (obj) {
         add_object(obj.id, coalesce_name(obj));
-        obj.move($("#"+DivName).scrollLeft(),$("#"+DivName).scrollTop());
-        obj.mousedown(function(){$("#lst_object").val(obj.id);return false;});
+        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        obj.mousedown(function() {
+            $("#lst_object").val(obj.id);
+            return false;
+        });
         closeNav();
     }
 }

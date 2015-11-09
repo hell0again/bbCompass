@@ -470,23 +470,23 @@ export default class BBCQuery {
 
                         case 0x17:
                             (function() { //vsensor
-                            var color = getCol.call(queryobj),
-                                rada  = getUint16.call(queryobj),
-                                radb  = getUint16.call(queryobj),
-                                mode  = getUint8.call(queryobj),
-                                pos   = getPos.call(queryobj);
+                                var color = buff.getCol(),
+                                    rada = buff.getUint16(),
+                                    radb = buff.getUint16(),
+                                    mode = buff.getUint8(),
+                                    pos = buff.getPos();
 
-                                if (mode==0) {
-                                    mode='A';
+                                if (mode == 0) {
+                                    mode = 'A';
                                 } else {
-                                    mode='B';
+                                    mode = 'B';
                                 }
 
-                            obj=bbobj.add_vsensor(objname, rada, radb, color, mode,
-                                function() {
-                                    this.moveTo(pos.x, pos.y)
-                                        .redraw();
-                                });
+                                obj = bbobj.add_vsensor(objname, rada, radb, color, mode,
+                                    function() {
+                                        this.moveTo(pos.x, pos.y)
+                                            .redraw();
+                                    });
                             }());
                             break;
 
@@ -710,14 +710,14 @@ export default class BBCQuery {
                     objdata = objdata.concat(setCol(obj._color));
                     objdata = objdata.concat(setInt16(obj._radiusa));
                     objdata = objdata.concat(setInt16(obj._radiusb));
-                    if (obj._mode=='A') {
+                    if (obj._mode == 'A') {
                         objdata = objdata.concat(setInt8(0));
                     } else {
                         objdata = objdata.concat(setInt8(1));
                     }
                     objdata = objdata.concat(setPos(obj.position()));
                     break;
-    
+
                 case 'howitzer':
                     objdata.unshift(0x21);
                     objdata = objdata.concat(BufferView.setCol(obj._color));
