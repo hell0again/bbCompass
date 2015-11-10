@@ -3,7 +3,9 @@ set -eu && [ ${SET_X:-false} = true ] && set -x
 SCRIPT_DIR=$(cd $(dirname $0) && pwd)
 cd ${SCRIPT_DIR}
 
-BUILD_VERSION=$(git name-rev --name-only HEAD)
+DEFAULT_BUILD_VERSION=$(git name-rev --name-only HEAD)
+: ${BUILD_VERSION:=${DEFAULT_BUILD_VERSION}}
+echo "BUILD_VERSION=${BUILD_VERSION}"
 SRC_DIR=${SCRIPT_DIR}/src
 TMP_DIR=${SCRIPT_DIR}/public/_tmp
 DST_DIR=${SCRIPT_DIR}/public/${BUILD_VERSION}
