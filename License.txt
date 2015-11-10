@@ -1,4 +1,4 @@
-﻿Copyright (c) 2012 Himajin@BB, http://bbcompass.web.fc2.com/
+Copyright (c) 2015 hell0again, https://github.com/hell0again/bbCompass.git
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

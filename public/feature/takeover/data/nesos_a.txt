@@ -1,5 +1,0 @@
-stageData( {
-  "turret":[
-    [475, 396, 0, "G", false]
-  ]
-});
