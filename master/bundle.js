@@ -5041,7 +5041,7 @@
 	    _createClass(BufferView, [{
 	        key: 'append',
 	        value: function append(bytes) {
-	            this._buf = this._buf.cocnat(bytes);
+	            this._buf = this._buf.concat(bytes);
 	        }
 
 	        // textToByteArray
@@ -5341,7 +5341,7 @@
 	                bbobj = this.bbobj;
 
 	            try {
-	                while (buff.offset < buff.length) {
+	                while (buff._offset < buff._buf.length) {
 	                    var obj,
 	                        objlen = buff.getUint16(),
 	                        objname = buff.getStr(),
@@ -5747,15 +5747,15 @@
 
 	                    case 'vsensor':
 	                        objdata.unshift(0x17);
-	                        objdata = objdata.concat(setCol(obj._color));
-	                        objdata = objdata.concat(setInt16(obj._radiusa));
-	                        objdata = objdata.concat(setInt16(obj._radiusb));
+	                        objdata = objdata.concat(BufferView.setCol(obj._color));
+	                        objdata = objdata.concat(BufferView.setInt16(obj._radiusa));
+	                        objdata = objdata.concat(BufferView.setInt16(obj._radiusb));
 	                        if (obj._mode == 'A') {
-	                            objdata = objdata.concat(setInt8(0));
+	                            objdata = objdata.concat(BufferView.setInt8(0));
 	                        } else {
-	                            objdata = objdata.concat(setInt8(1));
+	                            objdata = objdata.concat(BufferView.setInt8(1));
 	                        }
-	                        objdata = objdata.concat(setPos(obj.position()));
+	                        objdata = objdata.concat(BufferView.setPos(obj.position()));
 	                        break;
 
 	                    case 'howitzer':
@@ -5821,9 +5821,7 @@
 	                if (objdata !== undefined) {
 	                    objdata.unshift.apply(objdata, BufferView.setStr(obj._text));
 	                    objdata.unshift.apply(objdata, BufferView.setInt16(objdata.length));
-	                    // this._buf = this._buf.concat(objdata);
-	                    // NOTE: 追加ではなく上書きに変更
-	                    this._bv = new BufferView(objdata);
+	                    this._bv.append(objdata);
 	                }
 	            }
 	        }
