@@ -11,6 +11,9 @@ DST_DIR=${SCRIPT_DIR}/public/${BUILD_VERSION}
 rm -rf ${SCRIPT_DIR}/public/_tmp
 js-beautify --replace src/js/*.js
 webpack src/js/*
+for f in Changelog.txt; do
+    cp -r ${f} ${TMP_DIR}/${f}
+done
 cd ${SRC_DIR}
 for f in css data image map ./*.html; do
     cp -r ${f} ${TMP_DIR}/${f}
