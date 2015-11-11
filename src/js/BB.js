@@ -1596,6 +1596,9 @@ class BB_waft extends BB_base {
         var handle = this._ourJc.circle(0, 0, px_rad + (10 * this._bbObj.zoomScale), this._color, true).opacity(0.3).layer(this.id);
         this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(1).layer(this.id);
         this._ourJc.image(this._image, img_width * (-0.5), img_height * (-0.5), img_width, img_height).layer(this.id);
+        this._ourJc.text(this._text, 0, -25)
+            .align('center').layer(this.id).color('#FFFFFF').font('15px sans-serif');
+
         this._ourJc.layer(this.id).draggable();
 
         //角度変更処理

@@ -23,6 +23,28 @@ var turretSpec = {
 };
 var turretCircle = 8;
 
+//メニューのオブジェクト選択
+var onObjectSelectorChanged = function($this, speed = "fast") {
+    if ($this.hasClass("selected")) {
+        return false;
+    } else {
+        $("div#objselector div.option.selected").removeClass("selected");
+        $this.addClass("selected");
+    }
+    var openid = $this.attr("data-target");
+
+    //リストの先頭を選択済みにする
+    $("#" + openid + " " + ".formlst option:first").attr('selected', true);
+    $("#" + openid + " " + ".formlst").change();
+
+    $("div.setobj:visible").fadeOut(speed,
+        function() {
+            $("#" + openid).fadeIn(speed);
+        }
+    );
+};
+
+
 // 読み込み時の処理
 $(document).ready(function() {
     $("#lst_scout").change(function() {
@@ -81,19 +103,8 @@ $(document).ready(function() {
     // 初回のリセット
     $("#stage").change();
 
-    //メニューのオブジェクト選択
     $("div#objselector div.option").click(function() {
-        if ($(this).hasClass("selected")) {
-            return false;
-        } else {
-            $("div#objselector div.option.selected").removeClass("selected");
-            $(this).addClass("selected");
-        }
-        var openid = $(this).attr("data-target");
-        $("div.setobj:visible").fadeOut("fast",
-            function() {
-                $("div.setobj#" + openid).fadeIn("fast");
-            });
+        onObjectSelectorChanged($(this));
     });
 
     //狭い時用メニューに関する初期化
@@ -550,6 +561,9 @@ function initialize() {
         //リロード時のウィンドウサイズ変更に対応
         window.setTimeout(initMenuScale, 100);
     }
+
+    //メニューの初期状態を設定
+    onObjectSelectorChanged($("#objselector div.option:first"), 0); // オブジェクトをひとつ選んでおく
 
     //query stringがあれば再現処理に入る
     if (window.location.search) {
