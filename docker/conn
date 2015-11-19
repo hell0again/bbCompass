@@ -1,0 +1,63 @@
+#!/bin/sh
+# dockerコンテナを起動するコマンドを表示する。
+# コンテナはローカルフォルダをマウントする。
+# コマンドを実行するには表示したコマンドをevalする。
+#
+# # アプリの起動コマンドの表示
+# ./docker/conn
+#
+# # アプリの起動
+# $(./docker/conn)
+# $(./docker/conn) npm run start
+# $(./docker/conn npm run start)
+#
+# # アプリのビルド
+# $(./docker/conn) npm run build
+#
+# # シェル
+# $(./docker/conn) bash
+
+set -eu && [ ${SET_X:-false} = true ] && set -x
+SCRIPT_DIR=$(cd $(dirname $0); pwd) && cd ${SCRIPT_DIR}/..
+source ./docker/env.source
+
+## コンテナからgit操作する設定
+DEFAULT_GIT_COMMITTER_NAME=$(git config --global user.name) &&:
+DEFAULT_GIT_COMMITTER_EMAIL=$(git config --global user.email) &&:
+: ${GIT_COMMITTER_NAME:=${DEFAULT_GIT_COMMITTER_NAME}}
+: ${GIT_COMMITTER_EMAIL:=${DEFAULT_GIT_COMMITTER_EMAIL}}
+: ${GIT_COMMITTER_NAME:?}
+: ${GIT_COMMITTER_EMAIL:?}
+: ${GIT_AUTHOR_NAME:=${GIT_COMMITTER_NAME}}
+: ${GIT_AUTHOR_EMAIL:=${GIT_COMMITTER_EMAIL}}
+: ${GIT_AUTHOR_NAME:?}
+: ${GIT_AUTHOR_EMAIL:?}
+
+
+## コンテナからsshするための設定
+## boot2dockerでboot2docker ssh -Aせずに起動する場合、agent転送は無効になる
+SSH_AGENT_OPTS=$(
+    HOST_AUTH_SOCK=$(readlink -f ${SSH_AUTH_SOCK}) &&:
+    if [ $? -eq 0 ]; then
+        cat <<EOM
+-v ${HOST_AUTH_SOCK}:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent
+EOM
+    else
+        echo >&2 "[WARN] ssh agent forward disabled"
+        echo ""
+    fi
+)
+
+cat <<EOM
+docker run --rm\
+ -it\
+ -p ${APP_PORT}:8000\
+ -v `pwd`:${CONTAINER_WORKDIR}\
+ ${SSH_AGENT_OPTS}\
+ -e GIT_COMMITTER_NAME="${GIT_COMMITTER_NAME}" -e GIT_COMMITTER_EMAIL="${GIT_COMMITTER_EMAIL}"\
+ -e GIT_AUTHOR_NAME="${GIT_AUTHOR_NAME}" -e GIT_AUTHOR_EMAIL="${GIT_AUTHOR_EMAIL}"\
+ ${CONTAINER_IMAGE_NAME}:${CONTAINER_IMAGE_TAG}\
+ $@
+EOM
+# -v ${HOME}/.config/hub:/root/.config/hub\
+
