@@ -2,7 +2,7 @@ stageData( {
   "turret":[
   ],
   "searcher":[
-    [370, 572, 85, false],
-    [667, 318, 85, false],
+    [370, 572, 100, false],
+    [667, 318, 100, false],
   ]
 });
