@@ -38,202 +38,29 @@
   <div class="menucell" id="menu_map">
     <div class="celltitle" id="head_map">マップ</div>
     <div class="item">
+      <div id="current_map">
+        <form name="current">
+          <select id="current" class="formtext">
+            <!-- ... -->
+          </select>
+        </form>
+      </div>
+    </div>
+    <div class="item">
+      <div class="name">すべて：</div>
       <div id="map_area">
         <form name="map">
           <div class="map_selector">
             <select id="stage" class="formtext">
-              <!--絞り込みに利用するので、valueと子供のdata-stageを一致させてください
-                  また、data-scale属性として [1メートルあたりのピクセル数]を記載します。
-                  (Javascriptで解釈するので、数式を書いてもOKです)
-                  オマケ機能として[pixel/メートル, 倍率]と書いておくと、
-                  画像を指定倍率で縮小し、距離の縮尺も倍率にあわせて補正します -->
-              <option value="map"          data-scale="[160/100*0.7]">スカービ渓谷</option>
-              <option value="blouer"       data-scale="[1.137*0.7]">旧ブロア市街地</option>
-              <option value="island"       data-scale="[1.378*0.7]">第三採掘島</option>
-              <option value="tlaza"        data-scale="[160/100*0.7]">トラザ山岳基地</option>
-              <option value="darya"        data-scale="[107/63*0.7]">ダリーヤ遺跡</option>
-              <option value="d51"          data-scale="[1.540*0.7]">放棄区画D51</option>
-              <option value="wuhai"        data-scale="[1.336*0.7]">ウーハイ産業港</option>
-              <option value="valerio"      data-scale="[1.068*0.7]">城塞都市バレリオ</option>
-              <option value="belsk"        data-scale="[154/100*0.7]">極洋基地ベルスク</option>
-              <option value="adora"        data-scale="[1.120*0.7]">アドラ火山連峰</option>
-              <option value="algren"       data-scale="[1.138*0.7]">オルグレン湖水基地</option>
-              <option value="denebra"      data-scale="[0.946*0.7]">デ・ネブラ大落片</option>
-              <option value="highrisesite" data-scale="[1.194*0.7]">第19号高層サイト</option>
-              <option value="navar"        data-scale="[1.084*0.7]">ナヴァル岩石砂漠</option>
-              <option value="madelrond"    data-scale="[1.075*0.7]">マデルロンド大空洞</option>
-              <option value="gerberg"      data-scale="[1.305*0.7]">ゲルベルク要塞跡</option>
-              <option value="longsha"      data-scale="[1.020*0.7]">ロンシャ深山</option>
-              <option value="hopeside"     data-scale="[1.109*0.7]">ホープサイド市街地</option>
-              <option value="kinich"       data-scale="[1.096*0.7]">キニシュ砂岸</option>
-              <option value="nesos"        data-scale="[1.515*0.7]">ネソス島実験ドーム</option>
-              <option value="beanavis"     data-scale="[0.895]">ベネヴィス高原地帯</option>
-              <option value="malinasedna"  data-scale="[0.866*0.8]">マリナセドナ大雪山</option>
-              <option value="sector"       data-scale="[0.836]">極地観測所セクター９</option>
-              <option value="24"           data-scale="[1.515*0.7]">マグメル機体試験場</option>
+              <!-- ... -->
             </select>
           </div>
           <div class="map_selector">
             <select id="map" class="formtext">
-              <!-- 絞り込み用にdata-stage属性を指定すること -->
-              <!-- class=eventは大攻防戦用、class=unionはユニオンバトル用-->
-              <option data-stage="map" value="map_a" data-layer="[]">戦線突破</option>
-              <option data-stage="map" value="map_b" data-layer="[]">砂上の激突</option>
-              <option data-stage="blouer" value="blouer_a" data-layer="[]">熱戦の河畔</option>
-              <option data-stage="blouer" value="blouer_b" data-layer="[]">激戦の丘</option>
-              <option data-stage="blouer" value="blouer_c" data-layer="[]">街路制圧戦</option>
-              <option data-stage="blouer" value="blouer_d" data-layer="[]">制空血戦</option>
-              <option data-stage="blouer" value="blouer_e" data-layer="[]">破壊槌</option>
-              <option data-stage="blouer" value="blouer_ea" data-layer="[]" class="event">激闘の丘陵</option>
-              <option data-stage="blouer" value="blouer_ua" data-layer="[]" class="union">石路の連合戦</option>
-              <option data-stage="blouer" value="blouer_ub" data-layer="[]" class="union">緑野の迎撃戦</option>
-              <option data-stage="island" value="island_a" data-layer="[]">臨界決戦</option>
-              <option data-stage="island" value="island_b" data-layer="[]">夕暮れの戦火</option>
-              <option data-stage="island" value="island_c" data-layer="[]">塔上の攻防</option>
-              <option data-stage="island" value="island_d" data-layer="[]">前線猛爆</option>
-              <option data-stage="island" value="island_e" data-layer="[]">雷神拝受</option>
-              <option data-stage="island" value="island_ea" data-layer="[]" class="event">激闘の孤島</option>
-              <option data-stage="island" value="island_ua" data-layer="[]" class="union">黄昏の連合戦</option>
-              <option data-stage="island" value="island_ub" data-layer="[]" class="union">沿岸迎撃戦</option>
-              <option data-stage="tlaza" value="tlaza_a" data-layer="['通路表示あり']">砂塵の死線</option>
-              <option data-stage="tlaza" value="tlaza_b" data-layer="['通路表示あり']">夜間渡河</option>
-              <option data-stage="tlaza" value="tlaza_c" data-layer="['通路表示あり']">地下進撃</option>
-              <option data-stage="tlaza" value="tlaza_d" data-layer="['通路表示あり']">月下の砲煙</option>
-              <option data-stage="tlaza" value="tlaza_e" data-layer="['通路表示あり']">暗中行軍</option>
-              <option data-stage="tlaza" value="tlaza_f" data-layer="['通路表示あり']">激震の岩峰</option>
-              <option data-stage="tlaza" value="tlaza_g" data-layer="['通路表示あり']">高峰空襲</option>
-              <option data-stage="darya" value="darya_a" data-layer="['中段','下段','全表示']">廃都行軍</option>
-              <option data-stage="darya" value="darya_d" data-layer="['中段','下段','全表示']">乾季烈戦</option>
-              <option data-stage="darya" value="darya_e" data-layer="['中段','下段','全表示']">橋上の戦線</option>
-              <option data-stage="darya" value="darya_b" data-layer="['中段','下段','全表示']">河底の弾雨</option>
-              <option data-stage="darya" value="darya_c" data-layer="['中段','下段','全表示']">交錯の火線</option>
-              <option data-stage="darya" value="darya_ea" data-layer="['中段','下段','全表示']" class="event">激闘の古跡</option>
-              <option data-stage="darya" value="darya_eb" data-layer="[]" class="event">炎雨降らす砲座</option>
-              <option data-stage="darya" value="darya_ua" data-layer="['中段','下段','全表示']" class="union">密林の迎撃戦</option>
-              <option data-stage="d51" value="d51_a" data-layer="['中段','下段','全表示']">冷厳なる轟声</option>
-              <option data-stage="d51" value="d51_b" data-layer="['中段','下段','全表示']">白銀死都</option>
-              <option data-stage="d51" value="d51_c" data-layer="['中段','下段','全表示']">雪中遭遇戦</option>
-              <option data-stage="d51" value="d51_d" data-layer="['中段','下段','全表示']">氷点下の鳴動</option>
-              <option data-stage="d51" value="d51_e" data-layer="['中段','下段','全表示']">雪映えの赤光</option>
-              <option data-stage="d51" value="d51_f"  data-layer="['中段','下段','全表示']">連携の標柱</option>
-              <option data-stage="d51" value="d51_g"  data-layer="['中段','下段','全表示']">寒威三陣</option>
-              <option data-stage="d51" value="d51_ea" data-layer="['中段','下段','全表示']" class="event">激闘の氷域</option>
-              <option data-stage="wuhai" value="wuhai_a" data-layer="['上段','下段','全表示']">要衝襲撃</option>
-              <option data-stage="wuhai" value="wuhai_b" data-layer="['上段','下段','全表示']">暁の威容</option>
-              <option data-stage="wuhai" value="wuhai_c" data-layer="['上段','下段','全表示']">落日銃火</option>
-              <option data-stage="wuhai" value="wuhai_d" data-layer="['上段','下段','全表示']">艦上の交錯線</option>
-              <option data-stage="wuhai" value="wuhai_e" data-layer="['上段','下段','全表示']">残照の閃光</option>
-              <option data-stage="wuhai" value="wuhai_f" data-layer="['上段','下段','全表示']">海港の戦渦</option>
-              <option data-stage="wuhai" value="wuhai_ea" data-layer="['上段','下段','全表示']" class="event">激闘の港湾</option>
-              <option data-stage="wuhai" value="wuhai_sa" data-layer="[]" class="scramble">赤闇の争奪戦</option>
-              <option data-stage="valerio" value="valerio_a" data-layer="['建築物内部']">強行水路</option>
-              <option data-stage="valerio" value="valerio_b" data-layer="['建築物内部']">巨影侵撃</option>
-              <option data-stage="valerio" value="valerio_c" data-layer="['建築物内部']">血戦の城壁</option>
-              <option data-stage="valerio" value="valerio_d" data-layer="['建築物内部']">高地の煙硝</option>
-              <option data-stage="valerio" value="valerio_e" data-layer="['建築物内部']">地を穿つ光条</option>
-              <option data-stage="valerio" value="valerio_f" data-layer="['建築物内部']">導く光明</option>
-              <option data-stage="valerio" value="valerio_g" data-layer="[]">迫水制領</option>
-              <option data-stage="valerio" value="valerio_ea" data-layer="['建築物内部']" class="event">激闘の城下</option>
-              <option data-stage="valerio" value="valerio_ua" data-layer="['建築物内部']" class="union">城跡の連合戦</option>
-              <option data-stage="valerio" value="valerio_ub" data-layer="['建築物内部']" class="union">山塞の迎撃戦</option>
-              <option data-stage="valerio" value="valerio_sa" data-layer="[]" class="scramble">山城の争奪戦</option>
-              <option data-stage="belsk" value="belsk_a" data-layer="['通路A','通路B','通路C','全表示']">凍て付く戦陣</option>
-              <option data-stage="belsk" value="belsk_b" data-layer="['通路A','通路B','通路C','全表示']">純白の先途</option>
-              <option data-stage="belsk" value="belsk_c" data-layer="['通路A','通路B','通路C','全表示']">氷晶烈戦</option>
-              <option data-stage="belsk" value="belsk_d" data-layer="['通路A','通路B','通路C','全表示']">狭路急襲</option>
-              <option data-stage="belsk" value="belsk_e" data-layer="['通路A','通路B','通路C','全表示']">白霜の飛翔</option>
-              <option data-stage="belsk" value="belsk_f" data-layer="[]">反目の凍視線</option>
-              <option data-stage="belsk" value="belsk_ea" data-layer="['通路A','通路B','通路C','全表示']" class="event">激闘の氷海</option>
-              <option data-stage="belsk" value="belsk_sa" data-layer="[]" class="scramble">氷河の争奪戦</option>
-              <option data-stage="adora" value="adora_a" data-layer="['上段','下段','全表示']">紅蓮の大河</option>
-              <option data-stage="adora" value="adora_b" data-layer="['上段','下段','全表示']">爆炎戦域</option>
-              <option data-stage="adora" value="adora_c" data-layer="['上段','下段','全表示']">煉獄洞窟</option>
-              <option data-stage="adora" value="adora_d" data-layer="['上段','下段','全表示']">焦熱の死地</option>
-              <option data-stage="adora" value="adora_e" data-layer="['上段','下段','全表示']">渦巻く炎海</option>
-              <option data-stage="adora" value="adora_ea" data-layer="['上段','下段','全表示']" class="event">激闘の溶岩域</option>
-              <option data-stage="algren" value="algren_a" data-layer="['中段','下段','全通路']">巨坑侵入</option>
-              <option data-stage="algren" value="algren_b" data-layer="['通路表示あり']">瀑布の死闘</option>
-              <option data-stage="algren" value="algren_c" data-layer="['通路表示あり']">重盾戦機</option>
-              <option data-stage="algren" value="algren_d" data-layer="['中段','下段','全通路']">天貫く光芒</option>
-              <option data-stage="algren" value="algren_e" data-layer="['中段','下段','全通路']">孔上の対峙</option>
-              <option data-stage="algren" value="algren_ea" data-layer="['通路表示あり']" class="event">激闘の湖畔</option>
-              <option data-stage="algren" value="algren_ua" data-layer="['中段','下段','全通路']" class="union">水煙連合戦</option>
-              <option data-stage="algren" value="algren_ub" data-layer="['中段','下段','全通路']" class="union">落水の迎撃戦</option>
-              <option data-stage="algren" value="algren_sa" data-layer="['中段','下段','全通路']" class="scramble">穿孔争奪戦</option>
-              <option data-stage="denebra" value="denebra_a" data-layer="['通路A','通路B','全通路']">雨下応酬</option>
-              <option data-stage="denebra" value="denebra_b" data-layer="['通路A','通路B','全通路']">塔上接敵</option>
-              <option data-stage="denebra" value="denebra_c" data-layer="['通路A','通路B','全通路']">天翔る双龍</option>
-              <option data-stage="denebra" value="denebra_d" data-layer="['通路A','通路B','全通路']">煙雨の剛砲</option>
-              <option data-stage="denebra" value="denebra_e" data-layer="['通路A','通路B','全通路']">巨塊下の衝突</option>
-              <option data-stage="denebra" value="denebra_f" data-layer="['通路A','通路B','全通路']">崖下乱戦</option>
-              <option data-stage="denebra" value="denebra_ea" data-layer="['通路A','通路B','全通路']" class="event">激闘の高地</option>
-              <option data-stage="denebra" value="denebra_ua" data-layer="['通路A','通路B','全通路']" class="union">暴雨の連合戦</option>
-              <option data-stage="highrisesite" value="highrisesite_a" data-layer="['1F','2F','3F','全表示']">天柱の兵火</option>
-              <option data-stage="highrisesite" value="highrisesite_b" data-layer="['B1F/1F','2F','3F','全表示']">高高度電撃戦</option>
-              <option data-stage="highrisesite" value="highrisesite_c" data-layer="['1F','2F','3F','全表示']">雲上死線</option>
-              <option data-stage="highrisesite" value="highrisesite_d" data-layer="['B1F/1F','2F','3F','全表示']">天を突く一閃</option>
-              <option data-stage="highrisesite" value="highrisesite_e" data-layer="[]">高空立体戦</option>
-              <option data-stage="highrisesite" value="highrisesite_ea" data-layer="['B1F/1F','2F','3F','全表示']" class="event">激闘の高楼</option>
-              <option data-stage="navar" value="navar_a" data-layer="['通路表示あり']">戦端の大鉄橋</option>
-              <option data-stage="navar" value="navar_b" data-layer="['通路表示あり']">断崖の相克</option>
-              <option data-stage="navar" value="navar_c" data-layer="['通路表示あり']">絶崖跳躍</option>
-              <option data-stage="navar" value="navar_d" data-layer="['通路表示あり']">岩峪の侵襲</option>
-              <option data-stage="navar" value="navar_ea" data-layer="['通路表示あり']" class="event">激闘の荒野</option>
-              <option data-stage="navar" value="navar_ua" data-layer="['通路表示あり']" class="union">赤土の連合戦</option>
-              <option data-stage="navar" value="navar_ub" data-layer="['通路表示あり']" class="union">砂岩の迎撃戦</option>
-              <option data-stage="navar" value="navar_sa" data-layer="[]" class="scramble">砂海の争奪戦</option>
-              <option data-stage="madelrond" value="madelrond_a" data-layer="['通路表示あり']">地底の接敵</option>
-              <option data-stage="madelrond" value="madelrond_b" data-layer="['通路表示あり']">深部暗闘</option>
-              <option data-stage="madelrond" value="madelrond_c" data-layer="['通路表示あり']">結集の灯火</option>
-              <option data-stage="madelrond" value="madelrond_d" data-layer="['通路表示あり']">流動地底湖</option>
-              <option data-stage="madelrond" value="madelrond_e" data-layer="['通路表示あり']">水洞猛進</option>
-              <option data-stage="madelrond" value="madelrond_ea" data-layer="['通路表示あり']" class="event">激闘の岩窟</option>
-              <option data-stage="gerberg" value="gerberg_a" data-layer="['地下','建造物','全通路']">燃え盛る征野</option>
-              <option data-stage="gerberg" value="gerberg_b" data-layer="['地下','建造物','全通路']">闘争地下壕</option>
-              <option data-stage="gerberg" value="gerberg_c" data-layer="['地下','建造物','全通路']">一対の甲龍</option>
-              <option data-stage="gerberg" value="gerberg_d" data-layer="['地下','建造物','全通路']">煙中対敵</option>
-              <option data-stage="gerberg" value="gerberg_e" data-layer="['地下','建造物','全通路']">埋伏攻路</option>
-              <option data-stage="gerberg" value="gerberg_ea" data-layer="['地下','建造物','全通路']" class="event">激闘の塁砦</option>
-              <option data-stage="gerberg" value="gerberg_ua" data-layer="['地下','建造物','全通路']" class="union">硝煙の迎撃戦</option>
-              <option data-stage="gerberg" value="gerberg_ub" data-layer="['地下','建造物','全通路']" class="union">黒煙の連合戦</option>
-              <option data-stage="longsha" value="longsha_a" data-layer="['通路あり']">山門の抗衡</option>
-              <option data-stage="longsha" value="longsha_b" data-layer="['通路あり']">白霧潜攻</option>
-              <option data-stage="longsha" value="longsha_c" data-layer="['洞窟内A','洞窟内B','全表示']">眼下猛襲</option>
-              <option data-stage="longsha" value="longsha_d" data-layer="['洞窟内A','洞窟内B','全表示']">霊峰急撃</option>
-              <option data-stage="longsha" value="longsha_e" data-layer="[]">幽谷の異光</option>
-              <option data-stage="longsha" value="longsha_ua" data-layer="['通路あり']" class="union">晴嵐の連合戦</option>
-              <option data-stage="hopeside" value="hopeside_a" data-layer="['中段','下段','全表示']">都市侵襲</option>
-              <option data-stage="hopeside" value="hopeside_b" data-layer="['中段','下段','全表示']">運河に見ゆ</option>
-              <option data-stage="hopeside" value="hopeside_c" data-layer="['中段','下段','全表示']">高架の敵影</option>
-              <option data-stage="hopeside" value="hopeside_d" data-layer="['中段','下段','全表示']">双騎接近</option>
-              <option data-stage="hopeside" value="hopeside_ua" data-layer="['中段','下段','全表示']" class="union">摩天迎撃戦</option>
-              <option data-stage="hopeside" value="hopeside_ub" data-layer="[]" class="union">新都市連合戦</option>
-              <option data-stage="hopeside" value="hopeside_sa" data-layer="['中段','下段','全表示']" class="scramble">大都争奪戦</option>
-              <option data-stage="kinich" value="kinich_a" data-layer="['通路表示あり']">白砂進軍</option>
-              <option data-stage="kinich" value="kinich_b" data-layer="['通路表示あり']">火花散る渚</option>
-              <option data-stage="kinich" value="kinich_c" data-layer="['通路表示あり']">波打際の熱闘</option>
-              <option data-stage="kinich" value="kinich_d" data-layer="[]">遠浅の射光</option>
-              <option data-stage="kinich" value="kinich_ea" data-layer="[]" class="event">激闘の海岸線</option>
-              <option data-stage="kinich" value="kinich_ua" data-layer="['通路表示あり']" class="union">南海の迎撃戦</option>
-              <option data-stage="kinich" value="kinich_ub" data-layer="[]" class="union">汀の連合戦</option>
-              <option data-stage="nesos" value="nesos_a" data-layer="['下段']">構造α-01</option>
-              <option data-stage="nesos" value="nesos_b" data-layer="[]">構造β-05</option>
-              <option data-stage="nesos" value="nesos_c" data-layer="[]">構造α-66</option>
-              <option data-stage="nesos" value="nesos_ua" data-layer="[]" class="union">魔窟迎撃戦</option>
-              <option data-stage="nesos" value="nesos_sa" data-layer="[]" class="scramble">蜂巣争奪戦</option>
-              <option data-stage="beanavis" value="beanavis_a" data-layer="[]">湧水の波紋</option>
-              <option data-stage="beanavis" value="beanavis_b" data-layer="[]">祝福無き礼拝堂</option>
-              <option data-stage="beanavis" value="beanavis_c" data-layer="[]">石橋の眼下</option>
-              <option data-stage="beanavis" value="beanavis_d" data-layer="[]">蒼天の黒火龍</option>
-              <option data-stage="beanavis" value="beanavis_e" data-layer="[]">教会堂を望む</option>
-              <option data-stage="malinasedna" value="malinasedna_a" data-layer="[]">雪濠の凱歌</option>
-              <option data-stage="malinasedna" value="malinasedna_b" data-layer="[]">霜夜の裏の裏</option>
-              <option data-stage="malinasedna" value="malinasedna_c" data-layer="[]">掎角の氷穴</option>
-              <option data-stage="sector" value="sector_a" data-layer="[]">軋轢の天望坐</option>
-              <option data-stage="24" value="24_sqa" data-layer="[]">FIELD-D</option>
-              <option data-stage="24" value="24_sqb" data-layer="[]">FIELD-S</option>
+              <!-- ... -->
             </select>
           </div>
+
           <div class="submitbtn">
             <button id="change_map" type="button">選択</button>
           </div>
@@ -243,7 +70,8 @@
     <div class="item">
       <div class="name">階層：</div>
       <div id="layer_area">
-        <select id="lst_layer" size="4">
+        <select id="lst_layer" size="2">
+          <!-- ... -->
         </select>
       </div>
     </div>
@@ -278,27 +106,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_scout" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
 
         <div class="name">種別：</div>
         <div class="form">
           <select id="lst_scout" size="4" class="formlst">
-            <!--valueは [偵察範囲,進む距離,進む時間] -->
-            <option label="ラーク偵察機" value="[80,200,5.5]">ラーク</option>
-            <option label="ファルコン偵察機" value="[50,500,8]">ファルコン</option>
-            <option label="アウル偵察機" value="[120,200,11]">アウル</option>
-            <option label="ロビン偵察機" value="[250,20,0.6]">ロビン</option>
-            <option label="ストーク偵察機" value="[90,50,20]">ストーク</option>
-            <option label="ギィ" value="[100,200,11]">ギィ</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="submitbtn"><button id="submit_scout" type="button">設置</button></div>
@@ -312,24 +127,13 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_sensor" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
             <select id="lst_sensor" size="4" class="formlst">
-                <!--valueは 索敵半径を指定 -->
-                <option label="索敵センサー" value="60">初期センサー</option>
-                <option label="小型索敵センサー" value="45">小型センサー</option>
-                <option label="広域索敵センサー" value="90">広域センサー</option>
-                <option label="軽量索敵センサー" value="55">軽量センサー</option>
+              <!-- ... -->
             </select>
         </div>
         <div class="submitbtn"><button id="submit_sensor" type="button">設置</button></div>
@@ -343,24 +147,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_radar" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
-            <select id="lst_radar" size="4" class="formlst">
-                <!--valueは 索敵半径と角度を指定 -->
-                <option label="レーダー" value="[200,60]">レーダー</option>
-                <option label="レーダーII" value="[160,120]">レーダーII</option>
-                <option label="レーダーIII" value="[130,360]">レーダーIII</option>
-            </select>
+          <select id="lst_radar" size="4" class="formlst">
+            <!-- ... -->
+          </select>
         </div>
         <div class="submitbtn"><button id="submit_radar" type="button">設置</button></div>
       </form></div>
@@ -373,24 +167,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_sonde" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
-            <select id="lst_sonde" size="4" class="formlst">
-                <!--valueは 射出半径と索敵半径を指定 -->
-                <option label="滞空索敵弾" value="[350,65]">滞空索敵弾</option>
-                <option label="小型索敵弾" value="[450,55]">小型索敵弾</option>
-                <option label="広域索敵弾" value="[250,80]">広域索敵弾</option>
-            </select>
+          <select id="lst_sonde" size="4" class="formlst">
+            <!-- ... -->
+          </select>
         </div>
         <div class="submitbtn"><button id="submit_sonde" type="button">設置</button></div>
       </form></div>
@@ -403,24 +187,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_ndsensor" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
-            <select id="lst_ndsensor" size="4" class="formlst">
-                <!--valueは 索敵半径と角度を指定 -->
-                <option label="ND索敵" value="150">ND索敵</option>
-                <option label="小型ND" value="100">小型ND</option>
-                <option label="広域ND" value="220">広域ND</option>
-            </select>
+          <select id="lst_ndsensor" size="4" class="formlst">
+            <!-- ... -->
+          </select>
         </div>
         <div class="submitbtn"><button id="submit_ndsensor" type="button">設置</button></div>
       </form></div>
@@ -433,23 +207,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_vsensor" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
-            <select id="lst_vsensor" size="4" class="formlst">
-                <!--valueは 索敵半径を指定 -->
-                <option label="Vセンサー投射機" value="[55,160]">Vセンサー</option>
-                <option label="小型Vセンサー投射機" value="[40,130]">小型Vセンサー</option>
-            </select>
+          <select id="lst_vsensor" size="4" class="formlst">
+            <!-- ... -->
+          </select>
         </div>
         <div class="submitbtn"><button id="submit_vsensor" type="button">設置</button></div>
       </form></div>
@@ -462,35 +227,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_howitzer" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
-            <select id="lst_howitzer" size="4" class="formlst">
-                <!--valueは [射程,爆発半径,着弾誤差半径] -->
-                <option label="タイタン榴弾砲"   value="[300,25,15]">タイタン</option>
-                <option label="コロッサス榴弾砲" value="[250,24,25]">コロッサス</option>
-                <option label="アトラント榴弾砲" value="[500,25,20]">アトラント</option>
-                <option label="ギガノト榴弾砲"   value="[350,40,0]">ギガノト</option>
-                <option label="ネフィリム榴弾砲" value="[260,35,15]">ネフィリム</option>
-                <option label="T10"  value="[350,28,15]">T10</option>
-                <option label="T25"  value="[260,45,0]">T25</option>
-                <option label="XHR"  value="[300,30,30]">XHR</option>
-                <option label="T30"  value="[400,35,10]">T30</option>
-                <option label="タウル重装砲"     value="[250,18,0]">タウル</option>
-                <option label="ヴァーゴ重装砲"   value="[250,16,0]">ヴァーゴ</option>
-                <option label="ドラード重装砲"   value="[250,24,0]">ドラード</option>
-                <option label="ハイドラ重装砲"   value="[250,15,0]">ハイドラ</option>
-                <option label="モノセロス重装砲" value="[250,28,0]">モノセロス</option>
-            </select>
+          <select id="lst_howitzer" size="4" class="formlst">
+            <!-- ... -->
+          </select>
         </div>
         <div class="submitbtn"><button id="submit_howitzer" type="button">設置</button></div>
       </form></div>
@@ -503,14 +247,7 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_waft" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="submitbtn"><button id="submit_waft" type="button">設置</button></div>
@@ -524,26 +261,14 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_misc" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
-            <select id="lst_misc" size="4" class="formlst">
-                <!--value経由で種類を指定する -->
-                <option label="サテライトバンカー" value="bunker">バンカー</option>
-                <option label="セントリーガン"     value="sentry">セントリー</option>
-                <option label="エアロセントリー"   value="aerosent">エアロセントリー</option>
-                <option label="爆撃通信機"         value="bomber">爆撃通信機</option>
-                <option label="偵察要請装置"       value="bascout">偵察要請装置</option>
-            </select>
+          <select id="lst_misc" size="4" class="formlst">
+            <!-- ... -->
+          </select>
         </div>
         <div class="submitbtn"><button id="submit_misc" type="button">設置</button></div>
       </form></div>
@@ -556,14 +281,7 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_circle" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">半径：</div>
@@ -579,14 +297,7 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_line" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">長さ：</div>
@@ -602,14 +313,7 @@
         <div class="ptname">色：</div>
         <div class="form">
           <select id="col_point" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="ptname">サイズ：</div>
@@ -638,28 +342,13 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_icon" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="name">種別：</div>
         <div class="form">
           <select id="lst_icon" size="4" class="formlst">
-            <option label="強襲"       value="image/assault.png">強襲</option>
-            <option label="重火力"     value="image/heavy.png">重火力</option>
-            <option label="狙撃"       value="image/snipe.png">狙撃</option>
-            <option label="支援"       value="image/support.png">支援</option>
-            <option label="吸収装置"   value="image/absorb.png">吸収装置</option>
-            <option label="マイン"     value="image/mine.png">マイン</option>
-            <option label="セントリー" value="image/sentry.png">セントリー</option>
-            <option label="エアロセントリー" value="image/aero.png">エアロセントリー</option>
-            <option label="リモートシューター" value="image/remote.png">リモートシューター</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="submitbtn"><button id="submit_icon" type="button">設置</button></div>
@@ -673,14 +362,7 @@
         <div class="name">色：</div>
         <div class="form">
           <select id="col_freehand" class="colorpick">
-            <option value="#ff0000">red</option>
-            <option value="#ff00ff">pink</option>
-            <option value="#ffA500">orange</option>
-            <option value="#ffff00">yellow</option>
-            <option value="#00ff00">green</option>
-            <option value="#00ffff">cyan</option>
-            <option value="#0000ff">blue</option>
-            <option value="#800080">purple</option>
+            <!-- ... -->
           </select>
         </div>
         <div class="submitbtn">

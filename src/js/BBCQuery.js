@@ -248,7 +248,7 @@ export default class BBCQuery {
             this.map = map;
             this._bv = new BufferView(BufferView.setStr(map));
         }
-        // setQueryString (str) {
+    // setQueryString (str) {
     fromBase64(str) {
             var data = Base64.decode(str);
             this._bv = new BufferView(pako.inflateRaw(data));
@@ -263,7 +263,7 @@ export default class BBCQuery {
             }
             return true;
         }
-        // getQueryString () {
+    // getQueryString () {
     toBase64() {
             var buf = this._bv._buf;
             var data = pako.deflateRaw(buf, {

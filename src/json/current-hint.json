@@ -1,0 +1,15 @@
+[
+    {
+        "hint": "ダリーヤ遺跡群 〜炎雨降らす砲座〜",
+        "type": "event"
+    },
+    {
+        "hint": "マグメル機体試験場 〜FIELD-D〜",
+        "type": "squad_battle"
+    },
+    {
+        "hint": "マグメル機体試験場 〜FIELD-S〜",
+        "type": "squad_battle"
+    }
+]
+

@@ -22,6 +22,6 @@ for f in css data image map ./*.html; do
 done
 rm -rf ${DST_DIR}
 mkdir -p ${DST_DIR}
-mv ${TMP_DIR}/* ${DST_DIR}
+mv -f ${TMP_DIR}/* ${DST_DIR}
 rmdir ${SCRIPT_DIR}/public/_tmp
 

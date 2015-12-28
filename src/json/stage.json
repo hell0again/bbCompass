@@ -1,0 +1,27 @@
+[
+    {"value": "map",          "dataset": {"scale": "[160/100*0.7]"}, "text": "スカービ渓谷"},
+    {"value": "blouer",       "dataset": {"scale": "[1.137*0.7]"},   "text": "旧ブロア市街地"},
+    {"value": "island",       "dataset": {"scale": "[1.378*0.7]"},   "text": "第三採掘島"},
+    {"value": "tlaza",        "dataset": {"scale": "[160/100*0.7]"}, "text": "トラザ山岳基地"},
+    {"value": "darya",        "dataset": {"scale": "[107/63*0.7]"},  "text": "ダリーヤ遺跡"},
+    {"value": "d51",          "dataset": {"scale": "[1.540*0.7]"},   "text": "放棄区画D51"},
+    {"value": "wuhai",        "dataset": {"scale": "[1.336*0.7]"},   "text": "ウーハイ産業港"},
+    {"value": "valerio",      "dataset": {"scale": "[1.068*0.7]"},   "text": "城塞都市バレリオ"},
+    {"value": "belsk",        "dataset": {"scale": "[154/100*0.7]"}, "text": "極洋基地ベルスク"},
+    {"value": "adora",        "dataset": {"scale": "[1.120*0.7]"},   "text": "アドラ火山連峰"},
+    {"value": "algren",       "dataset": {"scale": "[1.138*0.7]"},   "text": "オルグレン湖水基地"},
+    {"value": "denebra",      "dataset": {"scale": "[0.946*0.7]"},   "text": "デ・ネブラ大落片"},
+    {"value": "highrisesite", "dataset": {"scale": "[1.194*0.7]"},   "text": "第19号高層サイト"},
+    {"value": "navar",        "dataset": {"scale": "[1.084*0.7]"},   "text": "ナヴァル岩石砂漠"},
+    {"value": "madelrond",    "dataset": {"scale": "[1.075*0.7]"},   "text": "マデルロンド大空洞"},
+    {"value": "gerberg",      "dataset": {"scale": "[1.305*0.7]"},   "text": "ゲルベルク要塞跡"},
+    {"value": "longsha",      "dataset": {"scale": "[1.020*0.7]"},   "text": "ロンシャ深山"},
+    {"value": "hopeside",     "dataset": {"scale": "[1.109*0.7]"},   "text": "ホープサイド市街地"},
+    {"value": "kinich",       "dataset": {"scale": "[1.096*0.7]"},   "text": "キニシュ砂岸"},
+    {"value": "nesos",        "dataset": {"scale": "[1.515*0.7]"},   "text": "ネソス島実験ドーム"},
+    {"value": "beanavis",     "dataset": {"scale": "[0.895]"},       "text": "ベネヴィス高原地帯"},
+    {"value": "malinasedna",  "dataset": {"scale": "[0.866*0.8]"},   "text": "マリナセドナ大雪山"},
+    {"value": "sector",       "dataset": {"scale": "[0.836]"},       "text": "極地観測所セクター９"},
+    {"value": "24",           "dataset": {"scale": "[1.515*0.7]"},   "text": "マグメル機体試験場"}
+]
+

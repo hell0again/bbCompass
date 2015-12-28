@@ -1,0 +1,31 @@
+[
+    {
+        "type": "event",
+        "maps": []
+    },
+    {
+        "type": "national_battle_high",
+        "maps": [
+            "d51_b"
+        ]
+    },
+    {
+        "type": "national_battle_low",
+        "maps": [
+            "beanavis_a"
+        ]
+    },
+    {
+        "type": "union_battle",
+        "maps": [
+            "kinich_ub"
+        ]
+    },
+    {
+        "type": "squad_battle",
+        "maps": [
+            "24_sqa",
+            "24_sqb"
+        ]
+    }
+]

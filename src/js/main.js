@@ -1,8 +1,16 @@
 import $ from 'jquery';
 import BB from './BB';
 import BBCQuery from './BBCQuery';
+import BBDB from './BBDB';
+
+// import 'jquery-ui/jquery-ui.min.js';
+// /*global require*/ // eslint
+// require('jquery-ui/themes/base/core.css');
+// require('jquery-ui/themes/base/menu.css');
+// require('jquery-ui/themes/base/theme.css');
+// require('jquery-ui/themes/smoothness/jquery-ui.min.css');
+
 import 'jquery-simplecolorpicker/jquery.simplecolorpicker.js';
-/*global require*/ // eslint
 require('jquery-simplecolorpicker/jquery.simplecolorpicker.css');
 
 //初期化
@@ -14,6 +22,8 @@ var freehandOnWrite = undefined;
 var bbobj = "";
 var wideview = true;
 
+var debugMode = false;
+
 //ターレット関連データ
 var turretSpec = {
     "R": [200, 180],
@@ -23,88 +33,202 @@ var turretSpec = {
 };
 var turretCircle = 8;
 
+
+function createOptionFragments(optionList) {
+    var frag = document.createDocumentFragment();
+    $.each(optionList, function(it, el) {
+        var elOpt = document.createElement('option');
+        elOpt["value"] = el["value"];
+        if (el.hasOwnProperty("dataset") == true) {
+            $.each(el["dataset"], function(key, val) {
+                elOpt["dataset"][key] = val;
+            });
+        }
+        if (el.hasOwnProperty("disabled") == true) {
+            elOpt["disabled"] = el["disabled"];
+        }
+        if (el.hasOwnProperty("class") == true) {
+            elOpt["class"] = el["class"];
+        }
+        if (el.hasOwnProperty("label") == true) {
+            elOpt["label"] = el["label"];
+        }
+        elOpt.appendChild( document.createTextNode(el["text"]) );
+        frag.appendChild(elOpt);
+    });
+    return frag;
+}
+// $select要素のoptionリストを動的生成する
+// [ { "value": "map", "dataset": { "scale": "[160/100*0.7]" }, "text": "スカービ渓谷" }..., ]
+function loadSelectionOption($select, optionList) {
+    var frag = createOptionFragments(optionList);
+    $select.empty().append(frag);
+}
+
+
+function loadStageList() {
+    loadSelectionOption($("#current"), appData["current_map"]);
+    loadSelectionOption($("#stage"), appData["stage"]);
+}
+function loadMapList(stage = null) {
+    if (stage != null) {
+        var stageMaps = getMapsFromStage(stage);
+        loadSelectionOption($("#map"), stageMaps);
+    } else {
+        // いらない！！！
+        var optionList = appData["map"];
+        loadSelectionOption($("#map"), optionList);
+    }
+}
+function getMapsFromStage(stage) {
+    var maps = $.grep(appData["map"], function(el, it) {
+        return (el.hasOwnProperty("dataset") && el.dataset.stage == stage);
+    });
+    return maps;
+}
+function getStageFromMap(map) {
+    var stages = $.grep(appData["map"], function(el, it) {
+        return (el.value == map);
+    });
+    return stages[0].dataset.stage;
+}
+function loadObjectLists() {
+    var elMap = {
+        "object_scout": "#lst_scout",
+        "object_sensor": "#lst_sensor",
+        "object_radar": "#lst_radar",
+        "object_sonde": "#lst_sonde",
+        "object_ndsensor": "#lst_ndsensor",
+        "object_vsensor": "#lst_vsensor",
+        "object_howitzer": "#lst_howitzer",
+        "object_misc": "#lst_misc",
+        "object_icon": "#lst_icon",
+    };
+    $.each(elMap, function(name, selector) {
+        loadSelectionOption( $(selector), appData[name] );
+    });
+}
+
+var appData = BBDB;
+var appDataStatic = {
+    "picker": [
+        {"value": "#FF0000", "text": "red"},
+        {"value": "#FF00FF", "text": "pink"},
+        {"value": "#FFA500", "text": "orange"},
+        {"value": "#FFFF00", "text": "yellow"},
+        {"value": "#00FF00", "text": "green"},
+        {"value": "#00FFFF", "text": "cyan"},
+        {"value": "#0000FF", "text": "blue"},
+        {"value": "#800080", "text": "purple"},
+    ],
+    "defaultLayer": [
+        {"value": "", "text": "通常"},
+    ],
+};
+
+
+
 //メニューのオブジェクト選択
 var onObjectSelectorChanged = function($this, speed = "fast") {
     if ($this.hasClass("selected")) {
         return false;
     } else {
-        $("div#objselector div.option.selected").removeClass("selected");
+        $("#objselector .option.selected").removeClass("selected");
         $this.addClass("selected");
     }
-    var openid = $this.attr("data-target");
+    var openid = $this.data("target");
 
     //リストの先頭を選択済みにする
     $("#" + openid + " " + ".formlst option:first").attr('selected', true);
     $("#" + openid + " " + ".formlst").change();
 
-    $("div.setobj:visible").fadeOut(speed,
-        function() {
-            $("#" + openid).fadeIn(speed);
-        }
-    );
+    $("div.setobj:visible").fadeOut(speed, function() {
+        $("#" + openid).fadeIn(speed);
+    });
 };
 
 
 // 読み込み時の処理
 $(document).ready(function() {
-    $("#lst_scout").change(function() {
-        $("#name_scout").val($("#lst_scout option:selected").text());
-    });
-    $("#lst_sensor").change(function() {
-        $("#name_sensor").val($("#lst_sensor option:selected").text());
-    });
-    $("#lst_radar").change(function() {
-        $("#name_radar").val($("#lst_radar option:selected").text());
-    });
-    $("#lst_sonde").change(function() {
-        $("#name_sonde").val($("#lst_sonde option:selected").text());
-    });
-    $("#lst_ndsensor").change(function() {
-        $("#name_ndsensor").val($("#lst_ndsensor option:selected").text());
-    });
-    $("#lst_vsensor").change(function() {
-        $("#name_vsensor").val($("#lst_vsensor option:selected").text());
-    });
-    $("#lst_howitzer").change(function() {
-        $("#name_howitzer").val($("#lst_howitzer option:selected").text());
-    });
-    $("#lst_misc").change(function() {
-        $("#name_misc").val($("#lst_misc option:selected").text());
-    });
-    $("#lst_icon").change(function() {
-        $("#name_icon").val($("#lst_icon option:selected").text());
+
+    // 現在の戦場選択メニューの設定
+    $("#current").change(function(e) {
+        var map = $(this).val();
+        var stage = getStageFromMap(map);
+        $("#stage").val(stage);
+        $("#stage").change();
+        $("#map").val(map);
     });
 
-    $('select.colorpick').simplecolorpicker({
-        picker: true
-    });
-
-    var mapobj = $("select#map").children().get();
-    $.extend({
-        restoreMaps: function() {
-            $("select#map").children().remove();
-            $("select#map").append(mapobj);
-        }
-    });
-
-    $("select#stage").change(function(e) {
-        var stage = $("select#stage option:selected").val();
-        $.restoreMaps();
-        $("select#map").children("[data-stage!='" + stage + "']").remove();
+    // ステージ選択メニューの設定
+    $("#stage").change(function(e) {
+        var stage = $(this).val();
+        // ステージ変更に連動してマップ一覧をフィルタしなおし
+        loadMapList(stage);
         $("#map").change();
     });
-    $("select#map").change(function() {
-        $("select#map").removeClass("union event scramble");
-        if ($("select#map option:selected").attr("class") !== undefined) {
-            $("select#map").addClass($("select#map option:selected").attr("class"));
+    // マップ選択メニューの設定
+    $("#map").change(function(e) {
+        // var map = $(this).val();
+        $("#map").removeClass("union event scramble");
+        var mapClass = $("#map option:selected").attr("class");
+        if (mapClass !== undefined) {
+            $("#map").addClass(mapClass);
         }
     });
+    $("#change_map").bind('click', function(e) {
+        chg_map();
+    });
 
-    // 初回のリセット
-    $("#stage").change();
-
-    $("div#objselector div.option").click(function() {
+    // オブジェクト選択メニューの設定
+    $("#objselector .option").click(function() {
         onObjectSelectorChanged($(this));
+    });
+
+    // オブジェクトごとのリスト選択時の設定
+    $("#lst_scout").change(function() {
+        $("#name_scout").val($(this).find("option:selected").text());
+    });
+    $("#lst_sensor").change(function() {
+        $("#name_sensor").val($(this).find("option:selected").text());
+    });
+    $("#lst_radar").change(function() {
+        $("#name_radar").val($(this).find("option:selected").text());
+    });
+    $("#lst_sonde").change(function() {
+        $("#name_sonde").val($(this).find("option:selected").text());
+    });
+    $("#lst_ndsensor").change(function() {
+        $("#name_ndsensor").val($(this).find("option:selected").text());
+    });
+    $("#lst_vsensor").change(function() {
+        $("#name_vsensor").val($(this).find("option:selected").text());
+    });
+    $("#lst_howitzer").change(function() {
+        $("#name_howitzer").val($(this).find("option:selected").text());
+    });
+    $("#lst_misc").change(function() {
+        $("#name_misc").val($(this).find("option:selected").text());
+    });
+    $("#lst_icon").change(function() {
+        $("#name_icon").val($(this).find("option:selected").text());
+    });
+
+    // selectmenuだとタップしてメニュー展開という動作になってしまう。
+    // 開きっぱなしにしてほしいのでmenuのほうが適切っぽいけどmenuだとul, li。。
+    // $('#lst_scout').selectmenu({
+    //     change: function(ev, ui) {
+    //         $('#lst_scout option').attr('selected', false);
+    //         $('#lst_scout option:eq('+ ui.item.index +')').attr('selected', true);
+    //         $("#name_scout").val( ui.item.element.text() );
+    //     }
+    // });
+    // $('#lst_scout').selectmenu("open");
+
+    // カラーピッカーの設定
+    loadSelectionOption($('.colorpick'), appDataStatic["picker"]);
+    $('select.colorpick').simplecolorpicker({
+        picker: true
     });
 
     //狭い時用メニューに関する初期化
@@ -122,7 +246,6 @@ $(document).ready(function() {
             });
         }
     });
-
     $("div.menutab#menutab_item").click(function(ev) {
         if ($("div.menusubcell#subcell_graph").is(":visible")) {
             $("div.ribbonmenu").fadeOut("fast");
@@ -171,8 +294,7 @@ $(document).ready(function() {
             offset.left = $(window).width() - $("div.ContextMenu").width() + $(window).scrollLeft() - 3;
         }
 
-        $("div.ContextMenu").show()
-            .offset(offset);
+        $("div.ContextMenu").show().offset(offset);
 
         //どこかクリックしたらメニューを消す
         $(document).one('click', function() {
@@ -224,16 +346,15 @@ $(document).ready(function() {
         }
     });
 
-
+    // メニュー開閉
     $("#menusw_off").bind('click', function(e) {
         hide_menu();
     });
     $("#menusw_on").bind('click', function(e) {
         show_menu();
     });
-    $("#change_map").bind('click', function(e) {
-        chg_map();
-    });
+
+    // 各種オブジェクト設置
     $("#submit_scout").bind('click', function(e) {
         set_scout();
     });
@@ -324,40 +445,14 @@ $(document).ready(function() {
         getURL();
     });
 
-    initialize();
-});
-//各種初期化処理
-function initialize() {
-    /* canvas要素の存在チェックとCanvas未対応ブラウザの対処 */
-    var canvas = document.getElementById(CanvasName);
-    if (!canvas || !canvas.getContext) {
-        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
-        return false;
-    }
-    bbobj = new BB(CanvasName);
-
-    var cnvArea = document.getElementById(DivName);
-    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
-    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
-    $("#" + DivName).width($("#" + CanvasName).outerWidth() + scrollBarWidth)
-        .height($("#" + CanvasName).outerHeight() + scrollBarHeight);
-
-    $("#lst_layer").change(function() {
-        closeNav();
-        bbobj.setbgdiff($("#lst_layer").val())
-    });
-    $("#" + DivName).scroll(function() {
-        bbobj.chgScroll();
-    });
-
     //ウィンドウサイズの変更に対する対処
-    wideview = $("div.menutitle").is(":visible");
+    wideview = $(".menutitle").is(":visible");
     $(window).resize(function() {
         //キャンバスエリアの幅を調整、jCanvaScriptの処理に反映させる
         chgCanvasAreaSize();
 
         //メニューの表示・非表示対処
-        if ($("div.menutitle").is(":visible")) {
+        if ($(".menutitle").is(":visible")) {
             wideview = true;
 
             //各ブロックをcssのデフォルトに戻す
@@ -384,6 +479,30 @@ function initialize() {
                 $("div.ribbonmenu").hide();
             }
         }
+    });
+
+    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
+    var canvas = document.getElementById(CanvasName);
+    if (!canvas || !canvas.getContext) {
+        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
+        return false;
+    }
+
+    // canvas要素の初期化
+    bbobj = new BB(CanvasName);
+    var cnvArea = document.getElementById(DivName);
+    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
+    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
+    $("#" + DivName)
+        .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
+        .height($("#" + CanvasName).outerHeight() + scrollBarHeight);
+
+    $("#lst_layer").change(function() {
+        closeNav();
+        bbobj.setbgdiff($("#lst_layer").val())
+    });
+    $("#" + DivName).scroll(function() {
+        bbobj.chgScroll();
     });
 
     //スマホ用メニュー制御
@@ -562,87 +681,109 @@ function initialize() {
         window.setTimeout(initMenuScale, 100);
     }
 
+    loadInitData();
+});
+//各種初期化処理
+function loadInitData() {
+    loadStageList();
+    loadMapList();
+    loadObjectLists();
+
     //メニューの初期状態を設定
-    onObjectSelectorChanged($("#objselector div.option:first"), 0); // オブジェクトをひとつ選んでおく
+    onObjectSelectorChanged($("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
 
-    //query stringがあれば再現処理に入る
     if (window.location.search) {
+        //query stringがあれば再現処理に入る
         setURL(window.location.search.substr(1));
+    } else {
+        // なければもっともらしいマップを選ぶ
+        chg_map($("#current").val());
     }
-
 }
 
-
 //マップ変更
-function chg_map(callback) {
-    var file = sanitize_filename($("#map option:selected").val());
-    var stage = sanitize_filename($("#map option:selected").attr("data-stage"));
-    var layer = eval($("#map option:selected").attr("data-layer"));
-    var scale = eval($("#stage").children("[value='" + stage + "']").attr("data-scale"));
+function chg_map(map, callback) {
+    if (map== null) {
+        map= $("#map").val();
+    }
+    var stage= getStageFromMap(map);
+    $("#stage").val(stage);
+    $("#stage").change();
+    $("#map").val(map);
+    $("#map").change();
+    
+    var $map = $("#map option:selected");
+    map = sanitize_filename(map);
+    stage = sanitize_filename(stage);
+    var layer = eval($map.data("layer"));
+    var scale = eval($("#stage [value='" + stage + "']").data("scale"));
 
-    if ((file == null) || (stage == null)) {
+    if ((map == null) || (stage == null)) {
         alert("マップファイル名エラー");
         return;
     }
 
-    $("div#Loading").show();
+    $("#Loading").show();
     $("#lst_object").children().remove();
 
-    bbobj.setbg("./map/" + stage + "/" + file + ".jpg", scale[0], scale[1],
-        function() {
-            $("#lst_scale").val(1);
-            $("ul#contextZoom").children("li").removeClass("checked");
-            $("li#contextZoom_1").addClass("checked");
-            $("div#Loading").hide();
-            $.ajax({
-                "url": "data/" + file + ".txt",
-                dataType: "jsonp",
-                crossDomain: true,
-                cache: false,
-                jsonp: false,
-                jsonpCallback: "stageData",
-                success: function(data, status) {
-                    chgCanvasAreaSize();
+    bbobj.setbg("./map/" + stage + "/" + map + ".jpg", scale[0], scale[1], function() {
+        $("#lst_scale").val(1);
+        $("ul#contextZoom").children("li").removeClass("checked");
+        $("li#contextZoom_1").addClass("checked");
+        $("div#Loading").hide();
+        $.ajax({
+            "url": "data/" + map + ".txt",
+            dataType: "jsonp",
+            crossDomain: true,
+            cache: false,
+            jsonp: false,
+            jsonpCallback: "stageData",
+            success: function(data, status) {
+                chgCanvasAreaSize();
 
-                    if ("turret" in data) {
-                        var turretData = data["turret"];
-                        for (i = 0; i < turretData.length; i++) {
-                            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
-                            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2],
-                                turretSpec[turretData[i][3]][0],
-                                turretSpec[turretData[i][3]][1],
-                                turretCircle,
-                                undefined, turretData[i][4]);
-                        }
+                if ("turret" in data) {
+                    var turretData = data["turret"];
+                    for (i = 0; i < turretData.length; i++) {
+                        //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
+                        bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2],
+                            turretSpec[turretData[i][3]][0],
+                            turretSpec[turretData[i][3]][1],
+                            turretCircle,
+                            // undefined, turretData[i][4]);
+                            undefined, debugMode);
                     }
-                    if ("searcher" in data) {
-                        var searcherData = data["searcher"];
-                        for (i = 0; i < searcherData.length; i++) {
-                            //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
-                            bbobj.put_searcher(searcherData[i][0], searcherData[i][1],
-                                searcherData[i][2],
-                                turretCircle,
-                                undefined, searcherData[i][3]);
-                        }
+                }
+                if ("searcher" in data) {
+                    var searcherData = data["searcher"];
+                    for (i = 0; i < searcherData.length; i++) {
+                        //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
+                        bbobj.put_searcher(searcherData[i][0], searcherData[i][1],
+                            searcherData[i][2],
+                            turretCircle,
+                            // undefined, searcherData[i][3]);
+                            undefined, debugMode);
                     }
-                    if (callback !== undefined) {
-                        callback.call();
-                    }
-                },
-                error: function() {}
-            });
+                }
+                if (callback !== undefined) {
+                    callback.call();
+                }
+            },
+            error: function() {}
         });
+    });
 
-
-    $("#lst_layer").children().remove();
-    $("#lst_layer").append($('<option value=""></option>').text("通常"));
+    var layerList = [];
+    layerList = appDataStatic["defaultLayer"].concat();
     for (var i = 0; i < layer.length; i++) {
-        $("#lst_layer").append($('<option value="./map/' + stage + "/" + file + '_' + (i + 1) + '.jpg' + '"></option>').text(layer[i]));
+        layerList.push({
+            "value": './map/' + stage + '/' + map + '_' + (i + 1) + '.jpg',
+            "text": layer[i],
+        });
     }
+    loadSelectionOption($("#lst_layer"), layerList);
     $("#lst_layer").val("");
 
     closeNav();
-
 }
 
 //偵察機
@@ -1128,7 +1269,6 @@ function hide_menu() {
             $("#menusw_on").show();
         });
 }
-
 //メニュー出す
 function show_menu() {
     $("div.ribbonmenu").slideDown(
@@ -1199,20 +1339,9 @@ function getURL() {
 //URLクエリストリングからの復元
 function setURL(querystr) {
     var queryobj = new BBCQuery(bbobj, 'dummy');
-
-    // if (queryobj.setQueryString(querystr)) {
     if (queryobj.fromBase64(querystr)) {
-        $.restoreMaps();
-        $("select#stage").val($("select#map").children("[value='" + queryobj.map + "']").attr("data-stage"));
-        $("select#stage").change();
-
-        $("select#map").val(queryobj.map);
-        $("select#map").change();
-
-        chg_map(function() {
-            var objs;
-            objs = queryobj.applyObjects();
-            // objs=queryobj.setObjects.apply(queryobj);
+        chg_map(queryobj.map, function() {
+            var objs = queryobj.applyObjects();
             for (var i = 0; i < objs.length; i++) {
                 add_object(objs[i].id, coalesce_name(objs[i]));
                 var obj = objs[i];
@@ -1223,98 +1352,43 @@ function setURL(querystr) {
             }
         });
     }
-
-    //delete queryobj;
 }
 
+// オブジェクトの名前が空白だった場合のデフォルト名
+var coalesceNames = {
+    "scout": "(偵察機)",
+    "sensor": "(センサー)",
+    "radar": "(レーダー)",
+    'sonde': "(索敵弾)",
+    'ndsensor': "(ND)",
+    'vsensor': "(Vセンサー)",
+    'howitzer': "(榴弾)",
+    'bunker': "(バンカー)",
+    'sentry': "(セントリー)",
+    'aerosentry': "(エアロセントリー)",
+    'bomber': "(爆撃機)",
+    'bascout': "(偵察要請)",
+    'icon': "(アイコン)",
+    'waft': "(ワフトローダー)",
+    'circle': "(円)",
+    'line': "(直線)",
+    'point': "(点)",
+    'freehand': "(フリーハンド)",
+    'default': "(無名)",
+ };
 //オブジェクトの名前が空白だった場合の対策関数
 function coalesce_name(obj) {
     var name;
-
     if (obj._text.length != 0) {
         //名前指定がある場合はそのまま利用
         name = obj._text;
     } else {
-        //名前指定がないので、種別に応じた仮の名前を利用
-        switch (obj.type) {
-            case 'scout':
-                name = "(偵察機)";
-                break;
-
-            case 'sensor':
-                name = "(センサー)";
-                break;
-
-            case 'radar':
-                name = "(レーダー)";
-                break;
-
-            case 'sonde':
-                name = "(索敵弾)";
-                break;
-
-            case 'ndsensor':
-                name = "(ND)";
-                break;
-
-            case 'vsensor':
-                name = "(Vセンサー)";
-                break;
-
-            case 'howitzer':
-                name = "(榴弾)";
-                break;
-
-            case 'bunker':
-                name = "(バンカー)";
-                break;
-
-            case 'sentry':
-                name = "(セントリー)";
-                break;
-
-            case 'aerosentry':
-                name = "(エアロセントリー)";
-                break;
-
-            case 'bomber':
-                name = "(爆撃機)";
-                break;
-
-            case 'bascout':
-                name = "(偵察要請)";
-                break;
-
-            case 'icon':
-                name = "(アイコン)";
-                break;
-
-            case 'waft':
-                name = "(ワフトローダー)";
-                break;
-
-            case 'circle':
-                name = "(円)";
-                break;
-
-            case 'line':
-                name = "(直線)";
-                break;
-
-            case 'point':
-                name = "(点)";
-                break;
-
-            case 'freehand':
-                name = "(フリーハンド)";
-                break;
-
-            default:
-                name = "(無名)";
-                break;
+        if (coalesceNames.hasOwnProperty(obj.type) == true) {
+            name = coalesceNames[obj.type];
+        } else {
+            name = coalesceNames["default"];
         }
     }
-
     return name;
 }
 
