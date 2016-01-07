@@ -1,0 +1,6 @@
+stageData( {
+  "turret":[
+  ],
+  "searcher": [
+  ]
+});
