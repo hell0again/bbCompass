@@ -26858,12 +26858,6 @@
 			]
 		},
 		{
-			"type": "union_battle",
-			"maps": [
-				"kinich_ub"
-			]
-		},
-		{
 			"type": "squad_battle",
 			"maps": [
 				"24_sqa",
