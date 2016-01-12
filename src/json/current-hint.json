@@ -1,15 +1,17 @@
 [
     {
         "hint": "ダリーヤ遺跡群 〜炎雨降らす砲座〜",
-        "type": "event"
+        "filter": {
+            "title": "イベントバトル開催＜新春　牛マンのワガママップすぺしゃる＞",
+            "url": "/news/298"
+        }
     },
     {
-        "hint": "マグメル機体試験場 〜FIELD-D〜",
-        "type": "squad_battle"
-    },
-    {
-        "hint": "マグメル機体試験場 〜FIELD-S〜",
-        "type": "squad_battle"
+        "hint": "マデルロンド大空洞 〜激闘の岩窟〜",
+        "filter": {
+            "title": "大攻防戦",
+            "url": "/news/308"
+        }
     }
 ]
 
