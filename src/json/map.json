@@ -30,6 +30,7 @@
     {"value":"darya_b", "dataset": {"layer": "['中段','下段','全表示']", "stage": "darya"}, "text": "河底の弾雨"},
     {"value":"darya_c", "dataset": {"layer": "['中段','下段','全表示']", "stage": "darya"}, "text": "交錯の火線"},
     {"value":"darya_ea", "dataset": {"layer": "['中段','下段','全表示']", "stage": "darya"}, "text": "激闘の古跡", "class": "event"},
+    {"value":"darya_eb", "dataset": {"layer": "[]", "stage": "darya"}, "text": "炎雨降らす砲座", "class": "event"},
     {"value":"darya_ua", "dataset": {"layer": "['中段','下段','全表示']", "stage": "darya"}, "text": "密林の迎撃戦", "class": "union"},
     {"value":"d51_a", "dataset": {"layer": "['中段','下段','全表示']", "stage": "d51"}, "text": "冷厳なる轟声"},
     {"value":"d51_b", "dataset": {"layer": "['中段','下段','全表示']", "stage": "d51"}, "text": "白銀死都"},

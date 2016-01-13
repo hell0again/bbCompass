@@ -8,10 +8,10 @@ client.get('json/calendar-2016.json', {}, function(err, res, body) {
 
     // 終了したマップを除外
     var calendar = _.filter(calendar, function(el, it) {
-        return el["is_new"];
-        // var st = el["end_time"].split("-");
-        // var t = new Date(st[0], st[1]-1, st[2]);
-        // return (Date.now() < t.getTime());
+        // return el["is_new"];
+        var st = el["end_time"].split("-"); // e.g: "2016-01-01"
+        var t = new Date(st[0], st[1]-1, st[2], 24+7, 30, 00); // 終了日の翌7:30まで
+        return (Date.now() < t.getTime());
     });
 
     // 終了時刻順にソート

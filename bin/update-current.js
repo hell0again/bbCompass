@@ -75,14 +75,27 @@ function onLoadCalendar(json) {
     console.log(JSON.stringify(r, "", "    "));
 }
 
-
 // var client = request.createClient('http://borderbreak.com');
 // client.get('json/calendar-2016.json', {}, function(err, res, body) {
 //     onLoadCalendar(body);
 // });
 
+// (function() {
+//     onLoadCalendar(require('../calendar-2016.json'));
+// })();
+
 (function() {
-    onLoadCalendar(require('../calendar-2016.json'));
+    var stdin = process.stdin,
+        stdout = process.stdout,
+        inputStr = "";
+    stdin.resume();
+    stdin.setEncoding('utf8');
+    stdin.on('data', function(chunk) {
+        inputStr += chunk;
+    });
+    stdin.on('end', function() {
+        onLoadCalendar(JSON.parse(inputStr));
+    });
 })();
 
 

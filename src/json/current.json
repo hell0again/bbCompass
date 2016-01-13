@@ -1,7 +1,9 @@
 [
     {
         "type": "event",
-        "maps": []
+        "maps": [
+            "madelrond_ea"
+        ]
     },
     {
         "type": "national_battle_high",
