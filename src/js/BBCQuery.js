@@ -22,38 +22,38 @@ class BufferView {
         this._offset = 0;
     }
     append(bytes) {
-            this._buf = this._buf.concat(bytes);
-        }
-        // textToByteArray
+        this._buf = this._buf.concat(bytes);
+    }
+    // textToByteArray
     static setStr(text) {
-            var ret = Array();
-            var code;
+        var ret = Array();
+        var code;
 
-            ret[0] = text.length;
-            for (var i = 0; i < text.length; i++) {
-                code = text.charCodeAt(i);
-                if (code & 0xffff0000) {
-                    ret.push((code & 0xff000000) >> 24, (code & 0x00ff0000) >> 16, (code & 0x0000ff00) >> 8, (code & 0x000000ff));
-                } else {
-                    ret.push((code & 0x0000ff00) >> 8, (code & 0x000000ff));
-                }
+        ret[0] = text.length;
+        for (var i = 0; i < text.length; i++) {
+            code = text.charCodeAt(i);
+            if (code & 0xffff0000) {
+                ret.push((code & 0xff000000) >> 24, (code & 0x00ff0000) >> 16, (code & 0x0000ff00) >> 8, (code & 0x000000ff));
+            } else {
+                ret.push((code & 0x0000ff00) >> 8, (code & 0x000000ff));
             }
-            return ret;
         }
-        // int8ToByteArray
+        return ret;
+    }
+    // int8ToByteArray
     static setInt8(value) {
-            var ret = Array();
-            ret[0] = value & 0x00ff
-            return ret;
-        }
-        // int16ToByteArray
+        var ret = Array();
+        ret[0] = value & 0x00ff
+        return ret;
+    }
+    // int16ToByteArray
     static setInt16(value) {
-            var ret = Array();
-            ret[1] = value & 0x00ff
-            ret[0] = (value >> 8) & 0x00ff
-            return ret;
-        }
-        // floatToByteArray
+        var ret = Array();
+        ret[1] = value & 0x00ff
+        ret[0] = (value >> 8) & 0x00ff
+        return ret;
+    }
+    // floatToByteArray
     static floatToIntBits(f) {
         // this function is quoted from
         // http://stackoverflow.com/questions/3077718/converting-a-decimal-value-to-a-32bit-floating-point-hexadecimal
@@ -244,362 +244,362 @@ class BufferView {
 
 export default class BBCQuery {
     constructor(bbobj, map) {
-            this.bbobj = bbobj;
-            this.map = map;
-            this._bv = new BufferView(BufferView.setStr(map));
-        }
+        this.bbobj = bbobj;
+        this.map = map;
+        this._bv = new BufferView(BufferView.setStr(map));
+    }
     // setQueryString (str) {
     fromBase64(str) {
-            var data = Base64.decode(str);
-            this._bv = new BufferView(pako.inflateRaw(data));
-            try {
-                this.map = this._bv.getStr();
-            } catch (e) {
-                console.error(e);
-                alert("データ取り込み中にエラーが発生しました");
-                this._bv = new BufferView();
+        var data = Base64.decode(str);
+        this._bv = new BufferView(pako.inflateRaw(data));
+        try {
+            this.map = this._bv.getStr();
+        } catch (e) {
+            console.error(e);
+            alert("データ取り込み中にエラーが発生しました");
+            this._bv = new BufferView();
 
-                return false;
-            }
-            return true;
+            return false;
         }
+        return true;
+    }
     // getQueryString () {
     toBase64() {
-            var buf = this._bv._buf;
-            var data = pako.deflateRaw(buf, {
-                to: "string"
-            });
-            return Base64.encode(data);
-        }
-        // セットされているクエリパラメータからオブジェクトを復元する
-        // setObjects
+        var buf = this._bv._buf;
+        var data = pako.deflateRaw(buf, {
+            to: "string"
+        });
+        return Base64.encode(data);
+    }
+    // セットされているクエリパラメータからオブジェクトを復元する
+    // setObjects
     applyObjects() {
-            var i, j,
-                objs = new Array(),
-                buff = this._bv,
-                bbobj = this.bbobj;
+        var i, j,
+            objs = new Array(),
+            buff = this._bv,
+            bbobj = this.bbobj;
 
-            try {
-                while (buff._offset < buff._buf.length) {
-                    var obj,
-                        objlen = buff.getUint16(),
-                        objname = buff.getStr(),
-                        objtype = buff.getUint8();
+        try {
+            while (buff._offset < buff._buf.length) {
+                var obj,
+                    objlen = buff.getUint16(),
+                    objname = buff.getStr(),
+                    objtype = buff.getUint8();
 
-                    switch (objtype) {
-                        case 0x01:
-                            (function() { //circle
-                                var color = buff.getCol(),
-                                    rad = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    ptpos = buff.getPos();
+                switch (objtype) {
+                    case 0x01:
+                        (function() { //circle
+                            var color = buff.getCol(),
+                                rad = buff.getUint16(),
+                                pos = buff.getPos(),
+                                ptpos = buff.getPos();
 
-                                obj = bbobj.add_circle(objname, rad, color,
-                                    function() {
-                                        this._ptpos = ptpos;
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_circle(objname, rad, color,
+                                function() {
+                                    this._ptpos = ptpos;
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x02:
-                            (function() { //line
-                                var color = buff.getCol(),
-                                    len = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    pt1pos = buff.getPos(),
-                                    pt2pos = buff.getPos();
+                    case 0x02:
+                        (function() { //line
+                            var color = buff.getCol(),
+                                len = buff.getUint16(),
+                                pos = buff.getPos(),
+                                pt1pos = buff.getPos(),
+                                pt2pos = buff.getPos();
 
-                                obj = bbobj.add_line(objname, len, color,
-                                    function() {
-                                        this._pt1pos = pt1pos;
-                                        this._pt2pos = pt2pos;
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_line(objname, len, color,
+                                function() {
+                                    this._pt1pos = pt1pos;
+                                    this._pt2pos = pt2pos;
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x03:
-                            (function() { //freehand
-                                obj = bbobj.add_freehand(objname);
-                                obj._step = buff.getUint8();
-                                for (i = 1; i <= obj._step; i++) {
-                                    obj._stepcol[i] = buff.getCol();
-                                    var length = buff.getUint16(),
-                                        points = new Array();
-                                    for (j = 0; j < length; j++) {
-                                        var point = buff.getPos();
-                                        points.push([point.x, point.y]);
-                                    }
-                                    jc.line(points, obj._stepcol[i])
-                                        .layer(obj.id).id(i).lineStyle({
-                                            lineWidth: 3
-                                        });
+                    case 0x03:
+                        (function() { //freehand
+                            obj = bbobj.add_freehand(objname);
+                            obj._step = buff.getUint8();
+                            for (i = 1; i <= obj._step; i++) {
+                                obj._stepcol[i] = buff.getCol();
+                                var length = buff.getUint16(),
+                                    points = new Array();
+                                for (j = 0; j < length; j++) {
+                                    var point = buff.getPos();
+                                    points.push([point.x, point.y]);
                                 }
-                            }());
-                            break;
-
-                        case 0x04:
-                            (function() { //point
-                                var color = buff.getCol(),
-                                    align = buff.getUint8(),
-                                    size = buff.getUint8(),
-                                    pos = buff.getPos();
-
-                                obj = bbobj.add_point(objname, size, color, align,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
+                                jc.line(points, obj._stepcol[i])
+                                    .layer(obj.id).id(i).lineStyle({
+                                        lineWidth: 3
                                     });
-                            }());
-                            break;
+                            }
+                        }());
+                        break;
 
-                        case 0x05:
-                            (function() { //icon
-                                var color = buff.getCol(),
-                                    file = buff.getStr(),
-                                    pos = buff.getPos();
+                    case 0x04:
+                        (function() { //point
+                            var color = buff.getCol(),
+                                align = buff.getUint8(),
+                                size = buff.getUint8(),
+                                pos = buff.getPos();
 
-                                obj = bbobj.add_icon(objname, file, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_point(objname, size, color, align,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x11:
-                            (function() { //scout
-                                var color = buff.getCol(),
-                                    rad = buff.getUint16(),
-                                    len = buff.getUint16(),
-                                    duration = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x05:
+                        (function() { //icon
+                            var color = buff.getCol(),
+                                file = buff.getStr(),
+                                pos = buff.getPos();
 
-                                obj = bbobj.add_scout(objname, rad, len, duration, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_icon(objname, file, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x12:
-                            (function() { //sensor
-                                var color = buff.getCol(),
-                                    rad = buff.getUint16(),
-                                    pos = buff.getPos();
+                    case 0x11:
+                        (function() { //scout
+                            var color = buff.getCol(),
+                                rad = buff.getUint16(),
+                                len = buff.getUint16(),
+                                duration = buff.getUint16(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
 
-                                obj = bbobj.add_sensor(objname, rad, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_scout(objname, rad, len, duration, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x13:
-                            (function() { //radar
-                                var color = buff.getCol(),
-                                    rad = buff.getUint16(),
-                                    angle = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x12:
+                        (function() { //sensor
+                            var color = buff.getCol(),
+                                rad = buff.getUint16(),
+                                pos = buff.getPos();
 
-                                obj = bbobj.add_radar(objname, rad, angle, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_sensor(objname, rad, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x14:
-                            (function() { //sonde
-                                var color = buff.getCol(),
-                                    rad1 = buff.getUint16(),
-                                    rad2 = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    markpos = buff.getPos();
+                    case 0x13:
+                        (function() { //radar
+                            var color = buff.getCol(),
+                                rad = buff.getUint16(),
+                                angle = buff.getUint16(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
 
-                                obj = bbobj.add_sonde(objname, rad1, rad2, color,
-                                    function() {
-                                        this._markerx = markpos.x;
-                                        this._markery = markpos.y;
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_radar(objname, rad, angle, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x15:
-                            (function() { //ndsensor
-                                var color = buff.getCol(),
-                                    rad = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x14:
+                        (function() { //sonde
+                            var color = buff.getCol(),
+                                rad1 = buff.getUint16(),
+                                rad2 = buff.getUint16(),
+                                pos = buff.getPos(),
+                                markpos = buff.getPos();
 
-                                obj = bbobj.add_ndsensor(objname, rad, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_sonde(objname, rad1, rad2, color,
+                                function() {
+                                    this._markerx = markpos.x;
+                                    this._markery = markpos.y;
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x16:
-                            (function() { //bascout
-                                var color = buff.getCol(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x15:
+                        (function() { //ndsensor
+                            var color = buff.getCol(),
+                                rad = buff.getUint16(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
 
-                                obj = bbobj.add_bascout(objname, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_ndsensor(objname, rad, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x17:
-                            (function() { //vsensor
-                                var color = buff.getCol(),
-                                    rada = buff.getUint16(),
-                                    radb = buff.getUint16(),
-                                    mode = buff.getUint8(),
-                                    pos = buff.getPos();
+                    case 0x16:
+                        (function() { //bascout
+                            var color = buff.getCol(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
 
-                                if (mode == 0) {
-                                    mode = 'A';
-                                } else {
-                                    mode = 'B';
-                                }
+                            obj = bbobj.add_bascout(objname, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                                obj = bbobj.add_vsensor(objname, rada, radb, color, mode,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                    case 0x17:
+                        (function() { //vsensor
+                            var color = buff.getCol(),
+                                rada = buff.getUint16(),
+                                radb = buff.getUint16(),
+                                mode = buff.getUint8(),
+                                pos = buff.getPos();
 
-                        case 0x21:
-                            (function() { //howitzer
-                                var color = buff.getCol(),
-                                    rad1 = buff.getUint16(),
-                                    rad2 = buff.getUint16(),
-                                    rad3 = buff.getUint16(),
-                                    pos = buff.getPos(),
-                                    markpos = buff.getPos();
+                            if (mode == 0) {
+                                mode = 'A';
+                            } else {
+                                mode = 'B';
+                            }
 
-                                obj = bbobj.add_howitzer(objname, rad1, rad2, rad3, color,
-                                    function() {
-                                        this._markerx = markpos.x;
-                                        this._markery = markpos.y;
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_vsensor(objname, rada, radb, color, mode,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x22:
-                            (function() { //bunker
-                                var color = buff.getCol(),
-                                    pos = buff.getPos();
+                    case 0x21:
+                        (function() { //howitzer
+                            var color = buff.getCol(),
+                                rad1 = buff.getUint16(),
+                                rad2 = buff.getUint16(),
+                                rad3 = buff.getUint16(),
+                                pos = buff.getPos(),
+                                markpos = buff.getPos();
 
-                                obj = bbobj.add_bunker(objname, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_howitzer(objname, rad1, rad2, rad3, color,
+                                function() {
+                                    this._markerx = markpos.x;
+                                    this._markery = markpos.y;
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x23:
-                            (function() { //bomber
-                                var color = buff.getCol(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x22:
+                        (function() { //bunker
+                            var color = buff.getCol(),
+                                pos = buff.getPos();
 
-                                obj = bbobj.add_bomber(objname, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_bunker(objname, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x24:
-                            (function() { //sentry
-                                var color = buff.getCol(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x23:
+                        (function() { //bomber
+                            var color = buff.getCol(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
 
-                                obj = bbobj.add_sentry(objname, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_bomber(objname, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x25:
-                            (function() { //aerosentry
-                                var color = buff.getCol(),
-                                    pos = buff.getPos();
+                    case 0x24:
+                        (function() { //sentry
+                            var color = buff.getCol(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
 
-                                obj = bbobj.add_aerosentry(objname, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_sentry(objname, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        case 0x30:
-                            (function() { //waft
-                                var color = buff.getCol(),
-                                    file = buff.getStr(),
-                                    pos = buff.getPos(),
-                                    rotAngle = buff.getFloat32();
+                    case 0x25:
+                        (function() { //aerosentry
+                            var color = buff.getCol(),
+                                pos = buff.getPos();
 
-                                obj = bbobj.add_waft(objname, file, color,
-                                    function() {
-                                        this.moveTo(pos.x, pos.y)
-                                            .rotateTo(rotAngle)
-                                            .redraw();
-                                    });
-                            }());
-                            break;
+                            obj = bbobj.add_aerosentry(objname, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
 
-                        default:
-                            obj = undefined;
-                            console.error("object type not supported (" + objtype + ")");
-                            view.seek(view.tell() + objlen - 1);
-                            break;
-                    }
-                    if (obj === undefined) break;
-                    objs.push(obj);
+                    case 0x30:
+                        (function() { //waft
+                            var color = buff.getCol(),
+                                file = buff.getStr(),
+                                pos = buff.getPos(),
+                                rotAngle = buff.getFloat32();
+
+                            obj = bbobj.add_waft(objname, file, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .rotateTo(rotAngle)
+                                        .redraw();
+                                });
+                        }());
+                        break;
+
+                    default:
+                        obj = undefined;
+                        console.error("object type not supported (" + objtype + ")");
+                        view.seek(view.tell() + objlen - 1);
+                        break;
                 }
-            } catch (e) {
-                console.error(e);
-                alert("データ取り込み中にエラーが発生しました");
+                if (obj === undefined) break;
+                objs.push(obj);
             }
-
-            return objs;
+        } catch (e) {
+            console.error(e);
+            alert("データ取り込み中にエラーが発生しました");
         }
-        // // オブジェクト配列をバイナリ化してバイナリArrayを返す
-        // getObjects (objs) {
-        // オブジェクト配列を格納する
+
+        return objs;
+    }
+    // // オブジェクト配列をバイナリ化してバイナリArrayを返す
+    // getObjects (objs) {
+    // オブジェクト配列を格納する
     fromObjects(objs) {
         var i, j;
         for (i = 0; i < objs.length; i++) {
