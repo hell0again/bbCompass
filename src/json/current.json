@@ -8,13 +8,15 @@
     {
         "type": "national_battle_high",
         "maps": [
-            "d51_b"
+            "d51_b",
+            "longsha_a"
         ]
     },
     {
         "type": "national_battle_low",
         "maps": [
-            "beanavis_a"
+            "beanavis_a",
+            "tlaza_a"
         ]
     },
     {
