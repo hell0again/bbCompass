@@ -14400,13 +14400,47 @@
 	    //     }
 	    // });
 
-	    // tempsエントリ準備
-	    _lodash2['default'].each(currentJson, function (el, it) {
-	        _lodash2['default'].each(el["maps"], function (el2, it2) {
-	            temps[el2] = {};
-	        });
-	    });
-	    // mapとの紐付け
+	    var _iteratorNormalCompletion = true;
+	    var _didIteratorError = false;
+	    var _iteratorError = undefined;
+
+	    try {
+	        for (var _iterator = currentJson[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	            var m = _step.value;
+
+	            var start_date = new Date(m["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
+	            start_date.setMinutes(start_date.getMinutes() + 7 * 60 + 30);
+	            var end_date = new Date(m["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
+	            end_date.setMinutes(end_date.getMinutes() + 24 * 60 * 60 + 7 * 60 + 30);
+	            var prefix = "";
+	            if (end_date < Date.now()) {
+	                continue;
+	            } else if (Date.now() < start_date) {
+	                prefix = "(" + start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜) ";
+	            } else {
+	                // :
+	            }
+	            temps[m["map"]] = {
+	                "prefix": prefix
+	            };
+	        }
+
+	        // mapとの紐付け
+	    } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	    } finally {
+	        try {
+	            if (!_iteratorNormalCompletion && _iterator['return']) {
+	                _iterator['return']();
+	            }
+	        } finally {
+	            if (_didIteratorError) {
+	                throw _iteratorError;
+	            }
+	        }
+	    }
+
 	    _lodash2['default'].each(BBDB["map"], function (el, it) {
 	        var map = el;
 	        _lodash2['default'].each(temps, function (el2, it2) {
@@ -14430,13 +14464,12 @@
 	    // currentMapEx順で BBDB にpush
 	    _lodash2['default'].each(currentMapEx, function (el, it) {
 	        var type = el["type"];
-	        var m = _lodash2['default'].find(currentJson, function (el2) {
+	        var maps = _lodash2['default'].filter(currentJson, function (el2) {
 	            return type == el2["type"];
 	        });
-	        if (m == undefined || m["maps"].length == 0) {
+	        if (maps.length == 0) {
 	            return;
 	        }
-	        var maps = m["maps"];
 
 	        // セパレータをpush
 	        BBDB["current_map"].push({
@@ -14446,13 +14479,14 @@
 
 	        // mapsをpush
 	        _lodash2['default'].each(maps, function (el2, it2) {
-	            var mapId = el2;
+	            var mapId = el2["map"];
 	            var mapName = temps[mapId]["mapName"];
 	            // var stageId = temps[mapId]["stageId"];
 	            var stageName = temps[mapId]["stageName"];
+	            var labelPrefix = temps[mapId]["prefix"];
 	            BBDB["current_map"].push({
 	                "value": mapId,
-	                "label": mapName + " | " + stageName
+	                "label": labelPrefix + mapName + " | " + stageName
 	            });
 	        });
 	    });
@@ -26842,31 +26876,38 @@
 
 	module.exports = [
 		{
+			"start_time": "2016-01-18",
+			"end_time": "2016-01-24",
 			"type": "event",
-			"maps": [
-				"madelrond_ea"
-			]
+			"title": "大攻防戦",
+			"url": "/news/308",
+			"map": "madelrond_ea"
 		},
 		{
+			"start_time": "2016-01-18",
+			"end_time": "2016-01-24",
 			"type": "national_battle_high",
-			"maps": [
-				"d51_b",
-				"longsha_a"
-			]
+			"title": "ロンシャ深山〜山門の抗衡〜",
+			"url": "/map/17#opr-116",
+			"map": "longsha_a"
 		},
 		{
+			"start_time": "2016-01-18",
+			"end_time": "2016-01-24",
 			"type": "national_battle_low",
-			"maps": [
-				"beanavis_a",
-				"tlaza_a"
-			]
+			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+			"url": "/map/4#opr-19",
+			"map": "tlaza_a"
 		},
 		{
 			"type": "squad_battle",
-			"maps": [
-				"24_sqa",
-				"24_sqb"
-			]
+			"title": "マグメル機体試験場 〜FIELD-D〜",
+			"map": "24_sqa"
+		},
+		{
+			"type": "squad_battle",
+			"title": "マグメル機体試験場 〜FIELD-S〜",
+			"map": "24_sqb"
 		}
 	];
 
