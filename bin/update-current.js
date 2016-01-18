@@ -12,7 +12,7 @@ function onLoadCalendar(json) {
     var maps = mapJson;
 
     var calendar = json;
-    var typeToMaps = {};
+    var toMaps = [];
     var warnMsgs = [];
 
     var findMapByTitle = function(title) {
@@ -23,10 +23,6 @@ function onLoadCalendar(json) {
         });
     };
     _.each(calendar, function(el, it) {
-        var type = el["type"];
-        if (false == typeToMaps.hasOwnProperty(type)) {
-            typeToMaps[type] = [];
-        }
         var title = el["title"];
         var targetMap = findMapByTitle(title);
         if (targetMap == undefined) {
@@ -42,7 +38,14 @@ function onLoadCalendar(json) {
             }
         }
         if (targetMap != undefined) {
-            typeToMaps[type].push(targetMap["value"]);
+            toMaps.push({
+                "start_time": el["start_time"],
+                "end_time":   el["end_time"],
+                "type":       el["type"],
+                "title":      el["title"],
+                "url":        el["url"],
+                "map":        targetMap["value"],
+            });
         } else {
             warnMsgs.push("[WARN] failed. no map matched to \"" + title + "\"");
         }
@@ -51,28 +54,26 @@ function onLoadCalendar(json) {
     _.each(extras, function(el, it) {
         var type = el["type"];
         var title = el["title"];
-        if (false == typeToMaps.hasOwnProperty(type)) {
-            typeToMaps[type] = [];
-        }
         var targetMap = findMapByTitle(title);
         if (targetMap != undefined) {
-            typeToMaps[type].push(targetMap["value"]);
+            toMaps.push({
+                "start_time": el["start_time"],
+                "end_time":   el["end_time"],
+                "type":       el["type"],
+                "title":      el["title"],
+                "url":        el["url"],
+                "map":        targetMap["value"],
+            });
         } else {
             warnMsgs.push("[WARN] failed. map not defined \"" + title +"\"");
         }
     });
 
-    var r = [];
-    _.each(typeToMaps, function(el, it) {
-        r.push({
-            "type": it,
-            "maps": _.uniq(el)
-        });
-    });
+    toMaps = _.sortBy(toMaps, 'start_time');
     if (0 < warnMsgs.length) {
         console.warn(warnMsgs.join("\n"));
     }
-    console.log(JSON.stringify(r, "", "    "));
+    console.log(JSON.stringify(toMaps, "", "    "));
 }
 
 // var client = request.createClient('http://borderbreak.com');

@@ -173,12 +173,24 @@ var BBDB = {
     //     }
     // });
 
-    // tempsエントリ準備
-    _.each(currentJson, function(el, it) {
-        _.each(el["maps"], function(el2, it2) {
-            temps[el2] = {};
-        });
-    });
+    for (var m of currentJson) {
+        var start_date = new Date(m["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
+        start_date.setMinutes(start_date.getMinutes() +7*60 +30);
+        var end_date = new Date(m["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
+        end_date.setMinutes(end_date.getMinutes() +24*60*60 +7*60 +30);
+        var prefix = "";
+        if (end_date < Date.now()) {
+            continue;
+        } else if (Date.now() < start_date) {
+            prefix = "(" + start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜) ";
+        } else {
+            // :
+        }
+        temps[m["map"]] = {
+            "prefix": prefix
+        };
+    }
+
     // mapとの紐付け
     _.each(BBDB["map"], function(el, it) {
         var map = el;
@@ -203,11 +215,10 @@ var BBDB = {
     // currentMapEx順で BBDB にpush
     _.each(currentMapEx, function(el, it) {
         var type = el["type"];
-        var m = _.find(currentJson, function(el2) {
-            return type == el2["type"];
+        var maps = _.filter(currentJson, function(el2) {
+            return (type == el2["type"]);
         });
-        if (m == undefined || m["maps"].length == 0) { return; }
-        var maps = m["maps"];
+        if (maps.length == 0) { return; }
 
         // セパレータをpush
         BBDB["current_map"].push({
@@ -217,13 +228,14 @@ var BBDB = {
 
         // mapsをpush
         _.each(maps, function(el2, it2) {
-            var mapId = el2;
+            var mapId = el2["map"];
             var mapName = temps[mapId]["mapName"];
             // var stageId = temps[mapId]["stageId"];
             var stageName = temps[mapId]["stageName"];
+            var labelPrefix = temps[mapId]["prefix"];
             BBDB["current_map"].push({
                 "value": mapId,
-                "label": mapName + " | " + stageName
+                "label": labelPrefix + mapName + " | " + stageName
             });
         });
     });

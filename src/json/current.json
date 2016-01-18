@@ -1,29 +1,36 @@
 [
     {
+        "start_time": "2016-01-18",
+        "end_time": "2016-01-24",
         "type": "event",
-        "maps": [
-            "madelrond_ea"
-        ]
+        "title": "大攻防戦",
+        "url": "/news/308",
+        "map": "madelrond_ea"
     },
     {
+        "start_time": "2016-01-18",
+        "end_time": "2016-01-24",
         "type": "national_battle_high",
-        "maps": [
-            "d51_b",
-            "longsha_a"
-        ]
+        "title": "ロンシャ深山〜山門の抗衡〜",
+        "url": "/map/17#opr-116",
+        "map": "longsha_a"
     },
     {
+        "start_time": "2016-01-18",
+        "end_time": "2016-01-24",
         "type": "national_battle_low",
-        "maps": [
-            "beanavis_a",
-            "tlaza_a"
-        ]
+        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+        "url": "/map/4#opr-19",
+        "map": "tlaza_a"
     },
     {
         "type": "squad_battle",
-        "maps": [
-            "24_sqa",
-            "24_sqb"
-        ]
+        "title": "マグメル機体試験場 〜FIELD-D〜",
+        "map": "24_sqa"
+    },
+    {
+        "type": "squad_battle",
+        "title": "マグメル機体試験場 〜FIELD-S〜",
+        "map": "24_sqb"
     }
 ]
