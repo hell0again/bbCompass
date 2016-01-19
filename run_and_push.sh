@@ -2,6 +2,7 @@
 ## [Usage] EXEC_PUSH=true $0 "./build.sh && git add -u"
 ## リモートのBASE_BRANCHから作業用ブランチをcheckoutし、ビルドコマンドを実行する。
 ## ビルド結果はリモートのTARGET_BRANCHにpushする。
+## checkoutするとこのスクリプト自身もcheckoutされる点に注意する。
 ##
 ## - git add までがビルドコマンドの仕事
 ## - ローカルのブランチには一切タッチしない。リモートからcheckoutしてリモートにpushする
@@ -15,9 +16,13 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd) && cd ${SCRIPT_DIR}
 : ${BASE_BRANCH:=master}
 : ${TARGET_BRANCH:=master}
 : ${LOCAL_TEMP_BRANCH:="tmp/${TARGET_BRANCH}/$(date +%Y%m%d_%H%M%S)"}
-: ${COMMIT_MSG_HEAD:=auto build}
-: ${COMMIT_MSG_BODY:=}
 : ${EXEC_PUSH:=false}
+DEFAULT_COMMIT_MSG_HEAD="$0 \"$@\""
+: ${COMMIT_MSG_HEAD:=${DEFAULT_COMMIT_MSG_HEAD}}
+: ${COMMIT_MSG_BODY:=}
+echo BASE_BRANCH=${BASE_BRANCH}
+echo TARGET_BRANCH=${TARGET_BRANCH}
+echo EXEC_PUSH=${EXEC_PUSH}
 
 if [ 0 -ne $(git status --porcelain | grep -v "^??" | wc -l) ]; then
     git status
@@ -43,7 +48,7 @@ if [ 0 -eq $(git status --porcelain | grep -v "^??" | wc -l) ]; then
     )
 else
     cat <<EOM | git commit --file=-
-[${TARGET_BRANCH}] ${COMMIT_MSG_HEAD} ($@)
+[${TARGET_BRANCH}] ${COMMIT_MSG_HEAD}
 
 ${COMMIT_MSG_BODY}
 EOM
