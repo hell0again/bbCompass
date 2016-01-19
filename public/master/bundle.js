@@ -14400,47 +14400,25 @@
 	    //     }
 	    // });
 
-	    var _iteratorNormalCompletion = true;
-	    var _didIteratorError = false;
-	    var _iteratorError = undefined;
-
-	    try {
-	        for (var _iterator = currentJson[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	            var m = _step.value;
-
-	            var start_date = new Date(m["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
-	            start_date.setMinutes(start_date.getMinutes() + 7 * 60 + 30);
-	            var end_date = new Date(m["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
-	            end_date.setMinutes(end_date.getMinutes() + 24 * 60 * 60 + 7 * 60 + 30);
-	            var prefix = "";
-	            if (end_date < Date.now()) {
-	                continue;
-	            } else if (Date.now() < start_date) {
-	                prefix = "(" + start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜) ";
-	            } else {
-	                // :
-	            }
-	            temps[m["map"]] = {
-	                "prefix": prefix
-	            };
+	    _lodash2['default'].each(currentJson, function (el, it) {
+	        var start_date = new Date(el["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
+	        start_date.setMinutes(start_date.getMinutes() + 7 * 60 + 30);
+	        var end_date = new Date(el["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
+	        end_date.setMinutes(end_date.getMinutes() + 24 * 60 * 60 + 7 * 60 + 30);
+	        var prefix = "";
+	        if (end_date < Date.now()) {
+	            return;
+	        } else if (Date.now() < start_date) {
+	            prefix = "(" + start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜) ";
+	        } else {
+	            // :
 	        }
+	        temps[el["map"]] = {
+	            "prefix": prefix
+	        };
+	    });
 
-	        // mapとの紐付け
-	    } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
-	    } finally {
-	        try {
-	            if (!_iteratorNormalCompletion && _iterator['return']) {
-	                _iterator['return']();
-	            }
-	        } finally {
-	            if (_didIteratorError) {
-	                throw _iteratorError;
-	            }
-	        }
-	    }
-
+	    // mapとの紐付け
 	    _lodash2['default'].each(BBDB["map"], function (el, it) {
 	        var map = el;
 	        _lodash2['default'].each(temps, function (el2, it2) {
