@@ -11,7 +11,7 @@ import BBDB from './BBDB';
 // require('jquery-ui/themes/smoothness/jquery-ui.min.css');
 
 import 'jquery-simplecolorpicker/jquery.simplecolorpicker.js';
-require('jquery-simplecolorpicker/jquery.simplecolorpicker.css');
+require('jquery-simplecolorpicker/jquery.simplecolorpicker.css'); /*global require*/ // eslint
 
 //初期化
 var CanvasName = "BBCompass";

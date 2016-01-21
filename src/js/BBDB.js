@@ -1,5 +1,7 @@
 import _ from 'lodash';
 /*global require*/ // eslint
+//var Map = require('es6-map');
+require('es6-collections');
 var currentJson = require('../json/current.json');
 var stageJson = require('../json/stage.json');
 var mapJson = require('../json/map.json');
@@ -12,6 +14,7 @@ var currentMapEx = [
     {"type": "scramble_battle",      "label": "▼ スクランブルバトル ▼"},
     {"type": "squad_battle",         "label": "▼ スカッドバトル ▼"},
     {"type": "national_battle_low",  "label": "▼ 全国対戦(下位) ▼"},
+    {"type": "undefined",            "label": "▼ その他 ▼"},
 ];
 var BBDB = {
      // 現在の戦場
@@ -153,72 +156,54 @@ var BBDB = {
     });
 })();
 (function completeCurrentMap() {
-    var i, il, key, type;
-    var temps = {}; // {"belsk_f": {"mapName": "汀の", "stageId": "kinich", "stageName": "キニシュ"}, ...}
+    var tempMap = new Map(); // 終わったらclearしないとリーク
 
-    // // 例外対応分をマージ
-    // _.each(currentMapEx, function(el, it) {
-    //     var type = el["type"];
-    //     if (false == el.hasOwnProperty("default")) {return;}
-    //     var r = _.find(currentJson, function(el2) {
-    //         return type == el2["type"];
-    //     });
-    //     if (r == undefined) {
-    //         currentJson.push({
-    //             "type": type,
-    //             "maps": el["default"]
-    //         });
-    //     } else {
-    //         r["maps"] = _.union( r["maps"], el["default"]);
-    //     }
-    // });
-
+    // tempMap準備、日付関連
     _.each(currentJson, function(el, it) {
         var start_date = new Date(el["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
         start_date.setMinutes(start_date.getMinutes() +7*60 +30);
         var end_date = new Date(el["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
         end_date.setMinutes(end_date.getMinutes() +24*60*60 +7*60 +30);
-        var prefix = "";
-        if (end_date < Date.now()) {
-            return;
-        } else if (Date.now() < start_date) {
-            prefix = "(" + start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜) ";
-        } else {
-            // :
-        }
-        temps[el["map"]] = {
-            "prefix": prefix
-        };
-    });
 
-    // mapとの紐付け
+        if (end_date < Date.now()) { return; } // 終了したマップは除外
+
+        var mv = {};
+        tempMap.set(el, mv);
+
+        if (Date.now() < start_date) {
+            mv["datePrefix"] = start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜";
+        }
+    });
+    // mapとの紐付け。残念ながら O(map数 x tempMap数)
     _.each(BBDB["map"], function(el, it) {
         var map = el;
-        _.each(temps, function(el2, it2) {
-            var temp = el2;
-            if (map["value"] == it2) {
-                temp["mapName"] = map["text"];
-                temp["stageId"] = map["dataset"]["stage"];
+        tempMap.forEach(function(mv, mk) {
+            if (mk["map"] != undefined && mk["map"] == map["value"]) {
+                // mv["mapId"] = map["value"];
+                mv["mapName"] = map["text"];
+                mv["stageId"] = map["dataset"]["stage"];
             }
         });
     });
-    // stageとの紐付け
+    // stageとの紐付け。残念ながら O(stage数 x tempMap数)
     _.each(BBDB["stage"], function(el, it) {
         var stage = el;
-        _.each(temps, function(el2, it2) {
-            var temp = el2;
-            if (stage["value"] === temp["stageId"]) {
-                temp["stageName"] = stage["text"];
+        tempMap.forEach(function(mv, mk) {
+            if (mv["stageId"] != undefined && mv["stageId"] == stage["value"]) {
+                mv["stageName"] = stage["text"];
             }
         });
     });
     // currentMapEx順で BBDB にpush
     _.each(currentMapEx, function(el, it) {
-        var type = el["type"];
-        var maps = _.filter(currentJson, function(el2) {
-            return (type == el2["type"]);
+        var mks = [];
+        tempMap.forEach(function(mv, mk) {
+            var t = mk.type || "undefined";
+            if (t == el["type"]) {
+                mks.push(mk);
+            }
         });
-        if (maps.length == 0) { return; }
+        if (mks.length == 0) { return; }
 
         // セパレータをpush
         BBDB["current_map"].push({
@@ -227,18 +212,36 @@ var BBDB = {
         });
 
         // mapsをpush
-        _.each(maps, function(el2, it2) {
-            var mapId = el2["map"];
-            var mapName = temps[mapId]["mapName"];
-            // var stageId = temps[mapId]["stageId"];
-            var stageName = temps[mapId]["stageName"];
-            var labelPrefix = temps[mapId]["prefix"];
+        _.each(mks, function(mk) {
+            var mv = tempMap.get(mk);
+            var value = mk["map"];
+            var label = "";
+            var disabled = false;
+
+            if (mv["datePrefix"] != undefined) {
+                label = "[" + mv["datePrefix"] + "]";
+            }
+            if (mk["map"] == undefined) {
+                value = "";
+                label += "[NO DATA]";
+                disabled = true;
+            }
+            if (mv["mapName"] == undefined || mv["stageName"] == undefined) {
+                // 存在しないマップなら カレンダーのtitleを拾う
+                label += mk["title"];
+                disabled = true;
+            } else {
+                label += mv["mapName"] + " | " + mv["stageName"];
+            }
+
             BBDB["current_map"].push({
-                "value": mapId,
-                "label": labelPrefix + mapName + " | " + stageName
+                "value": value,
+                "label": label,
+                "disabled": disabled
             });
         });
     });
+    tempMap.clear();
 })();
 
 export default BBDB

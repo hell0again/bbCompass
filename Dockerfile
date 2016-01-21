@@ -16,7 +16,9 @@ RUN npm install -g\
     bower\
     local-web-server\
     js-beautify\
-    webpack
+    webpack\
+    browserify\
+    testling
 
 WORKDIR ${HOME}/git/bbCompass
 

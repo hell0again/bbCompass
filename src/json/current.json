@@ -24,13 +24,26 @@
         "map": "tlaza_a"
     },
     {
-        "type": "squad_battle",
-        "title": "マグメル機体試験場 〜FIELD-D〜",
+        "start_time": "2016-01-25",
+        "end_time": "2016-01-31",
+        "type": "national_battle_high",
+        "title": "【初公開】旧ブロア市街地〜占有驀進〜【特殊×】",
+        "url": ""
+    },
+    {
+        "start_time": "2016-01-25",
+        "end_time": "2016-01-31",
+        "type": "national_battle_low",
+        "title": "ダリーヤ遺跡群 〜河底の弾雨〜【特殊×】",
+        "url": "/map/5#opr-28",
+        "map": "darya_b"
+    },
+    {
+        "title": "マグメル機体試験場〜FIELD-D〜",
         "map": "24_sqa"
     },
     {
-        "type": "squad_battle",
-        "title": "マグメル機体試験場 〜FIELD-S〜",
+        "title": "マグメル機体試験場〜FIELD-S〜",
         "map": "24_sqb"
     }
 ]

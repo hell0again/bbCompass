@@ -24,6 +24,7 @@ function onLoadCalendar(json) {
     };
     _.each(calendar, function(el, it) {
         var title = el["title"];
+        // タイトルにマップ名が含まれているものとしてマップを探す
         var targetMap = findMapByTitle(title);
         if (targetMap == undefined) {
             // タイトル内にマップ名が含まれていなかったらヒントから探す
@@ -37,18 +38,20 @@ function onLoadCalendar(json) {
                 targetMap = findMapByTitle(found["hint"]);
             }
         }
+        var el = {
+            "start_time": el["start_time"],
+            "end_time":   el["end_time"],
+            "type":       el["type"],
+            "title":      el["title"],
+            "url":        el["url"],
+        };
+        // NOTE: allow no map defined!!
         if (targetMap != undefined) {
-            toMaps.push({
-                "start_time": el["start_time"],
-                "end_time":   el["end_time"],
-                "type":       el["type"],
-                "title":      el["title"],
-                "url":        el["url"],
-                "map":        targetMap["value"],
-            });
+            el["map"] = targetMap["value"];
         } else {
             warnMsgs.push("[WARN] failed. no map matched to \"" + title + "\"");
         }
+        toMaps.push(el);
     });
     // 定常マップを追加
     _.each(extras, function(el, it) {
