@@ -2321,11 +2321,11 @@ export default class BB {
             this.ourJc.line([
                     [x, y],
                     [x, y - 20]
-                ], 'rgba(255,255,255,1)')
+                ], 'rgba(255,0,0,1)')
                 .rotateTo(rot, x, y).lineStyle({
                     lineWidth: 2
                 });
-            hooker.color('rgba(255,255,255,1)').level('top');
+            hooker.color('rgba(255,0,0,1)').level('top');
         }
 
         hooker.mouseover(() => {

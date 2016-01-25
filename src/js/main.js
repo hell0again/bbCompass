@@ -31,7 +31,7 @@ var turretSpec = {
     "M": [250, 180],
     "L": [200, 180]
 };
-var turretCircle = 8;
+var turretCircle = 6;
 
 
 function createOptionFragments(optionList) {

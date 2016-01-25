@@ -2605,10 +2605,10 @@
 	                hooker = this.ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true).rotateTo(rot - 90, x, y).level(3).name("turrets");
 
 	            if (test) {
-	                this.ourJc.line([[x, y], [x, y - 20]], 'rgba(255,255,255,1)').rotateTo(rot, x, y).lineStyle({
+	                this.ourJc.line([[x, y], [x, y - 20]], 'rgba(255,0,0,1)').rotateTo(rot, x, y).lineStyle({
 	                    lineWidth: 2
 	                });
-	                hooker.color('rgba(255,255,255,1)').level('top');
+	                hooker.color('rgba(255,0,0,1)').level('top');
 	            }
 
 	            hooker.mouseover(function () {
@@ -14386,20 +14386,30 @@
 
 	    // tempMap準備、日付関連
 	    _lodash2['default'].each(currentJson, function (el, it) {
-	        var start_date = new Date(el["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
-	        start_date.setMinutes(start_date.getMinutes() + 7 * 60 + 30 - 9 * 60); // UTC > JST
-	        var end_date = new Date(el["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
-	        end_date.setMinutes(end_date.getMinutes() + 24 * 60 * 60 + 7 * 60 + 30 - 9 * 60);
+	        var now = new Date(); // タイムゾーン不明
 
-	        if (end_date.getTime() / 1000 < Date.now() / 1000) {
+	        // new Date("2016/01/01") は 2016/01/01 00:00:00 GMT+0900 (JST)
+	        // new Date("2016-01-01") は 2016/01/01 09:00:00 GMT+0900 (JST) #i.e. UTC0時がJST9時
+
+	        // var timezoneOffset = now.getTimezoneOffset();
+	        var timezoneOffsetJst = -9 * 60; // JST9時をJST0時に補正
+	        var startDate = new Date(el["start_time"]); // 2016/01/01 なら 2016/01/01 07:30:00 (JST) から
+	        startDate.setMinutes(startDate.getMinutes() + timezoneOffsetJst + 7 * 60 + 30);
+	        var endDate = new Date(el["end_time"]); // 2016/01/01 なら 2016/01/02 07:29:59 (JST) まで
+	        endDate.setMinutes(endDate.getMinutes() + timezoneOffsetJst + 24 * 60 + 7 * 60 + 30);
+
+	        if (endDate.getTime() / 1000 < now.getTime() / 1000) {
 	            return;
 	        } // 終了したマップは除外
 
 	        var mv = {};
 	        tempMap.set(el, mv);
 
-	        if (Date.now() / 1000 < start_date.getTime() / 1000) {
-	            mv["datePrefix"] = start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜";
+	        if (now.getTime() / 1000 < startDate.getTime() / 1000) {
+	            // get〜の日付関数は現地の日付を返すのでJST3時をUTC3時に読み替えて getUTC〜 を使う
+	            var dispStartDate = new Date(startDate.getTime());
+	            dispStartDate.setMinutes(dispStartDate.getMinutes() - timezoneOffsetJst); // JST3時 > JST12時＝UTC3時
+	            mv["datePrefix"] = dispStartDate.getUTCMonth() + 1 + "/" + dispStartDate.getUTCDate() + "〜";
 	        }
 	    });
 	    // mapとの紐付け。残念ながら O(map数 x tempMap数)
@@ -27097,7 +27107,7 @@
 			"end_time": "2016-01-31",
 			"type": "national_battle_high",
 			"title": "【初公開】旧ブロア市街地〜占有驀進〜【特殊×】",
-			"url": "",
+			"url": "/map/2#opr-153",
 			"map": "blouer_f"
 		},
 		{
@@ -27107,6 +27117,14 @@
 			"title": "ダリーヤ遺跡群 〜河底の弾雨〜【特殊×】",
 			"url": "/map/5#opr-28",
 			"map": "darya_b"
+		},
+		{
+			"start_time": "2016-01-28",
+			"end_time": "2016-01-31",
+			"type": "event",
+			"title": "スクランブルバトル",
+			"url": "/news/317",
+			"map": "wuhai_sa"
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
@@ -28646,7 +28664,7 @@
 	    "M": [250, 180],
 	    "L": [200, 180]
 	};
-	var turretCircle = 8;
+	var turretCircle = 6;
 
 	function createOptionFragments(optionList) {
 	    var frag = document.createDocumentFragment();
