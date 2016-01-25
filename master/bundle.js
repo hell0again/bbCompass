@@ -14387,18 +14387,18 @@
 	    // tempMap準備、日付関連
 	    _lodash2['default'].each(currentJson, function (el, it) {
 	        var start_date = new Date(el["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
-	        start_date.setMinutes(start_date.getMinutes() + 7 * 60 + 30);
+	        start_date.setMinutes(start_date.getMinutes() + 7 * 60 + 30 - 9 * 60); // UTC > JST
 	        var end_date = new Date(el["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
-	        end_date.setMinutes(end_date.getMinutes() + 24 * 60 * 60 + 7 * 60 + 30);
+	        end_date.setMinutes(end_date.getMinutes() + 24 * 60 * 60 + 7 * 60 + 30 - 9 * 60);
 
-	        if (end_date < Date.now()) {
+	        if (end_date.getTime() / 1000 < Date.now() / 1000) {
 	            return;
 	        } // 終了したマップは除外
 
 	        var mv = {};
 	        tempMap.set(el, mv);
 
-	        if (Date.now() < start_date) {
+	        if (Date.now() / 1000 < start_date.getTime() / 1000) {
 	            mv["datePrefix"] = start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜";
 	        }
 	    });
@@ -27093,35 +27093,12 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-01-18",
-			"end_time": "2016-01-24",
-			"type": "event",
-			"title": "大攻防戦",
-			"url": "/news/308",
-			"map": "madelrond_ea"
-		},
-		{
-			"start_time": "2016-01-18",
-			"end_time": "2016-01-24",
-			"type": "national_battle_high",
-			"title": "ロンシャ深山〜山門の抗衡〜",
-			"url": "/map/17#opr-116",
-			"map": "longsha_a"
-		},
-		{
-			"start_time": "2016-01-18",
-			"end_time": "2016-01-24",
-			"type": "national_battle_low",
-			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-			"url": "/map/4#opr-19",
-			"map": "tlaza_a"
-		},
-		{
 			"start_time": "2016-01-25",
 			"end_time": "2016-01-31",
 			"type": "national_battle_high",
 			"title": "【初公開】旧ブロア市街地〜占有驀進〜【特殊×】",
-			"url": ""
+			"url": "",
+			"map": "blouer_f"
 		},
 		{
 			"start_time": "2016-01-25",
@@ -27376,6 +27353,14 @@
 				"stage": "blouer"
 			},
 			"text": "破壊槌"
+		},
+		{
+			"value": "blouer_f",
+			"dataset": {
+				"layer": "[]",
+				"stage": "blouer"
+			},
+			"text": "占有驀進"
 		},
 		{
 			"value": "blouer_ea",
