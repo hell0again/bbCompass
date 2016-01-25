@@ -1,34 +1,11 @@
 [
     {
-        "start_time": "2016-01-18",
-        "end_time": "2016-01-24",
-        "type": "event",
-        "title": "大攻防戦",
-        "url": "/news/308",
-        "map": "madelrond_ea"
-    },
-    {
-        "start_time": "2016-01-18",
-        "end_time": "2016-01-24",
-        "type": "national_battle_high",
-        "title": "ロンシャ深山〜山門の抗衡〜",
-        "url": "/map/17#opr-116",
-        "map": "longsha_a"
-    },
-    {
-        "start_time": "2016-01-18",
-        "end_time": "2016-01-24",
-        "type": "national_battle_low",
-        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-        "url": "/map/4#opr-19",
-        "map": "tlaza_a"
-    },
-    {
         "start_time": "2016-01-25",
         "end_time": "2016-01-31",
         "type": "national_battle_high",
         "title": "【初公開】旧ブロア市街地〜占有驀進〜【特殊×】",
-        "url": ""
+        "url": "",
+        "map": "blouer_f"
     },
     {
         "start_time": "2016-01-25",

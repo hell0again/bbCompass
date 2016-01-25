@@ -161,16 +161,16 @@ var BBDB = {
     // tempMap準備、日付関連
     _.each(currentJson, function(el, it) {
         var start_date = new Date(el["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
-        start_date.setMinutes(start_date.getMinutes() +7*60 +30);
+        start_date.setMinutes(start_date.getMinutes() +7*60 +30 -9*60); // UTC > JST
         var end_date = new Date(el["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
-        end_date.setMinutes(end_date.getMinutes() +24*60*60 +7*60 +30);
+        end_date.setMinutes(end_date.getMinutes() +24*60*60 +7*60 +30 -9*60);
 
-        if (end_date < Date.now()) { return; } // 終了したマップは除外
+        if (end_date.getTime()/1000 < Date.now()/1000) { return; } // 終了したマップは除外
 
         var mv = {};
         tempMap.set(el, mv);
 
-        if (Date.now() < start_date) {
+        if (Date.now()/1000 < start_date.getTime()/1000) {
             mv["datePrefix"] = start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜";
         }
     });

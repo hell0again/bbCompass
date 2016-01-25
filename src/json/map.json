@@ -6,6 +6,7 @@
     {"value":"blouer_c", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "街路制圧戦"},
     {"value":"blouer_d", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "制空血戦"},
     {"value":"blouer_e", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "破壊槌"},
+    {"value":"blouer_f", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "占有驀進"},
     {"value":"blouer_ea", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "激闘の丘陵", "class": "event"},
     {"value":"blouer_ua", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "石路の連合戦", "class": "union"},
     {"value":"blouer_ub", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "緑野の迎撃戦", "class": "union"},
