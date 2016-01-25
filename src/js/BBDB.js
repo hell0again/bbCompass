@@ -160,18 +160,28 @@ var BBDB = {
 
     // tempMap準備、日付関連
     _.each(currentJson, function(el, it) {
-        var start_date = new Date(el["start_time"]); // "2016-01-01" なら 2016/01/01 07:30:00 から。start_dateは補正後も日付が変わらないと仮定
-        start_date.setMinutes(start_date.getMinutes() +7*60 +30 -9*60); // UTC > JST
-        var end_date = new Date(el["end_time"]); // "2016-01-01" なら 2016/01/02 07:29:59 まで
-        end_date.setMinutes(end_date.getMinutes() +24*60*60 +7*60 +30 -9*60);
+        var now = new Date(); // タイムゾーン不明
 
-        if (end_date.getTime()/1000 < Date.now()/1000) { return; } // 終了したマップは除外
+        // new Date("2016/01/01") は 2016/01/01 00:00:00 GMT+0900 (JST)
+        // new Date("2016-01-01") は 2016/01/01 09:00:00 GMT+0900 (JST) #i.e. UTC0時がJST9時
+
+        // var timezoneOffset = now.getTimezoneOffset();
+        var timezoneOffsetJst = -9 * 60; // JST9時をJST0時に補正
+        var startDate = new Date(el["start_time"]); // 2016/01/01 なら 2016/01/01 07:30:00 (JST) から
+        startDate.setMinutes(startDate.getMinutes() +timezoneOffsetJst +7*60 +30);
+        var endDate = new Date(el["end_time"]); // 2016/01/01 なら 2016/01/02 07:29:59 (JST) まで
+        endDate.setMinutes(endDate.getMinutes() +timezoneOffsetJst +24*60 +7*60 +30);
+
+        if (endDate.getTime()/1000 < now.getTime()/1000) { return; } // 終了したマップは除外
 
         var mv = {};
         tempMap.set(el, mv);
 
-        if (Date.now()/1000 < start_date.getTime()/1000) {
-            mv["datePrefix"] = start_date.getMonth() + 1 + "/" + start_date.getDate() + "〜";
+        if (now.getTime()/1000 < startDate.getTime()/1000) {
+            // get〜の日付関数は現地の日付を返すのでJST3時をUTC3時に読み替えて getUTC〜 を使う
+            var dispStartDate = new Date(startDate.getTime());
+            dispStartDate.setMinutes(dispStartDate.getMinutes() -timezoneOffsetJst); // JST3時 > JST12時＝UTC3時
+            mv["datePrefix"] = dispStartDate.getUTCMonth() + 1 + "/" + dispStartDate.getUTCDate() + "〜";
         }
     });
     // mapとの紐付け。残念ながら O(map数 x tempMap数)
