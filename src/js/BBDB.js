@@ -5,6 +5,7 @@ require('es6-collections');
 var currentJson = require('../json/current.json');
 var stageJson = require('../json/stage.json');
 var mapJson = require('../json/map.json');
+var C = require('./const');
 
 // NOTE: currentMapはこの順序で並べる
 var currentMapEx = [
@@ -166,11 +167,11 @@ var BBDB = {
         // new Date("2016-01-01") は 2016/01/01 09:00:00 GMT+0900 (JST) #i.e. UTC0時がJST9時
 
         // var timezoneOffset = now.getTimezoneOffset();
-        var timezoneOffsetJst = -9 * 60; // JST9時をJST0時に補正
+        var timezoneOffsetJst = C["calendar"]["timezoneOffset"]; // JST9時をJST0時に補正
         var startDate = new Date(el["start_time"]); // 2016/01/01 なら 2016/01/01 07:30:00 (JST) から
-        startDate.setMinutes(startDate.getMinutes() +timezoneOffsetJst +7*60 +30);
+        startDate.setMinutes(startDate.getMinutes() +timezoneOffsetJst C["calendar"]["starttimeOffset"]);
         var endDate = new Date(el["end_time"]); // 2016/01/01 なら 2016/01/02 07:29:59 (JST) まで
-        endDate.setMinutes(endDate.getMinutes() +timezoneOffsetJst +24*60 +7*60 +30);
+        endDate.setMinutes(endDate.getMinutes() +timezoneOffsetJst C["calendar"]["endtimeOffset"]);
 
         if (endDate.getTime()/1000 < now.getTime()/1000) { return; } // 終了したマップは除外
 

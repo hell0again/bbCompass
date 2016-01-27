@@ -172,8 +172,7 @@ class BB_circle extends BB_base {
         }
     }
     draw() {
-        var px_rad = this._bbObj.meter_to_pixel(this._radius),
-            ptx = this._ptpos.x,
+        var px_rad = this._bbObj.meter_to_pixel(this._radius), ptx = this._ptpos.x,
             pty = this._ptpos.y,
             obj = this;
 
@@ -1837,8 +1836,8 @@ export default class BB {
         this.initExtendJCanvaScript(jc);
 
         this.ptsize = 5, //オブジェクトの操作点を示す白点のサイズ
-            this.ptcolsize = 7, //操作点を縁取りする色つき円のサイズ
-            this.pttrasize = (window.TouchEvent) ? 15 : 7; //操作点そのもののサイズ
+        this.ptcolsize = 7, //操作点を縁取りする色つき円のサイズ
+        this.pttrasize = (window.TouchEvent) ? 15 : 7; //操作点そのもののサイズ
     }
 
     //
