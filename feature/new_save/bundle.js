@@ -29851,8 +29851,8 @@
 
 	    (0, _jquery2['default'])("#" + DivName).unbind('mousedown');
 
-	    var imgPng = (0, _jquery2['default'])("#SaveImg");
-	    imgPng.attr("href", (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png'));
+	    // var imgPng = $("#SaveImg");
+	    // imgPng.attr("href", $("#BBCompass")[0].toDataURL('image/png'));
 	    var imgView = (0, _jquery2['default'])("#SaveImgView");
 	    imgView.attr("src", (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png'));
 	    var img = (0, _jquery2['default'])("#SaveArea");
