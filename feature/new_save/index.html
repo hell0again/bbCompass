@@ -29,8 +29,34 @@
   </nav>
 </header>
 
+<style>
+  .name {
+    font-size: xx-small;
+    font-weight: bold;
+  }
+  .celltitle {
+    font-size: x-small;
+    font-weight: bold;
+  }
+  div#cursorselector > div {
+    min-width: 2em;
+  }
+  .clearfix {
+    clear: both;
+    height: 0px;
+  }
+  #obj_area {
+    width: 60%;
+  }
+  #lst_object {
+    width: 100%;
+  }
+  #obj_cont {
+    float: right;
+  }
+</style>
 <div class="menutitle">
-  <span id="titletext">メニュー</span>
+  <span id="titletext"></span>
   <span id="menusw_off">▲</span>
   <span id="menusw_on">▼</span>
 </div>
@@ -47,7 +73,10 @@
       </div>
     </div>
     <div class="item">
-      <div class="name">すべて：</div>
+      <div class="name">すべてのマップ
+        <div id="toggle-map" style="display:inline; font-size:xx-small">▼</div>
+      </div>
+      <br>
       <div id="map_area">
         <form name="map">
           <div class="map_selector">
@@ -68,7 +97,7 @@
       </div>
     </div>
     <div class="item">
-      <div class="name">階層：</div>
+      <div class="name">階層&nbsp;</div>
       <div id="layer_area">
         <select id="lst_layer" size="2">
           <!-- ... -->
@@ -78,7 +107,7 @@
   </div>
   <div class="menusubcell" id="subcell_graph">
     <div class="menucell" id="menu_graph">
-      <div class="celltitle" id="head_graph">設置</div>
+      <div class="celltitle" id="head_graph">オブジェクト</div>
       <div id="objsel_area">
         <div id="objselector" class="selector">
           <div class="option" data-target="objscout"><img src="./image/menu/scout.png" alt="メニュー偵察機"><br>偵察機</div>
@@ -100,17 +129,17 @@
 
       <!--偵察機-->
       <div class="setobj" id="objscout"><form name="scout">
-        <div class="title">偵察機</div>
-        <div class="name">名前：</div>
+        <!--<div class="title">偵察機</div>-->
+        <div class="name">名前&nbsp;</div>
         <div class="form"><input id="name_scout" type="text" class="formtext"></div>
-        <div class="name">色：</div>
+        <div class="name">色&nbsp;</div>
         <div class="form">
           <select id="col_scout" class="colorpick">
             <!-- ... -->
           </select>
         </div>
 
-        <div class="name">種別：</div>
+        <div class="name">種別&nbsp;</div>
         <div class="form">
           <select id="lst_scout" size="4" class="formlst">
             <!-- ... -->
@@ -374,11 +403,48 @@
       </form></div>
     </div>
   </div>
-  <div class="menucell" id="menu_view">
+
+  <div class="menucell" id="menu_cont">
     <div class="celltitle" id="head_view">表示</div>
+
     <div class="item">
-      <div class="title">ズーム</div>
-      <div class="name">倍率：</div>
+      <!--
+      <div class="name">レイヤー</div><br>
+      -->
+      <div class="name">レイヤー</div>
+      <div class="clearfix"></div>
+      <div id="cont_area">
+       
+        <div id="obj_area">
+          <select id="lst_object" size="6" multiple>
+          </select>
+        </div>
+
+        <div id="obj_cont">
+          <button type="button" id="up_object">上へ</button><br>
+          <button type="button" id="down_object">下へ</button><br>
+          <button type="button" id="del_object">削除</button><br>
+          <!--
+          <button type="button" id="delall_object">全削除</button><br>
+          -->
+        </div>
+
+       </div>
+    </div>
+
+    <div class="item"><!--移動-->
+      <div class="name">モード&nbsp;</div>
+      <div id="cursorselector" class="selector">
+        <div id="csr_select" class="option selected"><img src="./image/arrow.png" alt="オブジェ選択"></div>
+        <div id="csr_move" class="option"><img src="./image/hand.png" alt="移動"></div>
+        <!--
+        <div id="csr_save" class="option"><img src="./image/hand.png" alt="保存">保存</div>
+        -->
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="name">ズーム&nbsp;</div>
       <div class="form">
         <select id="lst_scale">
           <option value="1" selected>100%</option>
@@ -389,49 +455,36 @@
       </div>
     </div>
 
-    <div class="item"><!--移動-->
-      <div class="title">モード</div>
-      <div id="cursorselector" class="selector">
-        <div id="csr_select" class="option selected"><img src="./image/arrow.png" alt="オブジェ選択">選択</div>
-        <div id="csr_move" class="option"><img src="./image/hand.png" alt="移動">移動</div>
-        <div id="csr_save" class="option"><img src="./image/hand.png" alt="保存">保存</div>
-      </div>
-    </div>
   </div>
-  <div class="menucell" id="menu_cont">
-    <div class="celltitle" id="head_cont">制御</div>
+
+  <div class="menucell" id="menu_view">
+    <div class="celltitle" id="head_cont">保存</div>
+
     <div class="item">
-      <div class="title">オブジェクト</div>
-      <div id="cont_area">
-        <div id="obj_area">
-          <select id="lst_object" size="7" multiple>
-          </select>
-        </div>
-        <div id="obj_cont">
-        操作<br>
-        <button type="button" id="up_object">上へ</button><br>
-        <button type="button" id="down_object">下へ</button><br>
-        <button type="button" id="del_object">削除</button><br>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="title">出力</div>
+      <!--
+      <div class="name">保存</div><br>
+      -->
       <div id="save_area"><form name="save">
         <div class="submitbtn">
-          <button id="get_url" type="button">URL出力</button>
+          <button id="make_img" type="button">画像</button>
+          <button id="get_url" type="button">URL</button>
+
+          <div id="SaveArea" style="">
+            <!-- <img id="SaveImgView" src="" style="height:64px; margin:10px"> -->
+            <img id="SaveImgView" src="" style="width:112px; margin:10px">
+          </div>
+
         </div>
       </form></div>
     </div>
+
   </div>
+
 </div>
 
 <div id="LoadArea">
   <div id="CanvasArea">
     <canvas width="300" height="700" id="BBCompass"></canvas>
-  </div>
-  <div id="SaveArea" style="position:absolute; visibility: hidden; width:100%; margin: 10px 0px; top:0; left:0; opacity:0">
-    <img id="SaveImgView" src="" style="display:block; margin: 0 auto">
   </div>
   <div class="ContextMenu">
     <div class="Spacer"><!-- --></div>

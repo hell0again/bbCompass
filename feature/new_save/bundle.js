@@ -27127,6 +27127,21 @@
 			"map": "wuhai_sa"
 		},
 		{
+			"start_time": "2016-02-01",
+			"end_time": "2016-02-07",
+			"type": "national_battle_high",
+			"title": "【初公開】極地観測所セクター9〜天空への架け橋〜",
+			"url": ""
+		},
+		{
+			"start_time": "2016-02-01",
+			"end_time": "2016-02-07",
+			"type": "national_battle_low",
+			"title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
+			"url": "/map/2#opr-5",
+			"map": "blouer_c"
+		},
+		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
 			"map": "24_sqa"
 		},
@@ -28772,6 +28787,13 @@
 	// 読み込み時の処理
 	(0, _jquery2['default'])(document).ready(function () {
 
+	    (0, _jquery2['default'])("#make_img").click(function (e) {
+	        var imgView = (0, _jquery2['default'])("#SaveImgView");
+	        imgView.attr("src", (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png'));
+	        // var img = $("#SaveArea");
+	        // img.css("visibility", "visible");
+	    });
+
 	    // 現在の戦場選択メニューの設定
 	    (0, _jquery2['default'])("#current").change(function (e) {
 	        var map = (0, _jquery2['default'])(this).val();
@@ -29032,6 +29054,9 @@
 	    });
 	    (0, _jquery2['default'])("#del_object").bind('click', function (e) {
 	        del_object();
+	    });
+	    (0, _jquery2['default'])("#delall_object").bind('click', function (e) {
+	        delall_object();
 	    });
 	    (0, _jquery2['default'])("#save_img").bind('click', function (e) {
 	        saveImg();
@@ -29829,9 +29854,10 @@
 
 	    (0, _jquery2['default'])("#" + DivName).mousedown(md);
 
-	    var img = (0, _jquery2['default'])("#SaveArea");
-	    img.css("visibility", "hidden");
+	    // var img = $("#SaveArea");
+	    // img.css("visibility", "hidden");
 	}
+	// いらない
 	//保存開始
 	function start_save() {
 	    (0, _jquery2['default'])("button").attr("disabled", true);
@@ -29871,8 +29897,8 @@
 	    bbobj.ourJc.start(CanvasName, true);
 	    (0, _jquery2['default'])("#" + DivName).unbind('mousedown');
 
-	    var img = (0, _jquery2['default'])("#SaveArea");
-	    img.css("visibility", "hidden");
+	    // var img = $("#SaveArea");
+	    // img.css("visibility", "hidden");
 
 	    //力技なのが気になる
 	    if (freehandOnWrite !== undefined) {
@@ -29930,6 +29956,14 @@
 	//lst_objectから要素削除
 	function del_object() {
 	    (0, _jquery2['default'])("#lst_object option:selected").each(function () {
+	        bbobj.object((0, _jquery2['default'])(this).val()).del();
+	        (0, _jquery2['default'])(this).remove();
+	    });
+	}
+
+	//lst_objectから全要素削除
+	function delall_object() {
+	    (0, _jquery2['default'])("#lst_object option").each(function () {
 	        bbobj.object((0, _jquery2['default'])(this).val()).del();
 	        (0, _jquery2['default'])(this).remove();
 	    });
