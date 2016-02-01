@@ -153,6 +153,7 @@
     {"value":"malinasedna_b", "dataset": {"layer": "[]", "stage": "malinasedna"}, "text": "霜夜の裏の裏"},
     {"value":"malinasedna_c", "dataset": {"layer": "[]", "stage": "malinasedna"}, "text": "掎角の氷穴"},
     {"value":"sector_a", "dataset": {"layer": "[]", "stage": "sector"}, "text": "軋轢の天望坐"},
+    {"value":"sector_b", "dataset": {"layer": "[]", "stage": "sector"}, "text": "天空への架け橋"},
     {"value":"24_sqa", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-D", "class": "squad"},
     {"value":"24_sqb", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-S", "class": "squad"}
 ]
