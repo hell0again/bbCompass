@@ -27103,35 +27103,12 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-01-25",
-			"end_time": "2016-01-31",
-			"type": "national_battle_high",
-			"title": "【初公開】旧ブロア市街地〜占有驀進〜【特殊×】",
-			"url": "/map/2#opr-153",
-			"map": "blouer_f"
-		},
-		{
-			"start_time": "2016-01-25",
-			"end_time": "2016-01-31",
-			"type": "national_battle_low",
-			"title": "ダリーヤ遺跡群 〜河底の弾雨〜【特殊×】",
-			"url": "/map/5#opr-28",
-			"map": "darya_b"
-		},
-		{
-			"start_time": "2016-01-28",
-			"end_time": "2016-01-31",
-			"type": "event",
-			"title": "スクランブルバトル",
-			"url": "/news/317",
-			"map": "wuhai_sa"
-		},
-		{
 			"start_time": "2016-02-01",
 			"end_time": "2016-02-07",
 			"type": "national_battle_high",
 			"title": "【初公開】極地観測所セクター9〜天空への架け橋〜",
-			"url": ""
+			"url": "",
+			"map": "sector_b"
 		},
 		{
 			"start_time": "2016-02-01",
@@ -28605,6 +28582,14 @@
 				"stage": "sector"
 			},
 			"text": "軋轢の天望坐"
+		},
+		{
+			"value": "sector_b",
+			"dataset": {
+				"layer": "[]",
+				"stage": "sector"
+			},
+			"text": "天空への架け橋"
 		},
 		{
 			"value": "24_sqa",
