@@ -19,48 +19,24 @@
 </script>
 </head>
 <body>
-<header>
+<header class="layer-header">
   <div class="caption">
     <h1><a href="http://hell0again.github.io/bbCompass/master">BBコンパスもどき@移植中</a><span id="viewsw">PC版</span></h1>
   </div>
   <nav>
-    <div class="menutab selected" id="menutab_map"><span>マップ/操作</span></div>
-    <div class="menutab" id="menutab_item"><span>アイテム設置</span></div>
+    <div class="menutab" id="menutab_map"><span>マップ</span></div>
+    <div class="menutab" id="menutab_item"><span>オブジェクト</span></div>
+    <div class="menutab" id="menutab_view"><span>表示</span></div>
+    <div class="menutab" id="menutab_save"><span>保存</span></div>
   </nav>
 </header>
 
-<style>
-  .name {
-    font-size: xx-small;
-    font-weight: bold;
-  }
-  .celltitle {
-    font-size: x-small;
-    font-weight: bold;
-  }
-  div#cursorselector > div {
-    min-width: 2em;
-  }
-  .clearfix {
-    clear: both;
-    height: 0px;
-  }
-  #obj_area {
-    width: 60%;
-  }
-  #lst_object {
-    width: 100%;
-  }
-  #obj_cont {
-    float: right;
-  }
-</style>
 <div class="menutitle">
   <span id="titletext"></span>
   <span id="menusw_off">▲</span>
   <span id="menusw_on">▼</span>
 </div>
-<div class="ribbonmenu">
+<div class="ribbonmenu layer-ribbonmenu">
   <div class="menucell" id="menu_map">
     <div class="celltitle" id="head_map">マップ</div>
     <div class="item">
@@ -105,8 +81,7 @@
       </div>
     </div>
   </div>
-  <div class="menusubcell" id="subcell_graph">
-    <div class="menucell" id="menu_graph">
+  <div class="menucell" id="menu_graph">
       <div class="celltitle" id="head_graph">オブジェクト</div>
       <div id="objsel_area">
         <div id="objselector" class="selector">
@@ -401,7 +376,6 @@
           <button id="redo_freehand" type="button" class="disable" disabled>Redo</button>
         </div>
       </form></div>
-    </div>
   </div>
 
   <div class="menucell" id="menu_cont">
@@ -416,7 +390,7 @@
       <div id="cont_area">
        
         <div id="obj_area">
-          <select id="lst_object" size="6" multiple>
+          <select id="lst_object" size="4" multiple>
           </select>
         </div>
 
@@ -435,7 +409,7 @@
     <div class="item"><!--移動-->
       <div class="name">モード&nbsp;</div>
       <div id="cursorselector" class="selector">
-        <div id="csr_select" class="option selected"><img src="./image/arrow.png" alt="オブジェ選択"></div>
+        <div id="csr_select" class="option selected"><img src="./image/arrow.png" alt="選択"></div>
         <div id="csr_move" class="option"><img src="./image/hand.png" alt="移動"></div>
         <!--
         <div id="csr_save" class="option"><img src="./image/hand.png" alt="保存">保存</div>
@@ -461,32 +435,31 @@
     <div class="celltitle" id="head_cont">保存</div>
 
     <div class="item">
-      <!--
-      <div class="name">保存</div><br>
-      -->
       <div id="save_area"><form name="save">
         <div class="submitbtn">
-          <button id="make_img" type="button">画像</button>
-          <button id="get_url" type="button">URL</button>
-
-          <div id="SaveArea" style="">
-            <!-- <img id="SaveImgView" src="" style="height:64px; margin:10px"> -->
-            <img id="SaveImgView" src="" style="width:112px; margin:10px">
-          </div>
-
+          <button id="make_img" type="button">保存</button>
         </div>
       </form></div>
+
+      <div class="name">URL</div><br>
+      <div>
+        <input id="SaveImgText" type="text" value=""></input>
+      </div>
+
+      <div class="name">画像</div><br>
+      <div id="SaveArea" style="">
+        <img id="SaveImgView" src="" style="width:112px; margin:10px auto">
+      </div>
     </div>
-
   </div>
-
 </div>
+<div class="ribbonmenu-outer layer-ribbonmenu-outer"></div>
 
 <div id="LoadArea">
   <div id="CanvasArea">
     <canvas width="300" height="700" id="BBCompass"></canvas>
   </div>
-  <div class="ContextMenu">
+  <div class="ContextMenu layer-context-menu">
     <div class="Spacer"><!-- --></div>
     <ul>
       <li id="contextSelectMode" class="checked">選択モード</li>
@@ -495,7 +468,7 @@
     <div class="hrdiv"><hr></div>
     <ul>
       <li class="hasChild">ズーム
-        <div class="ContextChild">
+        <div class="ContextChild layer-context-child">
           <div class="Spacer"><!-- --></div>
           <ul id="contextZoom">
             <li id="contextZoom_1" class="checked">100%</li>
