@@ -28792,7 +28792,7 @@
 	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeIn("fast");
 	        setTimeout(function () {
 	            (0, _jquery2['default'])(".ribbonmenu").addClass("selected");
-	        }, 100);
+	        }, 200);
 
 	        // $(".ribbonmenu").fadeOut("fast", function() {
 	        //     // $(".ribbonmenu>*").hide();
@@ -28806,6 +28806,8 @@
 
 	// 読み込み時の処理
 	(0, _jquery2['default'])(document).ready(function () {
+	    var viewport = true ? 'width=device-width, initial-scale=1, user-scalable=no' : 'width=device-width, initial-scale=1, user-scalable=yes';
+	    (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
 
 	    (0, _jquery2['default'])("#make_img").click(function (e) {
 	        var $imgView = (0, _jquery2['default'])("#SaveImgView");
@@ -29120,6 +29122,7 @@
 	    //ウィンドウサイズの変更に対する対処
 	    wideview = (0, _jquery2['default'])(".menutitle").is(":visible");
 	    (0, _jquery2['default'])(window).resize(function () {
+	        return;
 	        //キャンバスエリアの幅を調整、jCanvaScriptの処理に反映させる
 	        chgCanvasAreaSize();
 
@@ -29177,7 +29180,7 @@
 
 	    //スマホ用メニュー制御
 	    var ua = navigator.userAgent;
-	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	    if (false) {
 	        var pcmode, intervalID, timeoutID, correctFlag, headerHeight, headelem, vp_width;
 	        var media;
 	        var sw;

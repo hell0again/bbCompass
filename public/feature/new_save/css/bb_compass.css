@@ -3,6 +3,7 @@ body {
     background-image:url("../image/bg.png");
     -webkit-text-size-adjust:100%;
     margin: 0;
+    font-family: sans-serif;
 }
 
 h1,h3{
@@ -184,11 +185,11 @@ select#map > option.scramble,select#map.scramble{
     -ms-touch-action: double-tap-zoom;
 }
 
-div#CanvasArea{
+#CanvasArea{
     position:relative;
     text-align:center;
     overflow:scroll;
-    margin:10px auto;
+    margin: 0 auto;
 }
 
 .ContextMenu {
@@ -518,7 +519,7 @@ div#Loading{
     }
     .menutab span {
         font-weight: bold;
-        font-size: small;
+        font-size: x-small;
         vertical-align: middle;
         background-clip: padding-box;
         border-radius: 20px;
