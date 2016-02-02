@@ -27103,35 +27103,12 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-01-25",
-			"end_time": "2016-01-31",
-			"type": "national_battle_high",
-			"title": "【初公開】旧ブロア市街地〜占有驀進〜【特殊×】",
-			"url": "/map/2#opr-153",
-			"map": "blouer_f"
-		},
-		{
-			"start_time": "2016-01-25",
-			"end_time": "2016-01-31",
-			"type": "national_battle_low",
-			"title": "ダリーヤ遺跡群 〜河底の弾雨〜【特殊×】",
-			"url": "/map/5#opr-28",
-			"map": "darya_b"
-		},
-		{
-			"start_time": "2016-01-28",
-			"end_time": "2016-01-31",
-			"type": "event",
-			"title": "スクランブルバトル",
-			"url": "/news/317",
-			"map": "wuhai_sa"
-		},
-		{
 			"start_time": "2016-02-01",
 			"end_time": "2016-02-07",
 			"type": "national_battle_high",
 			"title": "【初公開】極地観測所セクター9〜天空への架け橋〜",
-			"url": ""
+			"url": "/map/23#opr-154",
+			"map": "sector_b"
 		},
 		{
 			"start_time": "2016-02-01",
@@ -27140,6 +27117,14 @@
 			"title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
 			"url": "/map/2#opr-5",
 			"map": "blouer_c"
+		},
+		{
+			"start_time": "2016-02-08",
+			"end_time": "2016-02-14",
+			"type": "union_battle",
+			"title": "【ユニオンバトル】オルグレン湖水基地〜落水の迎撃戦〜",
+			"url": "/news/325",
+			"map": "algren_ub"
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
@@ -28607,6 +28592,14 @@
 			"text": "軋轢の天望坐"
 		},
 		{
+			"value": "sector_b",
+			"dataset": {
+				"layer": "[]",
+				"stage": "sector"
+			},
+			"text": "天空への架け橋"
+		},
+		{
 			"value": "24_sqa",
 			"dataset": {
 				"layer": "[]",
@@ -28784,14 +28777,57 @@
 	    });
 	};
 
+	var toggleMenutab = function toggleMenutab($tab, $target) {
+	    if ($tab == undefined || $tab.hasClass("selected")) {
+	        (0, _jquery2['default'])(".menutab").removeClass("selected");
+	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu").removeClass("selected");
+	        // $(".ribbonmenu").fadeOut("fast");
+	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeOut("fast");
+	    } else {
+	        (0, _jquery2['default'])(".menutab").removeClass("selected");
+	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        $tab.addClass("selected");
+	        $target.addClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeIn("fast");
+	        setTimeout(function () {
+	            (0, _jquery2['default'])(".ribbonmenu").addClass("selected");
+	        }, 100);
+
+	        // $(".ribbonmenu").fadeOut("fast", function() {
+	        //     // $(".ribbonmenu>*").hide();
+	        //     // $target.show();
+	        //     // $(".ribbonmenu").addClass("selected");
+	        //     // // $(".ribbonmenu").fadeIn("fast");
+	        //     $(".ribbonmenu-outer").fadeIn("fast");
+	        // });
+	    }
+	};
+
 	// 読み込み時の処理
 	(0, _jquery2['default'])(document).ready(function () {
 
 	    (0, _jquery2['default'])("#make_img").click(function (e) {
-	        var imgView = (0, _jquery2['default'])("#SaveImgView");
-	        imgView.attr("src", (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png'));
-	        // var img = $("#SaveArea");
-	        // img.css("visibility", "visible");
+	        var $imgView = (0, _jquery2['default'])("#SaveImgView");
+	        $imgView.attr("src", "");
+	        var $SaveImgText = (0, _jquery2['default'])("#SaveImgText");
+	        $SaveImgText.attr("value", "");
+
+	        var src = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
+
+	        setTimeout(function () {
+	            $imgView.attr("src", src);
+
+	            var objs = new Array();
+	            (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
+	                objs.push((0, _jquery2['default'])(this).val());
+	            });
+	            var queryobj = new _BBCQuery2['default'](bbobj, (0, _jquery2['default'])("select#map").val());
+	            queryobj.fromObjects(objs);
+	            var querystr = queryobj.toBase64(),
+	                baseurl = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
+	            $SaveImgText.attr("value", baseurl);
+	        }, 100);
 	    });
 
 	    // 現在の戦場選択メニューの設定
@@ -28875,41 +28911,28 @@
 	    });
 
 	    //狭い時用メニューに関する初期化
-	    (0, _jquery2['default'])("div.menutab#menutab_map").click(function (ev) {
-	        if ((0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").is(":visible")) {
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast");
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	        } else {
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast", function () {
-	                (0, _jquery2['default'])("div.ribbonmenu>*").hide();
-	                (0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").fadeIn("fast");
-	                (0, _jquery2['default'])("div.menutab#menutab_map").addClass("selected");
-	            });
-	        }
+	    (0, _jquery2['default'])("#menutab_map").click(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_map"), (0, _jquery2['default'])("#menu_map"));
 	    });
-	    (0, _jquery2['default'])("div.menutab#menutab_item").click(function (ev) {
-	        if ((0, _jquery2['default'])("div.menusubcell#subcell_graph").is(":visible")) {
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast");
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	        } else {
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast", function () {
-	                (0, _jquery2['default'])("div.ribbonmenu>*").hide();
-	                (0, _jquery2['default'])("div.menusubcell#subcell_graph").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").fadeIn("fast");
-	                (0, _jquery2['default'])("div.menutab#menutab_item").addClass("selected");
-	            });
-	        }
+	    (0, _jquery2['default'])("#menutab_item").click(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_item"), (0, _jquery2['default'])("#menu_graph"));
+	    });
+	    (0, _jquery2['default'])("#menutab_view").click(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_view"), (0, _jquery2['default'])("#menu_cont"));
+	    });
+	    (0, _jquery2['default'])("#menutab_save").click(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_save"), (0, _jquery2['default'])("#menu_view"));
+	    });
+	    (0, _jquery2['default'])(".ribbonmenu-outer").click(function (ev) {
+	        toggleMenutab();
 	    });
 
-	    //メニュー部のタッチによるスクロール防止と、独自スクロール処理のbind
-	    (0, _jquery2['default'])("header,div.ribbonmenu").bind('touchmove', function (ev) {
-	        if (wideview) return true;
-	        ev.preventDefault();
-	    });
-	    bindScroll((0, _jquery2['default'])("div#objselector"));
+	    // //メニュー部のタッチによるスクロール防止と、独自スクロール処理のbind
+	    // $("header,div.ribbonmenu").bind('touchmove', function(ev) {
+	    //     if (wideview) return true;
+	    //     ev.preventDefault();
+	    // });
+	    // bindScroll($("div#objselector"));
 
 	    //コンテキストメニュー
 	    (0, _jquery2['default'])("div.ContextMenu").bind('contextmenu', function (ev) {
@@ -29059,7 +29082,8 @@
 	        delall_object();
 	    });
 	    (0, _jquery2['default'])("#save_img").bind('click', function (e) {
-	        saveImg();
+	        window.alert("deprecated");
+	        // saveImg();
 	    });
 	    (0, _jquery2['default'])("#get_url").bind('click', function (e) {
 	        getURL();
@@ -29086,7 +29110,8 @@
 	        zoom_cnv(4);
 	    });
 	    (0, _jquery2['default'])("#save_img2").bind('click', function (e) {
-	        saveImg();
+	        window.alert("deprecated");
+	        // saveImg();
 	    });
 	    (0, _jquery2['default'])("#get_url2").bind('click', function (e) {
 	        getURL();
@@ -29107,25 +29132,25 @@
 
 	            //メニュー全体はスイッチを基に表示：非表示を決める
 	            if ((0, _jquery2['default'])("span#menusw_on").is(":visible")) {
-	                (0, _jquery2['default'])("div.ribbonmenu").hide();
+	                // $("div.ribbonmenu").hide();
 	            } else {
-	                (0, _jquery2['default'])("div.ribbonmenu").show();
-	            }
+	                    // $("div.ribbonmenu").show();
+	                }
 	        } else {
-	            wideview = false;
+	                wideview = false;
 
-	            if ((0, _jquery2['default'])("div.menutab#menutab_map").hasClass("selected")) {
-	                (0, _jquery2['default'])("div.menusubcell#subcell_graph").hide();
-	                (0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").show();
-	            } else if ((0, _jquery2['default'])("div.menutab#menutab_item").hasClass("selected")) {
-	                (0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").hide();
-	                (0, _jquery2['default'])("div.menusubcell#subcell_graph").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").show();
-	            } else {
-	                (0, _jquery2['default'])("div.ribbonmenu").hide();
+	                // if ($("div.menutab#menutab_map").hasClass("selected")) {
+	                //     $("div.menusubcell#subcell_graph").hide();
+	                //     $("div.menucell#menu_map,div.menucell#menu_cont").show();
+	                //     // $("div.ribbonmenu").show();
+	                // } else if ($("div.menutab#menutab_item").hasClass("selected")) {
+	                //     $("div.menucell#menu_map,div.menucell#menu_cont").hide();
+	                //     $("div.menusubcell#subcell_graph").show();
+	                //     $("div.ribbonmenu").show();
+	                // } else {
+	                //     $("div.ribbonmenu").hide();
+	                // }
 	            }
-	        }
 	    });
 
 	    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
@@ -29969,11 +29994,12 @@
 	    });
 	}
 
-	//画像保存
-	function saveImg() {
-	    (0, _jquery2['default'])("#WorkArea").append((0, _jquery2['default'])("<img id=DownloadImg src='" + bbobj.save() + "'>"));
-	    window.open("./image.html", "test");
-	}
+	// //画像保存
+	// function saveImg() {
+	//     window.alert("deprecated");
+	//     $("#WorkArea").append($("<img id=DownloadImg src='" + bbobj.save() + "'>"));
+	//     window.open("./image.html", "test");
+	// }
 
 	//現在の状態をURL化
 	function getURL() {
@@ -30109,70 +30135,76 @@
 
 	//ナビゲーションタブエリアを非表示にする
 	function closeNav() {
-	    if ((0, _jquery2['default'])("nav").is(":visible")) {
-	        (0, _jquery2['default'])("nav>div").removeClass("selected");
-	        (0, _jquery2['default'])("div.ribbonmenu").fadeOut();
-	    }
+	    toggleMenutab();
+	    // if ($("nav").is(":visible")) {
+	    //     $("nav>div").removeClass("selected");
+	    //     $("div.ribbonmenu").fadeOut();
+	    // }
 	}
 
+	/*
 	//スクロール関連独自処理
 	function bindScroll(ojQuery) {
-	    ojQuery.each(function (i, elem) {
-	        elem.addEventListener('wheel', function (e) {
-	            //スクロールが上限に達している場合はデフォルト動作を阻害する
-	            if (e.deltaX < 0 && elem.scrollLeft <= 0 || e.deltaX > 0 && elem.scrollLeft >= elem.scrollWidth - elem.clientWidth || e.deltaY < 0 && elem.scrollTop <= 0 || e.deltaY > 0 && elem.scrollTop >= elem.scrollHeight - elem.clientHeight) {
+	    ojQuery.each(function(i, elem) {
+	        elem.addEventListener('wheel',
+	            function(e) {
+	                //スクロールが上限に達している場合はデフォルト動作を阻害する
+	                if ((e.deltaX < 0) && (elem.scrollLeft <= 0) || (e.deltaX > 0) && (elem.scrollLeft >= elem.scrollWidth - elem.clientWidth) || (e.deltaY < 0) && (elem.scrollTop <= 0) || (e.deltaY > 0) && (elem.scrollTop >= elem.scrollHeight - elem.clientHeight)) {
+	                    e.preventDefault();
+	                    return;
+	                }
+
+	                if (e.deltaMode == 0) {
+	                    elem.scrollLeft = elem.scrollLeft + e.deltaX;
+	                    elem.scrollTop = elem.scrollTop + e.deltaY;
+	                } else if (e.deltaMode == 1) {
+	                    //elem.scrollLeft = elem.scrollLeft + e.deltaX * element.style.lineHeight;
+	                    //elem.scrollTop  = elem.scrollTop + e.deltaY * element.style.lineHeight;
+	                    elem.scrollLeft = elem.scrollLeft + e.deltaX * elem.style.lineHeight;
+	                    elem.scrollTop = elem.scrollTop + e.deltaY * elem.style.lineHeight;
+	                } else if (e.deltaMode == 2) {
+	                    elem.scrollLeft = elem.scrollLeft + e.deltaX * document.documentElement.clientWidth;
+	                    elem.scrollTop = elem.scrollTop + e.deltaY * document.documentElement.clientHeight;
+	                } else {
+	                    return;
+	                }
 	                e.preventDefault();
 	                return;
-	            }
-
-	            if (e.deltaMode == 0) {
-	                elem.scrollLeft = elem.scrollLeft + e.deltaX;
-	                elem.scrollTop = elem.scrollTop + e.deltaY;
-	            } else if (e.deltaMode == 1) {
-	                //elem.scrollLeft = elem.scrollLeft + e.deltaX * element.style.lineHeight;
-	                //elem.scrollTop  = elem.scrollTop + e.deltaY * element.style.lineHeight;
-	                elem.scrollLeft = elem.scrollLeft + e.deltaX * elem.style.lineHeight;
-	                elem.scrollTop = elem.scrollTop + e.deltaY * elem.style.lineHeight;
-	            } else if (e.deltaMode == 2) {
-	                elem.scrollLeft = elem.scrollLeft + e.deltaX * document.documentElement.clientWidth;
-	                elem.scrollTop = elem.scrollTop + e.deltaY * document.documentElement.clientHeight;
-	            } else {
-	                return;
-	            }
-	            e.preventDefault();
-	            return;
-	        }, false);
+	            },
+	            false);
 
 	        if (window.TouchEvent) {
-	            var startX, startY, scrollStartX, scrollStartY, flag, touchid;
+	            var startX, startY, scrollStartX, scrollStartY,
+	                // scrollLimitX, scrollLimitY,
+	                flag, touchid;
 
-	            (function () {
-	                var getTouch = function getTouch(ev) {
-	                    var touch;
+	            function getTouch(ev) {
+	                var touch;
 
-	                    switch (ev.type) {
-	                        case "touchstart":
-	                            touch = ev.touches[0];
-	                            touchid = touch.identifier;
-	                            break;
+	                switch (ev.type) {
+	                    case "touchstart":
+	                        touch = ev.touches[0];
+	                        touchid = touch.identifier;
+	                        break
 
-	                        case "touchmove":
-	                            for (i = 0; i < ev.changedTouches.length; i++) {
-	                                if (ev.changedTouches[i].identifier == touchid) {
-	                                    touch = ev.changedTouches[i];
-	                                    break;
-	                                }
+	                    case "touchmove":
+	                        for (i = 0; i < ev.changedTouches.length; i++) {
+	                            if (ev.changedTouches[i].identifier == touchid) {
+	                                touch = ev.changedTouches[i];
+	                                break;
 	                            }
-	                            break;
-	                    }
+	                        }
+	                        break;
+	                }
 
-	                    if (touch === undefined) {
-	                        return undefined;
-	                    }
-	                    return touch;
-	                };
+	                if (touch === undefined) {
+	                    return undefined;
+	                }
+	                return touch;
+	            }
 
-	                elem.addEventListener('touchstart', function (e) {
+	            elem.addEventListener('touchstart',
+	                function(e) {
 	                    var touch = getTouch(e);
 
 	                    flag = true;
@@ -30183,9 +30215,11 @@
 	                    // scrollLimitX=elem.scrollWidth - elem.clientWidth;
 	                    // scrollLimitY=elem.scrollHeight - elem.clientHeight;
 	                    return;
-	                }, false);
+	                },
+	                false);
 
-	                elem.addEventListener('touchmove', function (e) {
+	            elem.addEventListener('touchmove',
+	                function(e) {
 	                    //touchstartで拾ったイベントがないなら何もしない
 	                    if (!flag) return;
 	                    var touch = getTouch(e);
@@ -30195,19 +30229,19 @@
 	                    }
 
 	                    e.preventDefault();
-	                    elem.scrollLeft = scrollStartX + (touch.clientX - startX) * -1;
-	                    elem.scrollTop = scrollStartY + (touch.clientY - startY) * -1;
-	                }, false);
+	                    elem.scrollLeft = scrollStartX + (touch.clientX - startX) * (-1);
+	                    elem.scrollTop = scrollStartY + (touch.clientY - startY) * (-1);
+	                },
+	                false);
 
-	                elem.addEventListener('touchend', function (e) {
+	            elem.addEventListener('touchend',
+	                function(e) {
 	                    flag = false;
 	                });
-	            })();
 	        }
 	    });
 	}
-
-	// scrollLimitX, scrollLimitY,
+	*/
 
 /***/ },
 /* 20 */
