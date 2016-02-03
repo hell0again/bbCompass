@@ -28656,7 +28656,7 @@
 
 	//初期化
 	var CanvasName = "BBCompass";
-	var DivName = "CanvasArea";
+	var CanvasDivName = "CanvasArea";
 	var scrollBarWidth = 0;
 	var scrollBarHeight = 0;
 	var freehandOnWrite = undefined;
@@ -28945,7 +28945,7 @@
 	            ev.stopPropagation();
 	        }
 	    });
-	    (0, _jquery2['default'])("div#CanvasArea").bind('contextmenu', function (ev) {
+	    (0, _jquery2['default'])("#CanvasArea").bind('contextmenu', function (ev) {
 	        if (!wideview) return true;
 	        ev.preventDefault();
 	        var offset = {
@@ -29165,18 +29165,20 @@
 
 	    // canvas要素の初期化
 	    bbobj = new _BB2['default'](CanvasName);
-	    var cnvArea = document.getElementById(DivName);
+	    var cnvArea = document.getElementById(CanvasDivName);
 	    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
 	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
-	    (0, _jquery2['default'])("#" + DivName).width((0, _jquery2['default'])("#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
+	    (0, _jquery2['default'])("#" + CanvasDivName).width((0, _jquery2['default'])("#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
 
 	    (0, _jquery2['default'])("#lst_layer").change(function () {
 	        closeNav();
 	        bbobj.setbgdiff((0, _jquery2['default'])("#lst_layer").val());
 	    });
-	    (0, _jquery2['default'])("#" + DivName).scroll(function () {
+	    /*
+	    $("#" + CanvasDivName).scroll(function() {
 	        bbobj.chgScroll();
 	    });
+	    */
 
 	    //スマホ用メニュー制御
 	    var ua = navigator.userAgent;
@@ -29477,7 +29479,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29499,7 +29501,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29522,7 +29524,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29545,7 +29547,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29567,7 +29569,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29591,7 +29593,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29614,7 +29616,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29663,7 +29665,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29691,7 +29693,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29719,7 +29721,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29741,7 +29743,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29763,7 +29765,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29778,7 +29780,7 @@
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
@@ -29835,7 +29837,7 @@
 	    if (bbobj.zoomScale != newScale) {
 	        //倍率が変化する場合は左上維持して拡大処理
 	        bbobj.zoom(chgScale);
-	        (0, _jquery2['default'])("#" + DivName).scrollLeft((0, _jquery2['default'])("#" + DivName).scrollLeft() * chgScale).scrollTop((0, _jquery2['default'])("#" + DivName).scrollTop() * chgScale);
+	        (0, _jquery2['default'])("#" + CanvasDivName).scrollLeft((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft() * chgScale).scrollTop((0, _jquery2['default'])("#" + CanvasDivName).scrollTop() * chgScale);
 	    }
 	}
 
@@ -29860,27 +29862,27 @@
 	    mm = function (e) {
 	        var dx = e.pageX - base_x,
 	            dy = e.pageY - base_y;
-	        (0, _jquery2['default'])("#" + DivName).scrollLeft((0, _jquery2['default'])("#" + DivName).scrollLeft() - dx);
-	        (0, _jquery2['default'])("#" + DivName).scrollTop((0, _jquery2['default'])("#" + DivName).scrollTop() - dy);
+	        (0, _jquery2['default'])("#" + CanvasDivName).scrollLeft((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft() - dx);
+	        (0, _jquery2['default'])("#" + CanvasDivName).scrollTop((0, _jquery2['default'])("#" + CanvasDivName).scrollTop() - dy);
 	        base_x = e.pageX;
 	        base_y = e.pageY;
 	        return false;
 	    };
 
 	    mu = function (e) {
-	        (0, _jquery2['default'])("#" + DivName).unbind('mousemove', mm);
-	        (0, _jquery2['default'])("#" + DivName).unbind('mouseup', mu);
+	        (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousemove', mm);
+	        (0, _jquery2['default'])("#" + CanvasDivName).unbind('mouseup', mu);
 	        return false;
 	    };
 	    md = function (e) {
 	        base_x = e.pageX;
 	        base_y = e.pageY;
-	        (0, _jquery2['default'])("#" + DivName).bind('mousemove', mm);
-	        (0, _jquery2['default'])("#" + DivName).bind('mouseup', mu);
+	        (0, _jquery2['default'])("#" + CanvasDivName).bind('mousemove', mm);
+	        (0, _jquery2['default'])("#" + CanvasDivName).bind('mouseup', mu);
 	        return false;
 	    };
 
-	    (0, _jquery2['default'])("#" + DivName).mousedown(md);
+	    (0, _jquery2['default'])("#" + CanvasDivName).mousedown(md);
 
 	    // var img = $("#SaveArea");
 	    // img.css("visibility", "hidden");
@@ -29903,7 +29905,7 @@
 
 	    bbobj.ourJc.pause(CanvasName);
 
-	    (0, _jquery2['default'])("#" + DivName).unbind('mousedown');
+	    (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousedown');
 
 	    var imgView = (0, _jquery2['default'])("#SaveImgView");
 	    imgView.attr("src", (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png'));
@@ -29923,7 +29925,7 @@
 	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "auto");
 
 	    bbobj.ourJc.start(CanvasName, true);
-	    (0, _jquery2['default'])("#" + DivName).unbind('mousedown');
+	    (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousedown');
 
 	    // var img = $("#SaveArea");
 	    // img.css("visibility", "hidden");
@@ -30132,7 +30134,7 @@
 
 	//キャンバスエリアの幅を変更する
 	function chgCanvasAreaSize() {
-	    (0, _jquery2['default'])("div#" + DivName).width((0, _jquery2['default'])("canvas#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("canvas#" + CanvasName).outerHeight() + scrollBarHeight);
+	    (0, _jquery2['default'])("div#" + CanvasDivName).width((0, _jquery2['default'])("canvas#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("canvas#" + CanvasName).outerHeight() + scrollBarHeight);
 	    bbobj.chgScroll();
 	}
 

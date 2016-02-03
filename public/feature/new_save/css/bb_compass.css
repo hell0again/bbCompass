@@ -547,7 +547,7 @@ div#Loading{
         position: fixed;
         top: 0;
         left: 0;
-        bottom: 0;
+        bottom: -70px;
         right: 0;
         background-color: rgba(128,128,128,0.5);
     }
