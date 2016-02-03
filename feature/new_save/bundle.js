@@ -47,7 +47,8 @@
 	__webpack_require__(1);
 	__webpack_require__(5);
 	__webpack_require__(12);
-	module.exports = __webpack_require__(19);
+	__webpack_require__(19);
+	module.exports = __webpack_require__(21);
 
 
 /***/ },
@@ -61,7 +62,7 @@
 	    value: true
 	});
 
-	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -28643,6 +28644,8 @@
 
 	var _BBDB2 = _interopRequireDefault(_BBDB);
 
+	__webpack_require__(21);
+
 	// import 'jquery-ui/jquery-ui.min.js';
 	// /*global require*/ // eslint
 	// require('jquery-ui/themes/base/core.css');
@@ -28650,9 +28653,9 @@
 	// require('jquery-ui/themes/base/theme.css');
 	// require('jquery-ui/themes/smoothness/jquery-ui.min.css');
 
-	__webpack_require__(21);
+	__webpack_require__(22);
 
-	__webpack_require__(22); /*global require*/ // eslint
+	__webpack_require__(23); /*global require*/ // eslint
 
 	//初期化
 	var CanvasName = "BBCompass";
@@ -28687,6 +28690,9 @@
 	        if (el.hasOwnProperty("disabled") == true) {
 	            elOpt["disabled"] = el["disabled"];
 	        }
+	        if (el.hasOwnProperty("selected") == true) {
+	            elOpt["selected"] = el["selected"];
+	        }
 	        if (el.hasOwnProperty("class") == true) {
 	            elOpt["class"] = el["class"];
 	        }
@@ -28714,12 +28720,19 @@
 
 	    if (stage != null) {
 	        var stageMaps = getMapsFromStage(stage);
+	        stageMaps.unshift({
+	            "value": undefined,
+	            "label": "(マップを選択してください)",
+	            "disabled": true,
+	            "selected": true
+	        });
 	        loadSelectionOption((0, _jquery2['default'])("#map"), stageMaps);
-	    } else {
-	        // いらない！！！
-	        var optionList = appData["map"];
-	        loadSelectionOption((0, _jquery2['default'])("#map"), optionList);
 	    }
+	    // } else {
+	    //     // いらない！！！
+	    //     var optionList = appData["map"];
+	    //     loadSelectionOption($("#map"), optionList);
+	    // }
 	}
 	function getMapsFromStage(stage) {
 	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
@@ -28809,26 +28822,35 @@
 	    var viewport = true ? 'width=device-width, initial-scale=1, user-scalable=no' : 'width=device-width, initial-scale=1, user-scalable=yes';
 	    (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
 
-	    (0, _jquery2['default'])("#make_img").click(function (e) {
+	    (0, _jquery2['default'])("#make_img").tap(function (e) {
 	        var $imgView = (0, _jquery2['default'])("#SaveImgView");
 	        $imgView.attr("src", "");
 	        var $SaveImgText = (0, _jquery2['default'])("#SaveImgText");
 	        $SaveImgText.attr("value", "");
+	        var $SaveImgShortUrl = (0, _jquery2['default'])("#SaveImgShortUrl");
 
-	        var src = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
+	        var objs = new Array();
+	        (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
+	            objs.push((0, _jquery2['default'])(this).val());
+	        });
 
-	        setTimeout(function () {
-	            $imgView.attr("src", src);
-
-	            var objs = new Array();
-	            (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
-	                objs.push((0, _jquery2['default'])(this).val());
+	        var queryobj = new _BBCQuery2['default'](bbobj, (0, _jquery2['default'])("select#map").val());
+	        queryobj.fromObjects(objs);
+	        var querystr = queryobj.toBase64();
+	        var url = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
+	        if ($SaveImgShortUrl.prop('checked')) {
+	            shortenUrl(url, function (shorten) {
+	                $SaveImgText.attr("value", shorten);
 	            });
-	            var queryobj = new _BBCQuery2['default'](bbobj, (0, _jquery2['default'])("select#map").val());
-	            queryobj.fromObjects(objs);
-	            var querystr = queryobj.toBase64(),
-	                baseurl = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
-	            $SaveImgText.attr("value", baseurl);
+	        } else {
+	            setTimeout(function () {
+	                $SaveImgText.attr("value", url);
+	            }, 100);
+	        }
+
+	        var imgSrc = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
+	        setTimeout(function () {
+	            $imgView.attr("src", imgSrc);
 	        }, 100);
 	    });
 
@@ -28837,8 +28859,9 @@
 	        var map = (0, _jquery2['default'])(this).val();
 	        var stage = getStageFromMap(map);
 	        (0, _jquery2['default'])("#stage").val(stage);
-	        (0, _jquery2['default'])("#stage").change();
+	        loadMapList(stage);
 	        (0, _jquery2['default'])("#map").val(map);
+	        chg_map(map);
 	    });
 
 	    // ステージ選択メニューの設定
@@ -28846,23 +28869,24 @@
 	        var stage = (0, _jquery2['default'])(this).val();
 	        // ステージ変更に連動してマップ一覧をフィルタしなおし
 	        loadMapList(stage);
-	        (0, _jquery2['default'])("#map").change();
 	    });
 	    // マップ選択メニューの設定
 	    (0, _jquery2['default'])("#map").change(function (e) {
-	        // var map = $(this).val();
+	        var map = (0, _jquery2['default'])(this).val();
 	        (0, _jquery2['default'])("#map").removeClass("union event scramble");
 	        var mapClass = (0, _jquery2['default'])("#map option:selected").attr("class");
 	        if (mapClass !== undefined) {
 	            (0, _jquery2['default'])("#map").addClass(mapClass);
 	        }
+	        chg_map(map);
 	    });
-	    (0, _jquery2['default'])("#change_map").bind('click', function (e) {
-	        chg_map();
+	    (0, _jquery2['default'])("#change_map").bind('tap', function (e) {
+	        var map = (0, _jquery2['default'])("#map").val();
+	        chg_map(map);
 	    });
 
 	    // オブジェクト選択メニューの設定
-	    (0, _jquery2['default'])("#objselector .option").click(function () {
+	    (0, _jquery2['default'])("#objselector .option").tap(function () {
 	        onObjectSelectorChanged((0, _jquery2['default'])(this));
 	    });
 
@@ -28913,19 +28937,19 @@
 	    });
 
 	    //狭い時用メニューに関する初期化
-	    (0, _jquery2['default'])("#menutab_map").click(function (ev) {
+	    (0, _jquery2['default'])("#menutab_map").tap(function (ev) {
 	        toggleMenutab((0, _jquery2['default'])("#menutab_map"), (0, _jquery2['default'])("#menu_map"));
 	    });
-	    (0, _jquery2['default'])("#menutab_item").click(function (ev) {
+	    (0, _jquery2['default'])("#menutab_item").tap(function (ev) {
 	        toggleMenutab((0, _jquery2['default'])("#menutab_item"), (0, _jquery2['default'])("#menu_graph"));
 	    });
-	    (0, _jquery2['default'])("#menutab_view").click(function (ev) {
+	    (0, _jquery2['default'])("#menutab_view").tap(function (ev) {
 	        toggleMenutab((0, _jquery2['default'])("#menutab_view"), (0, _jquery2['default'])("#menu_cont"));
 	    });
-	    (0, _jquery2['default'])("#menutab_save").click(function (ev) {
+	    (0, _jquery2['default'])("#menutab_save").tap(function (ev) {
 	        toggleMenutab((0, _jquery2['default'])("#menutab_save"), (0, _jquery2['default'])("#menu_view"));
 	    });
-	    (0, _jquery2['default'])(".ribbonmenu-outer").click(function (ev) {
+	    (0, _jquery2['default'])(".ribbonmenu-outer").tap(function (ev) {
 	        toggleMenutab();
 	    });
 
@@ -28940,7 +28964,7 @@
 	    (0, _jquery2['default'])("div.ContextMenu").bind('contextmenu', function (ev) {
 	        ev.preventDefault();
 	    });
-	    (0, _jquery2['default'])("div.ContextMenu li.hasChild").bind('click', function (ev) {
+	    (0, _jquery2['default'])("div.ContextMenu li.hasChild").bind('tap', function (ev) {
 	        if (ev.target == ev.currentTarget) {
 	            ev.stopPropagation();
 	        }
@@ -28965,7 +28989,7 @@
 	        (0, _jquery2['default'])("div.ContextMenu").show().offset(offset);
 
 	        //どこかクリックしたらメニューを消す
-	        (0, _jquery2['default'])(document).one('click', function () {
+	        (0, _jquery2['default'])(document).one('tap', function () {
 	            (0, _jquery2['default'])("div.ContextMenu,div.ContextMenu div.ContextChild").hide();
 	        });
 	    });
@@ -29010,112 +29034,112 @@
 	    });
 
 	    // メニュー開閉
-	    (0, _jquery2['default'])("#menusw_off").bind('click', function (e) {
+	    (0, _jquery2['default'])("#menusw_off").bind('tap', function (e) {
 	        hide_menu();
 	    });
-	    (0, _jquery2['default'])("#menusw_on").bind('click', function (e) {
+	    (0, _jquery2['default'])("#menusw_on").bind('tap', function (e) {
 	        show_menu();
 	    });
 
 	    // 各種オブジェクト設置
-	    (0, _jquery2['default'])("#submit_scout").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_scout").bind('tap', function (e) {
 	        set_scout();
 	    });
-	    (0, _jquery2['default'])("#submit_sensor").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_sensor").bind('tap', function (e) {
 	        set_sensor();
 	    });
-	    (0, _jquery2['default'])("#submit_radar").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_radar").bind('tap', function (e) {
 	        set_radar();
 	    });
-	    (0, _jquery2['default'])("#submit_sonde").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_sonde").bind('tap', function (e) {
 	        set_sonde();
 	    });
-	    (0, _jquery2['default'])("#submit_ndsensor").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_ndsensor").bind('tap', function (e) {
 	        set_ndsensor();
 	    });
-	    (0, _jquery2['default'])("#submit_vsensor").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_vsensor").bind('tap', function (e) {
 	        set_vsensor();
 	    });
-	    (0, _jquery2['default'])("#submit_howitzer").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_howitzer").bind('tap', function (e) {
 	        set_howitzer();
 	    });
-	    (0, _jquery2['default'])("#submit_waft").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_waft").bind('tap', function (e) {
 	        set_waft('image/waft.png');
 	    });
-	    (0, _jquery2['default'])("#submit_misc").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_misc").bind('tap', function (e) {
 	        set_misc();
 	    });
-	    (0, _jquery2['default'])("#submit_circle").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_circle").bind('tap', function (e) {
 	        set_circle();
 	    });
-	    (0, _jquery2['default'])("#submit_line").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_line").bind('tap', function (e) {
 	        set_line();
 	    });
-	    (0, _jquery2['default'])("#submit_point").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_point").bind('tap', function (e) {
 	        set_point();
 	    });
-	    (0, _jquery2['default'])("#submit_icon").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_icon").bind('tap', function (e) {
 	        set_icon();
 	    });
-	    (0, _jquery2['default'])("#submit_freehand").bind('click', function (e) {
+	    (0, _jquery2['default'])("#submit_freehand").bind('tap', function (e) {
 	        set_freehand();
 	    }); // TODO: あとで
 
-	    (0, _jquery2['default'])("#csr_select").bind('click', function (e) {
+	    (0, _jquery2['default'])("#csr_select").bind('tap', function (e) {
 	        start_select();
 	    });
-	    (0, _jquery2['default'])("#csr_move").bind('click', function (e) {
+	    (0, _jquery2['default'])("#csr_move").bind('tap', function (e) {
 	        start_move();
 	    });
-	    (0, _jquery2['default'])("#csr_save").bind('click', function (e) {
+	    (0, _jquery2['default'])("#csr_save").bind('tap', function (e) {
 	        start_save();
 	    });
 
-	    (0, _jquery2['default'])("#up_object").bind('click', function (e) {
+	    (0, _jquery2['default'])("#up_object").bind('tap', function (e) {
 	        up_object();
 	    });
-	    (0, _jquery2['default'])("#down_object").bind('click', function (e) {
+	    (0, _jquery2['default'])("#down_object").bind('tap', function (e) {
 	        down_object();
 	    });
-	    (0, _jquery2['default'])("#del_object").bind('click', function (e) {
+	    (0, _jquery2['default'])("#del_object").bind('tap', function (e) {
 	        del_object();
 	    });
-	    (0, _jquery2['default'])("#delall_object").bind('click', function (e) {
+	    (0, _jquery2['default'])("#delall_object").bind('tap', function (e) {
 	        delall_object();
 	    });
-	    (0, _jquery2['default'])("#save_img").bind('click', function (e) {
+	    (0, _jquery2['default'])("#save_img").bind('tap', function (e) {
 	        window.alert("deprecated");
 	        // saveImg();
 	    });
-	    (0, _jquery2['default'])("#get_url").bind('click', function (e) {
+	    (0, _jquery2['default'])("#get_url").bind('tap', function (e) {
 	        getURL();
 	    });
-	    (0, _jquery2['default'])("#contextSelectMode").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextSelectMode").bind('tap', function (e) {
 	        start_select();
 	    });
-	    (0, _jquery2['default'])("#contextMoveMode").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextMoveMode").bind('tap', function (e) {
 	        start_move();
 	    });
-	    (0, _jquery2['default'])("#contextSaveMode").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextSaveMode").bind('tap', function (e) {
 	        start_save();
 	    });
-	    (0, _jquery2['default'])("#contextZoom_1").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextZoom_1").bind('tap', function (e) {
 	        zoom_cnv(1);
 	    });
-	    (0, _jquery2['default'])("#contextZoom_1_5").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextZoom_1_5").bind('tap', function (e) {
 	        zoom_cnv(1.5);
 	    });
-	    (0, _jquery2['default'])("#contextZoom_2").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextZoom_2").bind('tap', function (e) {
 	        zoom_cnv(2);
 	    });
-	    (0, _jquery2['default'])("#contextZoom_4").bind('click', function (e) {
+	    (0, _jquery2['default'])("#contextZoom_4").bind('tap', function (e) {
 	        zoom_cnv(4);
 	    });
-	    (0, _jquery2['default'])("#save_img2").bind('click', function (e) {
+	    (0, _jquery2['default'])("#save_img2").bind('tap', function (e) {
 	        window.alert("deprecated");
 	        // saveImg();
 	    });
-	    (0, _jquery2['default'])("#get_url2").bind('click', function (e) {
+	    (0, _jquery2['default'])("#get_url2").bind('tap', function (e) {
 	        getURL();
 	    });
 
@@ -29168,17 +29192,17 @@
 	    var cnvArea = document.getElementById(CanvasDivName);
 	    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
 	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
-	    (0, _jquery2['default'])("#" + CanvasDivName).width((0, _jquery2['default'])("#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
+	    (0, _jquery2['default'])("#" + CanvasDivName)
+	    // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
+	    .height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
 
 	    (0, _jquery2['default'])("#lst_layer").change(function () {
 	        closeNav();
 	        bbobj.setbgdiff((0, _jquery2['default'])("#lst_layer").val());
 	    });
-	    /*
-	    $("#" + CanvasDivName).scroll(function() {
+	    (0, _jquery2['default'])("#" + CanvasDivName).scroll(function () {
 	        bbobj.chgScroll();
 	    });
-	    */
 
 	    //スマホ用メニュー制御
 	    var ua = navigator.userAgent;
@@ -29298,7 +29322,7 @@
 	            }sw = (0, _jquery2['default'])("span#viewsw");
 
 	            sw.show();
-	            sw.bind('click', function (ev) {
+	            sw.bind('tap', function (ev) {
 	                if (timeoutID) {
 	                    window.clearTimeout(timeoutID);
 	                    timeoutID = null;
@@ -29334,7 +29358,7 @@
 
 	            // cookieに指定があればPCモードに切り替えておく
 	            if (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true") {
-	                sw.click();
+	                sw.tap();
 	            }
 
 	            // スクロール関連のイベント定義
@@ -29388,13 +29412,13 @@
 	//マップ変更
 	function chg_map(map, callback) {
 	    if (map == null) {
-	        map = (0, _jquery2['default'])("#map").val();
+	        return;
 	    }
 	    var stage = getStageFromMap(map);
 	    (0, _jquery2['default'])("#stage").val(stage);
 	    (0, _jquery2['default'])("#stage").change();
 	    (0, _jquery2['default'])("#map").val(map);
-	    (0, _jquery2['default'])("#map").change();
+	    // $("#map").change();
 
 	    var $map = (0, _jquery2['default'])("#map option:selected");
 	    map = sanitize_filename(map);
@@ -29803,20 +29827,20 @@
 	            obj.color((0, _jquery2['default'])(this).val());
 	        };
 	        (0, _jquery2['default'])("#col_freehand").bind('blur', colChg);
-	        (0, _jquery2['default'])("#undo_freehand").attr("disabled", false).click(function () {
+	        (0, _jquery2['default'])("#undo_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite.undo();
 	        });
-	        (0, _jquery2['default'])("#redo_freehand").attr("disabled", false).click(function () {
+	        (0, _jquery2['default'])("#redo_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite.redo();
 	        });
-	        (0, _jquery2['default'])("#stop_freehand").attr("disabled", false).click(function () {
+	        (0, _jquery2['default'])("#stop_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite = undefined;
 	            obj.end();
 	            (0, _jquery2['default'])("#col_freehand").unbind('blur', colChg);
 	            (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	            (0, _jquery2['default'])("#stop_freehand").attr("disabled", true).unbind("click");
-	            (0, _jquery2['default'])("#undo_freehand").attr("disabled", true).unbind("click");
-	            (0, _jquery2['default'])("#redo_freehand").attr("disabled", true).unbind("click");
+	            (0, _jquery2['default'])("#stop_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2['default'])("#undo_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2['default'])("#redo_freehand").attr("disabled", true).unbind("tap");
 	        });
 	    }
 	}
@@ -30006,6 +30030,41 @@
 	//     window.open("./image.html", "test");
 	// }
 
+	// is.gd で短縮する
+	// callbackの第一引数に短縮したURLを渡す。
+	// 対応していないURL(localhostとか)なら変換せずにそのままコールバックに渡す
+	function shortenUrl(url, callback) {
+	    if (url.match(/^https?:\/\//) && !url.match(/^http:\/\/localhost/)) {
+	        _jquery2['default'].ajax({
+	            type: 'GET',
+	            url: 'http://is.gd/create.php',
+	            dataType: 'jsonp',
+	            crossDomain: true,
+	            cache: false,
+	            jsonp: false,
+	            data: {
+	                url: url,
+	                format: "json",
+	                callback: "shortenurl"
+	            },
+	            jsonpCallback: 'shortenurl',
+	            success: function success(data, status) {
+	                if (!data["errorcode"]) {
+	                    callback(data["shorturl"]);
+	                    // window.prompt("表示用URL", data["shorturl"]);
+	                } else {
+	                        alert("URL短縮エラー(" & data["errorcode"] & ")");
+	                    }
+	            },
+	            error: function error() {
+	                alert("URL短縮に失敗しました");
+	            }
+	        });
+	    } else {
+	        callback(url);
+	    }
+	}
+
 	//現在の状態をURL化
 	function getURL() {
 	    var objs = new Array();
@@ -30134,7 +30193,9 @@
 
 	//キャンバスエリアの幅を変更する
 	function chgCanvasAreaSize() {
-	    (0, _jquery2['default'])("div#" + CanvasDivName).width((0, _jquery2['default'])("canvas#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("canvas#" + CanvasName).outerHeight() + scrollBarHeight);
+	    (0, _jquery2['default'])("#" + CanvasDivName)
+	    // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
+	    .height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
 	    bbobj.chgScroll();
 	}
 
@@ -39468,6 +39529,731 @@
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	var _jquery = __webpack_require__(20);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	//////////////////////////////////////
+	// jquery mobile からイベント部分のみ抜き出し
+	// https://gist.github.com/moroya/5450697
+
+	/**
+	 * jquery.mobile.vmouse.js
+	 *
+	 * https://github.com/jquery/jquery-mobile/blob/1.3.1/js/jquery.mobile.vmouse.js
+	 *
+	 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
+	 * Released under the MIT license.
+	 * http://jquery.org/license
+	 */
+
+	(function ($, window, document, undefined) {
+
+	    var dataPropertyName = "virtualMouseBindings",
+	        touchTargetPropertyName = "virtualTouchID",
+	        virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split(" "),
+	        touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" "),
+	        mouseHookProps = $.event.mouseHooks ? $.event.mouseHooks.props : [],
+	        mouseEventProps = $.event.props.concat(mouseHookProps),
+	        activeDocHandlers = {},
+	        resetTimerID = 0,
+	        startX = 0,
+	        startY = 0,
+	        didScroll = false,
+	        clickBlockList = [],
+	        blockMouseTriggers = false,
+	        blockTouchTriggers = false,
+	        eventCaptureSupported = ("addEventListener" in document),
+	        $document = $(document),
+	        nextTouchID = 1,
+	        lastTouchID = 0,
+	        threshold;
+
+	    $.vmouse = {
+	        moveDistanceThreshold: 10,
+	        clickDistanceThreshold: 10,
+	        resetTimerDuration: 1500
+	    };
+
+	    function getNativeEvent(event) {
+
+	        while (event && typeof event.originalEvent !== "undefined") {
+	            event = event.originalEvent;
+	        }
+	        return event;
+	    }
+
+	    function createVirtualEvent(event, eventType) {
+
+	        var t = event.type,
+	            oe,
+	            props,
+	            ne,
+	            prop,
+	            ct,
+	            touch,
+	            i,
+	            j,
+	            len;
+
+	        event = $.Event(event);
+	        event.type = eventType;
+
+	        oe = event.originalEvent;
+	        props = $.event.props;
+
+	        // addresses separation of $.event.props in to $.event.mouseHook.props and Issue 3280
+	        // https://github.com/jquery/jquery-mobile/issues/3280
+	        if (t.search(/^(mouse|click)/) > -1) {
+	            props = mouseEventProps;
+	        }
+
+	        // copy original event properties over to the new event
+	        // this would happen if we could call $.event.fix instead of $.Event
+	        // but we don't have a way to force an event to be fixed multiple times
+	        if (oe) {
+	            for (i = props.length, prop; i;) {
+	                prop = props[--i];
+	                event[prop] = oe[prop];
+	            }
+	        }
+
+	        // make sure that if the mouse and click virtual events are generated
+	        // without a .which one is defined
+	        if (t.search(/mouse(down|up)|click/) > -1 && !event.which) {
+	            event.which = 1;
+	        }
+
+	        if (t.search(/^touch/) !== -1) {
+	            ne = getNativeEvent(oe);
+	            t = ne.touches;
+	            ct = ne.changedTouches;
+	            touch = t && t.length ? t[0] : ct && ct.length ? ct[0] : undefined;
+
+	            if (touch) {
+	                for (j = 0, len = touchEventProps.length; j < len; j++) {
+	                    prop = touchEventProps[j];
+	                    event[prop] = touch[prop];
+	                }
+	            }
+	        }
+
+	        return event;
+	    }
+
+	    function getVirtualBindingFlags(element) {
+
+	        var flags = {},
+	            b,
+	            k;
+
+	        while (element) {
+
+	            b = $.data(element, dataPropertyName);
+
+	            for (k in b) {
+	                if (b[k]) {
+	                    flags[k] = flags.hasVirtualBinding = true;
+	                }
+	            }
+	            element = element.parentNode;
+	        }
+	        return flags;
+	    }
+
+	    function getClosestElementWithVirtualBinding(element, eventType) {
+	        var b;
+	        while (element) {
+
+	            b = $.data(element, dataPropertyName);
+
+	            if (b && (!eventType || b[eventType])) {
+	                return element;
+	            }
+	            element = element.parentNode;
+	        }
+	        return null;
+	    }
+
+	    function enableTouchBindings() {
+	        blockTouchTriggers = false;
+	    }
+
+	    function disableTouchBindings() {
+	        blockTouchTriggers = true;
+	    }
+
+	    function enableMouseBindings() {
+	        lastTouchID = 0;
+	        clickBlockList.length = 0;
+	        blockMouseTriggers = false;
+
+	        // When mouse bindings are enabled, our
+	        // touch bindings are disabled.
+	        disableTouchBindings();
+	    }
+
+	    function disableMouseBindings() {
+	        // When mouse bindings are disabled, our
+	        // touch bindings are enabled.
+	        enableTouchBindings();
+	    }
+
+	    function startResetTimer() {
+	        clearResetTimer();
+	        resetTimerID = setTimeout(function () {
+	            resetTimerID = 0;
+	            enableMouseBindings();
+	        }, $.vmouse.resetTimerDuration);
+	    }
+
+	    function clearResetTimer() {
+	        if (resetTimerID) {
+	            clearTimeout(resetTimerID);
+	            resetTimerID = 0;
+	        }
+	    }
+
+	    function triggerVirtualEvent(eventType, event, flags) {
+	        var ve;
+
+	        if (flags && flags[eventType] || !flags && getClosestElementWithVirtualBinding(event.target, eventType)) {
+
+	            ve = createVirtualEvent(event, eventType);
+
+	            $(event.target).trigger(ve);
+	        }
+
+	        return ve;
+	    }
+
+	    function mouseEventCallback(event) {
+	        var touchID = $.data(event.target, touchTargetPropertyName);
+
+	        if (!blockMouseTriggers && (!lastTouchID || lastTouchID !== touchID)) {
+	            var ve = triggerVirtualEvent("v" + event.type, event);
+	            if (ve) {
+	                if (ve.isDefaultPrevented()) {
+	                    event.preventDefault();
+	                }
+	                if (ve.isPropagationStopped()) {
+	                    event.stopPropagation();
+	                }
+	                if (ve.isImmediatePropagationStopped()) {
+	                    event.stopImmediatePropagation();
+	                }
+	            }
+	        }
+	    }
+
+	    function handleTouchStart(event) {
+
+	        var touches = getNativeEvent(event).touches,
+	            target,
+	            flags;
+
+	        if (touches && touches.length === 1) {
+
+	            target = event.target;
+	            flags = getVirtualBindingFlags(target);
+
+	            if (flags.hasVirtualBinding) {
+
+	                lastTouchID = nextTouchID++;
+	                $.data(target, touchTargetPropertyName, lastTouchID);
+
+	                clearResetTimer();
+
+	                disableMouseBindings();
+	                didScroll = false;
+
+	                var t = getNativeEvent(event).touches[0];
+	                startX = t.pageX;
+	                startY = t.pageY;
+
+	                triggerVirtualEvent("vmouseover", event, flags);
+	                triggerVirtualEvent("vmousedown", event, flags);
+	            }
+	        }
+	    }
+
+	    function handleScroll(event) {
+	        if (blockTouchTriggers) {
+	            return;
+	        }
+
+	        if (!didScroll) {
+	            triggerVirtualEvent("vmousecancel", event, getVirtualBindingFlags(event.target));
+	        }
+
+	        didScroll = true;
+	        startResetTimer();
+	    }
+
+	    function handleTouchMove(event) {
+	        if (blockTouchTriggers) {
+	            return;
+	        }
+
+	        var t = getNativeEvent(event).touches[0],
+	            didCancel = didScroll,
+	            moveThreshold = $.vmouse.moveDistanceThreshold,
+	            flags = getVirtualBindingFlags(event.target);
+
+	        didScroll = didScroll || (Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold);
+
+	        if (didScroll && !didCancel) {
+	            triggerVirtualEvent("vmousecancel", event, flags);
+	        }
+
+	        triggerVirtualEvent("vmousemove", event, flags);
+	        startResetTimer();
+	    }
+
+	    function handleTouchEnd(event) {
+	        if (blockTouchTriggers) {
+	            return;
+	        }
+
+	        disableTouchBindings();
+
+	        var flags = getVirtualBindingFlags(event.target),
+	            t;
+	        triggerVirtualEvent("vmouseup", event, flags);
+
+	        if (!didScroll) {
+	            var ve = triggerVirtualEvent("vclick", event, flags);
+	            if (ve && ve.isDefaultPrevented()) {
+	                // The target of the mouse events that follow the touchend
+	                // event don't necessarily match the target used during the
+	                // touch. This means we need to rely on coordinates for blocking
+	                // any click that is generated.
+	                t = getNativeEvent(event).changedTouches[0];
+	                clickBlockList.push({
+	                    touchID: lastTouchID,
+	                    x: t.clientX,
+	                    y: t.clientY
+	                });
+
+	                // Prevent any mouse events that follow from triggering
+	                // virtual event notifications.
+	                blockMouseTriggers = true;
+	            }
+	        }
+	        triggerVirtualEvent("vmouseout", event, flags);
+	        didScroll = false;
+
+	        startResetTimer();
+	    }
+
+	    function hasVirtualBindings(ele) {
+	        var bindings = $.data(ele, dataPropertyName),
+	            k;
+
+	        if (bindings) {
+	            for (k in bindings) {
+	                if (bindings[k]) {
+	                    return true;
+	                }
+	            }
+	        }
+	        return false;
+	    }
+
+	    function dummyMouseHandler() {}
+
+	    function getSpecialEventObject(eventType) {
+	        var realType = eventType.substr(1);
+
+	        return {
+	            setup: function setup(data, namespace) {
+	                // If this is the first virtual mouse binding for this element,
+	                // add a bindings object to its data.
+
+	                if (!hasVirtualBindings(this)) {
+	                    $.data(this, dataPropertyName, {});
+	                }
+
+	                // If setup is called, we know it is the first binding for this
+	                // eventType, so initialize the count for the eventType to zero.
+	                var bindings = $.data(this, dataPropertyName);
+	                bindings[eventType] = true;
+
+	                // If this is the first virtual mouse event for this type,
+	                // register a global handler on the document.
+
+	                activeDocHandlers[eventType] = (activeDocHandlers[eventType] || 0) + 1;
+
+	                if (activeDocHandlers[eventType] === 1) {
+	                    $document.bind(realType, mouseEventCallback);
+	                }
+
+	                // Some browsers, like Opera Mini, won't dispatch mouse/click events
+	                // for elements unless they actually have handlers registered on them.
+	                // To get around this, we register dummy handlers on the elements.
+
+	                $(this).bind(realType, dummyMouseHandler);
+
+	                // For now, if event capture is not supported, we rely on mouse handlers.
+	                if (eventCaptureSupported) {
+	                    // If this is the first virtual mouse binding for the document,
+	                    // register our touchstart handler on the document.
+
+	                    activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
+
+	                    if (activeDocHandlers["touchstart"] === 1) {
+	                        $document.bind("touchstart", handleTouchStart).bind("touchend", handleTouchEnd)
+
+	                        // On touch platforms, touching the screen and then dragging your finger
+	                        // causes the window content to scroll after some distance threshold is
+	                        // exceeded. On these platforms, a scroll prevents a click event from being
+	                        // dispatched, and on some platforms, even the touchend is suppressed. To
+	                        // mimic the suppression of the click event, we need to watch for a scroll
+	                        // event. Unfortunately, some platforms like iOS don't dispatch scroll
+	                        // events until *AFTER* the user lifts their finger (touchend). This means
+	                        // we need to watch both scroll and touchmove events to figure out whether
+	                        // or not a scroll happenens before the touchend event is fired.
+
+	                        .bind("touchmove", handleTouchMove).bind("scroll", handleScroll);
+	                    }
+	                }
+	            },
+
+	            teardown: function teardown(data, namespace) {
+	                // If this is the last virtual binding for this eventType,
+	                // remove its global handler from the document.
+
+	                --activeDocHandlers[eventType];
+
+	                if (!activeDocHandlers[eventType]) {
+	                    $document.unbind(realType, mouseEventCallback);
+	                }
+
+	                if (eventCaptureSupported) {
+	                    // If this is the last virtual mouse binding in existence,
+	                    // remove our document touchstart listener.
+
+	                    --activeDocHandlers["touchstart"];
+
+	                    if (!activeDocHandlers["touchstart"]) {
+	                        $document.unbind("touchstart", handleTouchStart).unbind("touchmove", handleTouchMove).unbind("touchend", handleTouchEnd).unbind("scroll", handleScroll);
+	                    }
+	                }
+
+	                var $this = $(this),
+	                    bindings = $.data(this, dataPropertyName);
+
+	                // teardown may be called when an element was
+	                // removed from the DOM. If this is the case,
+	                // jQuery core may have already stripped the element
+	                // of any data bindings so we need to check it before
+	                // using it.
+	                if (bindings) {
+	                    bindings[eventType] = false;
+	                }
+
+	                // Unregister the dummy event handler.
+
+	                $this.unbind(realType, dummyMouseHandler);
+
+	                // If this is the last virtual mouse binding on the
+	                // element, remove the binding data from the element.
+
+	                if (!hasVirtualBindings(this)) {
+	                    $this.removeData(dataPropertyName);
+	                }
+	            }
+	        };
+	    }
+
+	    // Expose our custom events to the jQuery bind/unbind mechanism.
+
+	    for (var i = 0; i < virtualEventNames.length; i++) {
+	        $.event.special[virtualEventNames[i]] = getSpecialEventObject(virtualEventNames[i]);
+	    }
+
+	    // Add a capture click handler to block clicks.
+	    // Note that we require event capture support for this so if the device
+	    // doesn't support it, we punt for now and rely solely on mouse events.
+	    if (eventCaptureSupported) {
+	        document.addEventListener("click", function (e) {
+	            var cnt = clickBlockList.length,
+	                target = e.target,
+	                x,
+	                y,
+	                ele,
+	                i,
+	                o,
+	                touchID;
+
+	            if (cnt) {
+	                x = e.clientX;
+	                y = e.clientY;
+	                threshold = $.vmouse.clickDistanceThreshold;
+
+	                // The idea here is to run through the clickBlockList to see if
+	                // the current click event is in the proximity of one of our
+	                // vclick events that had preventDefault() called on it. If we find
+	                // one, then we block the click.
+	                //
+	                // Why do we have to rely on proximity?
+	                //
+	                // Because the target of the touch event that triggered the vclick
+	                // can be different from the target of the click event synthesized
+	                // by the browser. The target of a mouse/click event that is syntehsized
+	                // from a touch event seems to be implementation specific. For example,
+	                // some browsers will fire mouse/click events for a link that is near
+	                // a touch event, even though the target of the touchstart/touchend event
+	                // says the user touched outside the link. Also, it seems that with most
+	                // browsers, the target of the mouse/click event is not calculated until the
+	                // time it is dispatched, so if you replace an element that you touched
+	                // with another element, the target of the mouse/click will be the new
+	                // element underneath that point.
+	                //
+	                // Aside from proximity, we also check to see if the target and any
+	                // of its ancestors were the ones that blocked a click. This is necessary
+	                // because of the strange mouse/click target calculation done in the
+	                // Android 2.1 browser, where if you click on an element, and there is a
+	                // mouse/click handler on one of its ancestors, the target will be the
+	                // innermost child of the touched element, even if that child is no where
+	                // near the point of touch.
+
+	                ele = target;
+
+	                while (ele) {
+	                    for (i = 0; i < cnt; i++) {
+	                        o = clickBlockList[i];
+	                        touchID = 0;
+
+	                        if (ele === target && Math.abs(o.x - x) < threshold && Math.abs(o.y - y) < threshold || $.data(ele, touchTargetPropertyName) === o.touchID) {
+	                            // XXX: We may want to consider removing matches from the block list
+	                            //      instead of waiting for the reset timer to fire.
+	                            e.preventDefault();
+	                            e.stopPropagation();
+	                            return;
+	                        }
+	                    }
+	                    ele = ele.parentNode;
+	                }
+	            }
+	        }, true);
+	    }
+	})(_jquery2["default"], window, document);
+
+	/**
+	 * events/touch.js
+	 *
+	 * https://raw.github.com/jquery/jquery-mobile/1.3.1/js/events/touch.js
+	 *
+	 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
+	 * Released under the MIT license.
+	 * http://jquery.org/license
+	 */
+
+	(function ($, window, undefined) {
+	    var $document = $(document);
+
+	    // add new event shortcuts
+	    $.each(("touchstart touchmove touchend " + "tap taphold " + "swipe swipeleft swiperight " + "scrollstart scrollstop").split(" "), function (i, name) {
+
+	        $.fn[name] = function (fn) {
+	            return fn ? this.bind(name, fn) : this.trigger(name);
+	        };
+
+	        // jQuery < 1.8
+	        if ($.attrFn) {
+	            $.attrFn[name] = true;
+	        }
+	    });
+
+	    var supportTouch = ("ontouchend" in document),
+	        scrollEvent = "touchmove scroll",
+	        touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+	        touchStopEvent = supportTouch ? "touchend" : "mouseup",
+	        touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+
+	    function triggerCustomEvent(obj, eventType, event) {
+	        var originalType = event.type;
+	        event.type = eventType;
+	        $.event.dispatch.call(obj, event);
+	        event.type = originalType;
+	    }
+
+	    // also handles scrollstop
+	    $.event.special.scrollstart = {
+
+	        enabled: true,
+
+	        setup: function setup() {
+
+	            var thisObject = this,
+	                $this = $(thisObject),
+	                scrolling,
+	                timer;
+
+	            function trigger(event, state) {
+	                scrolling = state;
+	                triggerCustomEvent(thisObject, scrolling ? "scrollstart" : "scrollstop", event);
+	            }
+
+	            // iPhone triggers scroll after a small delay; use touchmove instead
+	            $this.bind(scrollEvent, function (event) {
+
+	                if (!$.event.special.scrollstart.enabled) {
+	                    return;
+	                }
+
+	                if (!scrolling) {
+	                    trigger(event, true);
+	                }
+
+	                clearTimeout(timer);
+	                timer = setTimeout(function () {
+	                    trigger(event, false);
+	                }, 50);
+	            });
+	        }
+	    };
+
+	    // also handles taphold
+	    $.event.special.tap = {
+	        tapholdThreshold: 750,
+
+	        setup: function setup() {
+	            var thisObject = this,
+	                $this = $(thisObject);
+
+	            $this.bind("vmousedown", function (event) {
+
+	                if (event.which && event.which !== 1) {
+	                    return false;
+	                }
+
+	                var origTarget = event.target,
+	                    origEvent = event.originalEvent,
+	                    timer;
+
+	                function clearTapTimer() {
+	                    clearTimeout(timer);
+	                }
+
+	                function clearTapHandlers() {
+	                    clearTapTimer();
+
+	                    $this.unbind("vclick", clickHandler).unbind("vmouseup", clearTapTimer);
+	                    $document.unbind("vmousecancel", clearTapHandlers);
+	                }
+
+	                function clickHandler(event) {
+	                    clearTapHandlers();
+
+	                    // ONLY trigger a 'tap' event if the start target is
+	                    // the same as the stop target.
+	                    if (origTarget === event.target) {
+	                        triggerCustomEvent(thisObject, "tap", event);
+	                    }
+	                }
+
+	                $this.bind("vmouseup", clearTapTimer).bind("vclick", clickHandler);
+	                $document.bind("vmousecancel", clearTapHandlers);
+
+	                timer = setTimeout(function () {
+	                    triggerCustomEvent(thisObject, "taphold", $.Event("taphold", { target: origTarget }));
+	                }, $.event.special.tap.tapholdThreshold);
+	            });
+	        }
+	    };
+
+	    // also handles swipeleft, swiperight
+	    $.event.special.swipe = {
+	        scrollSupressionThreshold: 30, // More than this horizontal displacement, and we will suppress scrolling.
+
+	        durationThreshold: 1000, // More time than this, and it isn't a swipe.
+
+	        horizontalDistanceThreshold: 30, // Swipe horizontal displacement must be more than this.
+
+	        verticalDistanceThreshold: 75, // Swipe vertical displacement must be less than this.
+
+	        start: function start(event) {
+	            var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+	            return {
+	                time: new Date().getTime(),
+	                coords: [data.pageX, data.pageY],
+	                origin: $(event.target)
+	            };
+	        },
+
+	        stop: function stop(event) {
+	            var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+	            return {
+	                time: new Date().getTime(),
+	                coords: [data.pageX, data.pageY]
+	            };
+	        },
+
+	        handleSwipe: function handleSwipe(start, stop) {
+	            if (stop.time - start.time < $.event.special.swipe.durationThreshold && Math.abs(start.coords[0] - stop.coords[0]) > $.event.special.swipe.horizontalDistanceThreshold && Math.abs(start.coords[1] - stop.coords[1]) < $.event.special.swipe.verticalDistanceThreshold) {
+
+	                start.origin.trigger("swipe").trigger(start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight");
+	            }
+	        },
+
+	        setup: function setup() {
+	            var thisObject = this,
+	                $this = $(thisObject);
+
+	            $this.bind(touchStartEvent, function (event) {
+	                var start = $.event.special.swipe.start(event),
+	                    stop;
+
+	                function moveHandler(event) {
+	                    if (!start) {
+	                        return;
+	                    }
+
+	                    stop = $.event.special.swipe.stop(event);
+
+	                    // prevent scrolling
+	                    if (Math.abs(start.coords[0] - stop.coords[0]) > $.event.special.swipe.scrollSupressionThreshold) {
+	                        event.preventDefault();
+	                    }
+	                }
+
+	                $this.bind(touchMoveEvent, moveHandler).one(touchStopEvent, function () {
+	                    $this.unbind(touchMoveEvent, moveHandler);
+
+	                    if (start && stop) {
+	                        $.event.special.swipe.handleSwipe(start, stop);
+	                    }
+	                    start = stop = undefined;
+	                });
+	            });
+	        }
+	    };
+	    $.each({
+	        scrollstop: "scrollstart",
+	        taphold: "tap",
+	        swipeleft: "swipe",
+	        swiperight: "swipe"
+	    }, function (event, sourceEvent) {
+
+	        $.event.special[event] = {
+	            setup: function setup() {
+	                $(this).bind(sourceEvent, $.noop);
+	            }
+	        };
+	    });
+	})(_jquery2["default"], undefined);
+	//////////////////////////////////////
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(jQuery) {/*
 	 * Very simple jQuery Color Picker
 	 * https://github.com/tkrotoff/jquery-simplecolorpicker
@@ -39707,16 +40493,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(23);
+	var content = __webpack_require__(24);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(25)(content, {});
+	var update = __webpack_require__(26)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -39733,10 +40519,10 @@
 	}
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(24)();
+	exports = module.exports = __webpack_require__(25)();
 	// imports
 
 
@@ -39747,7 +40533,7 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/*
@@ -39803,7 +40589,7 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
