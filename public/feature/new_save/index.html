@@ -19,12 +19,6 @@
 </script>
 </head>
 <body>
-<style>
-  #LoadArea {
-    width: 320px;
-    overflow: scroll;
-  }
-</style>
 <header class="layer-header">
   <div class="caption">
     <h1><a href="http://hell0again.github.io/bbCompass/master">BBコンパスもどき@移植中</a><span id="viewsw">PC版</span></h1>
@@ -45,7 +39,10 @@
 <div class="ribbonmenu layer-ribbonmenu">
   <div class="menucell" id="menu_map">
     <div class="celltitle" id="head_map">マップ</div>
+
     <div class="item">
+      <div class="name">現在の戦場</div>
+      <br>
       <div id="current_map">
         <form name="current">
           <select id="current" class="formtext">
@@ -55,9 +52,7 @@
       </div>
     </div>
     <div class="item">
-      <div class="name">すべてのマップ
-        <div id="toggle-map" style="display:inline; font-size:xx-small">▼</div>
-      </div>
+      <div class="name">すべてのマップ</div>
       <br>
       <div id="map_area">
         <form name="map">
@@ -71,13 +66,15 @@
               <!-- ... -->
             </select>
           </div>
-
+          <!--
           <div class="submitbtn">
             <button id="change_map" type="button">選択</button>
           </div>
+          -->
         </form>
       </div>
     </div>
+
     <div class="item">
       <div class="name">階層&nbsp;</div>
       <div id="layer_area">
@@ -449,12 +446,13 @@
 
       <div class="name">URL</div><br>
       <div>
-        <input id="SaveImgText" type="text" value=""></input>
+        <input id="SaveImgText" type="text" value=""></input><br>
+        <input id="SaveImgShortUrl" type="checkbox"><span class="menu-notice">URLを短縮する</span>
       </div>
 
       <div class="name">画像</div><br>
-      <div id="SaveArea" style="">
-        <img id="SaveImgView" src="" style="width:112px; margin:10px auto">
+      <div id="SaveArea">
+        <img id="SaveImgView" src="">
       </div>
     </div>
   </div>
