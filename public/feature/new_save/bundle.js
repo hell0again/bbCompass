@@ -28819,8 +28819,11 @@
 
 	// 読み込み時の処理
 	(0, _jquery2['default'])(document).ready(function () {
-	    var viewport = true ? 'width=device-width, initial-scale=1, user-scalable=no' : 'width=device-width, initial-scale=1, user-scalable=yes';
-	    (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
+	    var forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
+	    if (forcePcMode) {
+	        var viewport = forcePcMode ? 'width=850, user-scalable=yes' : 'width=device-width, user-scalable=no';
+	        (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
+	    }
 
 	    (0, _jquery2['default'])("#make_img").tap(function (e) {
 	        var $imgView = (0, _jquery2['default'])("#SaveImgView");
@@ -28960,60 +28963,65 @@
 	    // });
 	    // bindScroll($("div#objselector"));
 
-	    //コンテキストメニュー
-	    (0, _jquery2['default'])("div.ContextMenu").bind('contextmenu', function (ev) {
-	        ev.preventDefault();
-	    });
-	    (0, _jquery2['default'])("div.ContextMenu li.hasChild").bind('tap', function (ev) {
-	        if (ev.target == ev.currentTarget) {
-	            ev.stopPropagation();
-	        }
-	    });
-	    (0, _jquery2['default'])("#CanvasArea").bind('contextmenu', function (ev) {
-	        if (!wideview) return true;
-	        ev.preventDefault();
-	        var offset = {
-	            "top": ev.pageY,
-	            "left": ev.pageX
-	        };
+	    // //コンテキストメニュー
+	    // $("div.ContextMenu").bind('contextmenu', function(ev) {
+	    //     ev.preventDefault()
+	    // });
+	    // $("div.ContextMenu li.hasChild").bind('tap', function(ev) {
+	    //     if (ev.target == ev.currentTarget) {
+	    //         ev.stopPropagation()
+	    //     }
+	    // });
+	    // $("#CanvasArea").bind('contextmenu', function(ev) {
+	    //     if (!wideview) return true;
+	    //     ev.preventDefault();
+	    //     var offset = {
+	    //         "top": ev.pageY,
+	    //         "left": ev.pageX
+	    //     };
 
-	        //はみ出しそうなら収める
-	        if (ev.clientY + (0, _jquery2['default'])("div.ContextMenu").height() > (0, _jquery2['default'])(window).height() - 3) {
-	            offset.top = (0, _jquery2['default'])(window).height() - (0, _jquery2['default'])("div.ContextMenu").height() + (0, _jquery2['default'])(window).scrollTop() - 3;
-	        }
+	    //     //はみ出しそうなら収める
+	    //     if (ev.clientY + $("div.ContextMenu").height() > $(window).height() - 3) {
+	    //         offset.top = $(window).height() - $("div.ContextMenu").height() + $(window).scrollTop() - 3;
+	    //     }
 
-	        if (ev.clientX + (0, _jquery2['default'])("div.ContextMenu").width() > (0, _jquery2['default'])(window).width() - 3) {
-	            offset.left = (0, _jquery2['default'])(window).width() - (0, _jquery2['default'])("div.ContextMenu").width() + (0, _jquery2['default'])(window).scrollLeft() - 3;
-	        }
+	    //     if (ev.clientX + $("div.ContextMenu").width() > $(window).width() - 3) {
+	    //         offset.left = $(window).width() - $("div.ContextMenu").width() + $(window).scrollLeft() - 3;
+	    //     }
 
-	        (0, _jquery2['default'])("div.ContextMenu").show().offset(offset);
+	    //     $("div.ContextMenu").show().offset(offset);
 
-	        //どこかクリックしたらメニューを消す
-	        (0, _jquery2['default'])(document).one('tap', function () {
-	            (0, _jquery2['default'])("div.ContextMenu,div.ContextMenu div.ContextChild").hide();
-	        });
-	    });
+	    //     //どこかクリックしたらメニューを消す
+	    //     $(document).one('tap', function() {
+	    //         $("div.ContextMenu,div.ContextMenu div.ContextChild").hide();
+	    //     });
 
-	    //子メニュー表示部
-	    (0, _jquery2['default'])("div.ContextMenu li.hasChild").hover(function (ev) {
-	        var offset = {
-	            top: (0, _jquery2['default'])(this).offset().top,
-	            left: (0, _jquery2['default'])(this).offset().left + (0, _jquery2['default'])(this).width() * 0.99
-	        };
+	    // });
 
-	        if ((0, _jquery2['default'])(this).offset().top - (0, _jquery2['default'])(window).scrollTop() + (0, _jquery2['default'])(this).children(".ContextChild").height() > (0, _jquery2['default'])(window).height()) {
+	    // //子メニュー表示部
+	    // $("div.ContextMenu li.hasChild").hover(
+	    //     function(ev) {
+	    //         var offset = {
+	    //             top: $(this).offset().top,
+	    //             left: $(this).offset().left + $(this).width() * 0.99
+	    //         };
 
-	            offset.top = (0, _jquery2['default'])(window).scrollTop() + (0, _jquery2['default'])(window).height() - (0, _jquery2['default'])(this).children(".ContextChild").height() - 3;
-	        }
+	    //         if ($(this).offset().top - $(window).scrollTop() + $(this).children(".ContextChild").height() > $(window).height()) {
 
-	        if ((0, _jquery2['default'])(this).offset().left - (0, _jquery2['default'])(window).scrollLeft() + (0, _jquery2['default'])(this).width() * 0.99 + (0, _jquery2['default'])(this).children(".ContextChild").width() > (0, _jquery2['default'])(window).width()) {
-	            offset.left = (0, _jquery2['default'])(this).offset().left - (0, _jquery2['default'])(this).children(".ContextChild").width() * 0.99;
-	        }
+	    //             offset.top = $(window).scrollTop() + $(window).height() - $(this).children(".ContextChild").height() - 3;
+	    //         }
 
-	        (0, _jquery2['default'])(this).children(".ContextChild").show().offset(offset);
-	    }, function (ev) {
-	        (0, _jquery2['default'])(this).children(".ContextChild").hide();
-	    });
+	    //         if ($(this).offset().left - $(window).scrollLeft() + $(this).width() * 0.99 + $(this).children(".ContextChild").width() > $(window).width()) {
+	    //             offset.left = $(this).offset().left - $(this).children(".ContextChild").width() * 0.99;
+	    //         }
+
+	    //         $(this).children(".ContextChild").show()
+	    //             .offset(offset);
+	    //     },
+	    //     function(ev) {
+	    //         $(this).children(".ContextChild").hide();
+	    //     }
+	    // );
 
 	    //ズーム
 	    (0, _jquery2['default'])("#lst_scale").change(function () {
@@ -29114,27 +29122,27 @@
 	    (0, _jquery2['default'])("#get_url").bind('tap', function (e) {
 	        getURL();
 	    });
-	    (0, _jquery2['default'])("#contextSelectMode").bind('tap', function (e) {
-	        start_select();
-	    });
-	    (0, _jquery2['default'])("#contextMoveMode").bind('tap', function (e) {
-	        start_move();
-	    });
-	    (0, _jquery2['default'])("#contextSaveMode").bind('tap', function (e) {
-	        start_save();
-	    });
-	    (0, _jquery2['default'])("#contextZoom_1").bind('tap', function (e) {
-	        zoom_cnv(1);
-	    });
-	    (0, _jquery2['default'])("#contextZoom_1_5").bind('tap', function (e) {
-	        zoom_cnv(1.5);
-	    });
-	    (0, _jquery2['default'])("#contextZoom_2").bind('tap', function (e) {
-	        zoom_cnv(2);
-	    });
-	    (0, _jquery2['default'])("#contextZoom_4").bind('tap', function (e) {
-	        zoom_cnv(4);
-	    });
+	    // $("#contextSelectMode").bind('tap', function(e) {
+	    //     start_select();
+	    // });
+	    // $("#contextMoveMode").bind('tap', function(e) {
+	    //     start_move();
+	    // });
+	    // $("#contextSaveMode").bind('tap', function(e) {
+	    //     start_save();
+	    // });
+	    // $("#contextZoom_1").bind('tap', function(e) {
+	    //     zoom_cnv(1);
+	    // });
+	    // $("#contextZoom_1_5").bind('tap', function(e) {
+	    //     zoom_cnv(1.5);
+	    // });
+	    // $("#contextZoom_2").bind('tap', function(e) {
+	    //     zoom_cnv(2);
+	    // });
+	    // $("#contextZoom_4").bind('tap', function(e) {
+	    //     zoom_cnv(4);
+	    // });
 	    (0, _jquery2['default'])("#save_img2").bind('tap', function (e) {
 	        window.alert("deprecated");
 	        // saveImg();
@@ -29205,189 +29213,191 @@
 	    });
 
 	    //スマホ用メニュー制御
+	    // - PCだとウィンドウサイズに応じてスタイルをmedia query任せ
+	    // - モバイルだとモバイル版をデフォルトで表示＋設定に任せる
+	    //   - モバイルでPC版表示にする場合はwidth=850＋ズームありで
+	    //
+	    //firefoxにはバグがある
+	    // - metaの属性書き換えではなく、タグごと消して作り直す
+	    // - 大人しくリロードする
+	    // の2択となる。大人しくリロードする
 	    var ua = navigator.userAgent;
-	    if (false) {
-	        var pcmode, intervalID, timeoutID, correctFlag, headerHeight, headelem, vp_width;
-	        var media;
-	        var sw;
+	    var sw = (0, _jquery2['default'])("#viewsw");
+	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	        var forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
 
-	        (function () {
+	        if (forcePcMode) {
+	            // PC版
+	            sw.text('スマホ版を表示する');
+	        } else {
+	            // SP版
+	            sw.text('PC版を表示する');
+	        }
+	        (0, _jquery2['default'])("#viewsw").bind('tap', function (e) {
+	            document.cookie = forcePcMode ? 'pcmode=false;max-age=0' : 'pcmode=true;max-age=2592000';
+	            location.href = location.href;
+	        });
+	    } else {
+	        sw.hide();
+	    }
 
-	            //スクロール時のメニュー追従処理に使う関数を定義
-
-	            var chgMenuScale = function chgMenuScale() {
-	                //幅広表示の時は座標の再計算だけして抜ける(無効化漏れのフォロー)
-	                if (wideview) {
-	                    bbobj.chgScroll();
-	                    return false;
+	    /*
+	    //スマホ用メニュー制御
+	    var ua = navigator.userAgent;
+	    if (false && window.TouchEvent &&
+	        (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	         //各種制御用変数
+	        var pcmode = false,
+	            intervalID = null,
+	            timeoutID = null,
+	            correctFlag = false,
+	            headerHeight = $("header").outerHeight(),
+	            headelem = document.getElementsByTagName("header")[0],
+	            vp_width; //後でinitMenuScaleが初期化するため、ここでは触らない
+	        // cookies  = document.cookie;
+	         //向きが変わっていたら幅を取り直す
+	        var media = window.matchMedia("(orientation: portrait)");
+	        media.addListener(function(m) {
+	            window.setTimeout(initMenuScale, 50);
+	        });
+	         //古いandroidの標準ブラウザの挙動が特殊なので、
+	        //androidはY軸のスクロールに関する挙動からメニュー位置補正の方針を決める
+	        if (ua.indexOf('Android') > 0) {
+	            window.addEventListener('scroll', (function() {
+	                    return function f() {
+	                        correctFlag = (-headelem.getBoundingClientRect().top != window.pageYOffset);
+	                        window.removeEventListener('scroll', f, true);
+	                    }
+	                })(),
+	                true);
+	            window.scrollTo(0, 1);
+	        } else {
+	            //iOSなどは常に補正ありで問題なさそう
+	            correctFlag = true;
+	            //inputやselectからフォーカスアウトした際に位置合わせしなおす
+	            $("select, input, textarea").bind('blur', function() {
+	                if (!wideview) {
+	                    window.setTimeout(chgMenuScale, 200);
+	                    window.setTimeout(chgMenuScale, 700);
 	                }
-
-	                //headerとメニュー幅を固定・拡縮
-	                var scale = window.innerWidth / vp_width;
-	                (0, _jquery2['default'])("header, div.ribbonmenu").css("transform", "scale(" + scale + ")").css("-ms-transform", "scale(" + scale + ")").css("-webkit-transform", "scale(" + scale + ")");
-
-	                var headrect = headelem.getBoundingClientRect(),
-	                    docrect = document.documentElement.getBoundingClientRect();
-
-	                if (correctFlag) {
-	                    var menuTop = Math.round(window.pageYOffset + docrect.top + headelem.offsetTop - headrect.top);
-	                    (0, _jquery2['default'])("header").css("top", menuTop);
-	                    (0, _jquery2['default'])("div.ribbonmenu").css("top", menuTop + headerHeight);
-
-	                    var menuLeft = Math.round(window.pageXOffset + docrect.left + headelem.offsetLeft - headrect.left);
-	                    (0, _jquery2['default'])("header, div.ribbonmenu").css("left", menuLeft);
-	                }
+	            });
+	        }
+	         //スクロール時のメニュー追従処理に使う関数を定義
+	        function chgMenuScale() {
+	            //幅広表示の時は座標の再計算だけして抜ける(無効化漏れのフォロー)
+	            if (wideview) {
 	                bbobj.chgScroll();
-	                return true;
+	                return false;
 	            }
-
-	            //スクロール終了待ち処理 タイマーをリセットするのみ
-	            ;
-
-	            var doWhileScroll = function doWhileScroll() {
-	                if (timeoutID) window.clearTimeout(timeoutID);
-	                timeoutID = window.setTimeout(doWhenScrollEnded, 60);
+	             //headerとメニュー幅を固定・拡縮
+	            var scale = window.innerWidth / vp_width;
+	            $("header, div.ribbonmenu").css("transform", "scale(" + scale + ")")
+	                .css("-ms-transform", "scale(" + scale + ")")
+	                .css("-webkit-transform", "scale(" + scale + ")");
+	             var headrect = headelem.getBoundingClientRect(),
+	                docrect = document.documentElement.getBoundingClientRect();
+	             if (correctFlag) {
+	                var menuTop = Math.round(window.pageYOffset + docrect.top + headelem.offsetTop - headrect.top);
+	                $("header").css("top", menuTop);
+	                $("div.ribbonmenu").css("top", menuTop + headerHeight);
+	                 var menuLeft = Math.round(window.pageXOffset + docrect.left + headelem.offsetLeft - headrect.left);
+	                $("header, div.ribbonmenu").css("left", menuLeft);
 	            }
-
-	            //スクロール停止後 改めて移動処理を行ってからbodyのマージンを変更
-	            ;
-
-	            var doWhenScrollEnded = function doWhenScrollEnded() {
-	                window.clearInterval(intervalID);
-	                intervalID = null;
-	                timeoutID = null;
-	                window.removeEventListener('scroll', doWhileScroll);
-	                if (chgMenuScale()) {
-	                    (0, _jquery2['default'])("body").css("margin-top", (headerHeight + 5) * window.innerWidth / vp_width);
-
-	                    //処理遅れの救済処置
-	                    setTimeout(chgMenuScale, 100);
-	                    setTimeout(chgMenuScale, 300);
-	                    setTimeout(chgMenuScale, 500);
-	                }
-	            }
-
-	            //PC版・スマホ版の切替機能を仕込む
-	            //firefoxのバグ対策のため、metaの属性書き換えではなく、タグごと消して作り直す
-	            ;
-
-	            var initMenuScale = function initMenuScale() {
-	                vp_width = window.outerWidth || document.documentElement.getBoundingClientRect().width;
-	                if (chgMenuScale()) {
-	                    (0, _jquery2['default'])("body").css("margin-top", headerHeight * window.innerWidth / vp_width + 5);
-	                    (0, _jquery2['default'])("header, div.ribbonmenu").css("width", vp_width);
-	                }
-	            }
-
-	            //リロード時のウィンドウサイズ変更に対応
-	            ;
-
-	            //各種制御用変数
-	            pcmode = false;
+	            bbobj.chgScroll();
+	            return true;
+	        }
+	         //スクロール終了待ち処理 タイマーをリセットするのみ
+	        function doWhileScroll() {
+	            if (timeoutID) window.clearTimeout(timeoutID);
+	            timeoutID = window.setTimeout(doWhenScrollEnded, 60);
+	        }
+	         //スクロール停止後 改めて移動処理を行ってからbodyのマージンを変更
+	        function doWhenScrollEnded() {
+	            window.clearInterval(intervalID);
 	            intervalID = null;
 	            timeoutID = null;
-	            correctFlag = false;
-	            headerHeight = (0, _jquery2['default'])("header").outerHeight();
-	            headelem = document.getElementsByTagName("header")[0];
-	            //後でinitMenuScaleが初期化するため、ここでは触らない
-	            // cookies  = document.cookie;
-
-	            //向きが変わっていたら幅を取り直す
-	            media = window.matchMedia("(orientation: portrait)");
-
-	            media.addListener(function (m) {
-	                window.setTimeout(initMenuScale, 50);
-	            });
-
-	            //古いandroidの標準ブラウザの挙動が特殊なので、
-	            //androidはY軸のスクロールに関する挙動からメニュー位置補正の方針を決める
-	            if (ua.indexOf('Android') > 0) {
-	                window.addEventListener('scroll', (function () {
-	                    return function f() {
-	                        correctFlag = -headelem.getBoundingClientRect().top != window.pageYOffset;
-	                        window.removeEventListener('scroll', f, true);
-	                    };
-	                })(), true);
-	                window.scrollTo(0, 1);
-	            } else {
-	                //iOSなどは常に補正ありで問題なさそう
-	                correctFlag = true;
-	                //inputやselectからフォーカスアウトした際に位置合わせしなおす
-	                (0, _jquery2['default'])("select, input, textarea").bind('blur', function () {
-	                    if (!wideview) {
-	                        window.setTimeout(chgMenuScale, 200);
-	                        window.setTimeout(chgMenuScale, 700);
-	                    }
-	                });
-	            }sw = (0, _jquery2['default'])("span#viewsw");
-
-	            sw.show();
-	            sw.bind('tap', function (ev) {
-	                if (timeoutID) {
-	                    window.clearTimeout(timeoutID);
-	                    timeoutID = null;
-	                }
-	                if (intervalID) {
-	                    window.clearInterval(intervalID);
-	                    intervalID = null;
-	                }
-	                window.removeEventListener('scroll', doWhileScroll);
-	                (0, _jquery2['default'])("body, header, div.ribbonmenu, div.ribbonmenu>div").removeAttr('style');
-	                if (pcmode) {
-	                    pcmode = false;
-	                    sw.text('PC版');
-	                    document.cookie = 'pcmode=false;max-age=0';
-	                    (0, _jquery2['default'])('meta[name=viewport]').remove();
-	                    (0, _jquery2['default'])('head').append('<meta name="viewport" content="width=device-width,initial-scale=1.0">');
-
-	                    //処理が遅れる場合があるようなので、少し遅延させる
-	                    setTimeout(initMenuScale, 100);
-	                } else {
-	                    pcmode = true;
-	                    sw.text('スマホ版');
-	                    document.cookie = 'pcmode=true;max-age=2592000';
-	                    (0, _jquery2['default'])('meta[name=viewport]').remove();
-	                    (0, _jquery2['default'])('head').append('<meta name="viewport" content="width=980">');
-	                    //古いWebKit対策。少し遅らせてstyleに空白を設定しなおす
-	                    setTimeout(function () {
-	                        (0, _jquery2['default'])("body, header, div.ribbonmenu, div.ribbonmenu>div").attr('style', '');
-	                    }, 50);
-	                }
-	                (0, _jquery2['default'])(window).resize();
-	            });
-
-	            // cookieに指定があればPCモードに切り替えておく
-	            if (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true") {
-	                sw.tap();
+	            window.removeEventListener('scroll', doWhileScroll);
+	            if (chgMenuScale()) {
+	                $("body").css("margin-top", (headerHeight + 5) * window.innerWidth / vp_width);
+	                 //処理遅れの救済処置
+	                setTimeout(chgMenuScale, 100);
+	                setTimeout(chgMenuScale, 300);
+	                setTimeout(chgMenuScale, 500);
 	            }
-
-	            // スクロール関連のイベント定義
-	            window.addEventListener('touchstart', function (e) {
+	        }
+	         //PC版・スマホ版の切替機能を仕込む
+	        //firefoxのバグ対策のため、metaの属性書き換えではなく、タグごと消して作り直す
+	        var sw = $("span#viewsw");
+	        sw.show();
+	        sw.bind('tap', function(ev) {
+	            if (timeoutID) {
+	                window.clearTimeout(timeoutID);
+	                timeoutID = null;
+	            }
+	            if (intervalID) {
+	                window.clearInterval(intervalID);
+	                intervalID = null;
+	            }
+	            window.removeEventListener('scroll', doWhileScroll);
+	            $("body, header, div.ribbonmenu, div.ribbonmenu>div").removeAttr('style');
+	            if (pcmode) {
+	                pcmode = false;
+	                sw.text('PC版');
+	                document.cookie = 'pcmode=false;max-age=0';
+	                $('meta[name=viewport]').remove();
+	                $('head').append('<meta name="viewport" content="width=device-width,initial-scale=1.0">');
+	                 //処理が遅れる場合があるようなので、少し遅延させる
+	                setTimeout(initMenuScale, 100);
+	            } else {
+	                pcmode = true;
+	                sw.text('スマホ版');
+	                document.cookie = 'pcmode=true;max-age=2592000';
+	                $('meta[name=viewport]').remove();
+	                $('head').append('<meta name="viewport" content="width=980">');
+	                //古いWebKit対策。少し遅らせてstyleに空白を設定しなおす
+	                setTimeout(function() {
+	                    $("body, header, div.ribbonmenu, div.ribbonmenu>div").attr('style', '')
+	                }, 50);
+	            }
+	            $(window).resize();
+	        });
+	         // cookieに指定があればPCモードに切り替えておく
+	        if (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true") {
+	            sw.tap();
+	        }
+	         // スクロール関連のイベント定義
+	        window.addEventListener('touchstart',
+	            function(e) {
 	                //幅広表示の時は何もしない
 	                if (wideview) return;
-
-	                window.removeEventListener('scroll', doWhileScroll);
+	                 window.removeEventListener('scroll', doWhileScroll);
 	                if (!intervalID) {
-	                    intervalID = window.setInterval(function () {
+	                    intervalID = window.setInterval(function() {
 	                        chgMenuScale();
 	                    }, 1000 / 30);
 	                }
 	            });
-
-	            window.addEventListener('touchend', function (e) {
+	         window.addEventListener('touchend',
+	            function(e) {
 	                //幅広表示の時は何もしない
 	                if (wideview) return;
-
-	                if (e.touches.length < 1) {
+	                 if (e.touches.length < 1) {
 	                    //スクロール終了待ちに移行
 	                    timeoutID = window.setTimeout(doWhenScrollEnded, 60);
 	                    window.addEventListener('scroll', doWhileScroll);
 	                }
 	            });
-
-	            window.setTimeout(initMenuScale, 100);
-	        })();
+	         function initMenuScale() {
+	            vp_width = window.outerWidth || document.documentElement.getBoundingClientRect().width;
+	            if (chgMenuScale()) {
+	                $("body").css("margin-top", headerHeight * window.innerWidth / vp_width + 5);
+	                $("header, div.ribbonmenu").css("width", vp_width);
+	            }
+	        }
+	         //リロード時のウィンドウサイズ変更に対応
+	        window.setTimeout(initMenuScale, 100);
 	    }
+	    */
 
 	    loadInitData();
 	});
@@ -29436,8 +29446,8 @@
 
 	    bbobj.setbg("./map/" + stage + "/" + map + ".jpg", scale[0], scale[1], function () {
 	        (0, _jquery2['default'])("#lst_scale").val(1);
-	        (0, _jquery2['default'])("ul#contextZoom").children("li").removeClass("checked");
-	        (0, _jquery2['default'])("li#contextZoom_1").addClass("checked");
+	        // $("ul#contextZoom").children("li").removeClass("checked");
+	        // $("li#contextZoom_1").addClass("checked");
 	        (0, _jquery2['default'])("div#Loading").hide();
 	        _jquery2['default'].ajax({
 	            "url": "data/" + map + ".txt",
@@ -29854,8 +29864,8 @@
 	    (0, _jquery2['default'])("#lst_scale").val(newScale);
 
 	    var liid = newScale.toString().replace(".", "_");
-	    (0, _jquery2['default'])("ul#contextZoom").children("li").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextZoom_" + liid).addClass("checked");
+	    // $("ul#contextZoom").children("li").removeClass("checked");
+	    // $("li#contextZoom_" + liid).addClass("checked");
 
 	    chgScale = newScale / bbobj.zoomScale;
 	    if (bbobj.zoomScale != newScale) {
@@ -29868,9 +29878,9 @@
 	//移動開始
 	function start_move() {
 	    (0, _jquery2['default'])("button").attr("disabled", true);
-	    (0, _jquery2['default'])("li#contextSelectMode").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextMoveMode").addClass("checked");
-	    (0, _jquery2['default'])("li#contextSaveMode").removeClass("checked");
+	    // $("li#contextSelectMode").removeClass("checked");
+	    // $("li#contextMoveMode").addClass("checked");
+	    // $("li#contextSaveMode").removeClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").addClass("selected");
 	    (0, _jquery2['default'])("div#csr_save").removeClass("selected");
@@ -29915,9 +29925,9 @@
 	//保存開始
 	function start_save() {
 	    (0, _jquery2['default'])("button").attr("disabled", true);
-	    (0, _jquery2['default'])("li#contextSelectMode").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextMoveMode").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextSaveMode").addClass("checked");
+	    // $("li#contextSelectMode").removeClass("checked");
+	    // $("li#contextMoveMode").removeClass("checked");
+	    // $("li#contextSaveMode").addClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_save").addClass("selected");
@@ -29940,9 +29950,9 @@
 	//移動終了
 	function start_select() {
 	    (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	    (0, _jquery2['default'])("li#contextSelectMode").addClass("checked");
-	    (0, _jquery2['default'])("li#contextMoveMode").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextSaveMode").removeClass("checked");
+	    // $("li#contextSelectMode").addClass("checked");
+	    // $("li#contextMoveMode").removeClass("checked");
+	    // $("li#contextSaveMode").removeClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").addClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_save").removeClass("selected");

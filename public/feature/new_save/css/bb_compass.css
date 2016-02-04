@@ -38,7 +38,7 @@ div#objsel_area {
     margin-right:-12em;
 }
 
-div#objselector {
+#objselector {
     position:relative;
     background-color:#FFFFFF;
     border:1px solid gainsboro;
@@ -348,8 +348,10 @@ div#Loading{
 
 #SaveImgView {
     display: block;
+    /*
     max-width: 100px;
     max-height: 64px;
+    */
     margin: 10px auto;
 }
 
@@ -437,6 +439,10 @@ div#Loading{
         -webkit-box-flex: 1;
         -moz-box-flex: 1;
     }
+
+    #objselector {
+        height: 12em;
+    }
     
     /*
     .ribbonmenu select, .ribbonmenu input {
@@ -483,6 +489,11 @@ div#Loading{
     #obj_cont button {
         margin-top: 0.2em;
         margin-bottom: 0.2em;
+    }
+
+    #SaveImgView {
+        max-width: 100px;
+        max-height: 64px;
     }
 }
 
@@ -579,7 +590,7 @@ div#Loading{
     }
 
     .menucell {
-        min-height: 15em;
+        min-height: 19em;
         box-flex: 0;
         -webkit-box-flex: 0;
         -moz-box-flex: 0;
@@ -593,6 +604,9 @@ div#Loading{
         -moz-box-flex: 1;
     }
 
+    #objselector {
+        height: 17em; /* .menucell の height - 2 */
+    }
 
     .ribbonmenu button {
         width:70%;
@@ -650,6 +664,12 @@ div#Loading{
         margin-right: 0.2em;
         margin-top: 0.3em;
     }
+    
+    #SaveImgView {
+        max-width: 120px;
+        max-height: 100px;
+    }
+
 }
 
 /* 画面幅が広い場合変更履歴と謝辞等を左右に分けて配置*/
