@@ -188,7 +188,9 @@ select#map > option.scramble,select#map.scramble{
 #CanvasArea {
     position:relative;
     text-align:center;
+    /*
     overflow:scroll;
+    */
     max-width: 100%;
     margin: 0 auto;
 }
@@ -631,6 +633,10 @@ div#Loading{
         position: relative;
         width: 100%;
         overflow-x: scroll;
+    }
+
+    #CanvasArea {
+        overflow: scroll;
     }
 
     /* 設置部 */
