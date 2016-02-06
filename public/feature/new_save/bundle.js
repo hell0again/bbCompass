@@ -27128,6 +27128,22 @@
 			"map": "algren_ub"
 		},
 		{
+			"start_time": "2016-02-08",
+			"end_time": "2016-02-14",
+			"type": "national_battle_high",
+			"title": "マリナセドナ大雪山〜掎角の氷穴〜【特殊×】",
+			"url": "/map/21#opr-143",
+			"map": "malinasedna_c"
+		},
+		{
+			"start_time": "2016-02-08",
+			"end_time": "2016-02-14",
+			"type": "national_battle_low",
+			"title": "第3採掘島〜臨海決戦〜【特殊×】",
+			"url": "/map/3#opr-11",
+			"map": "island_a"
+		},
+		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
 			"map": "24_sqa"
 		},
@@ -27478,7 +27494,7 @@
 		{
 			"value": "tlaza_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "砂塵の死線"
@@ -27486,7 +27502,7 @@
 		{
 			"value": "tlaza_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "夜間渡河"
@@ -27494,7 +27510,7 @@
 		{
 			"value": "tlaza_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "地下進撃"
@@ -27502,7 +27518,7 @@
 		{
 			"value": "tlaza_d",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "月下の砲煙"
@@ -27510,7 +27526,7 @@
 		{
 			"value": "tlaza_e",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "暗中行軍"
@@ -27518,7 +27534,7 @@
 		{
 			"value": "tlaza_f",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "激震の岩峰"
@@ -27526,7 +27542,7 @@
 		{
 			"value": "tlaza_g",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "高峰空襲"
@@ -27534,7 +27550,7 @@
 		{
 			"value": "darya_a",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "廃都行軍"
@@ -27542,7 +27558,7 @@
 		{
 			"value": "darya_d",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "乾季烈戦"
@@ -27550,7 +27566,7 @@
 		{
 			"value": "darya_e",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "橋上の戦線"
@@ -27558,7 +27574,7 @@
 		{
 			"value": "darya_b",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "河底の弾雨"
@@ -27566,7 +27582,7 @@
 		{
 			"value": "darya_c",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "交錯の火線"
@@ -27574,7 +27590,7 @@
 		{
 			"value": "darya_ea",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "激闘の古跡",
@@ -27592,7 +27608,7 @@
 		{
 			"value": "darya_ua",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "密林の迎撃戦",
@@ -27601,7 +27617,7 @@
 		{
 			"value": "d51_a",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "冷厳なる轟声"
@@ -27609,7 +27625,7 @@
 		{
 			"value": "d51_b",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "白銀死都"
@@ -27617,7 +27633,7 @@
 		{
 			"value": "d51_c",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "雪中遭遇戦"
@@ -27625,7 +27641,7 @@
 		{
 			"value": "d51_d",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "氷点下の鳴動"
@@ -27633,7 +27649,7 @@
 		{
 			"value": "d51_e",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "雪映えの赤光"
@@ -27641,7 +27657,7 @@
 		{
 			"value": "d51_f",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "連携の標柱"
@@ -27649,7 +27665,7 @@
 		{
 			"value": "d51_g",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "寒威三陣"
@@ -27657,7 +27673,7 @@
 		{
 			"value": "d51_ea",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "激闘の氷域",
@@ -27666,7 +27682,7 @@
 		{
 			"value": "wuhai_a",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "要衝襲撃"
@@ -27674,7 +27690,7 @@
 		{
 			"value": "wuhai_b",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "暁の威容"
@@ -27682,7 +27698,7 @@
 		{
 			"value": "wuhai_c",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "落日銃火"
@@ -27690,7 +27706,7 @@
 		{
 			"value": "wuhai_d",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "艦上の交錯線"
@@ -27698,7 +27714,7 @@
 		{
 			"value": "wuhai_e",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "残照の閃光"
@@ -27706,7 +27722,7 @@
 		{
 			"value": "wuhai_f",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "海港の戦渦"
@@ -27714,7 +27730,7 @@
 		{
 			"value": "wuhai_ea",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "激闘の港湾",
@@ -27732,7 +27748,7 @@
 		{
 			"value": "valerio_a",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "強行水路"
@@ -27740,7 +27756,7 @@
 		{
 			"value": "valerio_b",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "巨影侵撃"
@@ -27748,7 +27764,7 @@
 		{
 			"value": "valerio_c",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "血戦の城壁"
@@ -27756,7 +27772,7 @@
 		{
 			"value": "valerio_d",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "高地の煙硝"
@@ -27764,7 +27780,7 @@
 		{
 			"value": "valerio_e",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "地を穿つ光条"
@@ -27772,7 +27788,7 @@
 		{
 			"value": "valerio_f",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "導く光明"
@@ -27788,7 +27804,7 @@
 		{
 			"value": "valerio_ea",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "激闘の城下",
@@ -27797,7 +27813,7 @@
 		{
 			"value": "valerio_ua",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "城跡の連合戦",
@@ -27806,7 +27822,7 @@
 		{
 			"value": "valerio_ub",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "山塞の迎撃戦",
@@ -27824,7 +27840,7 @@
 		{
 			"value": "belsk_a",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "凍て付く戦陣"
@@ -27832,7 +27848,7 @@
 		{
 			"value": "belsk_b",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "純白の先途"
@@ -27840,7 +27856,7 @@
 		{
 			"value": "belsk_c",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "氷晶烈戦"
@@ -27848,7 +27864,7 @@
 		{
 			"value": "belsk_d",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "狭路急襲"
@@ -27856,7 +27872,7 @@
 		{
 			"value": "belsk_e",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "白霜の飛翔"
@@ -27872,7 +27888,7 @@
 		{
 			"value": "belsk_ea",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "激闘の氷海",
@@ -27890,7 +27906,7 @@
 		{
 			"value": "adora_a",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "紅蓮の大河"
@@ -27898,7 +27914,7 @@
 		{
 			"value": "adora_b",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "爆炎戦域"
@@ -27906,7 +27922,7 @@
 		{
 			"value": "adora_c",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "煉獄洞窟"
@@ -27914,7 +27930,7 @@
 		{
 			"value": "adora_d",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "焦熱の死地"
@@ -27922,7 +27938,7 @@
 		{
 			"value": "adora_e",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "渦巻く炎海"
@@ -27930,7 +27946,7 @@
 		{
 			"value": "adora_ea",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "激闘の溶岩域",
@@ -27939,7 +27955,7 @@
 		{
 			"value": "algren_a",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "巨坑侵入"
@@ -27947,7 +27963,7 @@
 		{
 			"value": "algren_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "algren"
 			},
 			"text": "瀑布の死闘"
@@ -27955,7 +27971,7 @@
 		{
 			"value": "algren_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "algren"
 			},
 			"text": "重盾戦機"
@@ -27963,7 +27979,7 @@
 		{
 			"value": "algren_d",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "天貫く光芒"
@@ -27971,7 +27987,7 @@
 		{
 			"value": "algren_e",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "孔上の対峙"
@@ -27979,7 +27995,7 @@
 		{
 			"value": "algren_ea",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "algren"
 			},
 			"text": "激闘の湖畔",
@@ -27988,7 +28004,7 @@
 		{
 			"value": "algren_ua",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "水煙連合戦",
@@ -27997,7 +28013,7 @@
 		{
 			"value": "algren_ub",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "落水の迎撃戦",
@@ -28006,7 +28022,7 @@
 		{
 			"value": "algren_sa",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "穿孔争奪戦",
@@ -28015,7 +28031,7 @@
 		{
 			"value": "denebra_a",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "雨下応酬"
@@ -28023,7 +28039,7 @@
 		{
 			"value": "denebra_b",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "塔上接敵"
@@ -28031,7 +28047,7 @@
 		{
 			"value": "denebra_c",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "天翔る双龍"
@@ -28039,7 +28055,7 @@
 		{
 			"value": "denebra_d",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "煙雨の剛砲"
@@ -28047,7 +28063,7 @@
 		{
 			"value": "denebra_e",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "巨塊下の衝突"
@@ -28055,7 +28071,7 @@
 		{
 			"value": "denebra_f",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "崖下乱戦"
@@ -28063,7 +28079,7 @@
 		{
 			"value": "denebra_ea",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "激闘の高地",
@@ -28072,7 +28088,7 @@
 		{
 			"value": "denebra_ua",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "暴雨の連合戦",
@@ -28081,7 +28097,7 @@
 		{
 			"value": "highrisesite_a",
 			"dataset": {
-				"layer": "['1F','2F','3F','全表示']",
+				"layer": "[\"1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "天柱の兵火"
@@ -28089,7 +28105,7 @@
 		{
 			"value": "highrisesite_b",
 			"dataset": {
-				"layer": "['B1F/1F','2F','3F','全表示']",
+				"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "高高度電撃戦"
@@ -28097,7 +28113,7 @@
 		{
 			"value": "highrisesite_c",
 			"dataset": {
-				"layer": "['1F','2F','3F','全表示']",
+				"layer": "[\"1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "雲上死線"
@@ -28105,7 +28121,7 @@
 		{
 			"value": "highrisesite_d",
 			"dataset": {
-				"layer": "['B1F/1F','2F','3F','全表示']",
+				"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "天を突く一閃"
@@ -28121,7 +28137,7 @@
 		{
 			"value": "highrisesite_ea",
 			"dataset": {
-				"layer": "['B1F/1F','2F','3F','全表示']",
+				"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "激闘の高楼",
@@ -28130,7 +28146,7 @@
 		{
 			"value": "navar_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "戦端の大鉄橋"
@@ -28138,7 +28154,7 @@
 		{
 			"value": "navar_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "断崖の相克"
@@ -28146,7 +28162,7 @@
 		{
 			"value": "navar_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "絶崖跳躍"
@@ -28154,7 +28170,7 @@
 		{
 			"value": "navar_d",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "岩峪の侵襲"
@@ -28162,7 +28178,7 @@
 		{
 			"value": "navar_ea",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "激闘の荒野",
@@ -28171,7 +28187,7 @@
 		{
 			"value": "navar_ua",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "赤土の連合戦",
@@ -28180,7 +28196,7 @@
 		{
 			"value": "navar_ub",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "砂岩の迎撃戦",
@@ -28198,7 +28214,7 @@
 		{
 			"value": "madelrond_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "地底の接敵"
@@ -28206,7 +28222,7 @@
 		{
 			"value": "madelrond_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "深部暗闘"
@@ -28214,7 +28230,7 @@
 		{
 			"value": "madelrond_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "結集の灯火"
@@ -28222,7 +28238,7 @@
 		{
 			"value": "madelrond_d",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "流動地底湖"
@@ -28230,7 +28246,7 @@
 		{
 			"value": "madelrond_e",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "水洞猛進"
@@ -28238,7 +28254,7 @@
 		{
 			"value": "madelrond_ea",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "激闘の岩窟",
@@ -28247,7 +28263,7 @@
 		{
 			"value": "gerberg_a",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "燃え盛る征野"
@@ -28255,7 +28271,7 @@
 		{
 			"value": "gerberg_b",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "闘争地下壕"
@@ -28263,7 +28279,7 @@
 		{
 			"value": "gerberg_c",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "一対の甲龍"
@@ -28271,7 +28287,7 @@
 		{
 			"value": "gerberg_d",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "煙中対敵"
@@ -28279,7 +28295,7 @@
 		{
 			"value": "gerberg_e",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "埋伏攻路"
@@ -28287,7 +28303,7 @@
 		{
 			"value": "gerberg_ea",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "激闘の塁砦",
@@ -28296,7 +28312,7 @@
 		{
 			"value": "gerberg_ua",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "硝煙の迎撃戦",
@@ -28305,7 +28321,7 @@
 		{
 			"value": "gerberg_ub",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "黒煙の連合戦",
@@ -28314,7 +28330,7 @@
 		{
 			"value": "longsha_a",
 			"dataset": {
-				"layer": "['通路あり']",
+				"layer": "[\"通路あり\"]",
 				"stage": "longsha"
 			},
 			"text": "山門の抗衡"
@@ -28322,7 +28338,7 @@
 		{
 			"value": "longsha_b",
 			"dataset": {
-				"layer": "['通路あり']",
+				"layer": "[\"通路あり\"]",
 				"stage": "longsha"
 			},
 			"text": "白霧潜攻"
@@ -28330,7 +28346,7 @@
 		{
 			"value": "longsha_c",
 			"dataset": {
-				"layer": "['洞窟内A','洞窟内B','全表示']",
+				"layer": "[\"洞窟内A\",\"洞窟内B\",\"全表示\"]",
 				"stage": "longsha"
 			},
 			"text": "眼下猛襲"
@@ -28338,7 +28354,7 @@
 		{
 			"value": "longsha_d",
 			"dataset": {
-				"layer": "['洞窟内A','洞窟内B','全表示']",
+				"layer": "[\"洞窟内A\",\"洞窟内B\",\"全表示\"]",
 				"stage": "longsha"
 			},
 			"text": "霊峰急撃"
@@ -28354,7 +28370,7 @@
 		{
 			"value": "longsha_ua",
 			"dataset": {
-				"layer": "['通路あり']",
+				"layer": "[\"通路あり\"]",
 				"stage": "longsha"
 			},
 			"text": "晴嵐の連合戦",
@@ -28363,7 +28379,7 @@
 		{
 			"value": "hopeside_a",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "都市侵襲"
@@ -28371,7 +28387,7 @@
 		{
 			"value": "hopeside_b",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "運河に見ゆ"
@@ -28379,7 +28395,7 @@
 		{
 			"value": "hopeside_c",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "高架の敵影"
@@ -28387,7 +28403,7 @@
 		{
 			"value": "hopeside_d",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "双騎接近"
@@ -28395,7 +28411,7 @@
 		{
 			"value": "hopeside_ua",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "摩天迎撃戦",
@@ -28413,7 +28429,7 @@
 		{
 			"value": "hopeside_sa",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "大都争奪戦",
@@ -28422,7 +28438,7 @@
 		{
 			"value": "kinich_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "白砂進軍"
@@ -28430,7 +28446,7 @@
 		{
 			"value": "kinich_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "火花散る渚"
@@ -28438,7 +28454,7 @@
 		{
 			"value": "kinich_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "波打際の熱闘"
@@ -28463,7 +28479,7 @@
 		{
 			"value": "kinich_ua",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "南海の迎撃戦",
@@ -28481,7 +28497,7 @@
 		{
 			"value": "nesos_a",
 			"dataset": {
-				"layer": "['下段']",
+				"layer": "[\"下段\"]",
 				"stage": "nesos"
 			},
 			"text": "構造α-01"
@@ -28664,7 +28680,7 @@
 	var scrollBarHeight = 0;
 	var freehandOnWrite = undefined;
 	var bbobj = "";
-	var wideview = true;
+	var forcePcMode = false;
 
 	var debugMode = false;
 
@@ -28711,11 +28727,80 @@
 	    $select.empty().append(frag);
 	}
 
+	function getMapImgPath(stage, map) {
+	    return './map/' + stage + '/' + map + '.jpg';
+	}
+	function getMapLayerImgPath(stage, map, layerIdx) {
+	    return './map/' + stage + '/' + map + '_' + (layerIdx + 1) + '.jpg';
+	}
+	function getMapDataPath(map) {
+	    return 'data/' + map + '.txt';
+	}
+	//ファイル名・ディレクトリ名チェック
+	function sanitize_filename(path) {
+	    var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
+	    path.replace(control_codes, '�');
+	    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
+	        return path;
+	    } else {
+	        return null;
+	    }
+	}
+
+	// is.gd で短縮する
+	// callbackの引数は (error, shortenUrl)
+	// 対応していないURL(localhostとか)なら変換せずにそのまま
+	function shortenUrl(url, callback) {
+	    if (url.match(/^https?:\/\//) && !url.match(/^http:\/\/localhost/)) {
+	        _jquery2['default'].ajax({
+	            type: 'GET',
+	            url: 'http://is.gd/create.php',
+	            dataType: 'jsonp',
+	            crossDomain: true,
+	            cache: false,
+	            jsonp: false,
+	            data: {
+	                url: url,
+	                format: "json",
+	                callback: "shortenurl"
+	            },
+	            jsonpCallback: 'shortenurl',
+	            success: function success(data, status) {
+	                if (!data["errorcode"]) {
+	                    callback(null, data["shorturl"]);
+	                } else {
+	                    callback("URL短縮エラー(" & data["errorcode"] & ")", url);
+	                }
+	            },
+	            error: function error() {
+	                callback("URL短縮に失敗しました", url);
+	            }
+	        });
+	    } else {
+	        callback(null, url);
+	    }
+	}
+
+	// //前景色を得る
+	// function get_fgColor($bgcol) {
+	//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
+	//
+	//     var $r = parseInt($bgcol.substr(1, 2),16);
+	//     var $g = parseInt($bgcol.substr(3, 2),16);
+	//     var $b = parseInt($bgcol.substr(5, 2),16);
+	//
+	//     var $bright = (($r*299)+($g*587)+($b*114))/1000;
+	//     if( $bright < 127.5 ) {
+	//         return ("#FFFFFF");
+	//     }
+	//     return ("#000000");
+	// }
+
 	function loadStageList() {
 	    loadSelectionOption((0, _jquery2['default'])("#current"), appData["current_map"]);
 	    loadSelectionOption((0, _jquery2['default'])("#stage"), appData["stage"]);
 	}
-	function loadMapList() {
+	function loadStageMapList() {
 	    var stage = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 
 	    if (stage != null) {
@@ -28727,12 +28812,11 @@
 	            "selected": true
 	        });
 	        loadSelectionOption((0, _jquery2['default'])("#map"), stageMaps);
+	    } else {
+	        // いらない！！！
+	        var optionList = appData["map"];
+	        loadSelectionOption((0, _jquery2['default'])("#map"), optionList);
 	    }
-	    // } else {
-	    //     // いらない！！！
-	    //     var optionList = appData["map"];
-	    //     loadSelectionOption($("#map"), optionList);
-	    // }
 	}
 	function getMapsFromStage(stage) {
 	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
@@ -28782,20 +28866,23 @@
 	    var openid = $this.data("target");
 
 	    //リストの先頭を選択済みにする
-	    (0, _jquery2['default'])("#" + openid + " " + ".formlst option:first").attr('selected', true);
-	    (0, _jquery2['default'])("#" + openid + " " + ".formlst").change();
+	    (0, _jquery2['default'])('#' + openid + ' .formlst option:first').attr('selected', true);
+	    (0, _jquery2['default'])('#' + openid + ' .formlst').change();
 
 	    (0, _jquery2['default'])("div.setobj:visible").fadeOut(speed, function () {
-	        (0, _jquery2['default'])("#" + openid).fadeIn(speed);
+	        (0, _jquery2['default'])('#' + openid).fadeIn(speed);
 	    });
 	};
 
+	// メニュータブの選択状態を切り替え
+	// - $tab: タブ
+	// - $target: タブに対応するメニュー要素
+	// 選択した $tab, $target と .ribbonmenuに selectedクラスを追加する
 	var toggleMenutab = function toggleMenutab($tab, $target) {
 	    if ($tab == undefined || $tab.hasClass("selected")) {
 	        (0, _jquery2['default'])(".menutab").removeClass("selected");
 	        (0, _jquery2['default'])(".menucell").removeClass("selected");
 	        (0, _jquery2['default'])(".ribbonmenu").removeClass("selected");
-	        // $(".ribbonmenu").fadeOut("fast");
 	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeOut("fast");
 	    } else {
 	        (0, _jquery2['default'])(".menutab").removeClass("selected");
@@ -28816,76 +28903,122 @@
 	        // });
 	    }
 	};
+	// メニューを閉じる
+	function closeMenuTab() {
+	    toggleMenutab();
+	}
+
+	var execMakeImg = function execMakeImg() {
+	    var $imgView = (0, _jquery2['default'])("#SaveImgView");
+	    var $SaveImgText = (0, _jquery2['default'])("#SaveImgText");
+	    var $SaveImgShortUrl = (0, _jquery2['default'])("#SaveImgShortUrl");
+	    var $map = (0, _jquery2['default'])("#map");
+	    var objs = new Array();
+
+	    $imgView.attr("src", "");
+	    $SaveImgText.attr("value", "");
+
+	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
+	        objs.push((0, _jquery2['default'])(this).val());
+	    });
+
+	    var queryobj = new _BBCQuery2['default'](bbobj, $map.val());
+	    queryobj.fromObjects(objs);
+	    var querystr = queryobj.toBase64();
+	    var url = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
+	    if ($SaveImgShortUrl.prop('checked')) {
+	        shortenUrl(url, function (err, shorten) {
+	            if (err) {
+	                window.alert(err);
+	            }
+	            $SaveImgText.attr("value", shorten);
+	        });
+	    } else {
+	        setTimeout(function () {
+	            $SaveImgText.attr("value", url);
+	        }, 200);
+	    }
+
+	    var imgSrc = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
+	    setTimeout(function () {
+	        $imgView.attr("src", imgSrc);
+	    }, 200);
+	};
+
+	function getBbObj() {
+	    return bbobj;
+	}
 
 	// 読み込み時の処理
 	(0, _jquery2['default'])(document).ready(function () {
-	    var forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
+	    // デバイスごとの切り替え
+	    forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
 	    if (forcePcMode) {
 	        var viewport = forcePcMode ? 'width=850, user-scalable=yes' : 'width=device-width, user-scalable=no';
 	        (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
 	    }
-
-	    (0, _jquery2['default'])("#make_img").tap(function (e) {
-	        var $imgView = (0, _jquery2['default'])("#SaveImgView");
-	        $imgView.attr("src", "");
-	        var $SaveImgText = (0, _jquery2['default'])("#SaveImgText");
-	        $SaveImgText.attr("value", "");
-	        var $SaveImgShortUrl = (0, _jquery2['default'])("#SaveImgShortUrl");
-
-	        var objs = new Array();
-	        (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
-	            objs.push((0, _jquery2['default'])(this).val());
-	        });
-
-	        var queryobj = new _BBCQuery2['default'](bbobj, (0, _jquery2['default'])("select#map").val());
-	        queryobj.fromObjects(objs);
-	        var querystr = queryobj.toBase64();
-	        var url = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
-	        if ($SaveImgShortUrl.prop('checked')) {
-	            shortenUrl(url, function (shorten) {
-	                $SaveImgText.attr("value", shorten);
-	            });
+	    //スマホ用メニュー制御
+	    // - PCだとウィンドウサイズに応じてスタイルをmedia query任せ
+	    // - モバイルだとモバイル版をデフォルトで表示＋設定に任せる
+	    //   - モバイルでPC版表示にする場合はwidth=850＋ズームありで
+	    //
+	    //firefoxにはバグがある
+	    // - metaの属性書き換えではなく、タグごと消して作り直す
+	    // - 大人しくリロードする
+	    // の2択となる。大人しくリロードする
+	    var ua = navigator.userAgent;
+	    var $viewsw = (0, _jquery2['default'])("#viewsw");
+	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	        if (forcePcMode) {
+	            // PC版
+	            $viewsw.text('スマホ版を表示する');
 	        } else {
-	            setTimeout(function () {
-	                $SaveImgText.attr("value", url);
-	            }, 100);
+	            // SP版
+	            $viewsw.text('PC版を表示する');
 	        }
+	    } else {
+	        $viewsw.hide();
+	    }
 
-	        var imgSrc = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
-	        setTimeout(function () {
-	            $imgView.attr("src", imgSrc);
-	        }, 100);
-	    });
+	    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
+	    var canvas = document.getElementById(CanvasName);
+	    if (!canvas || !canvas.getContext) {
+	        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
+	        return false;
+	    }
 
-	    // 現在の戦場選択メニューの設定
+	    bindEventHandler();
+	    loadInitData();
+	});
+
+	// 各種ハンドラの設定
+	function bindEventHandler() {
+
+	    // 現在の戦場選択メニュー
 	    (0, _jquery2['default'])("#current").change(function (e) {
 	        var map = (0, _jquery2['default'])(this).val();
 	        var stage = getStageFromMap(map);
-	        (0, _jquery2['default'])("#stage").val(stage);
-	        loadMapList(stage);
-	        (0, _jquery2['default'])("#map").val(map);
-	        chg_map(map);
+	        changeStageSelection(stage);
+	        changeMapSelection(map);
+	        loadMap(map);
+	        closeMenuTab();
 	    });
-
-	    // ステージ選択メニューの設定
+	    // ステージ選択メニュー
 	    (0, _jquery2['default'])("#stage").change(function (e) {
 	        var stage = (0, _jquery2['default'])(this).val();
-	        // ステージ変更に連動してマップ一覧をフィルタしなおし
-	        loadMapList(stage);
+	        changeStageSelection(stage);
 	    });
-	    // マップ選択メニューの設定
+	    // マップ選択メニュー
 	    (0, _jquery2['default'])("#map").change(function (e) {
 	        var map = (0, _jquery2['default'])(this).val();
-	        (0, _jquery2['default'])("#map").removeClass("union event scramble");
-	        var mapClass = (0, _jquery2['default'])("#map option:selected").attr("class");
-	        if (mapClass !== undefined) {
-	            (0, _jquery2['default'])("#map").addClass(mapClass);
-	        }
-	        chg_map(map);
+	        changeMapSelection(map);
+	        loadMap(map);
+	        closeMenuTab();
 	    });
-	    (0, _jquery2['default'])("#change_map").bind('tap', function (e) {
-	        var map = (0, _jquery2['default'])("#map").val();
-	        chg_map(map);
+	    // 階層選択
+	    (0, _jquery2['default'])("#lst_layer").change(function () {
+	        getBbObj().setbgdiff((0, _jquery2['default'])("#lst_layer").val());
+	        // closeMenuTab();
 	    });
 
 	    // オブジェクト選択メニューの設定
@@ -28922,17 +29055,6 @@
 	        (0, _jquery2['default'])("#name_icon").val((0, _jquery2['default'])(this).find("option:selected").text());
 	    });
 
-	    // selectmenuだとタップしてメニュー展開という動作になってしまう。
-	    // 開きっぱなしにしてほしいのでmenuのほうが適切っぽいけどmenuだとul, li。。
-	    // $('#lst_scout').selectmenu({
-	    //     change: function(ev, ui) {
-	    //         $('#lst_scout option').attr('selected', false);
-	    //         $('#lst_scout option:eq('+ ui.item.index +')').attr('selected', true);
-	    //         $("#name_scout").val( ui.item.element.text() );
-	    //     }
-	    // });
-	    // $('#lst_scout').selectmenu("open");
-
 	    // カラーピッカーの設定
 	    loadSelectionOption((0, _jquery2['default'])('.colorpick'), appDataStatic["picker"]);
 	    (0, _jquery2['default'])('select.colorpick').simplecolorpicker({
@@ -28956,97 +29078,25 @@
 	        toggleMenutab();
 	    });
 
-	    // //メニュー部のタッチによるスクロール防止と、独自スクロール処理のbind
-	    // $("header,div.ribbonmenu").bind('touchmove', function(ev) {
-	    //     if (wideview) return true;
-	    //     ev.preventDefault();
-	    // });
-	    // bindScroll($("div#objselector"));
-
-	    // //コンテキストメニュー
-	    // $("div.ContextMenu").bind('contextmenu', function(ev) {
-	    //     ev.preventDefault()
-	    // });
-	    // $("div.ContextMenu li.hasChild").bind('tap', function(ev) {
-	    //     if (ev.target == ev.currentTarget) {
-	    //         ev.stopPropagation()
-	    //     }
-	    // });
-	    // $("#CanvasArea").bind('contextmenu', function(ev) {
-	    //     if (!wideview) return true;
-	    //     ev.preventDefault();
-	    //     var offset = {
-	    //         "top": ev.pageY,
-	    //         "left": ev.pageX
-	    //     };
-
-	    //     //はみ出しそうなら収める
-	    //     if (ev.clientY + $("div.ContextMenu").height() > $(window).height() - 3) {
-	    //         offset.top = $(window).height() - $("div.ContextMenu").height() + $(window).scrollTop() - 3;
-	    //     }
-
-	    //     if (ev.clientX + $("div.ContextMenu").width() > $(window).width() - 3) {
-	    //         offset.left = $(window).width() - $("div.ContextMenu").width() + $(window).scrollLeft() - 3;
-	    //     }
-
-	    //     $("div.ContextMenu").show().offset(offset);
-
-	    //     //どこかクリックしたらメニューを消す
-	    //     $(document).one('tap', function() {
-	    //         $("div.ContextMenu,div.ContextMenu div.ContextChild").hide();
-	    //     });
-
-	    // });
-
-	    // //子メニュー表示部
-	    // $("div.ContextMenu li.hasChild").hover(
-	    //     function(ev) {
-	    //         var offset = {
-	    //             top: $(this).offset().top,
-	    //             left: $(this).offset().left + $(this).width() * 0.99
-	    //         };
-
-	    //         if ($(this).offset().top - $(window).scrollTop() + $(this).children(".ContextChild").height() > $(window).height()) {
-
-	    //             offset.top = $(window).scrollTop() + $(window).height() - $(this).children(".ContextChild").height() - 3;
-	    //         }
-
-	    //         if ($(this).offset().left - $(window).scrollLeft() + $(this).width() * 0.99 + $(this).children(".ContextChild").width() > $(window).width()) {
-	    //             offset.left = $(this).offset().left - $(this).children(".ContextChild").width() * 0.99;
-	    //         }
-
-	    //         $(this).children(".ContextChild").show()
-	    //             .offset(offset);
-	    //     },
-	    //     function(ev) {
-	    //         $(this).children(".ContextChild").hide();
-	    //     }
-	    // );
-
 	    //ズーム
 	    (0, _jquery2['default'])("#lst_scale").change(function () {
 	        zoom_cnv((0, _jquery2['default'])(this).val());
 	    });
 
-	    //changelog
-	    _jquery2['default'].ajax({
-	        url: "./Changelog.txt",
-	        dataType: 'text',
-	        cache: false,
-	        success: function success(txt, status) {
-	            (0, _jquery2['default'])("#changelog").val(txt);
-	        },
-	        error: function error() {
-	            (0, _jquery2['default'])("#changelog").val("更新履歴の取得に失敗しました");
-	        }
-	    });
-
 	    // メニュー開閉
+	    //メニュー隠す
 	    (0, _jquery2['default'])("#menusw_off").bind('tap', function (e) {
-	        hide_menu();
+	        (0, _jquery2['default'])("div.ribbonmenu").slideUp(function () {
+	            (0, _jquery2['default'])("#menusw_off").hide();
+	            (0, _jquery2['default'])("#menusw_on").show();
+	        });
 	    });
+	    //メニュー出す
 	    (0, _jquery2['default'])("#menusw_on").bind('tap', function (e) {
-	        show_menu();
+	        (0, _jquery2['default'])("div.ribbonmenu").slideDown(function () {
+	            (0, _jquery2['default'])("#menusw_on").hide();
+	            (0, _jquery2['default'])("#menusw_off").show();
+	        });
 	    });
 
 	    // 各種オブジェクト設置
@@ -29099,9 +29149,6 @@
 	    (0, _jquery2['default'])("#csr_move").bind('tap', function (e) {
 	        start_move();
 	    });
-	    (0, _jquery2['default'])("#csr_save").bind('tap', function (e) {
-	        start_save();
-	    });
 
 	    (0, _jquery2['default'])("#up_object").bind('tap', function (e) {
 	        up_object();
@@ -29115,296 +29162,34 @@
 	    (0, _jquery2['default'])("#delall_object").bind('tap', function (e) {
 	        delall_object();
 	    });
-	    (0, _jquery2['default'])("#save_img").bind('tap', function (e) {
-	        window.alert("deprecated");
-	        // saveImg();
-	    });
-	    (0, _jquery2['default'])("#get_url").bind('tap', function (e) {
-	        getURL();
-	    });
-	    // $("#contextSelectMode").bind('tap', function(e) {
-	    //     start_select();
-	    // });
-	    // $("#contextMoveMode").bind('tap', function(e) {
-	    //     start_move();
-	    // });
-	    // $("#contextSaveMode").bind('tap', function(e) {
-	    //     start_save();
-	    // });
-	    // $("#contextZoom_1").bind('tap', function(e) {
-	    //     zoom_cnv(1);
-	    // });
-	    // $("#contextZoom_1_5").bind('tap', function(e) {
-	    //     zoom_cnv(1.5);
-	    // });
-	    // $("#contextZoom_2").bind('tap', function(e) {
-	    //     zoom_cnv(2);
-	    // });
-	    // $("#contextZoom_4").bind('tap', function(e) {
-	    //     zoom_cnv(4);
-	    // });
-	    (0, _jquery2['default'])("#save_img2").bind('tap', function (e) {
-	        window.alert("deprecated");
-	        // saveImg();
-	    });
-	    (0, _jquery2['default'])("#get_url2").bind('tap', function (e) {
-	        getURL();
+
+	    (0, _jquery2['default'])("#make_img").tap(function (e) {
+	        execMakeImg();
 	    });
 
-	    //ウィンドウサイズの変更に対する対処
-	    wideview = (0, _jquery2['default'])(".menutitle").is(":visible");
-	    (0, _jquery2['default'])(window).resize(function () {
-	        return;
-	        //キャンバスエリアの幅を調整、jCanvaScriptの処理に反映させる
-	        chgCanvasAreaSize();
-
-	        //メニューの表示・非表示対処
-	        if ((0, _jquery2['default'])(".menutitle").is(":visible")) {
-	            wideview = true;
-
-	            //各ブロックをcssのデフォルトに戻す
-	            (0, _jquery2['default'])("body,header,div.ribbonmenu,div.ribbonmenu>div").removeAttr('style');
-
-	            //メニュー全体はスイッチを基に表示：非表示を決める
-	            if ((0, _jquery2['default'])("span#menusw_on").is(":visible")) {
-	                // $("div.ribbonmenu").hide();
-	            } else {
-	                    // $("div.ribbonmenu").show();
-	                }
-	        } else {
-	                wideview = false;
-
-	                // if ($("div.menutab#menutab_map").hasClass("selected")) {
-	                //     $("div.menusubcell#subcell_graph").hide();
-	                //     $("div.menucell#menu_map,div.menucell#menu_cont").show();
-	                //     // $("div.ribbonmenu").show();
-	                // } else if ($("div.menutab#menutab_item").hasClass("selected")) {
-	                //     $("div.menucell#menu_map,div.menucell#menu_cont").hide();
-	                //     $("div.menusubcell#subcell_graph").show();
-	                //     $("div.ribbonmenu").show();
-	                // } else {
-	                //     $("div.ribbonmenu").hide();
-	                // }
-	            }
+	    (0, _jquery2['default'])("#CanvasArea").scroll(function () {
+	        getBbObj().chgScroll();
 	    });
 
-	    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
-	    var canvas = document.getElementById(CanvasName);
-	    if (!canvas || !canvas.getContext) {
-	        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
-	        return false;
-	    }
+	    (0, _jquery2['default'])("#viewsw").bind('tap', function (e) {
+	        document.cookie = forcePcMode ? 'pcmode=false;max-age=0' : 'pcmode=true;max-age=2592000';
+	        location.reload();
+	    });
+	}
+	//各種初期化処理
+	function loadInitData() {
 
 	    // canvas要素の初期化
 	    bbobj = new _BB2['default'](CanvasName);
-	    var cnvArea = document.getElementById(CanvasDivName);
+	    var cnvArea = document.getElementById("CanvasArea");
 	    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
-	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
-	    (0, _jquery2['default'])("#" + CanvasDivName)
+	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6; // for win?
+	    (0, _jquery2['default'])("#CanvasArea")
 	    // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
 	    .height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
 
-	    (0, _jquery2['default'])("#lst_layer").change(function () {
-	        closeNav();
-	        bbobj.setbgdiff((0, _jquery2['default'])("#lst_layer").val());
-	    });
-	    (0, _jquery2['default'])("#" + CanvasDivName).scroll(function () {
-	        bbobj.chgScroll();
-	    });
-
-	    //スマホ用メニュー制御
-	    // - PCだとウィンドウサイズに応じてスタイルをmedia query任せ
-	    // - モバイルだとモバイル版をデフォルトで表示＋設定に任せる
-	    //   - モバイルでPC版表示にする場合はwidth=850＋ズームありで
-	    //
-	    //firefoxにはバグがある
-	    // - metaの属性書き換えではなく、タグごと消して作り直す
-	    // - 大人しくリロードする
-	    // の2択となる。大人しくリロードする
-	    var ua = navigator.userAgent;
-	    var sw = (0, _jquery2['default'])("#viewsw");
-	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
-	        var forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
-
-	        if (forcePcMode) {
-	            // PC版
-	            sw.text('スマホ版を表示する');
-	        } else {
-	            // SP版
-	            sw.text('PC版を表示する');
-	        }
-	        (0, _jquery2['default'])("#viewsw").bind('tap', function (e) {
-	            document.cookie = forcePcMode ? 'pcmode=false;max-age=0' : 'pcmode=true;max-age=2592000';
-	            location.reload();
-	        });
-	    } else {
-	        sw.hide();
-	    }
-
-	    /*
-	    //スマホ用メニュー制御
-	    var ua = navigator.userAgent;
-	    if (false && window.TouchEvent &&
-	        (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
-	         //各種制御用変数
-	        var pcmode = false,
-	            intervalID = null,
-	            timeoutID = null,
-	            correctFlag = false,
-	            headerHeight = $("header").outerHeight(),
-	            headelem = document.getElementsByTagName("header")[0],
-	            vp_width; //後でinitMenuScaleが初期化するため、ここでは触らない
-	        // cookies  = document.cookie;
-	         //向きが変わっていたら幅を取り直す
-	        var media = window.matchMedia("(orientation: portrait)");
-	        media.addListener(function(m) {
-	            window.setTimeout(initMenuScale, 50);
-	        });
-	         //古いandroidの標準ブラウザの挙動が特殊なので、
-	        //androidはY軸のスクロールに関する挙動からメニュー位置補正の方針を決める
-	        if (ua.indexOf('Android') > 0) {
-	            window.addEventListener('scroll', (function() {
-	                    return function f() {
-	                        correctFlag = (-headelem.getBoundingClientRect().top != window.pageYOffset);
-	                        window.removeEventListener('scroll', f, true);
-	                    }
-	                })(),
-	                true);
-	            window.scrollTo(0, 1);
-	        } else {
-	            //iOSなどは常に補正ありで問題なさそう
-	            correctFlag = true;
-	            //inputやselectからフォーカスアウトした際に位置合わせしなおす
-	            $("select, input, textarea").bind('blur', function() {
-	                if (!wideview) {
-	                    window.setTimeout(chgMenuScale, 200);
-	                    window.setTimeout(chgMenuScale, 700);
-	                }
-	            });
-	        }
-	         //スクロール時のメニュー追従処理に使う関数を定義
-	        function chgMenuScale() {
-	            //幅広表示の時は座標の再計算だけして抜ける(無効化漏れのフォロー)
-	            if (wideview) {
-	                bbobj.chgScroll();
-	                return false;
-	            }
-	             //headerとメニュー幅を固定・拡縮
-	            var scale = window.innerWidth / vp_width;
-	            $("header, div.ribbonmenu").css("transform", "scale(" + scale + ")")
-	                .css("-ms-transform", "scale(" + scale + ")")
-	                .css("-webkit-transform", "scale(" + scale + ")");
-	             var headrect = headelem.getBoundingClientRect(),
-	                docrect = document.documentElement.getBoundingClientRect();
-	             if (correctFlag) {
-	                var menuTop = Math.round(window.pageYOffset + docrect.top + headelem.offsetTop - headrect.top);
-	                $("header").css("top", menuTop);
-	                $("div.ribbonmenu").css("top", menuTop + headerHeight);
-	                 var menuLeft = Math.round(window.pageXOffset + docrect.left + headelem.offsetLeft - headrect.left);
-	                $("header, div.ribbonmenu").css("left", menuLeft);
-	            }
-	            bbobj.chgScroll();
-	            return true;
-	        }
-	         //スクロール終了待ち処理 タイマーをリセットするのみ
-	        function doWhileScroll() {
-	            if (timeoutID) window.clearTimeout(timeoutID);
-	            timeoutID = window.setTimeout(doWhenScrollEnded, 60);
-	        }
-	         //スクロール停止後 改めて移動処理を行ってからbodyのマージンを変更
-	        function doWhenScrollEnded() {
-	            window.clearInterval(intervalID);
-	            intervalID = null;
-	            timeoutID = null;
-	            window.removeEventListener('scroll', doWhileScroll);
-	            if (chgMenuScale()) {
-	                $("body").css("margin-top", (headerHeight + 5) * window.innerWidth / vp_width);
-	                 //処理遅れの救済処置
-	                setTimeout(chgMenuScale, 100);
-	                setTimeout(chgMenuScale, 300);
-	                setTimeout(chgMenuScale, 500);
-	            }
-	        }
-	         //PC版・スマホ版の切替機能を仕込む
-	        //firefoxのバグ対策のため、metaの属性書き換えではなく、タグごと消して作り直す
-	        var sw = $("span#viewsw");
-	        sw.show();
-	        sw.bind('tap', function(ev) {
-	            if (timeoutID) {
-	                window.clearTimeout(timeoutID);
-	                timeoutID = null;
-	            }
-	            if (intervalID) {
-	                window.clearInterval(intervalID);
-	                intervalID = null;
-	            }
-	            window.removeEventListener('scroll', doWhileScroll);
-	            $("body, header, div.ribbonmenu, div.ribbonmenu>div").removeAttr('style');
-	            if (pcmode) {
-	                pcmode = false;
-	                sw.text('PC版');
-	                document.cookie = 'pcmode=false;max-age=0';
-	                $('meta[name=viewport]').remove();
-	                $('head').append('<meta name="viewport" content="width=device-width,initial-scale=1.0">');
-	                 //処理が遅れる場合があるようなので、少し遅延させる
-	                setTimeout(initMenuScale, 100);
-	            } else {
-	                pcmode = true;
-	                sw.text('スマホ版');
-	                document.cookie = 'pcmode=true;max-age=2592000';
-	                $('meta[name=viewport]').remove();
-	                $('head').append('<meta name="viewport" content="width=980">');
-	                //古いWebKit対策。少し遅らせてstyleに空白を設定しなおす
-	                setTimeout(function() {
-	                    $("body, header, div.ribbonmenu, div.ribbonmenu>div").attr('style', '')
-	                }, 50);
-	            }
-	            $(window).resize();
-	        });
-	         // cookieに指定があればPCモードに切り替えておく
-	        if (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true") {
-	            sw.tap();
-	        }
-	         // スクロール関連のイベント定義
-	        window.addEventListener('touchstart',
-	            function(e) {
-	                //幅広表示の時は何もしない
-	                if (wideview) return;
-	                 window.removeEventListener('scroll', doWhileScroll);
-	                if (!intervalID) {
-	                    intervalID = window.setInterval(function() {
-	                        chgMenuScale();
-	                    }, 1000 / 30);
-	                }
-	            });
-	         window.addEventListener('touchend',
-	            function(e) {
-	                //幅広表示の時は何もしない
-	                if (wideview) return;
-	                 if (e.touches.length < 1) {
-	                    //スクロール終了待ちに移行
-	                    timeoutID = window.setTimeout(doWhenScrollEnded, 60);
-	                    window.addEventListener('scroll', doWhileScroll);
-	                }
-	            });
-	         function initMenuScale() {
-	            vp_width = window.outerWidth || document.documentElement.getBoundingClientRect().width;
-	            if (chgMenuScale()) {
-	                $("body").css("margin-top", headerHeight * window.innerWidth / vp_width + 5);
-	                $("header, div.ribbonmenu").css("width", vp_width);
-	            }
-	        }
-	         //リロード時のウィンドウサイズ変更に対応
-	        window.setTimeout(initMenuScale, 100);
-	    }
-	    */
-
-	    loadInitData();
-	});
-	//各種初期化処理
-	function loadInitData() {
 	    loadStageList();
-	    loadMapList();
+	    loadStageMapList();
 	    loadObjectLists();
 
 	    //メニューの初期状態を設定
@@ -29415,26 +29200,91 @@
 	        setURL(window.location.search.substr(1));
 	    } else {
 	        // なければもっともらしいマップを選ぶ
-	        chg_map((0, _jquery2['default'])("#current").val());
+	        (0, _jquery2['default'])("#current").change();
+	    }
+
+	    //changelogロード
+	    _jquery2['default'].ajax({
+	        url: "./Changelog.txt",
+	        dataType: 'text',
+	        cache: false,
+	        success: function success(txt, status) {
+	            (0, _jquery2['default'])("#changelog").val(txt);
+	        },
+	        error: function error() {
+	            (0, _jquery2['default'])("#changelog").val("更新履歴の取得に失敗しました");
+	        }
+	    });
+	}
+
+	// ロードしたマップデータ内のオブジェクト情報を反映させる
+	function onLoadMapData(data, bbobj) {
+	    // TODO: マップ同士のオフセット座標対応
+	    resizeCanvasArea();
+	    if ("turret" in data) {
+	        var turretData = data["turret"];
+	        for (var i = 0; i < turretData.length; i++) {
+	            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
+	            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, debugMode);
+	        }
+	    }
+	    if ("searcher" in data) {
+	        var searcherData = data["searcher"];
+	        for (var i = 0; i < searcherData.length; i++) {
+	            //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
+	            bbobj.put_searcher(searcherData[i][0], searcherData[i][1], searcherData[i][2], turretCircle, undefined, debugMode);
+	        }
 	    }
 	}
 
-	//マップ変更
-	function chg_map(map, callback) {
+	// ステージ選択を変更する。あわせてマップの選択肢を対応するマップのみに絞る
+	function changeStageSelection(stage) {
+	    var $stage = (0, _jquery2['default'])("#stage");
+	    if (stage == null) {
+	        return;
+	    }
+	    $stage.val(stage);
+	    loadStageMapList(stage);
+	}
+	// マップ選択を変更する
+	function changeMapSelection(map) {
+	    var $map = (0, _jquery2['default'])("#map");
 	    if (map == null) {
 	        return;
 	    }
+	    $map.val(map);
 	    var stage = getStageFromMap(map);
-	    (0, _jquery2['default'])("#stage").val(stage);
-	    (0, _jquery2['default'])("#stage").change();
-	    (0, _jquery2['default'])("#map").val(map);
-	    // $("#map").change();
 
-	    var $map = (0, _jquery2['default'])("#map option:selected");
+	    // イベントとかの場合は #map にクラスを追加
+	    var $selectedMap = (0, _jquery2['default'])("#map option:selected");
+	    $map.removeClass("union event scramble squad");
+	    var mapClass = $selectedMap.attr("class");
+	    if (mapClass !== undefined) {
+	        $map.addClass(mapClass);
+	    }
+
+	    // 階層選択を更新
+	    var layer = eval($selectedMap.data("layer"));
+	    var layerList = [];
+	    layerList = appDataStatic["defaultLayer"].concat();
+	    for (var i = 0; i < layer.length; i++) {
+	        layerList.push({
+	            "value": getMapLayerImgPath(stage, map, i),
+	            "text": layer[i]
+	        });
+	    }
+	    loadSelectionOption((0, _jquery2['default'])("#lst_layer"), layerList);
+	    (0, _jquery2['default'])("#lst_layer").val("");
+	}
+
+	//マップをロードする
+	function loadMap(map, callback) {
+	    var $stage = (0, _jquery2['default'])("#stage");
+	    var $map = (0, _jquery2['default'])("#map");
+	    var stage = getStageFromMap(map);
 	    map = sanitize_filename(map);
 	    stage = sanitize_filename(stage);
-	    var layer = eval($map.data("layer"));
-	    var scale = eval((0, _jquery2['default'])("#stage [value='" + stage + "']").data("scale"));
+	    var scale = eval($stage.find('[value="' + stage + '"]').data("scale"));
 
 	    if (map == null || stage == null) {
 	        alert("マップファイル名エラー");
@@ -29444,59 +29294,27 @@
 	    (0, _jquery2['default'])("#Loading").show();
 	    (0, _jquery2['default'])("#lst_object").children().remove();
 
-	    bbobj.setbg("./map/" + stage + "/" + map + ".jpg", scale[0], scale[1], function () {
+	    bbobj.setbg(getMapImgPath(stage, map), scale[0], scale[1], function () {
 	        (0, _jquery2['default'])("#lst_scale").val(1);
-	        // $("ul#contextZoom").children("li").removeClass("checked");
-	        // $("li#contextZoom_1").addClass("checked");
-	        (0, _jquery2['default'])("div#Loading").hide();
+	        (0, _jquery2['default'])("#Loading").hide();
 	        _jquery2['default'].ajax({
-	            "url": "data/" + map + ".txt",
+	            "url": getMapDataPath(map),
 	            dataType: "jsonp",
 	            crossDomain: true,
 	            cache: false,
 	            jsonp: false,
 	            jsonpCallback: "stageData",
 	            success: function success(data, status) {
-	                chgCanvasAreaSize();
-
-	                if ("turret" in data) {
-	                    var turretData = data["turret"];
-	                    for (i = 0; i < turretData.length; i++) {
-	                        //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
-	                        bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle,
-	                        // undefined, turretData[i][4]);
-	                        undefined, debugMode);
-	                    }
-	                }
-	                if ("searcher" in data) {
-	                    var searcherData = data["searcher"];
-	                    for (i = 0; i < searcherData.length; i++) {
-	                        //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
-	                        bbobj.put_searcher(searcherData[i][0], searcherData[i][1], searcherData[i][2], turretCircle,
-	                        // undefined, searcherData[i][3]);
-	                        undefined, debugMode);
-	                    }
-	                }
+	                onLoadMapData(data, bbobj);
 	                if (callback !== undefined) {
 	                    callback.call();
 	                }
 	            },
-	            error: function error() {}
+	            error: function error() {
+	                // マップデータは読み込み失敗しても黙っておく
+	            }
 	        });
 	    });
-
-	    var layerList = [];
-	    layerList = appDataStatic["defaultLayer"].concat();
-	    for (var i = 0; i < layer.length; i++) {
-	        layerList.push({
-	            "value": './map/' + stage + '/' + map + '_' + (i + 1) + '.jpg',
-	            "text": layer[i]
-	        });
-	    }
-	    loadSelectionOption((0, _jquery2['default'])("#lst_layer"), layerList);
-	    (0, _jquery2['default'])("#lst_layer").val("");
-
-	    closeNav();
 	}
 
 	//偵察機
@@ -29518,7 +29336,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29540,7 +29358,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29563,7 +29381,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29586,7 +29404,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29608,7 +29426,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29632,7 +29450,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29655,7 +29473,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29704,7 +29522,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29732,7 +29550,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29760,7 +29578,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29782,7 +29600,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29804,7 +29622,7 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
@@ -29819,14 +29637,14 @@
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//フリーハンド
 	function set_freehand() {
 	    var obj = bbobj.add_freehand((0, _jquery2['default'])("#name_freehand").val(), (0, _jquery2['default'])("#col_freehand").val());
-	    closeNav();
+	    closeMenuTab();
 
 	    if (obj) {
 	        add_object(obj.id, coalesce_name(obj));
@@ -29864,8 +29682,6 @@
 	    (0, _jquery2['default'])("#lst_scale").val(newScale);
 
 	    var liid = newScale.toString().replace(".", "_");
-	    // $("ul#contextZoom").children("li").removeClass("checked");
-	    // $("li#contextZoom_" + liid).addClass("checked");
 
 	    chgScale = newScale / bbobj.zoomScale;
 	    if (bbobj.zoomScale != newScale) {
@@ -29878,12 +29694,8 @@
 	//移動開始
 	function start_move() {
 	    (0, _jquery2['default'])("button").attr("disabled", true);
-	    // $("li#contextSelectMode").removeClass("checked");
-	    // $("li#contextMoveMode").addClass("checked");
-	    // $("li#contextSaveMode").removeClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").addClass("selected");
-	    (0, _jquery2['default'])("div#csr_save").removeClass("selected");
 	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "move");
 
 	    if (freehandOnWrite !== undefined) {
@@ -29921,41 +29733,12 @@
 	    // var img = $("#SaveArea");
 	    // img.css("visibility", "hidden");
 	}
-	// いらない
-	//保存開始
-	function start_save() {
-	    (0, _jquery2['default'])("button").attr("disabled", true);
-	    // $("li#contextSelectMode").removeClass("checked");
-	    // $("li#contextMoveMode").removeClass("checked");
-	    // $("li#contextSaveMode").addClass("checked");
-	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
-	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
-	    (0, _jquery2['default'])("div#csr_save").addClass("selected");
-	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "auto");
-
-	    if (freehandOnWrite !== undefined) {
-	        freehandOnWrite.end();
-	    }
-
-	    bbobj.ourJc.pause(CanvasName);
-
-	    (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousedown');
-
-	    var imgView = (0, _jquery2['default'])("#SaveImgView");
-	    imgView.attr("src", (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png'));
-	    var img = (0, _jquery2['default'])("#SaveArea");
-	    img.css("visibility", "visible");
-	}
 
 	//移動終了
 	function start_select() {
 	    (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	    // $("li#contextSelectMode").addClass("checked");
-	    // $("li#contextMoveMode").removeClass("checked");
-	    // $("li#contextSaveMode").removeClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").addClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
-	    (0, _jquery2['default'])("div#csr_save").removeClass("selected");
 	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "auto");
 
 	    bbobj.ourJc.start(CanvasName, true);
@@ -30001,21 +29784,8 @@
 	        }
 	    });
 	}
-
-	//メニュー隠す
-	function hide_menu() {
-	    (0, _jquery2['default'])("div.ribbonmenu").slideUp(function () {
-	        (0, _jquery2['default'])("#menusw_off").hide();
-	        (0, _jquery2['default'])("#menusw_on").show();
-	    });
-	}
-	//メニュー出す
-	function show_menu() {
-	    (0, _jquery2['default'])("div.ribbonmenu").slideDown(function () {
-	        (0, _jquery2['default'])("#menusw_on").hide();
-	        (0, _jquery2['default'])("#menusw_off").show();
-	    });
-	}
+	function hide_menu() {}
+	function show_menu() {}
 
 	//lst_objectから要素削除
 	function del_object() {
@@ -30025,7 +29795,7 @@
 	    });
 	}
 
-	//lst_objectから全要素削除
+	// lst_objectから全要素削除
 	function delall_object() {
 	    (0, _jquery2['default'])("#lst_object option").each(function () {
 	        bbobj.object((0, _jquery2['default'])(this).val()).del();
@@ -30033,97 +29803,11 @@
 	    });
 	}
 
-	// //画像保存
-	// function saveImg() {
-	//     window.alert("deprecated");
-	//     $("#WorkArea").append($("<img id=DownloadImg src='" + bbobj.save() + "'>"));
-	//     window.open("./image.html", "test");
-	// }
-
-	// is.gd で短縮する
-	// callbackの第一引数に短縮したURLを渡す。
-	// 対応していないURL(localhostとか)なら変換せずにそのままコールバックに渡す
-	function shortenUrl(url, callback) {
-	    if (url.match(/^https?:\/\//) && !url.match(/^http:\/\/localhost/)) {
-	        _jquery2['default'].ajax({
-	            type: 'GET',
-	            url: 'http://is.gd/create.php',
-	            dataType: 'jsonp',
-	            crossDomain: true,
-	            cache: false,
-	            jsonp: false,
-	            data: {
-	                url: url,
-	                format: "json",
-	                callback: "shortenurl"
-	            },
-	            jsonpCallback: 'shortenurl',
-	            success: function success(data, status) {
-	                if (!data["errorcode"]) {
-	                    callback(data["shorturl"]);
-	                    // window.prompt("表示用URL", data["shorturl"]);
-	                } else {
-	                        alert("URL短縮エラー(" & data["errorcode"] & ")");
-	                    }
-	            },
-	            error: function error() {
-	                alert("URL短縮に失敗しました");
-	            }
-	        });
-	    } else {
-	        callback(url);
-	    }
-	}
-
-	//現在の状態をURL化
-	function getURL() {
-	    var objs = new Array();
-	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
-	        objs.push((0, _jquery2['default'])(this).val());
-	    });
-
-	    var queryobj = new _BBCQuery2['default'](bbobj, (0, _jquery2['default'])("select#map").val());
-	    queryobj.fromObjects(objs);
-	    var querystr = queryobj.toBase64(),
-	        baseurl = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
-
-	    if (baseurl.match(/^https?:\/\//)) {
-	        _jquery2['default'].ajax({
-	            type: 'GET',
-	            url: 'http://is.gd/create.php',
-	            dataType: 'jsonp',
-	            crossDomain: true,
-	            cache: false,
-	            jsonp: false,
-	            data: {
-	                url: baseurl,
-	                format: "json",
-	                callback: "shortenurl"
-	            },
-	            jsonpCallback: 'shortenurl',
-	            success: function success(data, status) {
-	                if (!data["errorcode"]) {
-	                    window.prompt("表示用URL", data["shorturl"]);
-	                } else {
-	                    alert("URL短縮エラー(" & data["errorcode"] & ")");
-	                }
-	            },
-	            error: function error() {
-	                alert("URL短縮に失敗しました");
-	            }
-	        });
-	    } else {
-	        window.prompt("表示用URL", baseurl);
-	    }
-
-	    //delete queryobj;
-	}
-
 	//URLクエリストリングからの復元
 	function setURL(querystr) {
 	    var queryobj = new _BBCQuery2['default'](bbobj, 'dummy');
 	    if (queryobj.fromBase64(querystr)) {
-	        chg_map(queryobj.map, function () {
+	        changeMap(queryobj.map, function () {
 	            var objs = queryobj.applyObjects();
 	            for (var i = 0; i < objs.length; i++) {
 	                add_object(objs[i].id, coalesce_name(objs[i]));
@@ -30175,149 +29859,16 @@
 	    return name;
 	}
 
-	// //前景色を得る
-	// function get_fgColor($bgcol) {
-	//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
-	//
-	//     var $r = parseInt($bgcol.substr(1, 2),16);
-	//     var $g = parseInt($bgcol.substr(3, 2),16);
-	//     var $b = parseInt($bgcol.substr(5, 2),16);
-	//
-	//     var $bright = (($r*299)+($g*587)+($b*114))/1000;
-	//     if( $bright < 127.5 ) {
-	//         return ("#FFFFFF");
-	//     }
-	//     return ("#000000");
-	// }
-
-	//ファイル名・ディレクトリ名チェック
-	function sanitize_filename(path) {
-	    var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
-	    path.replace(control_codes, '�');
-	    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
-	        return path;
+	// キャンバスのサイズ変更に合わせてキャンバスエリアのサイズを追従させる
+	function resizeCanvasArea() {
+	    var ua = navigator.userAgent;
+	    if (!forcePcMode && window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	        (0, _jquery2['default'])("#CanvasArea").height((0, _jquery2['default'])("#BBCompass").outerHeight() + scrollBarHeight);
 	    } else {
-	        return null;
+	        (0, _jquery2['default'])("#CanvasArea").width((0, _jquery2['default'])("#BBCompass").outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("#BBCompass").outerHeight() + scrollBarHeight);
 	    }
+	    getBbObj().chgScroll();
 	}
-
-	//キャンバスエリアの幅を変更する
-	function chgCanvasAreaSize() {
-	    (0, _jquery2['default'])("#" + CanvasDivName)
-	    // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
-	    .height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
-	    bbobj.chgScroll();
-	}
-
-	//ナビゲーションタブエリアを非表示にする
-	function closeNav() {
-	    toggleMenutab();
-	    // if ($("nav").is(":visible")) {
-	    //     $("nav>div").removeClass("selected");
-	    //     $("div.ribbonmenu").fadeOut();
-	    // }
-	}
-
-	/*
-	//スクロール関連独自処理
-	function bindScroll(ojQuery) {
-	    ojQuery.each(function(i, elem) {
-	        elem.addEventListener('wheel',
-	            function(e) {
-	                //スクロールが上限に達している場合はデフォルト動作を阻害する
-	                if ((e.deltaX < 0) && (elem.scrollLeft <= 0) || (e.deltaX > 0) && (elem.scrollLeft >= elem.scrollWidth - elem.clientWidth) || (e.deltaY < 0) && (elem.scrollTop <= 0) || (e.deltaY > 0) && (elem.scrollTop >= elem.scrollHeight - elem.clientHeight)) {
-	                    e.preventDefault();
-	                    return;
-	                }
-
-	                if (e.deltaMode == 0) {
-	                    elem.scrollLeft = elem.scrollLeft + e.deltaX;
-	                    elem.scrollTop = elem.scrollTop + e.deltaY;
-	                } else if (e.deltaMode == 1) {
-	                    //elem.scrollLeft = elem.scrollLeft + e.deltaX * element.style.lineHeight;
-	                    //elem.scrollTop  = elem.scrollTop + e.deltaY * element.style.lineHeight;
-	                    elem.scrollLeft = elem.scrollLeft + e.deltaX * elem.style.lineHeight;
-	                    elem.scrollTop = elem.scrollTop + e.deltaY * elem.style.lineHeight;
-	                } else if (e.deltaMode == 2) {
-	                    elem.scrollLeft = elem.scrollLeft + e.deltaX * document.documentElement.clientWidth;
-	                    elem.scrollTop = elem.scrollTop + e.deltaY * document.documentElement.clientHeight;
-	                } else {
-	                    return;
-	                }
-	                e.preventDefault();
-	                return;
-	            },
-	            false);
-
-	        if (window.TouchEvent) {
-	            var startX, startY, scrollStartX, scrollStartY,
-	                // scrollLimitX, scrollLimitY,
-	                flag, touchid;
-
-	            function getTouch(ev) {
-	                var touch;
-
-	                switch (ev.type) {
-	                    case "touchstart":
-	                        touch = ev.touches[0];
-	                        touchid = touch.identifier;
-	                        break
-
-	                    case "touchmove":
-	                        for (i = 0; i < ev.changedTouches.length; i++) {
-	                            if (ev.changedTouches[i].identifier == touchid) {
-	                                touch = ev.changedTouches[i];
-	                                break;
-	                            }
-	                        }
-	                        break;
-	                }
-
-	                if (touch === undefined) {
-	                    return undefined;
-	                }
-	                return touch;
-	            }
-
-	            elem.addEventListener('touchstart',
-	                function(e) {
-	                    var touch = getTouch(e);
-
-	                    flag = true;
-	                    startX = touch.clientX;
-	                    startY = touch.clientY;
-	                    scrollStartX = elem.scrollLeft;
-	                    scrollStartY = elem.scrollTop;
-	                    // scrollLimitX=elem.scrollWidth - elem.clientWidth;
-	                    // scrollLimitY=elem.scrollHeight - elem.clientHeight;
-	                    return;
-	                },
-	                false);
-
-	            elem.addEventListener('touchmove',
-	                function(e) {
-	                    //touchstartで拾ったイベントがないなら何もしない
-	                    if (!flag) return;
-	                    var touch = getTouch(e);
-	                    if (touch === undefined) {
-	                        flag = false;
-	                        return;
-	                    }
-
-	                    e.preventDefault();
-	                    elem.scrollLeft = scrollStartX + (touch.clientX - startX) * (-1);
-	                    elem.scrollTop = scrollStartY + (touch.clientY - startY) * (-1);
-	                },
-	                false);
-
-	            elem.addEventListener('touchend',
-	                function(e) {
-	                    flag = false;
-	                });
-	        }
-	    });
-	}
-	*/
 
 /***/ },
 /* 20 */
