@@ -24,6 +24,22 @@
         "map": "algren_ub"
     },
     {
+        "start_time": "2016-02-08",
+        "end_time": "2016-02-14",
+        "type": "national_battle_high",
+        "title": "マリナセドナ大雪山〜掎角の氷穴〜【特殊×】",
+        "url": "/map/21#opr-143",
+        "map": "malinasedna_c"
+    },
+    {
+        "start_time": "2016-02-08",
+        "end_time": "2016-02-14",
+        "type": "national_battle_low",
+        "title": "第3採掘島〜臨海決戦〜【特殊×】",
+        "url": "/map/3#opr-11",
+        "map": "island_a"
+    },
+    {
         "title": "マグメル機体試験場〜FIELD-D〜",
         "map": "24_sqa"
     },
