@@ -47,7 +47,8 @@
 	__webpack_require__(1);
 	__webpack_require__(5);
 	__webpack_require__(12);
-	module.exports = __webpack_require__(19);
+	__webpack_require__(19);
+	module.exports = __webpack_require__(21);
 
 
 /***/ },
@@ -257,7 +258,7 @@
 	        key: 'del',
 	        value: function del() {
 	            delete this._bbObj.member[this.id];
-	            var objs = this._ourJc.layer(this.id).objs;
+	            // var objs = this._ourJc.layer(this.id).objs;
 	            this._ourJc.layer(this.id).del();
 	        }
 	    }]);
@@ -914,8 +915,8 @@
 	                    tgtline.translateTo(x, y);
 	                    cross.translateTo(x, y);
 	                }
-	                obj._markerx = point._x + point._transformdx;
-	                obj._markery = point._y + point._transformdy;
+	                obj._markerx = this._x + this._transformdx;
+	                obj._markery = this._y + this._transformdy;
 	            };
 
 	            var tgtdrag = function tgtdrag() {
@@ -934,8 +935,8 @@
 	                tgt.translateTo(base.x, base.y);
 	                tgtline.translateTo(base.x, base.y);
 	                cross.translateTo(base.x, base.y);
-	                obj._markerx = point._x + point._transformdx;
-	                obj._markery = point._y + point._transformdy;
+	                obj._markerx = this._x + this._transformdx;
+	                obj._markery = this._y + this._transformdy;
 	                return false;
 	            };
 
@@ -1117,7 +1118,7 @@
 	        this.regist();
 	        if (typeof _callback === "function") {
 	            _callback.apply(this);
-	        };
+	        }
 	    }
 
 	    //
@@ -2675,12 +2676,12 @@
 	                line.visible(visible);
 	            });
 	        }
-	    }, {
-	        key: 'add_scout',
 
 	        //
 	        //オブジェクト描画
 	        //
+	    }, {
+	        key: 'add_scout',
 	        value: function add_scout(string, radius, length, duration, color, _callback) {
 	            return new BB_scout(this, string, radius, length, duration, color, _callback);
 	        }
@@ -5211,7 +5212,7 @@
 	            // this function is quoted from
 	            // http://stackoverflow.com/questions/3077718/converting-a-decimal-value-to-a-32bit-floating-point-hexadecimal
 
-	            var ret = Array();
+	            // var ret = Array();
 	            var NAN_BITS = 0 | 0x7FC00000;
 	            var INF_BITS = 0 | 0x7F800000;
 	            var ZERO_BITS = 0 | 0x00000000;
@@ -5240,10 +5241,11 @@
 	            var biasedExp = exp + 127;
 
 	            if (biasedExp == 255) return signBits | INF_BITS;
+	            var mantissa;
 	            if (biasedExp == 0) {
-	                var mantissa = x * Math.pow(2.0, 23) / 2.0;
+	                mantissa = x * Math.pow(2.0, 23) / 2.0;
 	            } else {
-	                var mantissa = x * Math.pow(2.0, 23) - Math.pow(2.0, 23);
+	                mantissa = x * Math.pow(2.0, 23) - Math.pow(2.0, 23);
 	            }
 
 	            var expBits = biasedExp << 23 & EXP_MASK;
@@ -5624,7 +5626,7 @@
 	                        default:
 	                            obj = undefined;
 	                            console.error("object type not supported (" + objtype + ")");
-	                            view.seek(view.tell() + objlen - 1);
+	                            // view.seek(view.tell() + objlen - 1);
 	                            break;
 	                    }
 	                    if (obj === undefined) break;
@@ -14448,7 +14450,8 @@
 	        // セパレータをpush
 	        BBDB["current_map"].push({
 	            "disabled": true,
-	            "label": el["label"]
+	            // "label": el["label"]
+	            "text": el["label"]
 	        });
 
 	        // mapsをpush
@@ -14476,7 +14479,8 @@
 
 	            BBDB["current_map"].push({
 	                "value": value,
-	                "label": label,
+	                // "label": label,
+	                "text": label,
 	                "disabled": disabled
 	            });
 	        });
@@ -27491,7 +27495,7 @@
 		{
 			"value": "tlaza_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "砂塵の死線"
@@ -27499,7 +27503,7 @@
 		{
 			"value": "tlaza_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "夜間渡河"
@@ -27507,7 +27511,7 @@
 		{
 			"value": "tlaza_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "地下進撃"
@@ -27515,7 +27519,7 @@
 		{
 			"value": "tlaza_d",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "月下の砲煙"
@@ -27523,7 +27527,7 @@
 		{
 			"value": "tlaza_e",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "暗中行軍"
@@ -27531,7 +27535,7 @@
 		{
 			"value": "tlaza_f",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "激震の岩峰"
@@ -27539,7 +27543,7 @@
 		{
 			"value": "tlaza_g",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "tlaza"
 			},
 			"text": "高峰空襲"
@@ -27547,7 +27551,7 @@
 		{
 			"value": "darya_a",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "廃都行軍"
@@ -27555,7 +27559,7 @@
 		{
 			"value": "darya_d",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "乾季烈戦"
@@ -27563,7 +27567,7 @@
 		{
 			"value": "darya_e",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "橋上の戦線"
@@ -27571,7 +27575,7 @@
 		{
 			"value": "darya_b",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "河底の弾雨"
@@ -27579,7 +27583,7 @@
 		{
 			"value": "darya_c",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "交錯の火線"
@@ -27587,7 +27591,7 @@
 		{
 			"value": "darya_ea",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "激闘の古跡",
@@ -27605,7 +27609,7 @@
 		{
 			"value": "darya_ua",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "darya"
 			},
 			"text": "密林の迎撃戦",
@@ -27614,7 +27618,7 @@
 		{
 			"value": "d51_a",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "冷厳なる轟声"
@@ -27622,7 +27626,7 @@
 		{
 			"value": "d51_b",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "白銀死都"
@@ -27630,7 +27634,7 @@
 		{
 			"value": "d51_c",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "雪中遭遇戦"
@@ -27638,7 +27642,7 @@
 		{
 			"value": "d51_d",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "氷点下の鳴動"
@@ -27646,7 +27650,7 @@
 		{
 			"value": "d51_e",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "雪映えの赤光"
@@ -27654,7 +27658,7 @@
 		{
 			"value": "d51_f",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "連携の標柱"
@@ -27662,7 +27666,7 @@
 		{
 			"value": "d51_g",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "寒威三陣"
@@ -27670,7 +27674,7 @@
 		{
 			"value": "d51_ea",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "d51"
 			},
 			"text": "激闘の氷域",
@@ -27679,7 +27683,7 @@
 		{
 			"value": "wuhai_a",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "要衝襲撃"
@@ -27687,7 +27691,7 @@
 		{
 			"value": "wuhai_b",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "暁の威容"
@@ -27695,7 +27699,7 @@
 		{
 			"value": "wuhai_c",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "落日銃火"
@@ -27703,7 +27707,7 @@
 		{
 			"value": "wuhai_d",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "艦上の交錯線"
@@ -27711,7 +27715,7 @@
 		{
 			"value": "wuhai_e",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "残照の閃光"
@@ -27719,7 +27723,7 @@
 		{
 			"value": "wuhai_f",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "海港の戦渦"
@@ -27727,7 +27731,7 @@
 		{
 			"value": "wuhai_ea",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "wuhai"
 			},
 			"text": "激闘の港湾",
@@ -27745,7 +27749,7 @@
 		{
 			"value": "valerio_a",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "強行水路"
@@ -27753,7 +27757,7 @@
 		{
 			"value": "valerio_b",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "巨影侵撃"
@@ -27761,7 +27765,7 @@
 		{
 			"value": "valerio_c",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "血戦の城壁"
@@ -27769,7 +27773,7 @@
 		{
 			"value": "valerio_d",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "高地の煙硝"
@@ -27777,7 +27781,7 @@
 		{
 			"value": "valerio_e",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "地を穿つ光条"
@@ -27785,7 +27789,7 @@
 		{
 			"value": "valerio_f",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "導く光明"
@@ -27801,7 +27805,7 @@
 		{
 			"value": "valerio_ea",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "激闘の城下",
@@ -27810,7 +27814,7 @@
 		{
 			"value": "valerio_ua",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "城跡の連合戦",
@@ -27819,7 +27823,7 @@
 		{
 			"value": "valerio_ub",
 			"dataset": {
-				"layer": "['建築物内部']",
+				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
 			"text": "山塞の迎撃戦",
@@ -27837,7 +27841,7 @@
 		{
 			"value": "belsk_a",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "凍て付く戦陣"
@@ -27845,7 +27849,7 @@
 		{
 			"value": "belsk_b",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "純白の先途"
@@ -27853,7 +27857,7 @@
 		{
 			"value": "belsk_c",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "氷晶烈戦"
@@ -27861,7 +27865,7 @@
 		{
 			"value": "belsk_d",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "狭路急襲"
@@ -27869,7 +27873,7 @@
 		{
 			"value": "belsk_e",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "白霜の飛翔"
@@ -27885,7 +27889,7 @@
 		{
 			"value": "belsk_ea",
 			"dataset": {
-				"layer": "['通路A','通路B','通路C','全表示']",
+				"layer": "[\"通路A\",\"通路B\",\"通路C\",\"全表示\"]",
 				"stage": "belsk"
 			},
 			"text": "激闘の氷海",
@@ -27903,7 +27907,7 @@
 		{
 			"value": "adora_a",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "紅蓮の大河"
@@ -27911,7 +27915,7 @@
 		{
 			"value": "adora_b",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "爆炎戦域"
@@ -27919,7 +27923,7 @@
 		{
 			"value": "adora_c",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "煉獄洞窟"
@@ -27927,7 +27931,7 @@
 		{
 			"value": "adora_d",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "焦熱の死地"
@@ -27935,7 +27939,7 @@
 		{
 			"value": "adora_e",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "渦巻く炎海"
@@ -27943,7 +27947,7 @@
 		{
 			"value": "adora_ea",
 			"dataset": {
-				"layer": "['上段','下段','全表示']",
+				"layer": "[\"上段\",\"下段\",\"全表示\"]",
 				"stage": "adora"
 			},
 			"text": "激闘の溶岩域",
@@ -27952,7 +27956,7 @@
 		{
 			"value": "algren_a",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "巨坑侵入"
@@ -27960,7 +27964,7 @@
 		{
 			"value": "algren_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "algren"
 			},
 			"text": "瀑布の死闘"
@@ -27968,7 +27972,7 @@
 		{
 			"value": "algren_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "algren"
 			},
 			"text": "重盾戦機"
@@ -27976,7 +27980,7 @@
 		{
 			"value": "algren_d",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "天貫く光芒"
@@ -27984,7 +27988,7 @@
 		{
 			"value": "algren_e",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "孔上の対峙"
@@ -27992,7 +27996,7 @@
 		{
 			"value": "algren_ea",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "algren"
 			},
 			"text": "激闘の湖畔",
@@ -28001,7 +28005,7 @@
 		{
 			"value": "algren_ua",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "水煙連合戦",
@@ -28010,7 +28014,7 @@
 		{
 			"value": "algren_ub",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "落水の迎撃戦",
@@ -28019,7 +28023,7 @@
 		{
 			"value": "algren_sa",
 			"dataset": {
-				"layer": "['中段','下段','全通路']",
+				"layer": "[\"中段\",\"下段\",\"全通路\"]",
 				"stage": "algren"
 			},
 			"text": "穿孔争奪戦",
@@ -28028,7 +28032,7 @@
 		{
 			"value": "denebra_a",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "雨下応酬"
@@ -28036,7 +28040,7 @@
 		{
 			"value": "denebra_b",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "塔上接敵"
@@ -28044,7 +28048,7 @@
 		{
 			"value": "denebra_c",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "天翔る双龍"
@@ -28052,7 +28056,7 @@
 		{
 			"value": "denebra_d",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "煙雨の剛砲"
@@ -28060,7 +28064,7 @@
 		{
 			"value": "denebra_e",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "巨塊下の衝突"
@@ -28068,7 +28072,7 @@
 		{
 			"value": "denebra_f",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "崖下乱戦"
@@ -28076,7 +28080,7 @@
 		{
 			"value": "denebra_ea",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "激闘の高地",
@@ -28085,7 +28089,7 @@
 		{
 			"value": "denebra_ua",
 			"dataset": {
-				"layer": "['通路A','通路B','全通路']",
+				"layer": "[\"通路A\",\"通路B\",\"全通路\"]",
 				"stage": "denebra"
 			},
 			"text": "暴雨の連合戦",
@@ -28094,7 +28098,7 @@
 		{
 			"value": "highrisesite_a",
 			"dataset": {
-				"layer": "['1F','2F','3F','全表示']",
+				"layer": "[\"1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "天柱の兵火"
@@ -28102,7 +28106,7 @@
 		{
 			"value": "highrisesite_b",
 			"dataset": {
-				"layer": "['B1F/1F','2F','3F','全表示']",
+				"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "高高度電撃戦"
@@ -28110,7 +28114,7 @@
 		{
 			"value": "highrisesite_c",
 			"dataset": {
-				"layer": "['1F','2F','3F','全表示']",
+				"layer": "[\"1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "雲上死線"
@@ -28118,7 +28122,7 @@
 		{
 			"value": "highrisesite_d",
 			"dataset": {
-				"layer": "['B1F/1F','2F','3F','全表示']",
+				"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "天を突く一閃"
@@ -28134,7 +28138,7 @@
 		{
 			"value": "highrisesite_ea",
 			"dataset": {
-				"layer": "['B1F/1F','2F','3F','全表示']",
+				"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]",
 				"stage": "highrisesite"
 			},
 			"text": "激闘の高楼",
@@ -28143,7 +28147,7 @@
 		{
 			"value": "navar_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "戦端の大鉄橋"
@@ -28151,7 +28155,7 @@
 		{
 			"value": "navar_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "断崖の相克"
@@ -28159,7 +28163,7 @@
 		{
 			"value": "navar_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "絶崖跳躍"
@@ -28167,7 +28171,7 @@
 		{
 			"value": "navar_d",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "岩峪の侵襲"
@@ -28175,7 +28179,7 @@
 		{
 			"value": "navar_ea",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "激闘の荒野",
@@ -28184,7 +28188,7 @@
 		{
 			"value": "navar_ua",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "赤土の連合戦",
@@ -28193,7 +28197,7 @@
 		{
 			"value": "navar_ub",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "navar"
 			},
 			"text": "砂岩の迎撃戦",
@@ -28211,7 +28215,7 @@
 		{
 			"value": "madelrond_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "地底の接敵"
@@ -28219,7 +28223,7 @@
 		{
 			"value": "madelrond_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "深部暗闘"
@@ -28227,7 +28231,7 @@
 		{
 			"value": "madelrond_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "結集の灯火"
@@ -28235,7 +28239,7 @@
 		{
 			"value": "madelrond_d",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "流動地底湖"
@@ -28243,7 +28247,7 @@
 		{
 			"value": "madelrond_e",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "水洞猛進"
@@ -28251,7 +28255,7 @@
 		{
 			"value": "madelrond_ea",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "madelrond"
 			},
 			"text": "激闘の岩窟",
@@ -28260,7 +28264,7 @@
 		{
 			"value": "gerberg_a",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "燃え盛る征野"
@@ -28268,7 +28272,7 @@
 		{
 			"value": "gerberg_b",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "闘争地下壕"
@@ -28276,7 +28280,7 @@
 		{
 			"value": "gerberg_c",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "一対の甲龍"
@@ -28284,7 +28288,7 @@
 		{
 			"value": "gerberg_d",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "煙中対敵"
@@ -28292,7 +28296,7 @@
 		{
 			"value": "gerberg_e",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "埋伏攻路"
@@ -28300,7 +28304,7 @@
 		{
 			"value": "gerberg_ea",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "激闘の塁砦",
@@ -28309,7 +28313,7 @@
 		{
 			"value": "gerberg_ua",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "硝煙の迎撃戦",
@@ -28318,7 +28322,7 @@
 		{
 			"value": "gerberg_ub",
 			"dataset": {
-				"layer": "['地下','建造物','全通路']",
+				"layer": "[\"地下\",\"建造物\",\"全通路\"]",
 				"stage": "gerberg"
 			},
 			"text": "黒煙の連合戦",
@@ -28327,7 +28331,7 @@
 		{
 			"value": "longsha_a",
 			"dataset": {
-				"layer": "['通路あり']",
+				"layer": "[\"通路あり\"]",
 				"stage": "longsha"
 			},
 			"text": "山門の抗衡"
@@ -28335,7 +28339,7 @@
 		{
 			"value": "longsha_b",
 			"dataset": {
-				"layer": "['通路あり']",
+				"layer": "[\"通路あり\"]",
 				"stage": "longsha"
 			},
 			"text": "白霧潜攻"
@@ -28343,7 +28347,7 @@
 		{
 			"value": "longsha_c",
 			"dataset": {
-				"layer": "['洞窟内A','洞窟内B','全表示']",
+				"layer": "[\"洞窟内A\",\"洞窟内B\",\"全表示\"]",
 				"stage": "longsha"
 			},
 			"text": "眼下猛襲"
@@ -28351,7 +28355,7 @@
 		{
 			"value": "longsha_d",
 			"dataset": {
-				"layer": "['洞窟内A','洞窟内B','全表示']",
+				"layer": "[\"洞窟内A\",\"洞窟内B\",\"全表示\"]",
 				"stage": "longsha"
 			},
 			"text": "霊峰急撃"
@@ -28367,7 +28371,7 @@
 		{
 			"value": "longsha_ua",
 			"dataset": {
-				"layer": "['通路あり']",
+				"layer": "[\"通路あり\"]",
 				"stage": "longsha"
 			},
 			"text": "晴嵐の連合戦",
@@ -28376,7 +28380,7 @@
 		{
 			"value": "hopeside_a",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "都市侵襲"
@@ -28384,7 +28388,7 @@
 		{
 			"value": "hopeside_b",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "運河に見ゆ"
@@ -28392,7 +28396,7 @@
 		{
 			"value": "hopeside_c",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "高架の敵影"
@@ -28400,7 +28404,7 @@
 		{
 			"value": "hopeside_d",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "双騎接近"
@@ -28408,7 +28412,7 @@
 		{
 			"value": "hopeside_ua",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "摩天迎撃戦",
@@ -28426,7 +28430,7 @@
 		{
 			"value": "hopeside_sa",
 			"dataset": {
-				"layer": "['中段','下段','全表示']",
+				"layer": "[\"中段\",\"下段\",\"全表示\"]",
 				"stage": "hopeside"
 			},
 			"text": "大都争奪戦",
@@ -28435,7 +28439,7 @@
 		{
 			"value": "kinich_a",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "白砂進軍"
@@ -28443,7 +28447,7 @@
 		{
 			"value": "kinich_b",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "火花散る渚"
@@ -28451,7 +28455,7 @@
 		{
 			"value": "kinich_c",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "波打際の熱闘"
@@ -28476,7 +28480,7 @@
 		{
 			"value": "kinich_ua",
 			"dataset": {
-				"layer": "['通路表示あり']",
+				"layer": "[\"通路表示あり\"]",
 				"stage": "kinich"
 			},
 			"text": "南海の迎撃戦",
@@ -28494,7 +28498,7 @@
 		{
 			"value": "nesos_a",
 			"dataset": {
-				"layer": "['下段']",
+				"layer": "[\"下段\"]",
 				"stage": "nesos"
 			},
 			"text": "構造α-01"
@@ -28657,6 +28661,8 @@
 
 	var _BBDB2 = _interopRequireDefault(_BBDB);
 
+	__webpack_require__(21);
+
 	// import 'jquery-ui/jquery-ui.min.js';
 	// /*global require*/ // eslint
 	// require('jquery-ui/themes/base/core.css');
@@ -28664,18 +28670,18 @@
 	// require('jquery-ui/themes/base/theme.css');
 	// require('jquery-ui/themes/smoothness/jquery-ui.min.css');
 
-	__webpack_require__(21);
+	__webpack_require__(22);
 
-	__webpack_require__(22); /*global require*/ // eslint
+	__webpack_require__(23); /*global require*/ // eslint
 
 	//初期化
 	var CanvasName = "BBCompass";
-	var DivName = "CanvasArea";
+	var CanvasDivName = "CanvasArea";
 	var scrollBarWidth = 0;
 	var scrollBarHeight = 0;
 	var freehandOnWrite = undefined;
 	var bbobj = "";
-	var wideview = true;
+	var forcePcMode = false;
 
 	var debugMode = false;
 
@@ -28688,6 +28694,27 @@
 	};
 	var turretCircle = 6;
 
+	var appData = _BBDB2['default'];
+	var appDataStatic = {
+	    "picker": [{ "value": "#FF0000", "text": "red" }, { "value": "#FF00FF", "text": "pink" }, { "value": "#FFA500", "text": "orange" }, { "value": "#FFFF00", "text": "yellow" }, { "value": "#00FF00", "text": "green" }, { "value": "#00FFFF", "text": "cyan" }, { "value": "#0000FF", "text": "blue" }, { "value": "#800080", "text": "purple" }],
+	    "defaultLayer": [{ "value": "", "text": "通常" }]
+	};
+
+	function getMapsFromStage(stage) {
+	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
+	        return el.hasOwnProperty("dataset") && el.dataset.stage == stage;
+	    });
+	    return maps;
+	}
+	function getStageFromMap(map) {
+	    var stages = _jquery2['default'].grep(appData["map"], function (el, it) {
+	        return el.value == map;
+	    });
+	    return stages[0].dataset.stage;
+	}
+
+	// optionに対応するオブジェクトのリストから
+	// optionリストのdocumentFragmentを生成する
 	function createOptionFragments(optionList) {
 	    var frag = document.createDocumentFragment();
 	    _jquery2['default'].each(optionList, function (it, el) {
@@ -28700,6 +28727,9 @@
 	        }
 	        if (el.hasOwnProperty("disabled") == true) {
 	            elOpt["disabled"] = el["disabled"];
+	        }
+	        if (el.hasOwnProperty("selected") == true) {
+	            elOpt["selected"] = el["selected"];
 	        }
 	        if (el.hasOwnProperty("class") == true) {
 	            elOpt["class"] = el["class"];
@@ -28719,15 +28749,123 @@
 	    $select.empty().append(frag);
 	}
 
+	// マップ画像のパス
+	function getMapImgPath(stage, map) {
+	    return './map/' + stage + '/' + map + '.jpg';
+	}
+	// マップの階層画像のパス
+	function getMapLayerImgPath(stage, map, layerIdx) {
+	    return './map/' + stage + '/' + map + '_' + (layerIdx + 1) + '.jpg';
+	}
+	// マップデータ(ガンタレ、索敵施設)のパス
+	function getMapDataPath(map) {
+	    return 'data/' + map + '.txt';
+	}
+	//ファイル名・ディレクトリ名チェック
+	function sanitizeFilePath(path) {
+	    var controlCodes = /[\u0000-\u001F\u007F-\u009F]/g;
+	    path.replace(controlCodes, '�');
+	    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
+	        return path;
+	    } else {
+	        return null;
+	    }
+	}
+
+	// is.gd で短縮する
+	// callbackの引数は (error, shortenUrl)
+	// 対応していないURL(localhostとか)なら変換せずにそのまま
+	function shortenUrl(url, callback) {
+	    if (url.match(/^https?:\/\//) && !url.match(/^http:\/\/localhost/)) {
+	        _jquery2['default'].ajax({
+	            type: 'GET',
+	            url: 'http://is.gd/create.php',
+	            dataType: 'jsonp',
+	            crossDomain: true,
+	            cache: false,
+	            jsonp: false,
+	            data: {
+	                url: url,
+	                format: "json",
+	                callback: "shortenurl"
+	            },
+	            jsonpCallback: 'shortenurl',
+	            success: function success(data, status) {
+	                if (!data["errorcode"]) {
+	                    callback(null, data["shorturl"]);
+	                } else {
+	                    callback("URL短縮エラー(" & data["errorcode"] & ")", url);
+	                }
+	            },
+	            error: function error() {
+	                callback("URL短縮に失敗しました", url);
+	            }
+	        });
+	    } else {
+	        callback(null, url);
+	    }
+	}
+
+	// //前景色を得る
+	// function getFgColor($bgcol) {
+	//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
+	//
+	//     var $r = parseInt($bgcol.substr(1, 2),16);
+	//     var $g = parseInt($bgcol.substr(3, 2),16);
+	//     var $b = parseInt($bgcol.substr(5, 2),16);
+	//
+	//     var $bright = (($r*299)+($g*587)+($b*114))/1000;
+	//     if( $bright < 127.5 ) {
+	//         return ("#FFFFFF");
+	//     }
+	//     return ("#000000");
+	// }
+
+	// メニュー関連 ///////////////////////////////////////
+
+	// メニュータブの選択状態を切り替え
+	// - $tab: タブ
+	// - $target: タブに対応するメニュー要素
+	// 選択した $tab, $target と .ribbonmenuに selectedクラスを追加する
+	function toggleMenutab($tab, $target) {
+	    if ($tab == undefined || $tab.hasClass("selected")) {
+	        (0, _jquery2['default'])(".menutab").removeClass("selected");
+	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu").removeClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeOut("fast");
+	    } else {
+	        (0, _jquery2['default'])(".menutab").removeClass("selected");
+	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        $tab.addClass("selected");
+	        $target.addClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeIn("fast");
+	        setTimeout(function () {
+	            (0, _jquery2['default'])(".ribbonmenu").addClass("selected");
+	        }, 200);
+	    }
+	}
+	// メニューを閉じる
+	function closeMenuTab() {
+	    toggleMenutab();
+	}
+
+	// ステージメニュー関連 //////////////////////////////////////////
+
 	function loadStageList() {
 	    loadSelectionOption((0, _jquery2['default'])("#current"), appData["current_map"]);
 	    loadSelectionOption((0, _jquery2['default'])("#stage"), appData["stage"]);
 	}
-	function loadMapList() {
+	function loadStageMapList() {
 	    var stage = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 
 	    if (stage != null) {
 	        var stageMaps = getMapsFromStage(stage);
+	        stageMaps.unshift({
+	            "value": undefined,
+	            "label": "(マップを選択してください)",
+	            "disabled": true,
+	            "selected": true
+	        });
 	        loadSelectionOption((0, _jquery2['default'])("#map"), stageMaps);
 	    } else {
 	        // いらない！！！
@@ -28735,18 +28873,50 @@
 	        loadSelectionOption((0, _jquery2['default'])("#map"), optionList);
 	    }
 	}
-	function getMapsFromStage(stage) {
-	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
-	        return el.hasOwnProperty("dataset") && el.dataset.stage == stage;
-	    });
-	    return maps;
+
+	// ステージ選択を変更する。あわせてマップの選択肢を対応するマップのみに絞る
+	function changeStageSelection(stage) {
+	    var $stage = (0, _jquery2['default'])("#stage");
+	    if (stage == null) {
+	        return;
+	    }
+	    $stage.val(stage);
+	    loadStageMapList(stage);
 	}
-	function getStageFromMap(map) {
-	    var stages = _jquery2['default'].grep(appData["map"], function (el, it) {
-	        return el.value == map;
-	    });
-	    return stages[0].dataset.stage;
+	// マップ選択を変更する。あわせて階層情報を更新する
+	function changeMapSelection(map) {
+	    var $map = (0, _jquery2['default'])("#map");
+	    if (map == null) {
+	        return;
+	    }
+	    $map.val(map);
+	    var stage = getStageFromMap(map);
+
+	    // イベントとかの場合は #map にクラスを追加
+	    var $selectedMap = $map.find("option:selected");
+	    $map.removeClass("union event scramble squad");
+	    var mapClass = $selectedMap.attr("class");
+	    if (mapClass !== undefined) {
+	        $map.addClass(mapClass);
+	    }
+
+	    // 階層選択を更新
+	    var layer = eval($selectedMap.data("layer"));
+	    var layerList = [];
+	    layerList = appDataStatic["defaultLayer"].concat();
+	    for (var i = 0; i < layer.length; i++) {
+	        layerList.push({
+	            "value": getMapLayerImgPath(stage, map, i),
+	            "text": layer[i]
+	        });
+	    }
+	    var $lstLayer = (0, _jquery2['default'])("#lst_layer");
+	    loadSelectionOption($lstLayer, layerList);
+	    $lstLayer.val("");
 	}
+
+	// オブジェクトメニュー関連 /////////////////////////////////
+
 	function loadObjectLists() {
 	    var elMap = {
 	        "object_scout": "#lst_scout",
@@ -28764,12 +28934,6 @@
 	    });
 	}
 
-	var appData = _BBDB2['default'];
-	var appDataStatic = {
-	    "picker": [{ "value": "#FF0000", "text": "red" }, { "value": "#FF00FF", "text": "pink" }, { "value": "#FFA500", "text": "orange" }, { "value": "#FFFF00", "text": "yellow" }, { "value": "#00FF00", "text": "green" }, { "value": "#00FFFF", "text": "cyan" }, { "value": "#0000FF", "text": "blue" }, { "value": "#800080", "text": "purple" }],
-	    "defaultLayer": [{ "value": "", "text": "通常" }]
-	};
-
 	//メニューのオブジェクト選択
 	var onObjectSelectorChanged = function onObjectSelectorChanged($this) {
 	    var speed = arguments.length <= 1 || arguments[1] === undefined ? "fast" : arguments[1];
@@ -28783,48 +28947,195 @@
 	    var openid = $this.data("target");
 
 	    //リストの先頭を選択済みにする
-	    (0, _jquery2['default'])("#" + openid + " " + ".formlst option:first").attr('selected', true);
-	    (0, _jquery2['default'])("#" + openid + " " + ".formlst").change();
+	    (0, _jquery2['default'])('#' + openid + ' .formlst option:first').attr('selected', true);
+	    (0, _jquery2['default'])('#' + openid + ' .formlst').change();
 
 	    (0, _jquery2['default'])("div.setobj:visible").fadeOut(speed, function () {
-	        (0, _jquery2['default'])("#" + openid).fadeIn(speed);
+	        (0, _jquery2['default'])('#' + openid).fadeIn(speed);
 	    });
 	};
 
+	// 表示メニュー関連 //////////////////////////////////////////
+
+	//lst_objectへの追加
+	function addObject(id, name) {
+	    var $lstObject = (0, _jquery2['default'])("#lst_object");
+	    if ($lstObject.children("option").get().length) {
+	        (0, _jquery2['default'])('<option value="' + id + '"></option>').text(name).insertBefore((0, _jquery2['default'])("#lst_object :first-child"));
+	    } else {
+	        $lstObject.append((0, _jquery2['default'])('<option value="' + id + '"></option>').text(name));
+	    }
+	    $lstObject.val(id);
+	}
+
+	//lst_objectを上に
+	function upObject() {
+	    (0, _jquery2['default'])("#lst_object option:not(:selected)").each(function () {
+	        while ((0, _jquery2['default'])(this).next().is(":selected")) {
+	            (0, _jquery2['default'])(this).insertAfter((0, _jquery2['default'])(this).next());
+	            bbobj.object((0, _jquery2['default'])(this).val()).down();
+	        }
+	    });
+	}
+
+	//lst_objectを下に
+	function downObject() {
+	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option:not(:selected)").get().reverse()).each(function () {
+	        while ((0, _jquery2['default'])(this).prev().is(":selected")) {
+	            (0, _jquery2['default'])(this).insertBefore((0, _jquery2['default'])(this).prev());
+	            bbobj.object((0, _jquery2['default'])(this).val()).up();
+	        }
+	    });
+	}
+
+	//lst_objectから要素削除
+	function delObject() {
+	    (0, _jquery2['default'])("#lst_object option:selected").each(function () {
+	        bbobj.object((0, _jquery2['default'])(this).val()).del();
+	        (0, _jquery2['default'])(this).remove();
+	    });
+	}
+
+	// lst_objectから全要素削除
+	function delallObject() {
+	    (0, _jquery2['default'])("#lst_object option").each(function () {
+	        bbobj.object((0, _jquery2['default'])(this).val()).del();
+	        (0, _jquery2['default'])(this).remove();
+	    });
+	}
+
+	//ズーム
+	function zoomCnv(scale) {
+	    var newScale, chgScale;
+	    // var canvas = document.getElementById(CanvasName);
+
+	    newScale = scale;
+	    (0, _jquery2['default'])("#lst_scale").val(newScale);
+
+	    chgScale = newScale / bbobj.zoomScale;
+	    if (bbobj.zoomScale != newScale) {
+	        //倍率が変化する場合は左上維持して拡大処理
+	        bbobj.zoom(chgScale);
+	        var $CanvasArea = (0, _jquery2['default'])("#" + CanvasDivName);
+	        $CanvasArea.scrollLeft($CanvasArea.scrollLeft() * chgScale).scrollTop($CanvasArea.scrollTop() * chgScale);
+	    }
+	}
+
+	// 保存メニュー関連 //////////////////////////////////////////
+
+	var execMakeImg = function execMakeImg() {
+	    var $imgView = (0, _jquery2['default'])("#SaveImgView");
+	    var $SaveImgText = (0, _jquery2['default'])("#SaveImgText");
+	    var $SaveImgShortUrl = (0, _jquery2['default'])("#SaveImgShortUrl");
+	    var $map = (0, _jquery2['default'])("#map");
+	    var objs = new Array();
+
+	    $imgView.attr("src", "");
+	    $SaveImgText.attr("value", "");
+
+	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
+	        objs.push((0, _jquery2['default'])(this).val());
+	    });
+
+	    var queryobj = new _BBCQuery2['default'](getBbObj(), $map.val());
+	    queryobj.fromObjects(objs);
+	    var querystr = queryobj.toBase64();
+	    var url = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
+	    if ($SaveImgShortUrl.prop('checked')) {
+	        shortenUrl(url, function (err, shorten) {
+	            if (err) {
+	                window.alert(err);
+	            }
+	            $SaveImgText.attr("value", shorten);
+	        });
+	    } else {
+	        setTimeout(function () {
+	            $SaveImgText.attr("value", url);
+	        }, 200);
+	    }
+
+	    var imgSrc = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
+	    setTimeout(function () {
+	        $imgView.attr("src", imgSrc);
+	    }, 200);
+	};
+
+	function getBbObj() {
+	    return bbobj;
+	}
+
 	// 読み込み時の処理
 	(0, _jquery2['default'])(document).ready(function () {
+	    // デバイスごとの切り替え
+	    forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
+	    if (forcePcMode) {
+	        var viewport = forcePcMode ? 'width=850, user-scalable=yes' : 'width=device-width, user-scalable=no';
+	        (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
+	    }
+	    //スマホ用メニュー制御
+	    // - PCだとウィンドウサイズに応じる。スタイルはmedia query任せ
+	    // - モバイルだとモバイル版をデフォルトで表示＋設定に任せる
+	    //   - モバイルでPC版表示にする場合はwidth=850＋ズームありで
+	    //
+	    //firefoxにはバグがある
+	    // - metaの属性書き換えではなく、タグごと消して作り直す
+	    // - 大人しくリロードする
+	    // の2択となる。大人しくリロードする
+	    var ua = navigator.userAgent;
+	    var $viewsw = (0, _jquery2['default'])("#viewsw");
+	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	        if (forcePcMode) {
+	            $viewsw.text('スマホ版を表示する');
+	        } else {
+	            $viewsw.text('PC版を表示する');
+	        }
+	    } else {
+	        $viewsw.hide();
+	    }
 
-	    // 現在の戦場選択メニューの設定
+	    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
+	    var canvas = document.getElementById(CanvasName);
+	    if (!canvas || !canvas.getContext) {
+	        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
+	        return false;
+	    }
+
+	    bindEventHandler();
+	    loadInitData();
+	});
+
+	// 各種ハンドラの設定
+	function bindEventHandler() {
+
+	    // 現在の戦場選択メニュー
 	    (0, _jquery2['default'])("#current").change(function (e) {
 	        var map = (0, _jquery2['default'])(this).val();
 	        var stage = getStageFromMap(map);
-	        (0, _jquery2['default'])("#stage").val(stage);
-	        (0, _jquery2['default'])("#stage").change();
-	        (0, _jquery2['default'])("#map").val(map);
+	        changeStageSelection(stage);
+	        changeMapSelection(map);
+	        loadMap(map);
+	        closeMenuTab();
 	    });
-
-	    // ステージ選択メニューの設定
+	    // ステージ選択メニュー
 	    (0, _jquery2['default'])("#stage").change(function (e) {
 	        var stage = (0, _jquery2['default'])(this).val();
-	        // ステージ変更に連動してマップ一覧をフィルタしなおし
-	        loadMapList(stage);
-	        (0, _jquery2['default'])("#map").change();
+	        changeStageSelection(stage);
 	    });
-	    // マップ選択メニューの設定
+	    // マップ選択メニュー
 	    (0, _jquery2['default'])("#map").change(function (e) {
-	        // var map = $(this).val();
-	        (0, _jquery2['default'])("#map").removeClass("union event scramble");
-	        var mapClass = (0, _jquery2['default'])("#map option:selected").attr("class");
-	        if (mapClass !== undefined) {
-	            (0, _jquery2['default'])("#map").addClass(mapClass);
-	        }
+	        var map = (0, _jquery2['default'])(this).val();
+	        changeMapSelection(map);
+	        loadMap(map);
+	        closeMenuTab();
 	    });
-	    (0, _jquery2['default'])("#change_map").bind('click', function (e) {
-	        chg_map();
+	    // 階層選択
+	    (0, _jquery2['default'])("#lst_layer").change(function () {
+	        getBbObj().setbgdiff((0, _jquery2['default'])("#lst_layer").val());
+	        // closeMenuTab();
 	    });
 
 	    // オブジェクト選択メニューの設定
-	    (0, _jquery2['default'])("#objselector .option").click(function () {
+	    (0, _jquery2['default'])("#objselector .option").tap(function () {
 	        onObjectSelectorChanged((0, _jquery2['default'])(this));
 	    });
 
@@ -28857,17 +29168,6 @@
 	        (0, _jquery2['default'])("#name_icon").val((0, _jquery2['default'])(this).find("option:selected").text());
 	    });
 
-	    // selectmenuだとタップしてメニュー展開という動作になってしまう。
-	    // 開きっぱなしにしてほしいのでmenuのほうが適切っぽいけどmenuだとul, li。。
-	    // $('#lst_scout').selectmenu({
-	    //     change: function(ev, ui) {
-	    //         $('#lst_scout option').attr('selected', false);
-	    //         $('#lst_scout option:eq('+ ui.item.index +')').attr('selected', true);
-	    //         $("#name_scout").val( ui.item.element.text() );
-	    //     }
-	    // });
-	    // $('#lst_scout').selectmenu("open");
-
 	    // カラーピッカーの設定
 	    loadSelectionOption((0, _jquery2['default'])('.colorpick'), appDataStatic["picker"]);
 	    (0, _jquery2['default'])('select.colorpick').simplecolorpicker({
@@ -28875,103 +29175,147 @@
 	    });
 
 	    //狭い時用メニューに関する初期化
-	    (0, _jquery2['default'])("div.menutab#menutab_map").click(function (ev) {
-	        if ((0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").is(":visible")) {
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast");
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	        } else {
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast", function () {
-	                (0, _jquery2['default'])("div.ribbonmenu>*").hide();
-	                (0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").fadeIn("fast");
-	                (0, _jquery2['default'])("div.menutab#menutab_map").addClass("selected");
-	            });
-	        }
+	    (0, _jquery2['default'])("#menutab_map").tap(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_map"), (0, _jquery2['default'])("#menu_map"));
 	    });
-	    (0, _jquery2['default'])("div.menutab#menutab_item").click(function (ev) {
-	        if ((0, _jquery2['default'])("div.menusubcell#subcell_graph").is(":visible")) {
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast");
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	        } else {
-	            (0, _jquery2['default'])("div.menutab").removeClass("selected");
-	            (0, _jquery2['default'])("div.ribbonmenu").fadeOut("fast", function () {
-	                (0, _jquery2['default'])("div.ribbonmenu>*").hide();
-	                (0, _jquery2['default'])("div.menusubcell#subcell_graph").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").fadeIn("fast");
-	                (0, _jquery2['default'])("div.menutab#menutab_item").addClass("selected");
-	            });
-	        }
+	    (0, _jquery2['default'])("#menutab_item").tap(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_item"), (0, _jquery2['default'])("#menu_graph"));
 	    });
-
-	    //メニュー部のタッチによるスクロール防止と、独自スクロール処理のbind
-	    (0, _jquery2['default'])("header,div.ribbonmenu").bind('touchmove', function (ev) {
-	        if (wideview) return true;
-	        ev.preventDefault();
+	    (0, _jquery2['default'])("#menutab_view").tap(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_view"), (0, _jquery2['default'])("#menu_cont"));
 	    });
-	    bindScroll((0, _jquery2['default'])("div#objselector"));
-
-	    //コンテキストメニュー
-	    (0, _jquery2['default'])("div.ContextMenu").bind('contextmenu', function (ev) {
-	        ev.preventDefault();
+	    (0, _jquery2['default'])("#menutab_save").tap(function (ev) {
+	        toggleMenutab((0, _jquery2['default'])("#menutab_save"), (0, _jquery2['default'])("#menu_view"));
 	    });
-	    (0, _jquery2['default'])("div.ContextMenu li.hasChild").bind('click', function (ev) {
-	        if (ev.target == ev.currentTarget) {
-	            ev.stopPropagation();
-	        }
-	    });
-	    (0, _jquery2['default'])("div#CanvasArea").bind('contextmenu', function (ev) {
-	        if (!wideview) return true;
-	        ev.preventDefault();
-	        var offset = {
-	            "top": ev.pageY,
-	            "left": ev.pageX
-	        };
-
-	        //はみ出しそうなら収める
-	        if (ev.clientY + (0, _jquery2['default'])("div.ContextMenu").height() > (0, _jquery2['default'])(window).height() - 3) {
-	            offset.top = (0, _jquery2['default'])(window).height() - (0, _jquery2['default'])("div.ContextMenu").height() + (0, _jquery2['default'])(window).scrollTop() - 3;
-	        }
-
-	        if (ev.clientX + (0, _jquery2['default'])("div.ContextMenu").width() > (0, _jquery2['default'])(window).width() - 3) {
-	            offset.left = (0, _jquery2['default'])(window).width() - (0, _jquery2['default'])("div.ContextMenu").width() + (0, _jquery2['default'])(window).scrollLeft() - 3;
-	        }
-
-	        (0, _jquery2['default'])("div.ContextMenu").show().offset(offset);
-
-	        //どこかクリックしたらメニューを消す
-	        (0, _jquery2['default'])(document).one('click', function () {
-	            (0, _jquery2['default'])("div.ContextMenu,div.ContextMenu div.ContextChild").hide();
-	        });
-	    });
-
-	    //子メニュー表示部
-	    (0, _jquery2['default'])("div.ContextMenu li.hasChild").hover(function (ev) {
-	        var offset = {
-	            top: (0, _jquery2['default'])(this).offset().top,
-	            left: (0, _jquery2['default'])(this).offset().left + (0, _jquery2['default'])(this).width() * 0.99
-	        };
-
-	        if ((0, _jquery2['default'])(this).offset().top - (0, _jquery2['default'])(window).scrollTop() + (0, _jquery2['default'])(this).children(".ContextChild").height() > (0, _jquery2['default'])(window).height()) {
-
-	            offset.top = (0, _jquery2['default'])(window).scrollTop() + (0, _jquery2['default'])(window).height() - (0, _jquery2['default'])(this).children(".ContextChild").height() - 3;
-	        }
-
-	        if ((0, _jquery2['default'])(this).offset().left - (0, _jquery2['default'])(window).scrollLeft() + (0, _jquery2['default'])(this).width() * 0.99 + (0, _jquery2['default'])(this).children(".ContextChild").width() > (0, _jquery2['default'])(window).width()) {
-	            offset.left = (0, _jquery2['default'])(this).offset().left - (0, _jquery2['default'])(this).children(".ContextChild").width() * 0.99;
-	        }
-
-	        (0, _jquery2['default'])(this).children(".ContextChild").show().offset(offset);
-	    }, function (ev) {
-	        (0, _jquery2['default'])(this).children(".ContextChild").hide();
+	    (0, _jquery2['default'])(".ribbonmenu-outer").tap(function (ev) {
+	        toggleMenutab();
 	    });
 
 	    //ズーム
 	    (0, _jquery2['default'])("#lst_scale").change(function () {
-	        zoom_cnv((0, _jquery2['default'])(this).val());
+	        zoomCnv((0, _jquery2['default'])(this).val());
 	    });
 
-	    //changelog
+	    // メニュー開閉
+	    //メニュー隠す
+	    (0, _jquery2['default'])("#menusw_off").bind('tap', function (e) {
+	        (0, _jquery2['default'])("div.ribbonmenu").slideUp(function () {
+	            (0, _jquery2['default'])("#menusw_off").hide();
+	            (0, _jquery2['default'])("#menusw_on").show();
+	        });
+	    });
+	    //メニュー出す
+	    (0, _jquery2['default'])("#menusw_on").bind('tap', function (e) {
+	        (0, _jquery2['default'])("div.ribbonmenu").slideDown(function () {
+	            (0, _jquery2['default'])("#menusw_on").hide();
+	            (0, _jquery2['default'])("#menusw_off").show();
+	        });
+	    });
+
+	    // 各種オブジェクト設置
+	    (0, _jquery2['default'])("#submit_scout").bind('tap', function (e) {
+	        setScout();
+	    });
+	    (0, _jquery2['default'])("#submit_sensor").bind('tap', function (e) {
+	        setSensor();
+	    });
+	    (0, _jquery2['default'])("#submit_radar").bind('tap', function (e) {
+	        setRadar();
+	    });
+	    (0, _jquery2['default'])("#submit_sonde").bind('tap', function (e) {
+	        setSonde();
+	    });
+	    (0, _jquery2['default'])("#submit_ndsensor").bind('tap', function (e) {
+	        setNdSensor();
+	    });
+	    (0, _jquery2['default'])("#submit_vsensor").bind('tap', function (e) {
+	        setVSensor();
+	    });
+	    (0, _jquery2['default'])("#submit_howitzer").bind('tap', function (e) {
+	        setHowitzer();
+	    });
+	    (0, _jquery2['default'])("#submit_waft").bind('tap', function (e) {
+	        setWaft('image/waft.png');
+	    });
+	    (0, _jquery2['default'])("#submit_misc").bind('tap', function (e) {
+	        setMisc();
+	    });
+	    (0, _jquery2['default'])("#submit_circle").bind('tap', function (e) {
+	        setCircle();
+	    });
+	    (0, _jquery2['default'])("#submit_line").bind('tap', function (e) {
+	        setLine();
+	    });
+	    (0, _jquery2['default'])("#submit_point").bind('tap', function (e) {
+	        setPoint();
+	    });
+	    (0, _jquery2['default'])("#submit_icon").bind('tap', function (e) {
+	        setIcon();
+	    });
+	    (0, _jquery2['default'])("#submit_freehand").bind('tap', function (e) {
+	        setFreehand();
+	    }); // TODO: あとで
+
+	    (0, _jquery2['default'])("#csr_select").bind('tap', function (e) {
+	        startSelect();
+	    });
+	    (0, _jquery2['default'])("#csr_move").bind('tap', function (e) {
+	        startMove();
+	    });
+
+	    (0, _jquery2['default'])("#up_object").bind('tap', function (e) {
+	        upObject();
+	    });
+	    (0, _jquery2['default'])("#down_object").bind('tap', function (e) {
+	        downObject();
+	    });
+	    (0, _jquery2['default'])("#del_object").bind('tap', function (e) {
+	        delObject();
+	    });
+	    (0, _jquery2['default'])("#delall_object").bind('tap', function (e) {
+	        delallObject();
+	    });
+
+	    (0, _jquery2['default'])("#make_img").tap(function (e) {
+	        execMakeImg();
+	    });
+
+	    (0, _jquery2['default'])("#CanvasArea").scroll(function () {
+	        getBbObj().chgScroll();
+	    });
+
+	    (0, _jquery2['default'])("#viewsw").bind('tap', function (e) {
+	        document.cookie = forcePcMode ? 'pcmode=false;max-age=0' : 'pcmode=true;max-age=2592000';
+	        location.reload();
+	    });
+	}
+	//各種初期化処理
+	function loadInitData() {
+
+	    // canvas要素の初期化
+	    bbobj = new _BB2['default'](CanvasName);
+	    var cnvArea = document.getElementById("CanvasArea");
+	    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
+	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6; // for win?
+	    (0, _jquery2['default'])("#CanvasArea")
+	    // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
+	    .height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
+
+	    loadStageList();
+	    loadStageMapList();
+	    loadObjectLists();
+
+	    //メニューの初期状態を設定
+	    onObjectSelectorChanged((0, _jquery2['default'])("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
+
+	    if (window.location.search) {
+	        //query stringがあれば再現処理に入る
+	        setURL(window.location.search.substr(1));
+	    } else {
+	        // なければもっともらしいマップを選ぶ
+	        (0, _jquery2['default'])("#current").change();
+	    }
+	    // changelogロード
 	    _jquery2['default'].ajax({
 	        url: "./Changelog.txt",
 	        dataType: 'text',
@@ -28983,451 +29327,74 @@
 	            (0, _jquery2['default'])("#changelog").val("更新履歴の取得に失敗しました");
 	        }
 	    });
+	}
 
-	    // メニュー開閉
-	    (0, _jquery2['default'])("#menusw_off").bind('click', function (e) {
-	        hide_menu();
-	    });
-	    (0, _jquery2['default'])("#menusw_on").bind('click', function (e) {
-	        show_menu();
-	    });
-
-	    // 各種オブジェクト設置
-	    (0, _jquery2['default'])("#submit_scout").bind('click', function (e) {
-	        set_scout();
-	    });
-	    (0, _jquery2['default'])("#submit_sensor").bind('click', function (e) {
-	        set_sensor();
-	    });
-	    (0, _jquery2['default'])("#submit_radar").bind('click', function (e) {
-	        set_radar();
-	    });
-	    (0, _jquery2['default'])("#submit_sonde").bind('click', function (e) {
-	        set_sonde();
-	    });
-	    (0, _jquery2['default'])("#submit_ndsensor").bind('click', function (e) {
-	        set_ndsensor();
-	    });
-	    (0, _jquery2['default'])("#submit_vsensor").bind('click', function (e) {
-	        set_vsensor();
-	    });
-	    (0, _jquery2['default'])("#submit_howitzer").bind('click', function (e) {
-	        set_howitzer();
-	    });
-	    (0, _jquery2['default'])("#submit_waft").bind('click', function (e) {
-	        set_waft('image/waft.png');
-	    });
-	    (0, _jquery2['default'])("#submit_misc").bind('click', function (e) {
-	        set_misc();
-	    });
-	    (0, _jquery2['default'])("#submit_circle").bind('click', function (e) {
-	        set_circle();
-	    });
-	    (0, _jquery2['default'])("#submit_line").bind('click', function (e) {
-	        set_line();
-	    });
-	    (0, _jquery2['default'])("#submit_point").bind('click', function (e) {
-	        set_point();
-	    });
-	    (0, _jquery2['default'])("#submit_icon").bind('click', function (e) {
-	        set_icon();
-	    });
-	    (0, _jquery2['default'])("#submit_freehand").bind('click', function (e) {
-	        set_freehand();
-	    }); // TODO: あとで
-
-	    (0, _jquery2['default'])("#csr_select").bind('click', function (e) {
-	        stop_move();
-	    });
-	    (0, _jquery2['default'])("#csr_move").bind('click', function (e) {
-	        start_move();
-	    });
-
-	    (0, _jquery2['default'])("#up_object").bind('click', function (e) {
-	        up_object();
-	    });
-	    (0, _jquery2['default'])("#down_object").bind('click', function (e) {
-	        down_object();
-	    });
-	    (0, _jquery2['default'])("#del_object").bind('click', function (e) {
-	        del_object();
-	    });
-	    (0, _jquery2['default'])("#save_img").bind('click', function (e) {
-	        saveImg();
-	    });
-	    (0, _jquery2['default'])("#get_url").bind('click', function (e) {
-	        getURL();
-	    });
-	    (0, _jquery2['default'])("#contextSelectMode").bind('click', function (e) {
-	        stop_move();
-	    });
-	    (0, _jquery2['default'])("#contextMoveMode").bind('click', function (e) {
-	        start_move();
-	    });
-	    (0, _jquery2['default'])("#contextZoom_1").bind('click', function (e) {
-	        zoom_cnv(1);
-	    });
-	    (0, _jquery2['default'])("#contextZoom_1_5").bind('click', function (e) {
-	        zoom_cnv(1.5);
-	    });
-	    (0, _jquery2['default'])("#contextZoom_2").bind('click', function (e) {
-	        zoom_cnv(2);
-	    });
-	    (0, _jquery2['default'])("#contextZoom_4").bind('click', function (e) {
-	        zoom_cnv(4);
-	    });
-	    (0, _jquery2['default'])("#save_img2").bind('click', function (e) {
-	        saveImg();
-	    });
-	    (0, _jquery2['default'])("#get_url2").bind('click', function (e) {
-	        getURL();
-	    });
-
-	    //ウィンドウサイズの変更に対する対処
-	    wideview = (0, _jquery2['default'])(".menutitle").is(":visible");
-	    (0, _jquery2['default'])(window).resize(function () {
-	        //キャンバスエリアの幅を調整、jCanvaScriptの処理に反映させる
-	        chgCanvasAreaSize();
-
-	        //メニューの表示・非表示対処
-	        if ((0, _jquery2['default'])(".menutitle").is(":visible")) {
-	            wideview = true;
-
-	            //各ブロックをcssのデフォルトに戻す
-	            (0, _jquery2['default'])("body,header,div.ribbonmenu,div.ribbonmenu>div").removeAttr('style');
-
-	            //メニュー全体はスイッチを基に表示：非表示を決める
-	            if ((0, _jquery2['default'])("span#menusw_on").is(":visible")) {
-	                (0, _jquery2['default'])("div.ribbonmenu").hide();
-	            } else {
-	                (0, _jquery2['default'])("div.ribbonmenu").show();
-	            }
-	        } else {
-	            wideview = false;
-
-	            if ((0, _jquery2['default'])("div.menutab#menutab_map").hasClass("selected")) {
-	                (0, _jquery2['default'])("div.menusubcell#subcell_graph").hide();
-	                (0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").show();
-	            } else if ((0, _jquery2['default'])("div.menutab#menutab_item").hasClass("selected")) {
-	                (0, _jquery2['default'])("div.menucell#menu_map,div.menucell#menu_cont").hide();
-	                (0, _jquery2['default'])("div.menusubcell#subcell_graph").show();
-	                (0, _jquery2['default'])("div.ribbonmenu").show();
-	            } else {
-	                (0, _jquery2['default'])("div.ribbonmenu").hide();
-	            }
+	// ロードしたマップデータ内のオブジェクト情報を反映させる
+	function onLoadMapData(data, bbobj) {
+	    var i;
+	    // TODO: マップ同士のオフセット座標対応
+	    resizeCanvasArea();
+	    if ("turret" in data) {
+	        var turretData = data["turret"];
+	        for (i = 0; i < turretData.length; i++) {
+	            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
+	            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, debugMode);
 	        }
-	    });
-
-	    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
-	    var canvas = document.getElementById(CanvasName);
-	    if (!canvas || !canvas.getContext) {
-	        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
-	        return false;
 	    }
-
-	    // canvas要素の初期化
-	    bbobj = new _BB2['default'](CanvasName);
-	    var cnvArea = document.getElementById(DivName);
-	    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
-	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
-	    (0, _jquery2['default'])("#" + DivName).width((0, _jquery2['default'])("#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
-
-	    (0, _jquery2['default'])("#lst_layer").change(function () {
-	        closeNav();
-	        bbobj.setbgdiff((0, _jquery2['default'])("#lst_layer").val());
-	    });
-	    (0, _jquery2['default'])("#" + DivName).scroll(function () {
-	        bbobj.chgScroll();
-	    });
-
-	    //スマホ用メニュー制御
-	    var ua = navigator.userAgent;
-	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
-	        var pcmode, intervalID, timeoutID, correctFlag, headerHeight, headelem, vp_width;
-	        var media;
-	        var sw;
-
-	        (function () {
-
-	            //スクロール時のメニュー追従処理に使う関数を定義
-
-	            var chgMenuScale = function chgMenuScale() {
-	                //幅広表示の時は座標の再計算だけして抜ける(無効化漏れのフォロー)
-	                if (wideview) {
-	                    bbobj.chgScroll();
-	                    return false;
-	                }
-
-	                //headerとメニュー幅を固定・拡縮
-	                var scale = window.innerWidth / vp_width;
-	                (0, _jquery2['default'])("header, div.ribbonmenu").css("transform", "scale(" + scale + ")").css("-ms-transform", "scale(" + scale + ")").css("-webkit-transform", "scale(" + scale + ")");
-
-	                var headrect = headelem.getBoundingClientRect(),
-	                    docrect = document.documentElement.getBoundingClientRect();
-
-	                if (correctFlag) {
-	                    var menuTop = Math.round(window.pageYOffset + docrect.top + headelem.offsetTop - headrect.top);
-	                    (0, _jquery2['default'])("header").css("top", menuTop);
-	                    (0, _jquery2['default'])("div.ribbonmenu").css("top", menuTop + headerHeight);
-
-	                    var menuLeft = Math.round(window.pageXOffset + docrect.left + headelem.offsetLeft - headrect.left);
-	                    (0, _jquery2['default'])("header, div.ribbonmenu").css("left", menuLeft);
-	                }
-	                bbobj.chgScroll();
-	                return true;
-	            }
-
-	            //スクロール終了待ち処理 タイマーをリセットするのみ
-	            ;
-
-	            var doWhileScroll = function doWhileScroll() {
-	                if (timeoutID) window.clearTimeout(timeoutID);
-	                timeoutID = window.setTimeout(doWhenScrollEnded, 60);
-	            }
-
-	            //スクロール停止後 改めて移動処理を行ってからbodyのマージンを変更
-	            ;
-
-	            var doWhenScrollEnded = function doWhenScrollEnded() {
-	                window.clearInterval(intervalID);
-	                intervalID = null;
-	                timeoutID = null;
-	                window.removeEventListener('scroll', doWhileScroll);
-	                if (chgMenuScale()) {
-	                    (0, _jquery2['default'])("body").css("margin-top", (headerHeight + 5) * window.innerWidth / vp_width);
-
-	                    //処理遅れの救済処置
-	                    setTimeout(chgMenuScale, 100);
-	                    setTimeout(chgMenuScale, 300);
-	                    setTimeout(chgMenuScale, 500);
-	                }
-	            }
-
-	            //PC版・スマホ版の切替機能を仕込む
-	            //firefoxのバグ対策のため、metaの属性書き換えではなく、タグごと消して作り直す
-	            ;
-
-	            var initMenuScale = function initMenuScale() {
-	                vp_width = window.outerWidth || document.documentElement.getBoundingClientRect().width;
-	                if (chgMenuScale()) {
-	                    (0, _jquery2['default'])("body").css("margin-top", headerHeight * window.innerWidth / vp_width + 5);
-	                    (0, _jquery2['default'])("header, div.ribbonmenu").css("width", vp_width);
-	                }
-	            }
-
-	            //リロード時のウィンドウサイズ変更に対応
-	            ;
-
-	            //各種制御用変数
-	            pcmode = false;
-	            intervalID = null;
-	            timeoutID = null;
-	            correctFlag = false;
-	            headerHeight = (0, _jquery2['default'])("header").outerHeight();
-	            headelem = document.getElementsByTagName("header")[0];
-	            //後でinitMenuScaleが初期化するため、ここでは触らない
-	            // cookies  = document.cookie;
-
-	            //向きが変わっていたら幅を取り直す
-	            media = window.matchMedia("(orientation: portrait)");
-
-	            media.addListener(function (m) {
-	                window.setTimeout(initMenuScale, 50);
-	            });
-
-	            //古いandroidの標準ブラウザの挙動が特殊なので、
-	            //androidはY軸のスクロールに関する挙動からメニュー位置補正の方針を決める
-	            if (ua.indexOf('Android') > 0) {
-	                window.addEventListener('scroll', (function () {
-	                    return function f() {
-	                        correctFlag = -headelem.getBoundingClientRect().top != window.pageYOffset;
-	                        window.removeEventListener('scroll', f, true);
-	                    };
-	                })(), true);
-	                window.scrollTo(0, 1);
-	            } else {
-	                //iOSなどは常に補正ありで問題なさそう
-	                correctFlag = true;
-	                //inputやselectからフォーカスアウトした際に位置合わせしなおす
-	                (0, _jquery2['default'])("select, input, textarea").bind('blur', function () {
-	                    if (!wideview) {
-	                        window.setTimeout(chgMenuScale, 200);
-	                        window.setTimeout(chgMenuScale, 700);
-	                    }
-	                });
-	            }sw = (0, _jquery2['default'])("span#viewsw");
-
-	            sw.show();
-	            sw.bind('click', function (ev) {
-	                if (timeoutID) {
-	                    window.clearTimeout(timeoutID);
-	                    timeoutID = null;
-	                }
-	                if (intervalID) {
-	                    window.clearInterval(intervalID);
-	                    intervalID = null;
-	                }
-	                window.removeEventListener('scroll', doWhileScroll);
-	                (0, _jquery2['default'])("body, header, div.ribbonmenu, div.ribbonmenu>div").removeAttr('style');
-	                if (pcmode) {
-	                    pcmode = false;
-	                    sw.text('PC版');
-	                    document.cookie = 'pcmode=false;max-age=0';
-	                    (0, _jquery2['default'])('meta[name=viewport]').remove();
-	                    (0, _jquery2['default'])('head').append('<meta name="viewport" content="width=device-width,initial-scale=1.0">');
-
-	                    //処理が遅れる場合があるようなので、少し遅延させる
-	                    setTimeout(initMenuScale, 100);
-	                } else {
-	                    pcmode = true;
-	                    sw.text('スマホ版');
-	                    document.cookie = 'pcmode=true;max-age=2592000';
-	                    (0, _jquery2['default'])('meta[name=viewport]').remove();
-	                    (0, _jquery2['default'])('head').append('<meta name="viewport" content="width=980">');
-	                    //古いWebKit対策。少し遅らせてstyleに空白を設定しなおす
-	                    setTimeout(function () {
-	                        (0, _jquery2['default'])("body, header, div.ribbonmenu, div.ribbonmenu>div").attr('style', '');
-	                    }, 50);
-	                }
-	                (0, _jquery2['default'])(window).resize();
-	            });
-
-	            // cookieに指定があればPCモードに切り替えておく
-	            if (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true") {
-	                sw.click();
-	            }
-
-	            // スクロール関連のイベント定義
-	            window.addEventListener('touchstart', function (e) {
-	                //幅広表示の時は何もしない
-	                if (wideview) return;
-
-	                window.removeEventListener('scroll', doWhileScroll);
-	                if (!intervalID) {
-	                    intervalID = window.setInterval(function () {
-	                        chgMenuScale();
-	                    }, 1000 / 30);
-	                }
-	            });
-
-	            window.addEventListener('touchend', function (e) {
-	                //幅広表示の時は何もしない
-	                if (wideview) return;
-
-	                if (e.touches.length < 1) {
-	                    //スクロール終了待ちに移行
-	                    timeoutID = window.setTimeout(doWhenScrollEnded, 60);
-	                    window.addEventListener('scroll', doWhileScroll);
-	                }
-	            });
-
-	            window.setTimeout(initMenuScale, 100);
-	        })();
-	    }
-
-	    loadInitData();
-	});
-	//各種初期化処理
-	function loadInitData() {
-	    loadStageList();
-	    loadMapList();
-	    loadObjectLists();
-
-	    //メニューの初期状態を設定
-	    onObjectSelectorChanged((0, _jquery2['default'])("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
-
-	    if (window.location.search) {
-	        //query stringがあれば再現処理に入る
-	        setURL(window.location.search.substr(1));
-	    } else {
-	        // なければもっともらしいマップを選ぶ
-	        chg_map((0, _jquery2['default'])("#current").val());
+	    if ("searcher" in data) {
+	        var searcherData = data["searcher"];
+	        for (i = 0; i < searcherData.length; i++) {
+	            //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
+	            bbobj.put_searcher(searcherData[i][0], searcherData[i][1], searcherData[i][2], turretCircle, undefined, debugMode);
+	        }
 	    }
 	}
 
-	//マップ変更
-	function chg_map(map, callback) {
-	    if (map == null) {
-	        map = (0, _jquery2['default'])("#map").val();
-	    }
+	//マップをロードする
+	function loadMap(map, callback) {
 	    var stage = getStageFromMap(map);
-	    (0, _jquery2['default'])("#stage").val(stage);
-	    (0, _jquery2['default'])("#stage").change();
-	    (0, _jquery2['default'])("#map").val(map);
-	    (0, _jquery2['default'])("#map").change();
-
-	    var $map = (0, _jquery2['default'])("#map option:selected");
-	    map = sanitize_filename(map);
-	    stage = sanitize_filename(stage);
-	    var layer = eval($map.data("layer"));
-	    var scale = eval((0, _jquery2['default'])("#stage [value='" + stage + "']").data("scale"));
+	    map = sanitizeFilePath(map);
+	    stage = sanitizeFilePath(stage);
+	    var scale = eval((0, _jquery2['default'])("#stage").find('[value="' + stage + '"]').data("scale"));
 
 	    if (map == null || stage == null) {
-	        alert("マップファイル名エラー");
+	        if (callback !== undefined) {
+	            callback("マップファイル名エラー");
+	        }
 	        return;
 	    }
 
 	    (0, _jquery2['default'])("#Loading").show();
-	    (0, _jquery2['default'])("#lst_object").children().remove();
+	    delallObject(); // 設置オブジェクトを全削除
 
-	    bbobj.setbg("./map/" + stage + "/" + map + ".jpg", scale[0], scale[1], function () {
+	    var bbobj = getBbObj();
+	    bbobj.setbg(getMapImgPath(stage, map), scale[0], scale[1], function () {
 	        (0, _jquery2['default'])("#lst_scale").val(1);
-	        (0, _jquery2['default'])("ul#contextZoom").children("li").removeClass("checked");
-	        (0, _jquery2['default'])("li#contextZoom_1").addClass("checked");
-	        (0, _jquery2['default'])("div#Loading").hide();
+	        (0, _jquery2['default'])("#Loading").hide();
 	        _jquery2['default'].ajax({
-	            "url": "data/" + map + ".txt",
+	            "url": getMapDataPath(map),
 	            dataType: "jsonp",
 	            crossDomain: true,
 	            cache: false,
 	            jsonp: false,
 	            jsonpCallback: "stageData",
 	            success: function success(data, status) {
-	                chgCanvasAreaSize();
-
-	                if ("turret" in data) {
-	                    var turretData = data["turret"];
-	                    for (i = 0; i < turretData.length; i++) {
-	                        //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
-	                        bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle,
-	                        // undefined, turretData[i][4]);
-	                        undefined, debugMode);
-	                    }
-	                }
-	                if ("searcher" in data) {
-	                    var searcherData = data["searcher"];
-	                    for (i = 0; i < searcherData.length; i++) {
-	                        //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
-	                        bbobj.put_searcher(searcherData[i][0], searcherData[i][1], searcherData[i][2], turretCircle,
-	                        // undefined, searcherData[i][3]);
-	                        undefined, debugMode);
-	                    }
-	                }
+	                onLoadMapData(data, bbobj);
 	                if (callback !== undefined) {
 	                    callback.call();
 	                }
 	            },
-	            error: function error() {}
+	            error: function error() {
+	                if (callback !== undefined) {
+	                    callback("マップデータの読み込みに失敗しました");
+	                }
+	            }
 	        });
 	    });
-
-	    var layerList = [];
-	    layerList = appDataStatic["defaultLayer"].concat();
-	    for (var i = 0; i < layer.length; i++) {
-	        layerList.push({
-	            "value": './map/' + stage + '/' + map + '_' + (i + 1) + '.jpg',
-	            "text": layer[i]
-	        });
-	    }
-	    loadSelectionOption((0, _jquery2['default'])("#lst_layer"), layerList);
-	    (0, _jquery2['default'])("#lst_layer").val("");
-
-	    closeNav();
 	}
 
 	//偵察機
-	function set_scout() {
+	function setScout() {
 	    if (!(0, _jquery2['default'])("#lst_scout").val()) {
 	        return;
 	    }
@@ -29439,18 +29406,18 @@
 	    var obj = bbobj.add_scout((0, _jquery2['default'])("#name_scout").val(), param[0], param[1], param[2], (0, _jquery2['default'])("#col_scout").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//センサー
-	function set_sensor() {
+	function setSensor() {
 	    if (!(0, _jquery2['default'])("#lst_sensor").val()) {
 	        return;
 	    }
@@ -29461,18 +29428,18 @@
 	    var obj = bbobj.add_sensor((0, _jquery2['default'])("#name_sensor").val(), (0, _jquery2['default'])("#lst_sensor").val(), (0, _jquery2['default'])("#col_sensor").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//レーダー
-	function set_radar() {
+	function setRadar() {
 	    if (!(0, _jquery2['default'])("#lst_radar").val()) {
 	        return;
 	    }
@@ -29484,18 +29451,18 @@
 	    var obj = bbobj.add_radar((0, _jquery2['default'])("#name_radar").val(), param[0], param[1], (0, _jquery2['default'])("#col_radar").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//滞空索敵弾
-	function set_sonde() {
+	function setSonde() {
 	    if (!(0, _jquery2['default'])("#lst_sonde").val()) {
 	        return;
 	    }
@@ -29507,18 +29474,18 @@
 	    var obj = bbobj.add_sonde((0, _jquery2['default'])("#name_sonde").val(), param[0], param[1], (0, _jquery2['default'])("#col_sonde").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//ND索敵センサー
-	function set_ndsensor() {
+	function setNdSensor() {
 	    if (!(0, _jquery2['default'])("#lst_ndsensor").val()) {
 	        return;
 	    }
@@ -29529,18 +29496,18 @@
 	    var obj = bbobj.add_ndsensor((0, _jquery2['default'])("#name_ndsensor").val(), (0, _jquery2['default'])("#lst_ndsensor").val(), (0, _jquery2['default'])("#col_ndsensor").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//Vセンサー
-	function set_vsensor() {
+	function setVSensor() {
 	    if (!(0, _jquery2['default'])("#lst_vsensor").val()) {
 	        return;
 	    }
@@ -29553,18 +29520,18 @@
 	    var obj = bbobj.add_vsensor((0, _jquery2['default'])("#name_vsensor").val(), param[0], param[1], (0, _jquery2['default'])("#col_vsensor").val(), 'A');
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//砲撃
-	function set_howitzer() {
+	function setHowitzer() {
 	    if (!(0, _jquery2['default'])("#lst_howitzer").val()) {
 	        return;
 	    }
@@ -29576,18 +29543,18 @@
 	    var obj = bbobj.add_howitzer((0, _jquery2['default'])("#name_howitzer").val(), param[0], param[1], param[2], (0, _jquery2['default'])("#col_howitzer").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//その他攻撃関連
-	function set_misc() {
+	function setMisc() {
 	    if (!(0, _jquery2['default'])("#lst_misc").val()) {
 	        return;
 	    }
@@ -29625,18 +29592,18 @@
 	    }
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//アイコン
-	function set_icon() {
+	function setIcon() {
 	    if (!(0, _jquery2['default'])("#lst_icon").val()) {
 	        return;
 	    }
@@ -29644,7 +29611,7 @@
 	        return;
 	    }
 
-	    var file = sanitize_filename((0, _jquery2['default'])("#lst_icon").val());
+	    var file = sanitizeFilePath((0, _jquery2['default'])("#lst_icon").val());
 	    if (file == null) {
 	        alert("アイコンファイル名エラー");
 	        return;
@@ -29653,18 +29620,18 @@
 	    var obj = bbobj.add_icon((0, _jquery2['default'])("#name_icon").val(), file, (0, _jquery2['default'])("#col_icon").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//ワフトローダー
-	function set_waft(file) {
+	function setWaft(file) {
 	    if (!file) {
 	        return;
 	    }
@@ -29672,7 +29639,7 @@
 	        return;
 	    }
 
-	    file = sanitize_filename(file);
+	    file = sanitizeFilePath(file);
 	    if (file == null) {
 	        alert("ワフト画像ファイル名エラー");
 	        return;
@@ -29681,18 +29648,18 @@
 	    var obj = bbobj.add_waft((0, _jquery2['default'])("#name_waft").val(), file, (0, _jquery2['default'])("#col_waft").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//円
-	function set_circle() {
+	function setCircle() {
 	    if (!(0, _jquery2['default'])("#rad_circle").val()) {
 	        return;
 	    }
@@ -29703,18 +29670,18 @@
 	    var obj = bbobj.add_circle((0, _jquery2['default'])("#name_circle").val(), (0, _jquery2['default'])("#rad_circle").val(), (0, _jquery2['default'])("#col_circle").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//直線
-	function set_line() {
+	function setLine() {
 	    if (!(0, _jquery2['default'])("#len_line").val()) {
 	        return;
 	    }
@@ -29725,38 +29692,38 @@
 	    var obj = bbobj.add_line((0, _jquery2['default'])("#name_line").val(), (0, _jquery2['default'])("#len_line").val(), (0, _jquery2['default'])("#col_line").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//点
-	function set_point() {
+	function setPoint() {
 	    var obj = bbobj.add_point((0, _jquery2['default'])("#name_point").val(), (0, _jquery2['default'])("#size_point").val(), (0, _jquery2['default'])("#col_point").val(), (0, _jquery2['default'])("#align_point").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
-	        obj.move((0, _jquery2['default'])("#" + DivName).scrollLeft(), (0, _jquery2['default'])("#" + DivName).scrollTop());
+	        addObject(obj.id, coalesceName(obj));
+	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
 	            return false;
 	        });
-	        closeNav();
+	        closeMenuTab();
 	    }
 	}
 
 	//フリーハンド
-	function set_freehand() {
+	function setFreehand() {
 	    var obj = bbobj.add_freehand((0, _jquery2['default'])("#name_freehand").val(), (0, _jquery2['default'])("#col_freehand").val());
-	    closeNav();
+	    closeMenuTab();
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        (0, _jquery2['default'])("button").attr("disabled", true);
 	        obj.start();
 	        freehandOnWrite = obj;
@@ -29764,52 +29731,30 @@
 	            obj.color((0, _jquery2['default'])(this).val());
 	        };
 	        (0, _jquery2['default'])("#col_freehand").bind('blur', colChg);
-	        (0, _jquery2['default'])("#undo_freehand").attr("disabled", false).click(function () {
+	        (0, _jquery2['default'])("#undo_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite.undo();
 	        });
-	        (0, _jquery2['default'])("#redo_freehand").attr("disabled", false).click(function () {
+	        (0, _jquery2['default'])("#redo_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite.redo();
 	        });
-	        (0, _jquery2['default'])("#stop_freehand").attr("disabled", false).click(function () {
+	        (0, _jquery2['default'])("#stop_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite = undefined;
 	            obj.end();
 	            (0, _jquery2['default'])("#col_freehand").unbind('blur', colChg);
 	            (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	            (0, _jquery2['default'])("#stop_freehand").attr("disabled", true).unbind("click");
-	            (0, _jquery2['default'])("#undo_freehand").attr("disabled", true).unbind("click");
-	            (0, _jquery2['default'])("#redo_freehand").attr("disabled", true).unbind("click");
+	            (0, _jquery2['default'])("#stop_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2['default'])("#undo_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2['default'])("#redo_freehand").attr("disabled", true).unbind("tap");
 	        });
 	    }
 	}
 
-	//ズーム
-	function zoom_cnv(scale) {
-	    var newScale, chgScale;
-	    // var canvas = document.getElementById(CanvasName);
-
-	    newScale = scale;
-	    (0, _jquery2['default'])("#lst_scale").val(newScale);
-
-	    var liid = newScale.toString().replace(".", "_");
-	    (0, _jquery2['default'])("ul#contextZoom").children("li").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextZoom_" + liid).addClass("checked");
-
-	    chgScale = newScale / bbobj.zoomScale;
-	    if (bbobj.zoomScale != newScale) {
-	        //倍率が変化する場合は左上維持して拡大処理
-	        bbobj.zoom(chgScale);
-	        (0, _jquery2['default'])("#" + DivName).scrollLeft((0, _jquery2['default'])("#" + DivName).scrollLeft() * chgScale).scrollTop((0, _jquery2['default'])("#" + DivName).scrollTop() * chgScale);
-	    }
-	}
-
 	//移動開始
-	function start_move() {
+	function startMove() {
 	    (0, _jquery2['default'])("button").attr("disabled", true);
-	    (0, _jquery2['default'])("li#contextSelectMode").removeClass("checked");
-	    (0, _jquery2['default'])("li#contextMoveMode").addClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").addClass("selected");
-	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "move");
+	    (0, _jquery2['default'])("#" + CanvasName).css("cursor", "move");
 
 	    if (freehandOnWrite !== undefined) {
 	        freehandOnWrite.end();
@@ -29821,40 +29766,44 @@
 	    mm = function (e) {
 	        var dx = e.pageX - base_x,
 	            dy = e.pageY - base_y;
-	        (0, _jquery2['default'])("#" + DivName).scrollLeft((0, _jquery2['default'])("#" + DivName).scrollLeft() - dx);
-	        (0, _jquery2['default'])("#" + DivName).scrollTop((0, _jquery2['default'])("#" + DivName).scrollTop() - dy);
+	        (0, _jquery2['default'])("#" + CanvasDivName).scrollLeft((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft() - dx);
+	        (0, _jquery2['default'])("#" + CanvasDivName).scrollTop((0, _jquery2['default'])("#" + CanvasDivName).scrollTop() - dy);
 	        base_x = e.pageX;
 	        base_y = e.pageY;
 	        return false;
 	    };
 
 	    mu = function (e) {
-	        (0, _jquery2['default'])("#" + DivName).unbind('mousemove', mm);
-	        (0, _jquery2['default'])("#" + DivName).unbind('mouseup', mu);
+	        (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousemove', mm);
+	        (0, _jquery2['default'])("#" + CanvasDivName).unbind('mouseup', mu);
 	        return false;
 	    };
 	    md = function (e) {
 	        base_x = e.pageX;
 	        base_y = e.pageY;
-	        (0, _jquery2['default'])("#" + DivName).bind('mousemove', mm);
-	        (0, _jquery2['default'])("#" + DivName).bind('mouseup', mu);
+	        (0, _jquery2['default'])("#" + CanvasDivName).bind('mousemove', mm);
+	        (0, _jquery2['default'])("#" + CanvasDivName).bind('mouseup', mu);
 	        return false;
 	    };
 
-	    (0, _jquery2['default'])("#" + DivName).mousedown(md);
+	    (0, _jquery2['default'])("#" + CanvasDivName).mousedown(md);
+
+	    // var img = $("#SaveArea");
+	    // img.css("visibility", "hidden");
 	}
 
 	//移動終了
-	function stop_move() {
+	function startSelect() {
 	    (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	    (0, _jquery2['default'])("li#contextSelectMode").addClass("checked");
-	    (0, _jquery2['default'])("li#contextMoveMode").removeClass("checked");
 	    (0, _jquery2['default'])("div#csr_select").addClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
-	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "auto");
+	    (0, _jquery2['default'])("#" + CanvasName).css("cursor", "auto");
 
 	    bbobj.ourJc.start(CanvasName, true);
-	    (0, _jquery2['default'])("#" + DivName).unbind('mousedown');
+	    (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousedown');
+
+	    // var img = $("#SaveArea");
+	    // img.css("visibility", "hidden");
 
 	    //力技なのが気になる
 	    if (freehandOnWrite !== undefined) {
@@ -29864,118 +29813,23 @@
 	    }
 	}
 
-	//lst_objectへの追加
-	function add_object(id, name) {
-	    if ((0, _jquery2['default'])("#lst_object").children("option").get().length) {
-	        (0, _jquery2['default'])('<option value="' + id + '"></option>').text(name).insertBefore((0, _jquery2['default'])("#lst_object :first-child"));
-	    } else {
-	        (0, _jquery2['default'])("#lst_object").append((0, _jquery2['default'])('<option value="' + id + '"></option>').text(name));
-	    }
-	    (0, _jquery2['default'])("#lst_object").val(id);
-	}
-
-	//lst_objectを上に
-	function up_object() {
-	    (0, _jquery2['default'])("#lst_object option:not(:selected)").each(function () {
-	        while ((0, _jquery2['default'])(this).next().is(":selected")) {
-	            (0, _jquery2['default'])(this).insertAfter((0, _jquery2['default'])(this).next());
-	            bbobj.object((0, _jquery2['default'])(this).val()).down();
-	        }
-	    });
-	}
-
-	//lst_objectを下に
-	function down_object() {
-	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option:not(:selected)").get().reverse()).each(function () {
-	        while ((0, _jquery2['default'])(this).prev().is(":selected")) {
-	            (0, _jquery2['default'])(this).insertBefore((0, _jquery2['default'])(this).prev());
-	            bbobj.object((0, _jquery2['default'])(this).val()).up();
-	        }
-	    });
-	}
-
-	//メニュー隠す
-	function hide_menu() {
-	    (0, _jquery2['default'])("div.ribbonmenu").slideUp(function () {
-	        (0, _jquery2['default'])("#menusw_off").hide();
-	        (0, _jquery2['default'])("#menusw_on").show();
-	    });
-	}
-	//メニュー出す
-	function show_menu() {
-	    (0, _jquery2['default'])("div.ribbonmenu").slideDown(function () {
-	        (0, _jquery2['default'])("#menusw_on").hide();
-	        (0, _jquery2['default'])("#menusw_off").show();
-	    });
-	}
-
-	//lst_objectから要素削除
-	function del_object() {
-	    (0, _jquery2['default'])("#lst_object option:selected").each(function () {
-	        bbobj.object((0, _jquery2['default'])(this).val()).del();
-	        (0, _jquery2['default'])(this).remove();
-	    });
-	}
-
-	//画像保存
-	function saveImg() {
-	    (0, _jquery2['default'])("#WorkArea").append((0, _jquery2['default'])("<img id=DownloadImg src='" + bbobj.save() + "'>"));
-	    window.open("./image.html", "test");
-	}
-
-	//現在の状態をURL化
-	function getURL() {
-	    var objs = new Array();
-	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
-	        objs.push((0, _jquery2['default'])(this).val());
-	    });
-
-	    var queryobj = new _BBCQuery2['default'](bbobj, (0, _jquery2['default'])("select#map").val());
-	    queryobj.fromObjects(objs);
-	    var querystr = queryobj.toBase64(),
-	        baseurl = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
-
-	    if (baseurl.match(/^https?:\/\//)) {
-	        _jquery2['default'].ajax({
-	            type: 'GET',
-	            url: 'http://is.gd/create.php',
-	            dataType: 'jsonp',
-	            crossDomain: true,
-	            cache: false,
-	            jsonp: false,
-	            data: {
-	                url: baseurl,
-	                format: "json",
-	                callback: "shortenurl"
-	            },
-	            jsonpCallback: 'shortenurl',
-	            success: function success(data, status) {
-	                if (!data["errorcode"]) {
-	                    window.prompt("表示用URL", data["shorturl"]);
-	                } else {
-	                    alert("URL短縮エラー(" & data["errorcode"] & ")");
-	                }
-	            },
-	            error: function error() {
-	                alert("URL短縮に失敗しました");
-	            }
-	        });
-	    } else {
-	        window.prompt("表示用URL", baseurl);
-	    }
-
-	    //delete queryobj;
-	}
-
 	//URLクエリストリングからの復元
 	function setURL(querystr) {
-	    var queryobj = new _BBCQuery2['default'](bbobj, 'dummy');
+	    var queryobj = new _BBCQuery2['default'](getBbObj(), 'dummy');
 	    if (queryobj.fromBase64(querystr)) {
-	        chg_map(queryobj.map, function () {
+	        var map = queryobj.map;
+	        var stage = getStageFromMap(map);
+	        changeStageSelection(stage);
+	        changeMapSelection(map);
+	        loadMap(map, function (err) {
+	            if (err) {
+	                window.alert(err);
+	                return;
+	            }
 	            var objs = queryobj.applyObjects();
 	            for (var i = 0; i < objs.length; i++) {
-	                add_object(objs[i].id, coalesce_name(objs[i]));
 	                var obj = objs[i];
+	                addObject(obj.id, coalesceName(obj));
 	                obj.mousedown(function () {
 	                    (0, _jquery2['default'])("#lst_object").val(obj.id);
 	                    return false;
@@ -30008,7 +29862,7 @@
 	    'default': "(無名)"
 	};
 	//オブジェクトの名前が空白だった場合の対策関数
-	function coalesce_name(obj) {
+	function coalesceName(obj) {
 	    var name;
 	    if (obj._text.length != 0) {
 	        //名前指定がある場合はそのまま利用
@@ -30023,139 +29877,17 @@
 	    return name;
 	}
 
-	// //前景色を得る
-	// function get_fgColor($bgcol) {
-	//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
-	//
-	//     var $r = parseInt($bgcol.substr(1, 2),16);
-	//     var $g = parseInt($bgcol.substr(3, 2),16);
-	//     var $b = parseInt($bgcol.substr(5, 2),16);
-	//
-	//     var $bright = (($r*299)+($g*587)+($b*114))/1000;
-	//     if( $bright < 127.5 ) {
-	//         return ("#FFFFFF");
-	//     }
-	//     return ("#000000");
-	// }
-
-	//ファイル名・ディレクトリ名チェック
-	function sanitize_filename(path) {
-	    var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
-	    path.replace(control_codes, '�');
-	    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
-	        return path;
+	// キャンバスのサイズ変更に合わせてキャンバスエリアのサイズを追従させる
+	function resizeCanvasArea() {
+	    var ua = navigator.userAgent;
+	    var $BBCompass = (0, _jquery2['default'])("#BBCompass");
+	    if (!forcePcMode && window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+	        (0, _jquery2['default'])("#CanvasArea").height($BBCompass.outerHeight() + scrollBarHeight);
 	    } else {
-	        return null;
+	        (0, _jquery2['default'])("#CanvasArea").width($BBCompass.outerWidth() + scrollBarWidth).height($BBCompass.outerHeight() + scrollBarHeight);
 	    }
+	    getBbObj().chgScroll();
 	}
-
-	//キャンバスエリアの幅を変更する
-	function chgCanvasAreaSize() {
-	    (0, _jquery2['default'])("div#" + DivName).width((0, _jquery2['default'])("canvas#" + CanvasName).outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("canvas#" + CanvasName).outerHeight() + scrollBarHeight);
-	    bbobj.chgScroll();
-	}
-
-	//ナビゲーションタブエリアを非表示にする
-	function closeNav() {
-	    if ((0, _jquery2['default'])("nav").is(":visible")) {
-	        (0, _jquery2['default'])("nav>div").removeClass("selected");
-	        (0, _jquery2['default'])("div.ribbonmenu").fadeOut();
-	    }
-	}
-
-	//スクロール関連独自処理
-	function bindScroll(ojQuery) {
-	    ojQuery.each(function (i, elem) {
-	        elem.addEventListener('wheel', function (e) {
-	            //スクロールが上限に達している場合はデフォルト動作を阻害する
-	            if (e.deltaX < 0 && elem.scrollLeft <= 0 || e.deltaX > 0 && elem.scrollLeft >= elem.scrollWidth - elem.clientWidth || e.deltaY < 0 && elem.scrollTop <= 0 || e.deltaY > 0 && elem.scrollTop >= elem.scrollHeight - elem.clientHeight) {
-	                e.preventDefault();
-	                return;
-	            }
-
-	            if (e.deltaMode == 0) {
-	                elem.scrollLeft = elem.scrollLeft + e.deltaX;
-	                elem.scrollTop = elem.scrollTop + e.deltaY;
-	            } else if (e.deltaMode == 1) {
-	                //elem.scrollLeft = elem.scrollLeft + e.deltaX * element.style.lineHeight;
-	                //elem.scrollTop  = elem.scrollTop + e.deltaY * element.style.lineHeight;
-	                elem.scrollLeft = elem.scrollLeft + e.deltaX * elem.style.lineHeight;
-	                elem.scrollTop = elem.scrollTop + e.deltaY * elem.style.lineHeight;
-	            } else if (e.deltaMode == 2) {
-	                elem.scrollLeft = elem.scrollLeft + e.deltaX * document.documentElement.clientWidth;
-	                elem.scrollTop = elem.scrollTop + e.deltaY * document.documentElement.clientHeight;
-	            } else {
-	                return;
-	            }
-	            e.preventDefault();
-	            return;
-	        }, false);
-
-	        if (window.TouchEvent) {
-	            var startX, startY, scrollStartX, scrollStartY, flag, touchid;
-
-	            (function () {
-	                var getTouch = function getTouch(ev) {
-	                    var touch;
-
-	                    switch (ev.type) {
-	                        case "touchstart":
-	                            touch = ev.touches[0];
-	                            touchid = touch.identifier;
-	                            break;
-
-	                        case "touchmove":
-	                            for (i = 0; i < ev.changedTouches.length; i++) {
-	                                if (ev.changedTouches[i].identifier == touchid) {
-	                                    touch = ev.changedTouches[i];
-	                                    break;
-	                                }
-	                            }
-	                            break;
-	                    }
-
-	                    if (touch === undefined) {
-	                        return undefined;
-	                    }
-	                    return touch;
-	                };
-
-	                elem.addEventListener('touchstart', function (e) {
-	                    var touch = getTouch(e);
-
-	                    flag = true;
-	                    startX = touch.clientX;
-	                    startY = touch.clientY;
-	                    scrollStartX = elem.scrollLeft;
-	                    scrollStartY = elem.scrollTop;
-	                    // scrollLimitX=elem.scrollWidth - elem.clientWidth;
-	                    // scrollLimitY=elem.scrollHeight - elem.clientHeight;
-	                    return;
-	                }, false);
-
-	                elem.addEventListener('touchmove', function (e) {
-	                    //touchstartで拾ったイベントがないなら何もしない
-	                    if (!flag) return;
-	                    var touch = getTouch(e);
-	                    if (touch === undefined) {
-	                        flag = false;
-	                        return;
-	                    }
-
-	                    e.preventDefault();
-	                    elem.scrollLeft = scrollStartX + (touch.clientX - startX) * -1;
-	                    elem.scrollTop = scrollStartY + (touch.clientY - startY) * -1;
-	                }, false);
-
-	                elem.addEventListener('touchend', function (e) {
-	                    flag = false;
-	                });
-	            })();
-	        }
-	    });
-	}
-
-	// scrollLimitX, scrollLimitY,
 
 /***/ },
 /* 20 */
@@ -39377,6 +39109,731 @@
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	var _jquery = __webpack_require__(20);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	//////////////////////////////////////
+	// jquery mobile からイベント部分のみ抜き出し
+	// https://gist.github.com/moroya/5450697
+
+	/**
+	 * jquery.mobile.vmouse.js
+	 *
+	 * https://github.com/jquery/jquery-mobile/blob/1.3.1/js/jquery.mobile.vmouse.js
+	 *
+	 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
+	 * Released under the MIT license.
+	 * http://jquery.org/license
+	 */
+
+	(function ($, window, document, undefined) {
+
+	    var dataPropertyName = "virtualMouseBindings",
+	        touchTargetPropertyName = "virtualTouchID",
+	        virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split(" "),
+	        touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" "),
+	        mouseHookProps = $.event.mouseHooks ? $.event.mouseHooks.props : [],
+	        mouseEventProps = $.event.props.concat(mouseHookProps),
+	        activeDocHandlers = {},
+	        resetTimerID = 0,
+	        startX = 0,
+	        startY = 0,
+	        didScroll = false,
+	        clickBlockList = [],
+	        blockMouseTriggers = false,
+	        blockTouchTriggers = false,
+	        eventCaptureSupported = ("addEventListener" in document),
+	        $document = $(document),
+	        nextTouchID = 1,
+	        lastTouchID = 0,
+	        threshold;
+
+	    $.vmouse = {
+	        moveDistanceThreshold: 10,
+	        clickDistanceThreshold: 10,
+	        resetTimerDuration: 1500
+	    };
+
+	    function getNativeEvent(event) {
+
+	        while (event && typeof event.originalEvent !== "undefined") {
+	            event = event.originalEvent;
+	        }
+	        return event;
+	    }
+
+	    function createVirtualEvent(event, eventType) {
+
+	        var t = event.type,
+	            oe,
+	            props,
+	            ne,
+	            prop,
+	            ct,
+	            touch,
+	            i,
+	            j,
+	            len;
+
+	        event = $.Event(event);
+	        event.type = eventType;
+
+	        oe = event.originalEvent;
+	        props = $.event.props;
+
+	        // addresses separation of $.event.props in to $.event.mouseHook.props and Issue 3280
+	        // https://github.com/jquery/jquery-mobile/issues/3280
+	        if (t.search(/^(mouse|click)/) > -1) {
+	            props = mouseEventProps;
+	        }
+
+	        // copy original event properties over to the new event
+	        // this would happen if we could call $.event.fix instead of $.Event
+	        // but we don't have a way to force an event to be fixed multiple times
+	        if (oe) {
+	            for (i = props.length, prop; i;) {
+	                prop = props[--i];
+	                event[prop] = oe[prop];
+	            }
+	        }
+
+	        // make sure that if the mouse and click virtual events are generated
+	        // without a .which one is defined
+	        if (t.search(/mouse(down|up)|click/) > -1 && !event.which) {
+	            event.which = 1;
+	        }
+
+	        if (t.search(/^touch/) !== -1) {
+	            ne = getNativeEvent(oe);
+	            t = ne.touches;
+	            ct = ne.changedTouches;
+	            touch = t && t.length ? t[0] : ct && ct.length ? ct[0] : undefined;
+
+	            if (touch) {
+	                for (j = 0, len = touchEventProps.length; j < len; j++) {
+	                    prop = touchEventProps[j];
+	                    event[prop] = touch[prop];
+	                }
+	            }
+	        }
+
+	        return event;
+	    }
+
+	    function getVirtualBindingFlags(element) {
+
+	        var flags = {},
+	            b,
+	            k;
+
+	        while (element) {
+
+	            b = $.data(element, dataPropertyName);
+
+	            for (k in b) {
+	                if (b[k]) {
+	                    flags[k] = flags.hasVirtualBinding = true;
+	                }
+	            }
+	            element = element.parentNode;
+	        }
+	        return flags;
+	    }
+
+	    function getClosestElementWithVirtualBinding(element, eventType) {
+	        var b;
+	        while (element) {
+
+	            b = $.data(element, dataPropertyName);
+
+	            if (b && (!eventType || b[eventType])) {
+	                return element;
+	            }
+	            element = element.parentNode;
+	        }
+	        return null;
+	    }
+
+	    function enableTouchBindings() {
+	        blockTouchTriggers = false;
+	    }
+
+	    function disableTouchBindings() {
+	        blockTouchTriggers = true;
+	    }
+
+	    function enableMouseBindings() {
+	        lastTouchID = 0;
+	        clickBlockList.length = 0;
+	        blockMouseTriggers = false;
+
+	        // When mouse bindings are enabled, our
+	        // touch bindings are disabled.
+	        disableTouchBindings();
+	    }
+
+	    function disableMouseBindings() {
+	        // When mouse bindings are disabled, our
+	        // touch bindings are enabled.
+	        enableTouchBindings();
+	    }
+
+	    function startResetTimer() {
+	        clearResetTimer();
+	        resetTimerID = setTimeout(function () {
+	            resetTimerID = 0;
+	            enableMouseBindings();
+	        }, $.vmouse.resetTimerDuration);
+	    }
+
+	    function clearResetTimer() {
+	        if (resetTimerID) {
+	            clearTimeout(resetTimerID);
+	            resetTimerID = 0;
+	        }
+	    }
+
+	    function triggerVirtualEvent(eventType, event, flags) {
+	        var ve;
+
+	        if (flags && flags[eventType] || !flags && getClosestElementWithVirtualBinding(event.target, eventType)) {
+
+	            ve = createVirtualEvent(event, eventType);
+
+	            $(event.target).trigger(ve);
+	        }
+
+	        return ve;
+	    }
+
+	    function mouseEventCallback(event) {
+	        var touchID = $.data(event.target, touchTargetPropertyName);
+
+	        if (!blockMouseTriggers && (!lastTouchID || lastTouchID !== touchID)) {
+	            var ve = triggerVirtualEvent("v" + event.type, event);
+	            if (ve) {
+	                if (ve.isDefaultPrevented()) {
+	                    event.preventDefault();
+	                }
+	                if (ve.isPropagationStopped()) {
+	                    event.stopPropagation();
+	                }
+	                if (ve.isImmediatePropagationStopped()) {
+	                    event.stopImmediatePropagation();
+	                }
+	            }
+	        }
+	    }
+
+	    function handleTouchStart(event) {
+
+	        var touches = getNativeEvent(event).touches,
+	            target,
+	            flags;
+
+	        if (touches && touches.length === 1) {
+
+	            target = event.target;
+	            flags = getVirtualBindingFlags(target);
+
+	            if (flags.hasVirtualBinding) {
+
+	                lastTouchID = nextTouchID++;
+	                $.data(target, touchTargetPropertyName, lastTouchID);
+
+	                clearResetTimer();
+
+	                disableMouseBindings();
+	                didScroll = false;
+
+	                var t = getNativeEvent(event).touches[0];
+	                startX = t.pageX;
+	                startY = t.pageY;
+
+	                triggerVirtualEvent("vmouseover", event, flags);
+	                triggerVirtualEvent("vmousedown", event, flags);
+	            }
+	        }
+	    }
+
+	    function handleScroll(event) {
+	        if (blockTouchTriggers) {
+	            return;
+	        }
+
+	        if (!didScroll) {
+	            triggerVirtualEvent("vmousecancel", event, getVirtualBindingFlags(event.target));
+	        }
+
+	        didScroll = true;
+	        startResetTimer();
+	    }
+
+	    function handleTouchMove(event) {
+	        if (blockTouchTriggers) {
+	            return;
+	        }
+
+	        var t = getNativeEvent(event).touches[0],
+	            didCancel = didScroll,
+	            moveThreshold = $.vmouse.moveDistanceThreshold,
+	            flags = getVirtualBindingFlags(event.target);
+
+	        didScroll = didScroll || Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold;
+
+	        if (didScroll && !didCancel) {
+	            triggerVirtualEvent("vmousecancel", event, flags);
+	        }
+
+	        triggerVirtualEvent("vmousemove", event, flags);
+	        startResetTimer();
+	    }
+
+	    function handleTouchEnd(event) {
+	        if (blockTouchTriggers) {
+	            return;
+	        }
+
+	        disableTouchBindings();
+
+	        var flags = getVirtualBindingFlags(event.target),
+	            t;
+	        triggerVirtualEvent("vmouseup", event, flags);
+
+	        if (!didScroll) {
+	            var ve = triggerVirtualEvent("vclick", event, flags);
+	            if (ve && ve.isDefaultPrevented()) {
+	                // The target of the mouse events that follow the touchend
+	                // event don't necessarily match the target used during the
+	                // touch. This means we need to rely on coordinates for blocking
+	                // any click that is generated.
+	                t = getNativeEvent(event).changedTouches[0];
+	                clickBlockList.push({
+	                    touchID: lastTouchID,
+	                    x: t.clientX,
+	                    y: t.clientY
+	                });
+
+	                // Prevent any mouse events that follow from triggering
+	                // virtual event notifications.
+	                blockMouseTriggers = true;
+	            }
+	        }
+	        triggerVirtualEvent("vmouseout", event, flags);
+	        didScroll = false;
+
+	        startResetTimer();
+	    }
+
+	    function hasVirtualBindings(ele) {
+	        var bindings = $.data(ele, dataPropertyName),
+	            k;
+
+	        if (bindings) {
+	            for (k in bindings) {
+	                if (bindings[k]) {
+	                    return true;
+	                }
+	            }
+	        }
+	        return false;
+	    }
+
+	    function dummyMouseHandler() {}
+
+	    function getSpecialEventObject(eventType) {
+	        var realType = eventType.substr(1);
+
+	        return {
+	            setup: function setup(data, namespace) {
+	                // If this is the first virtual mouse binding for this element,
+	                // add a bindings object to its data.
+
+	                if (!hasVirtualBindings(this)) {
+	                    $.data(this, dataPropertyName, {});
+	                }
+
+	                // If setup is called, we know it is the first binding for this
+	                // eventType, so initialize the count for the eventType to zero.
+	                var bindings = $.data(this, dataPropertyName);
+	                bindings[eventType] = true;
+
+	                // If this is the first virtual mouse event for this type,
+	                // register a global handler on the document.
+
+	                activeDocHandlers[eventType] = (activeDocHandlers[eventType] || 0) + 1;
+
+	                if (activeDocHandlers[eventType] === 1) {
+	                    $document.bind(realType, mouseEventCallback);
+	                }
+
+	                // Some browsers, like Opera Mini, won't dispatch mouse/click events
+	                // for elements unless they actually have handlers registered on them.
+	                // To get around this, we register dummy handlers on the elements.
+
+	                $(this).bind(realType, dummyMouseHandler);
+
+	                // For now, if event capture is not supported, we rely on mouse handlers.
+	                if (eventCaptureSupported) {
+	                    // If this is the first virtual mouse binding for the document,
+	                    // register our touchstart handler on the document.
+
+	                    activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
+
+	                    if (activeDocHandlers["touchstart"] === 1) {
+	                        $document.bind("touchstart", handleTouchStart).bind("touchend", handleTouchEnd)
+
+	                        // On touch platforms, touching the screen and then dragging your finger
+	                        // causes the window content to scroll after some distance threshold is
+	                        // exceeded. On these platforms, a scroll prevents a click event from being
+	                        // dispatched, and on some platforms, even the touchend is suppressed. To
+	                        // mimic the suppression of the click event, we need to watch for a scroll
+	                        // event. Unfortunately, some platforms like iOS don't dispatch scroll
+	                        // events until *AFTER* the user lifts their finger (touchend). This means
+	                        // we need to watch both scroll and touchmove events to figure out whether
+	                        // or not a scroll happenens before the touchend event is fired.
+
+	                        .bind("touchmove", handleTouchMove).bind("scroll", handleScroll);
+	                    }
+	                }
+	            },
+
+	            teardown: function teardown(data, namespace) {
+	                // If this is the last virtual binding for this eventType,
+	                // remove its global handler from the document.
+
+	                --activeDocHandlers[eventType];
+
+	                if (!activeDocHandlers[eventType]) {
+	                    $document.unbind(realType, mouseEventCallback);
+	                }
+
+	                if (eventCaptureSupported) {
+	                    // If this is the last virtual mouse binding in existence,
+	                    // remove our document touchstart listener.
+
+	                    --activeDocHandlers["touchstart"];
+
+	                    if (!activeDocHandlers["touchstart"]) {
+	                        $document.unbind("touchstart", handleTouchStart).unbind("touchmove", handleTouchMove).unbind("touchend", handleTouchEnd).unbind("scroll", handleScroll);
+	                    }
+	                }
+
+	                var $this = $(this),
+	                    bindings = $.data(this, dataPropertyName);
+
+	                // teardown may be called when an element was
+	                // removed from the DOM. If this is the case,
+	                // jQuery core may have already stripped the element
+	                // of any data bindings so we need to check it before
+	                // using it.
+	                if (bindings) {
+	                    bindings[eventType] = false;
+	                }
+
+	                // Unregister the dummy event handler.
+
+	                $this.unbind(realType, dummyMouseHandler);
+
+	                // If this is the last virtual mouse binding on the
+	                // element, remove the binding data from the element.
+
+	                if (!hasVirtualBindings(this)) {
+	                    $this.removeData(dataPropertyName);
+	                }
+	            }
+	        };
+	    }
+
+	    // Expose our custom events to the jQuery bind/unbind mechanism.
+
+	    for (var i = 0; i < virtualEventNames.length; i++) {
+	        $.event.special[virtualEventNames[i]] = getSpecialEventObject(virtualEventNames[i]);
+	    }
+
+	    // Add a capture click handler to block clicks.
+	    // Note that we require event capture support for this so if the device
+	    // doesn't support it, we punt for now and rely solely on mouse events.
+	    if (eventCaptureSupported) {
+	        document.addEventListener("click", function (e) {
+	            var cnt = clickBlockList.length,
+	                target = e.target,
+	                x,
+	                y,
+	                ele,
+	                i,
+	                o,
+	                touchID;
+
+	            if (cnt) {
+	                x = e.clientX;
+	                y = e.clientY;
+	                threshold = $.vmouse.clickDistanceThreshold;
+
+	                // The idea here is to run through the clickBlockList to see if
+	                // the current click event is in the proximity of one of our
+	                // vclick events that had preventDefault() called on it. If we find
+	                // one, then we block the click.
+	                //
+	                // Why do we have to rely on proximity?
+	                //
+	                // Because the target of the touch event that triggered the vclick
+	                // can be different from the target of the click event synthesized
+	                // by the browser. The target of a mouse/click event that is syntehsized
+	                // from a touch event seems to be implementation specific. For example,
+	                // some browsers will fire mouse/click events for a link that is near
+	                // a touch event, even though the target of the touchstart/touchend event
+	                // says the user touched outside the link. Also, it seems that with most
+	                // browsers, the target of the mouse/click event is not calculated until the
+	                // time it is dispatched, so if you replace an element that you touched
+	                // with another element, the target of the mouse/click will be the new
+	                // element underneath that point.
+	                //
+	                // Aside from proximity, we also check to see if the target and any
+	                // of its ancestors were the ones that blocked a click. This is necessary
+	                // because of the strange mouse/click target calculation done in the
+	                // Android 2.1 browser, where if you click on an element, and there is a
+	                // mouse/click handler on one of its ancestors, the target will be the
+	                // innermost child of the touched element, even if that child is no where
+	                // near the point of touch.
+
+	                ele = target;
+
+	                while (ele) {
+	                    for (i = 0; i < cnt; i++) {
+	                        o = clickBlockList[i];
+	                        touchID = 0;
+
+	                        if (ele === target && Math.abs(o.x - x) < threshold && Math.abs(o.y - y) < threshold || $.data(ele, touchTargetPropertyName) === o.touchID) {
+	                            // XXX: We may want to consider removing matches from the block list
+	                            //      instead of waiting for the reset timer to fire.
+	                            e.preventDefault();
+	                            e.stopPropagation();
+	                            return;
+	                        }
+	                    }
+	                    ele = ele.parentNode;
+	                }
+	            }
+	        }, true);
+	    }
+	})(_jquery2["default"], window, document);
+
+	/**
+	 * events/touch.js
+	 *
+	 * https://raw.github.com/jquery/jquery-mobile/1.3.1/js/events/touch.js
+	 *
+	 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
+	 * Released under the MIT license.
+	 * http://jquery.org/license
+	 */
+
+	(function ($, window, undefined) {
+	    var $document = $(document);
+
+	    // add new event shortcuts
+	    $.each(("touchstart touchmove touchend " + "tap taphold " + "swipe swipeleft swiperight " + "scrollstart scrollstop").split(" "), function (i, name) {
+
+	        $.fn[name] = function (fn) {
+	            return fn ? this.bind(name, fn) : this.trigger(name);
+	        };
+
+	        // jQuery < 1.8
+	        if ($.attrFn) {
+	            $.attrFn[name] = true;
+	        }
+	    });
+
+	    var supportTouch = ("ontouchend" in document),
+	        scrollEvent = "touchmove scroll",
+	        touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+	        touchStopEvent = supportTouch ? "touchend" : "mouseup",
+	        touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+
+	    function triggerCustomEvent(obj, eventType, event) {
+	        var originalType = event.type;
+	        event.type = eventType;
+	        $.event.dispatch.call(obj, event);
+	        event.type = originalType;
+	    }
+
+	    // also handles scrollstop
+	    $.event.special.scrollstart = {
+
+	        enabled: true,
+
+	        setup: function setup() {
+
+	            var thisObject = this,
+	                $this = $(thisObject),
+	                scrolling,
+	                timer;
+
+	            function trigger(event, state) {
+	                scrolling = state;
+	                triggerCustomEvent(thisObject, scrolling ? "scrollstart" : "scrollstop", event);
+	            }
+
+	            // iPhone triggers scroll after a small delay; use touchmove instead
+	            $this.bind(scrollEvent, function (event) {
+
+	                if (!$.event.special.scrollstart.enabled) {
+	                    return;
+	                }
+
+	                if (!scrolling) {
+	                    trigger(event, true);
+	                }
+
+	                clearTimeout(timer);
+	                timer = setTimeout(function () {
+	                    trigger(event, false);
+	                }, 50);
+	            });
+	        }
+	    };
+
+	    // also handles taphold
+	    $.event.special.tap = {
+	        tapholdThreshold: 750,
+
+	        setup: function setup() {
+	            var thisObject = this,
+	                $this = $(thisObject);
+
+	            $this.bind("vmousedown", function (event) {
+
+	                if (event.which && event.which !== 1) {
+	                    return false;
+	                }
+
+	                var origTarget = event.target,
+	                    origEvent = event.originalEvent,
+	                    timer;
+
+	                function clearTapTimer() {
+	                    clearTimeout(timer);
+	                }
+
+	                function clearTapHandlers() {
+	                    clearTapTimer();
+
+	                    $this.unbind("vclick", clickHandler).unbind("vmouseup", clearTapTimer);
+	                    $document.unbind("vmousecancel", clearTapHandlers);
+	                }
+
+	                function clickHandler(event) {
+	                    clearTapHandlers();
+
+	                    // ONLY trigger a 'tap' event if the start target is
+	                    // the same as the stop target.
+	                    if (origTarget === event.target) {
+	                        triggerCustomEvent(thisObject, "tap", event);
+	                    }
+	                }
+
+	                $this.bind("vmouseup", clearTapTimer).bind("vclick", clickHandler);
+	                $document.bind("vmousecancel", clearTapHandlers);
+
+	                timer = setTimeout(function () {
+	                    triggerCustomEvent(thisObject, "taphold", $.Event("taphold", { target: origTarget }));
+	                }, $.event.special.tap.tapholdThreshold);
+	            });
+	        }
+	    };
+
+	    // also handles swipeleft, swiperight
+	    $.event.special.swipe = {
+	        scrollSupressionThreshold: 30, // More than this horizontal displacement, and we will suppress scrolling.
+
+	        durationThreshold: 1000, // More time than this, and it isn't a swipe.
+
+	        horizontalDistanceThreshold: 30, // Swipe horizontal displacement must be more than this.
+
+	        verticalDistanceThreshold: 75, // Swipe vertical displacement must be less than this.
+
+	        start: function start(event) {
+	            var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+	            return {
+	                time: new Date().getTime(),
+	                coords: [data.pageX, data.pageY],
+	                origin: $(event.target)
+	            };
+	        },
+
+	        stop: function stop(event) {
+	            var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+	            return {
+	                time: new Date().getTime(),
+	                coords: [data.pageX, data.pageY]
+	            };
+	        },
+
+	        handleSwipe: function handleSwipe(start, stop) {
+	            if (stop.time - start.time < $.event.special.swipe.durationThreshold && Math.abs(start.coords[0] - stop.coords[0]) > $.event.special.swipe.horizontalDistanceThreshold && Math.abs(start.coords[1] - stop.coords[1]) < $.event.special.swipe.verticalDistanceThreshold) {
+
+	                start.origin.trigger("swipe").trigger(start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight");
+	            }
+	        },
+
+	        setup: function setup() {
+	            var thisObject = this,
+	                $this = $(thisObject);
+
+	            $this.bind(touchStartEvent, function (event) {
+	                var start = $.event.special.swipe.start(event),
+	                    stop;
+
+	                function moveHandler(event) {
+	                    if (!start) {
+	                        return;
+	                    }
+
+	                    stop = $.event.special.swipe.stop(event);
+
+	                    // prevent scrolling
+	                    if (Math.abs(start.coords[0] - stop.coords[0]) > $.event.special.swipe.scrollSupressionThreshold) {
+	                        event.preventDefault();
+	                    }
+	                }
+
+	                $this.bind(touchMoveEvent, moveHandler).one(touchStopEvent, function () {
+	                    $this.unbind(touchMoveEvent, moveHandler);
+
+	                    if (start && stop) {
+	                        $.event.special.swipe.handleSwipe(start, stop);
+	                    }
+	                    start = stop = undefined;
+	                });
+	            });
+	        }
+	    };
+	    $.each({
+	        scrollstop: "scrollstart",
+	        taphold: "tap",
+	        swipeleft: "swipe",
+	        swiperight: "swipe"
+	    }, function (event, sourceEvent) {
+
+	        $.event.special[event] = {
+	            setup: function setup() {
+	                $(this).bind(sourceEvent, $.noop);
+	            }
+	        };
+	    });
+	})(_jquery2["default"], undefined);
+	//////////////////////////////////////
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(jQuery) {/*
 	 * Very simple jQuery Color Picker
 	 * https://github.com/tkrotoff/jquery-simplecolorpicker
@@ -39616,16 +40073,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(23);
+	var content = __webpack_require__(24);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(25)(content, {});
+	var update = __webpack_require__(26)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -39642,10 +40099,10 @@
 	}
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(24)();
+	exports = module.exports = __webpack_require__(25)();
 	// imports
 
 
@@ -39656,7 +40113,7 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/*
@@ -39712,7 +40169,7 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
