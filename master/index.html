@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="keywords" content="borderbreak,ボーダーブレイク,コンパス">
 <meta name="description" content="セガのゲーム「ボーダーブレイク」用のコンパスツールもどき">
-<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name=viewport content="width=device-width, user-scalable=no">
 <title>BBコンパスもどき@移植中</title>
 <link rel=stylesheet type="text/css" href="./css/ribbonmenu.css">
 <link rel=stylesheet type="text/css" href="./css/bb_compass.css">
@@ -18,26 +18,33 @@
   ga('send', 'pageview');
 </script>
 </head>
+
 <body>
-<header>
+<header class="z-index-header">
   <div class="caption">
-    <h1><a href="http://hell0again.github.io/bbCompass/master">BBコンパスもどき@移植中</a><span id="viewsw">PC版</span></h1>
+    <h1>
+      <a href="http://hell0again.github.io/bbCompass/master">BBコンパスもどき@移植中</a>
+    </h1>
   </div>
   <nav>
-    <div class="menutab selected" id="menutab_map"><span>マップ/操作</span></div>
-    <div class="menutab" id="menutab_item"><span>アイテム設置</span></div>
+    <div class="menutab" id="menutab_map"><span>マップ</span></div>
+    <div class="menutab" id="menutab_item"><span>オブジェクト</span></div>
+    <div class="menutab" id="menutab_view"><span>表示</span></div>
+    <div class="menutab" id="menutab_save"><span>保存</span></div>
   </nav>
 </header>
 
 <div class="menutitle">
-  <span id="titletext">メニュー</span>
+  <span id="titletext"></span>
   <span id="menusw_off">▲</span>
   <span id="menusw_on">▼</span>
 </div>
-<div class="ribbonmenu">
+<div class="ribbonmenu z-index-ribbonmenu">
   <div class="menucell" id="menu_map">
     <div class="celltitle" id="head_map">マップ</div>
     <div class="item">
+      <div class="name">現在の戦場</div>
+      <br>
       <div id="current_map">
         <form name="current">
           <select id="current" class="formtext">
@@ -47,7 +54,8 @@
       </div>
     </div>
     <div class="item">
-      <div class="name">すべて：</div>
+      <div class="name">すべてのマップ</div>
+      <br>
       <div id="map_area">
         <form name="map">
           <div class="map_selector">
@@ -60,15 +68,12 @@
               <!-- ... -->
             </select>
           </div>
-
-          <div class="submitbtn">
-            <button id="change_map" type="button">選択</button>
-          </div>
         </form>
       </div>
     </div>
+
     <div class="item">
-      <div class="name">階層：</div>
+      <div class="name">階層&nbsp;</div>
       <div id="layer_area">
         <select id="lst_layer" size="2">
           <!-- ... -->
@@ -76,9 +81,8 @@
       </div>
     </div>
   </div>
-  <div class="menusubcell" id="subcell_graph">
-    <div class="menucell" id="menu_graph">
-      <div class="celltitle" id="head_graph">設置</div>
+  <div class="menucell" id="menu_graph">
+      <div class="celltitle" id="head_graph">オブジェクト</div>
       <div id="objsel_area">
         <div id="objselector" class="selector">
           <div class="option" data-target="objscout"><img src="./image/menu/scout.png" alt="メニュー偵察機"><br>偵察機</div>
@@ -100,17 +104,16 @@
 
       <!--偵察機-->
       <div class="setobj" id="objscout"><form name="scout">
-        <div class="title">偵察機</div>
-        <div class="name">名前：</div>
+        <div class="name">名前&nbsp;</div>
         <div class="form"><input id="name_scout" type="text" class="formtext"></div>
-        <div class="name">色：</div>
+        <div class="name">色&nbsp;</div>
         <div class="form">
           <select id="col_scout" class="colorpick">
             <!-- ... -->
           </select>
         </div>
 
-        <div class="name">種別：</div>
+        <div class="name">種別&nbsp;</div>
         <div class="form">
           <select id="lst_scout" size="4" class="formlst">
             <!-- ... -->
@@ -121,7 +124,6 @@
 
       <!--センサー-->
       <div class="setobj hidden" id="objsensor"><form name="sensor">
-        <div class="title">索敵センサー</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_sensor" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -141,7 +143,6 @@
 
       <!--レーダー-->
       <div class="setobj hidden" id="objradar"><form name="radar">
-        <div class="title">レーダーユニット</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_radar" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -161,7 +162,6 @@
 
       <!--滞空索敵弾ー-->
       <div class="setobj hidden" id="objsonde"><form name="sonde">
-        <div class="title">滞空索敵弾</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_sonde" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -181,7 +181,6 @@
 
       <!--ND索敵センサー-->
       <div class="setobj hidden" id="objndsensor"><form name="ndsensor">
-        <div class="title">ND索敵センサー</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_ndsensor" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -201,7 +200,6 @@
 
       <!--Vセンサー-->
       <div class="setobj hidden" id="objvsensor"><form name="vsensor">
-        <div class="title">Vセンサー</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_vsensor" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -221,7 +219,6 @@
 
       <!--榴弾-->
       <div class="setobj hidden" id="objhowitzer"><form name="howitzer">
-        <div class="title">榴弾/重装砲</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_howitzer" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -241,7 +238,6 @@
 
       <!--ワフトローダー-->
       <div class="setobj hidden" id="objwaft"><form name="waft">
-        <div class="title">ワフトローダー</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_waft" type="text" class="formtext" value="ワフトローダー"></div>
         <div class="name">色：</div>
@@ -255,7 +251,6 @@
 
       <!--その他武装-->
       <div class="setobj hidden" id="objmisc"><form name="misc">
-        <div class="title">その他</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_misc" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -275,7 +270,6 @@
 
       <!--円-->
       <div class="setobj hidden" id="objcircle"><form name="circle">
-        <div class="title">円</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_circle" type="text" value="円" class="formtext"></div>
         <div class="name">色：</div>
@@ -291,7 +285,6 @@
 
       <!--直線-->
       <div class="setobj hidden" id="objline"><form name="line">
-        <div class="title">直線</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_line" type="text" value="ライン" class="formtext"></div>
         <div class="name">色：</div>
@@ -307,7 +300,6 @@
 
       <!--点-->
       <div class="setobj hidden" id="objpoint"><form name="point">
-        <div class="title">点</div>
         <div class="ptname">名前：</div>
         <div class="form"><input id="name_point" type="text" value="" class="formtext"></div>
         <div class="ptname">色：</div>
@@ -336,7 +328,6 @@
 
       <!--アイコン-->
       <div class="setobj hidden" id="objicon"><form name="icon">
-        <div class="title">アイコン</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_icon" type="text" class="formtext"></div>
         <div class="name">色：</div>
@@ -356,7 +347,6 @@
 
       <!--フリーハンド-->
       <div class="setobj hidden" id="objfreehand"><form name="freehand" action="javascript:set_freehand();">
-        <div class="title">手書き</div>
         <div class="name">名前：</div>
         <div class="form"><input id="name_freehand" type="text" value="フリーハンド" class="formtext"></div>
         <div class="name">色：</div>
@@ -372,13 +362,39 @@
           <button id="redo_freehand" type="button" class="disable" disabled>Redo</button>
         </div>
       </form></div>
-    </div>
   </div>
-  <div class="menucell" id="menu_view">
+
+  <div class="menucell" id="menu_cont">
     <div class="celltitle" id="head_view">表示</div>
     <div class="item">
-      <div class="title">ズーム</div>
-      <div class="name">倍率：</div>
+      <div class="name">レイヤー</div>
+      <div class="clearfix"></div>
+      <div id="cont_area">
+        <div id="obj_area">
+          <select id="lst_object" size="4" multiple>
+          </select>
+        </div>
+        <div id="obj_cont">
+          <button type="button" id="up_object">上へ</button><br>
+          <button type="button" id="down_object">下へ</button><br>
+          <button type="button" id="del_object">削除</button><br>
+          <!--
+          <button type="button" id="delall_object">全削除</button><br>
+          -->
+        </div>
+      </div>
+    </div>
+
+    <div class="item"><!--移動-->
+      <div class="name">モード&nbsp;</div>
+      <div id="cursorselector" class="selector">
+        <div id="csr_select" class="option selected"><img src="./image/arrow.png" alt="選択"></div>
+        <div id="csr_move" class="option"><img src="./image/hand.png" alt="移動"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="name">ズーム&nbsp;</div>
       <div class="form">
         <select id="lst_scale">
           <option value="1" selected>100%</option>
@@ -388,129 +404,93 @@
         </select>
       </div>
     </div>
-
-    <div class="item"><!--移動-->
-      <div class="title">カーソルモード</div>
-      <div id="cursorselector" class="selector">
-        <div id="csr_select" class="option selected"><img src="./image/arrow.png" alt="オブジェ選択">選択</div>
-        <div id="csr_move" class="option"><img src="./image/hand.png" alt="移動">移動</div>
-      </div>
-    </div>
   </div>
-  <div class="menucell" id="menu_cont">
-    <div class="celltitle" id="head_cont">制御</div>
+
+  <div class="menucell" id="menu_view">
+    <div class="celltitle" id="head_cont">保存</div>
     <div class="item">
-      <div class="title">オブジェクト</div>
-      <div id="cont_area">
-        <div id="obj_area">
-          <select id="lst_object" size="7" multiple>
-          </select>
-        </div>
-        <div id="obj_cont">
-        操作<br>
-        <button type="button" id="up_object">上へ</button><br>
-        <button type="button" id="down_object">下へ</button><br>
-        <button type="button" id="del_object">削除</button><br>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="title">保存・出力</div>
       <div id="save_area"><form name="save">
         <div class="submitbtn">
-          <button id="save_img" type="button">保存</button>
-          <button id="get_url" type="button">URL出力</button>
+          <button id="make_img" type="button">保存</button>
         </div>
       </form></div>
+      <div class="name">URL</div><br>
+      <div>
+        <input id="SaveImgText" type="text" value=""></input><br>
+        <input id="SaveImgShortUrl" type="checkbox"><span class="menu-notice">URLを短縮する</span>
+      </div>
+      <div class="name">画像</div><br>
+      <div id="SaveArea">
+        <img id="SaveImgView" src="">
+      </div>
     </div>
   </div>
 </div>
+
+<div class="ribbonmenu-outer z-index-ribbonmenu-outer"></div>
 
 <div id="LoadArea">
   <div id="CanvasArea">
     <canvas width="300" height="700" id="BBCompass"></canvas>
   </div>
-  <div class="ContextMenu">
-    <div class="Spacer"><!-- --></div>
-    <ul>
-      <li id="contextSelectMode" class="checked">選択モード</li>
-      <li id="contextMoveMode">移動モード</li>
-    </ul>
-    <div class="hrdiv"><hr></div>
-    <ul>
-      <li class="hasChild">ズーム
-        <div class="ContextChild">
-          <div class="Spacer"><!-- --></div>
-          <ul id="contextZoom">
-            <li id="contextZoom_1" class="checked">100%</li>
-            <li id="contextZoom_1_5">150%</li>
-            <li id="contextZoom_2">200%</li>
-            <li id="contextZoom_4">400%</li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-    <div class="hrdiv"><hr></div>
-    <ul>
-      <li id="save_img2">画像を保存</li>
-      <li id="get_url2">URL出力</li>
-    </ul>
-  </div>
   <div id="Loading"><img src="./image/loading.gif" alt="loading"><br>読込中...</div>
 </div>
+
 <div id="Copyright">
   (c)SEGA
 </div>
-<div id="WorkArea">
-</div>
+
 <div id="Changes">
-<div class="caption"><h3>更新履歴</h3></div>
-<textarea id="changelog" rows="10" cols="50" readonly></textarea><br>
-<p>※お願い※<br>更新履歴に記載があるのに新マップが読み込めない、上手く動作しないといった不具合がある場合、
-<strong>更新(Ctrl+F5)を押して再読み込み</strong>を試してください。改善する場合があります。</p>
-<p>また、更新と直接関係ないお知らせや開発メモは<span style="font-size:130%;"><a href="https://twitter.com/hell0again">twitter</a></span>に書いていますので、
-よければこちらもご確認ください。不具合報告やご意見も受付いたします。</p>
+  <div class="caption"><h3>更新履歴</h3></div>
+  <textarea id="changelog" rows="10" cols="50" readonly></textarea><br>
+  <p>※お願い※<br>更新履歴に記載があるのに新マップが読み込めない、上手く動作しないといった不具合がある場合、
+  <strong>更新(Ctrl+F5)を押して再読み込み</strong>を試してください。改善する場合があります。</p>
+  <p>また、更新と直接関係ないお知らせや開発メモは<span style="font-size:130%;"><a href="https://twitter.com/hell0again">twitter</a></span>に書いていますので、
+  よければこちらもご確認ください。不具合報告やご意見も受付いたします。</p>
 </div>
+
 <div id="Thanks_Attention">
-<div id="Attention">
-<div class="caption"><h3>注意事項など</h3></div>
-<ol>
-  <li>本ページは<a href="http://bbcompass.web.fc2.com/">BBコンパスもどき</a>をforkしたものです。
-    <strong>不具合報告はfork先で<a href="https://github.com/hell0again/bbCompass/issues">Issue</a>を立てるか
-    <a href="https://twitter.com/hell0again">へるお</a>まで</strong>お願いします。
-  </li>
-  <li>アドレス公開やリンクに制限はありません。</li>
-  <li>勉強を兼ねてやっつけで作ったものであり、<strong>無保証、無サポート</strong>です。</li>
-  <li>Javascriptが動作するHTML5互換環境であれば、<strong>多分</strong>動きます。<br>
-    IE11，Firefox，Chromeは大ざっぱながら動作確認をしています。</li>
-  <li>新マップが出たときは何pixelで何メートルなのか教えてもらえると喜びます。</li>
-  <li>このサイトで使われているコード類は、<a href="https://github.com/hell0again/bbCompass">github</a>にて公開しています。<br></li>
-</ol>
+  <div id="Attention">
+    <div class="caption"><h3>注意事項など</h3></div>
+    <ol>
+      <li>本ページは<a href="http://bbcompass.web.fc2.com/">BBコンパスもどき</a>をforkしたものです。
+        <strong>不具合報告はfork先で<a href="https://github.com/hell0again/bbCompass/issues">Issue</a>を立てるか
+        <a href="https://twitter.com/hell0again">へるお</a>まで</strong>お願いします。
+      </li>
+      <li>アドレス公開やリンクに制限はありません。</li>
+      <li>勉強を兼ねてやっつけで作ったものであり、<strong>無保証、無サポート</strong>です。</li>
+      <li>Javascriptが動作するHTML5互換環境であれば、<strong>多分</strong>動きます。<br>
+        IE11，Firefox，Chromeは大ざっぱながら動作確認をしています。</li>
+      <li>新マップが出たときは何pixelで何メートルなのか教えてもらえると喜びます。</li>
+      <li>このサイトで使われているコード類は、<a href="https://github.com/hell0again/bbCompass">github</a>にて公開しています。<br></li>
+    </ol>
+  </div>
+  <div id="Thanks">
+    <div class="caption"><h3>謝辞</h3></div>
+    <p>まず、本ツールはBBコンパスもどきを移植したものです。
+    BBコンパスはいつも更新が素早く、長い間とても助けられてきました。本当にありがとうございました。</p>
+    <p>また、本ツールの地図データはセガが公開しているデータを利用しています。
+    自由度の高い規約で地図データを公開してくださってありがとうございます。</p>
+    <p>最後に、本ツールの開発においては下記の各ライブラリを利用しています。
+    ライブラリを開発された方々に御礼申し上げます。</p>
+    <ul>
+      <li><a href="http://jcscript.com/" target="_blank">jCanvaScript</a></li>
+      <li><a href="http://jquery.com/" target="_blank">jQuery</a></li>
+      <li><a href="https://github.com/tkrotoff/jquery-simplecolorpicker" target="_blank">jQuery-simplecolorpicker</a></li>
+      <li><a href="https://github.com/defunctzombie/node-uuid" target="_blank">uuid</a></li>
+      <li><a href="https://github.com/nodeca/pako" target="_blank">pako</a></li>
+      <li><a href="https://github.com/dankogai/js-base64" target="_blank">js-base64</a></li>
+    </ul>
+  </div>
 </div>
 
-<div id="Thanks">
-<div class="caption"><h3>謝辞</h3></div>
-
-<p>まず、本ツールはBBコンパスもどきを移植したものです。
-BBコンパスはいつも更新が素早く、長い間とても助けられてきました。本当にありがとうございました。</p>
-<p>また、本ツールの地図データはセガが公開しているデータを利用しています。
-自由度の高い規約で地図データを公開してくださってありがとうございます。</p>
-<p>最後に、本ツールの開発においては下記の各ライブラリを利用しています。
-ライブラリを開発された方々に御礼申し上げます。</p>
-
-<ul>
-<li><a href="http://jcscript.com/" target="_blank">jCanvaScript</a>
-<li><a href="http://jquery.com/" target="_blank">jQuery</a>
-<li><a href="https://github.com/tkrotoff/jquery-simplecolorpicker" target="_blank">jQuery-simplecolorpicker</a>
-<li><a href="https://github.com/defunctzombie/node-uuid" target="_blank">uuid</a>
-<li><a href="https://github.com/nodeca/pako" target="_blank">pako</a>
-<li><a href="https://github.com/dankogai/js-base64" target="_blank">js-base64</a>
-
-</ul>
-</div>
-</div>
 <div id="Address">
-<address>製作者：<a href="https://twitter.com/hell0again">へるお</a></address>
+  <address>製作者：<a href="https://twitter.com/hell0again">へるお</a></address>
 </div>
+
+<div>
+  <a href="#" id="viewsw">--</a>
+</div>
+
 </body>
 </html>
