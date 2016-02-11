@@ -258,7 +258,7 @@
 	        key: 'del',
 	        value: function del() {
 	            delete this._bbObj.member[this.id];
-	            var objs = this._ourJc.layer(this.id).objs;
+	            // var objs = this._ourJc.layer(this.id).objs;
 	            this._ourJc.layer(this.id).del();
 	        }
 	    }]);
@@ -915,8 +915,8 @@
 	                    tgtline.translateTo(x, y);
 	                    cross.translateTo(x, y);
 	                }
-	                obj._markerx = point._x + point._transformdx;
-	                obj._markery = point._y + point._transformdy;
+	                obj._markerx = this._x + this._transformdx;
+	                obj._markery = this._y + this._transformdy;
 	            };
 
 	            var tgtdrag = function tgtdrag() {
@@ -935,8 +935,8 @@
 	                tgt.translateTo(base.x, base.y);
 	                tgtline.translateTo(base.x, base.y);
 	                cross.translateTo(base.x, base.y);
-	                obj._markerx = point._x + point._transformdx;
-	                obj._markery = point._y + point._transformdy;
+	                obj._markerx = this._x + this._transformdx;
+	                obj._markery = this._y + this._transformdy;
 	                return false;
 	            };
 
@@ -1118,7 +1118,7 @@
 	        this.regist();
 	        if (typeof _callback === "function") {
 	            _callback.apply(this);
-	        };
+	        }
 	    }
 
 	    //
@@ -2676,12 +2676,12 @@
 	                line.visible(visible);
 	            });
 	        }
-	    }, {
-	        key: 'add_scout',
 
 	        //
 	        //オブジェクト描画
 	        //
+	    }, {
+	        key: 'add_scout',
 	        value: function add_scout(string, radius, length, duration, color, _callback) {
 	            return new BB_scout(this, string, radius, length, duration, color, _callback);
 	        }
@@ -5212,7 +5212,7 @@
 	            // this function is quoted from
 	            // http://stackoverflow.com/questions/3077718/converting-a-decimal-value-to-a-32bit-floating-point-hexadecimal
 
-	            var ret = Array();
+	            // var ret = Array();
 	            var NAN_BITS = 0 | 0x7FC00000;
 	            var INF_BITS = 0 | 0x7F800000;
 	            var ZERO_BITS = 0 | 0x00000000;
@@ -5241,10 +5241,11 @@
 	            var biasedExp = exp + 127;
 
 	            if (biasedExp == 255) return signBits | INF_BITS;
+	            var mantissa;
 	            if (biasedExp == 0) {
-	                var mantissa = x * Math.pow(2.0, 23) / 2.0;
+	                mantissa = x * Math.pow(2.0, 23) / 2.0;
 	            } else {
-	                var mantissa = x * Math.pow(2.0, 23) - Math.pow(2.0, 23);
+	                mantissa = x * Math.pow(2.0, 23) - Math.pow(2.0, 23);
 	            }
 
 	            var expBits = biasedExp << 23 & EXP_MASK;
@@ -5625,7 +5626,7 @@
 	                        default:
 	                            obj = undefined;
 	                            console.error("object type not supported (" + objtype + ")");
-	                            view.seek(view.tell() + objlen - 1);
+	                            // view.seek(view.tell() + objlen - 1);
 	                            break;
 	                    }
 	                    if (obj === undefined) break;
@@ -27104,22 +27105,6 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-02-01",
-			"end_time": "2016-02-07",
-			"type": "national_battle_high",
-			"title": "【初公開】極地観測所セクター9〜天空への架け橋〜",
-			"url": "/map/23#opr-154",
-			"map": "sector_b"
-		},
-		{
-			"start_time": "2016-02-01",
-			"end_time": "2016-02-07",
-			"type": "national_battle_low",
-			"title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
-			"url": "/map/2#opr-5",
-			"map": "blouer_c"
-		},
-		{
 			"start_time": "2016-02-08",
 			"end_time": "2016-02-14",
 			"type": "union_battle",
@@ -27142,6 +27127,20 @@
 			"title": "第3採掘島〜臨海決戦〜【特殊×】",
 			"url": "/map/3#opr-11",
 			"map": "island_a"
+		},
+		{
+			"start_time": "2016-02-15",
+			"end_time": "2016-02-21",
+			"type": "event",
+			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜GRFの機略戦〜＞",
+			"url": "/news/332"
+		},
+		{
+			"start_time": "2016-02-29",
+			"end_time": "2016-03-06",
+			"type": "event",
+			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜EUSTの閃撃戦〜＞",
+			"url": ""
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
@@ -28693,6 +28692,27 @@
 	};
 	var turretCircle = 6;
 
+	var appData = _BBDB2['default'];
+	var appDataStatic = {
+	    "picker": [{ "value": "#FF0000", "text": "red" }, { "value": "#FF00FF", "text": "pink" }, { "value": "#FFA500", "text": "orange" }, { "value": "#FFFF00", "text": "yellow" }, { "value": "#00FF00", "text": "green" }, { "value": "#00FFFF", "text": "cyan" }, { "value": "#0000FF", "text": "blue" }, { "value": "#800080", "text": "purple" }],
+	    "defaultLayer": [{ "value": "", "text": "通常" }]
+	};
+
+	function getMapsFromStage(stage) {
+	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
+	        return el.hasOwnProperty("dataset") && el.dataset.stage == stage;
+	    });
+	    return maps;
+	}
+	function getStageFromMap(map) {
+	    var stages = _jquery2['default'].grep(appData["map"], function (el, it) {
+	        return el.value == map;
+	    });
+	    return stages[0].dataset.stage;
+	}
+
+	// optionに対応するオブジェクトのリストから
+	// optionリストのdocumentFragmentを生成する
 	function createOptionFragments(optionList) {
 	    var frag = document.createDocumentFragment();
 	    _jquery2['default'].each(optionList, function (it, el) {
@@ -28727,19 +28747,22 @@
 	    $select.empty().append(frag);
 	}
 
+	// マップ画像のパス
 	function getMapImgPath(stage, map) {
 	    return './map/' + stage + '/' + map + '.jpg';
 	}
+	// マップの階層画像のパス
 	function getMapLayerImgPath(stage, map, layerIdx) {
 	    return './map/' + stage + '/' + map + '_' + (layerIdx + 1) + '.jpg';
 	}
+	// マップデータ(ガンタレ、索敵施設)のパス
 	function getMapDataPath(map) {
 	    return 'data/' + map + '.txt';
 	}
 	//ファイル名・ディレクトリ名チェック
-	function sanitize_filename(path) {
-	    var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
-	    path.replace(control_codes, '�');
+	function sanitizeFilePath(path) {
+	    var controlCodes = /[\u0000-\u001F\u007F-\u009F]/g;
+	    path.replace(controlCodes, '�');
 	    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
 	        return path;
 	    } else {
@@ -28782,7 +28805,7 @@
 	}
 
 	// //前景色を得る
-	// function get_fgColor($bgcol) {
+	// function getFgColor($bgcol) {
 	//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
 	//
 	//     var $r = parseInt($bgcol.substr(1, 2),16);
@@ -28795,6 +28818,36 @@
 	//     }
 	//     return ("#000000");
 	// }
+
+	// メニュー関連 ///////////////////////////////////////
+
+	// メニュータブの選択状態を切り替え
+	// - $tab: タブ
+	// - $target: タブに対応するメニュー要素
+	// 選択した $tab, $target と .ribbonmenuに selectedクラスを追加する
+	function toggleMenutab($tab, $target) {
+	    if ($tab == undefined || $tab.hasClass("selected")) {
+	        (0, _jquery2['default'])(".menutab").removeClass("selected");
+	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu").removeClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeOut("fast");
+	    } else {
+	        (0, _jquery2['default'])(".menutab").removeClass("selected");
+	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        $tab.addClass("selected");
+	        $target.addClass("selected");
+	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeIn("fast");
+	        setTimeout(function () {
+	            (0, _jquery2['default'])(".ribbonmenu").addClass("selected");
+	        }, 200);
+	    }
+	}
+	// メニューを閉じる
+	function closeMenuTab() {
+	    toggleMenutab();
+	}
+
+	// ステージメニュー関連 //////////////////////////////////////////
 
 	function loadStageList() {
 	    loadSelectionOption((0, _jquery2['default'])("#current"), appData["current_map"]);
@@ -28818,18 +28871,50 @@
 	        loadSelectionOption((0, _jquery2['default'])("#map"), optionList);
 	    }
 	}
-	function getMapsFromStage(stage) {
-	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
-	        return el.hasOwnProperty("dataset") && el.dataset.stage == stage;
-	    });
-	    return maps;
+
+	// ステージ選択を変更する。あわせてマップの選択肢を対応するマップのみに絞る
+	function changeStageSelection(stage) {
+	    var $stage = (0, _jquery2['default'])("#stage");
+	    if (stage == null) {
+	        return;
+	    }
+	    $stage.val(stage);
+	    loadStageMapList(stage);
 	}
-	function getStageFromMap(map) {
-	    var stages = _jquery2['default'].grep(appData["map"], function (el, it) {
-	        return el.value == map;
-	    });
-	    return stages[0].dataset.stage;
+	// マップ選択を変更する。あわせて階層情報を更新する
+	function changeMapSelection(map) {
+	    var $map = (0, _jquery2['default'])("#map");
+	    if (map == null) {
+	        return;
+	    }
+	    $map.val(map);
+	    var stage = getStageFromMap(map);
+
+	    // イベントとかの場合は #map にクラスを追加
+	    var $selectedMap = $map.find("option:selected");
+	    $map.removeClass("union event scramble squad");
+	    var mapClass = $selectedMap.attr("class");
+	    if (mapClass !== undefined) {
+	        $map.addClass(mapClass);
+	    }
+
+	    // 階層選択を更新
+	    var layer = eval($selectedMap.data("layer"));
+	    var layerList = [];
+	    layerList = appDataStatic["defaultLayer"].concat();
+	    for (var i = 0; i < layer.length; i++) {
+	        layerList.push({
+	            "value": getMapLayerImgPath(stage, map, i),
+	            "text": layer[i]
+	        });
+	    }
+	    var $lstLayer = (0, _jquery2['default'])("#lst_layer");
+	    loadSelectionOption($lstLayer, layerList);
+	    $lstLayer.val("");
 	}
+
+	// オブジェクトメニュー関連 /////////////////////////////////
+
 	function loadObjectLists() {
 	    var elMap = {
 	        "object_scout": "#lst_scout",
@@ -28846,12 +28931,6 @@
 	        loadSelectionOption((0, _jquery2['default'])(selector), appData[name]);
 	    });
 	}
-
-	var appData = _BBDB2['default'];
-	var appDataStatic = {
-	    "picker": [{ "value": "#FF0000", "text": "red" }, { "value": "#FF00FF", "text": "pink" }, { "value": "#FFA500", "text": "orange" }, { "value": "#FFFF00", "text": "yellow" }, { "value": "#00FF00", "text": "green" }, { "value": "#00FFFF", "text": "cyan" }, { "value": "#0000FF", "text": "blue" }, { "value": "#800080", "text": "purple" }],
-	    "defaultLayer": [{ "value": "", "text": "通常" }]
-	};
 
 	//メニューのオブジェクト選択
 	var onObjectSelectorChanged = function onObjectSelectorChanged($this) {
@@ -28874,39 +28953,73 @@
 	    });
 	};
 
-	// メニュータブの選択状態を切り替え
-	// - $tab: タブ
-	// - $target: タブに対応するメニュー要素
-	// 選択した $tab, $target と .ribbonmenuに selectedクラスを追加する
-	var toggleMenutab = function toggleMenutab($tab, $target) {
-	    if ($tab == undefined || $tab.hasClass("selected")) {
-	        (0, _jquery2['default'])(".menutab").removeClass("selected");
-	        (0, _jquery2['default'])(".menucell").removeClass("selected");
-	        (0, _jquery2['default'])(".ribbonmenu").removeClass("selected");
-	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeOut("fast");
-	    } else {
-	        (0, _jquery2['default'])(".menutab").removeClass("selected");
-	        (0, _jquery2['default'])(".menucell").removeClass("selected");
-	        $tab.addClass("selected");
-	        $target.addClass("selected");
-	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeIn("fast");
-	        setTimeout(function () {
-	            (0, _jquery2['default'])(".ribbonmenu").addClass("selected");
-	        }, 200);
+	// 表示メニュー関連 //////////////////////////////////////////
 
-	        // $(".ribbonmenu").fadeOut("fast", function() {
-	        //     // $(".ribbonmenu>*").hide();
-	        //     // $target.show();
-	        //     // $(".ribbonmenu").addClass("selected");
-	        //     // // $(".ribbonmenu").fadeIn("fast");
-	        //     $(".ribbonmenu-outer").fadeIn("fast");
-	        // });
+	//lst_objectへの追加
+	function addObject(id, name) {
+	    var $lstObject = (0, _jquery2['default'])("#lst_object");
+	    if ($lstObject.children("option").get().length) {
+	        (0, _jquery2['default'])('<option value="' + id + '"></option>').text(name).insertBefore((0, _jquery2['default'])("#lst_object :first-child"));
+	    } else {
+	        $lstObject.append((0, _jquery2['default'])('<option value="' + id + '"></option>').text(name));
 	    }
-	};
-	// メニューを閉じる
-	function closeMenuTab() {
-	    toggleMenutab();
+	    $lstObject.val(id);
 	}
+
+	//lst_objectを上に
+	function upObject() {
+	    (0, _jquery2['default'])("#lst_object option:not(:selected)").each(function () {
+	        while ((0, _jquery2['default'])(this).next().is(":selected")) {
+	            (0, _jquery2['default'])(this).insertAfter((0, _jquery2['default'])(this).next());
+	            bbobj.object((0, _jquery2['default'])(this).val()).down();
+	        }
+	    });
+	}
+
+	//lst_objectを下に
+	function downObject() {
+	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option:not(:selected)").get().reverse()).each(function () {
+	        while ((0, _jquery2['default'])(this).prev().is(":selected")) {
+	            (0, _jquery2['default'])(this).insertBefore((0, _jquery2['default'])(this).prev());
+	            bbobj.object((0, _jquery2['default'])(this).val()).up();
+	        }
+	    });
+	}
+
+	//lst_objectから要素削除
+	function delObject() {
+	    (0, _jquery2['default'])("#lst_object option:selected").each(function () {
+	        bbobj.object((0, _jquery2['default'])(this).val()).del();
+	        (0, _jquery2['default'])(this).remove();
+	    });
+	}
+
+	// lst_objectから全要素削除
+	function delallObject() {
+	    (0, _jquery2['default'])("#lst_object option").each(function () {
+	        bbobj.object((0, _jquery2['default'])(this).val()).del();
+	        (0, _jquery2['default'])(this).remove();
+	    });
+	}
+
+	//ズーム
+	function zoomCnv(scale) {
+	    var newScale, chgScale;
+	    // var canvas = document.getElementById(CanvasName);
+
+	    newScale = scale;
+	    (0, _jquery2['default'])("#lst_scale").val(newScale);
+
+	    chgScale = newScale / bbobj.zoomScale;
+	    if (bbobj.zoomScale != newScale) {
+	        //倍率が変化する場合は左上維持して拡大処理
+	        bbobj.zoom(chgScale);
+	        var $CanvasArea = (0, _jquery2['default'])("#" + CanvasDivName);
+	        $CanvasArea.scrollLeft($CanvasArea.scrollLeft() * chgScale).scrollTop($CanvasArea.scrollTop() * chgScale);
+	    }
+	}
+
+	// 保存メニュー関連 //////////////////////////////////////////
 
 	var execMakeImg = function execMakeImg() {
 	    var $imgView = (0, _jquery2['default'])("#SaveImgView");
@@ -28922,7 +29035,7 @@
 	        objs.push((0, _jquery2['default'])(this).val());
 	    });
 
-	    var queryobj = new _BBCQuery2['default'](bbobj, $map.val());
+	    var queryobj = new _BBCQuery2['default'](getBbObj(), $map.val());
 	    queryobj.fromObjects(objs);
 	    var querystr = queryobj.toBase64();
 	    var url = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
@@ -28958,7 +29071,7 @@
 	        (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
 	    }
 	    //スマホ用メニュー制御
-	    // - PCだとウィンドウサイズに応じてスタイルをmedia query任せ
+	    // - PCだとウィンドウサイズに応じる。スタイルはmedia query任せ
 	    // - モバイルだとモバイル版をデフォルトで表示＋設定に任せる
 	    //   - モバイルでPC版表示にする場合はwidth=850＋ズームありで
 	    //
@@ -28970,10 +29083,8 @@
 	    var $viewsw = (0, _jquery2['default'])("#viewsw");
 	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
 	        if (forcePcMode) {
-	            // PC版
 	            $viewsw.text('スマホ版を表示する');
 	        } else {
-	            // SP版
 	            $viewsw.text('PC版を表示する');
 	        }
 	    } else {
@@ -29080,7 +29191,7 @@
 
 	    //ズーム
 	    (0, _jquery2['default'])("#lst_scale").change(function () {
-	        zoom_cnv((0, _jquery2['default'])(this).val());
+	        zoomCnv((0, _jquery2['default'])(this).val());
 	    });
 
 	    // メニュー開閉
@@ -29101,66 +29212,66 @@
 
 	    // 各種オブジェクト設置
 	    (0, _jquery2['default'])("#submit_scout").bind('tap', function (e) {
-	        set_scout();
+	        setScout();
 	    });
 	    (0, _jquery2['default'])("#submit_sensor").bind('tap', function (e) {
-	        set_sensor();
+	        setSensor();
 	    });
 	    (0, _jquery2['default'])("#submit_radar").bind('tap', function (e) {
-	        set_radar();
+	        setRadar();
 	    });
 	    (0, _jquery2['default'])("#submit_sonde").bind('tap', function (e) {
-	        set_sonde();
+	        setSonde();
 	    });
 	    (0, _jquery2['default'])("#submit_ndsensor").bind('tap', function (e) {
-	        set_ndsensor();
+	        setNdSensor();
 	    });
 	    (0, _jquery2['default'])("#submit_vsensor").bind('tap', function (e) {
-	        set_vsensor();
+	        setVSensor();
 	    });
 	    (0, _jquery2['default'])("#submit_howitzer").bind('tap', function (e) {
-	        set_howitzer();
+	        setHowitzer();
 	    });
 	    (0, _jquery2['default'])("#submit_waft").bind('tap', function (e) {
-	        set_waft('image/waft.png');
+	        setWaft('image/waft.png');
 	    });
 	    (0, _jquery2['default'])("#submit_misc").bind('tap', function (e) {
-	        set_misc();
+	        setMisc();
 	    });
 	    (0, _jquery2['default'])("#submit_circle").bind('tap', function (e) {
-	        set_circle();
+	        setCircle();
 	    });
 	    (0, _jquery2['default'])("#submit_line").bind('tap', function (e) {
-	        set_line();
+	        setLine();
 	    });
 	    (0, _jquery2['default'])("#submit_point").bind('tap', function (e) {
-	        set_point();
+	        setPoint();
 	    });
 	    (0, _jquery2['default'])("#submit_icon").bind('tap', function (e) {
-	        set_icon();
+	        setIcon();
 	    });
 	    (0, _jquery2['default'])("#submit_freehand").bind('tap', function (e) {
-	        set_freehand();
+	        setFreehand();
 	    }); // TODO: あとで
 
 	    (0, _jquery2['default'])("#csr_select").bind('tap', function (e) {
-	        start_select();
+	        startSelect();
 	    });
 	    (0, _jquery2['default'])("#csr_move").bind('tap', function (e) {
-	        start_move();
+	        startMove();
 	    });
 
 	    (0, _jquery2['default'])("#up_object").bind('tap', function (e) {
-	        up_object();
+	        upObject();
 	    });
 	    (0, _jquery2['default'])("#down_object").bind('tap', function (e) {
-	        down_object();
+	        downObject();
 	    });
 	    (0, _jquery2['default'])("#del_object").bind('tap', function (e) {
-	        del_object();
+	        delObject();
 	    });
 	    (0, _jquery2['default'])("#delall_object").bind('tap', function (e) {
-	        delall_object();
+	        delallObject();
 	    });
 
 	    (0, _jquery2['default'])("#make_img").tap(function (e) {
@@ -29202,8 +29313,7 @@
 	        // なければもっともらしいマップを選ぶ
 	        (0, _jquery2['default'])("#current").change();
 	    }
-
-	    //changelogロード
+	    // changelogロード
 	    _jquery2['default'].ajax({
 	        url: "./Changelog.txt",
 	        dataType: 'text',
@@ -29219,81 +29329,43 @@
 
 	// ロードしたマップデータ内のオブジェクト情報を反映させる
 	function onLoadMapData(data, bbobj) {
+	    var i;
 	    // TODO: マップ同士のオフセット座標対応
 	    resizeCanvasArea();
 	    if ("turret" in data) {
 	        var turretData = data["turret"];
-	        for (var i = 0; i < turretData.length; i++) {
+	        for (i = 0; i < turretData.length; i++) {
 	            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
 	            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, debugMode);
 	        }
 	    }
 	    if ("searcher" in data) {
 	        var searcherData = data["searcher"];
-	        for (var i = 0; i < searcherData.length; i++) {
+	        for (i = 0; i < searcherData.length; i++) {
 	            //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
 	            bbobj.put_searcher(searcherData[i][0], searcherData[i][1], searcherData[i][2], turretCircle, undefined, debugMode);
 	        }
 	    }
 	}
 
-	// ステージ選択を変更する。あわせてマップの選択肢を対応するマップのみに絞る
-	function changeStageSelection(stage) {
-	    var $stage = (0, _jquery2['default'])("#stage");
-	    if (stage == null) {
-	        return;
-	    }
-	    $stage.val(stage);
-	    loadStageMapList(stage);
-	}
-	// マップ選択を変更する
-	function changeMapSelection(map) {
-	    var $map = (0, _jquery2['default'])("#map");
-	    if (map == null) {
-	        return;
-	    }
-	    $map.val(map);
-	    var stage = getStageFromMap(map);
-
-	    // イベントとかの場合は #map にクラスを追加
-	    var $selectedMap = (0, _jquery2['default'])("#map option:selected");
-	    $map.removeClass("union event scramble squad");
-	    var mapClass = $selectedMap.attr("class");
-	    if (mapClass !== undefined) {
-	        $map.addClass(mapClass);
-	    }
-
-	    // 階層選択を更新
-	    var layer = eval($selectedMap.data("layer"));
-	    var layerList = [];
-	    layerList = appDataStatic["defaultLayer"].concat();
-	    for (var i = 0; i < layer.length; i++) {
-	        layerList.push({
-	            "value": getMapLayerImgPath(stage, map, i),
-	            "text": layer[i]
-	        });
-	    }
-	    loadSelectionOption((0, _jquery2['default'])("#lst_layer"), layerList);
-	    (0, _jquery2['default'])("#lst_layer").val("");
-	}
-
 	//マップをロードする
 	function loadMap(map, callback) {
-	    var $stage = (0, _jquery2['default'])("#stage");
-	    var $map = (0, _jquery2['default'])("#map");
 	    var stage = getStageFromMap(map);
-	    map = sanitize_filename(map);
-	    stage = sanitize_filename(stage);
-	    var scale = eval($stage.find('[value="' + stage + '"]').data("scale"));
+	    map = sanitizeFilePath(map);
+	    stage = sanitizeFilePath(stage);
+	    var scale = eval((0, _jquery2['default'])("#stage").find('[value="' + stage + '"]').data("scale"));
 
 	    if (map == null || stage == null) {
-	        alert("マップファイル名エラー");
+	        if (callback !== undefined) {
+	            callback("マップファイル名エラー");
+	        }
 	        return;
 	    }
 
 	    (0, _jquery2['default'])("#Loading").show();
-	    (0, _jquery2['default'])("#lst_object").children().remove();
+	    delallObject(); // 設置オブジェクトを全削除
 
+	    var bbobj = getBbObj();
 	    bbobj.setbg(getMapImgPath(stage, map), scale[0], scale[1], function () {
 	        (0, _jquery2['default'])("#lst_scale").val(1);
 	        (0, _jquery2['default'])("#Loading").hide();
@@ -29311,14 +29383,16 @@
 	                }
 	            },
 	            error: function error() {
-	                // マップデータは読み込み失敗しても黙っておく
+	                if (callback !== undefined) {
+	                    callback("マップデータの読み込みに失敗しました");
+	                }
 	            }
 	        });
 	    });
 	}
 
 	//偵察機
-	function set_scout() {
+	function setScout() {
 	    if (!(0, _jquery2['default'])("#lst_scout").val()) {
 	        return;
 	    }
@@ -29330,7 +29404,7 @@
 	    var obj = bbobj.add_scout((0, _jquery2['default'])("#name_scout").val(), param[0], param[1], param[2], (0, _jquery2['default'])("#col_scout").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29341,7 +29415,7 @@
 	}
 
 	//センサー
-	function set_sensor() {
+	function setSensor() {
 	    if (!(0, _jquery2['default'])("#lst_sensor").val()) {
 	        return;
 	    }
@@ -29352,7 +29426,7 @@
 	    var obj = bbobj.add_sensor((0, _jquery2['default'])("#name_sensor").val(), (0, _jquery2['default'])("#lst_sensor").val(), (0, _jquery2['default'])("#col_sensor").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29363,7 +29437,7 @@
 	}
 
 	//レーダー
-	function set_radar() {
+	function setRadar() {
 	    if (!(0, _jquery2['default'])("#lst_radar").val()) {
 	        return;
 	    }
@@ -29375,7 +29449,7 @@
 	    var obj = bbobj.add_radar((0, _jquery2['default'])("#name_radar").val(), param[0], param[1], (0, _jquery2['default'])("#col_radar").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29386,7 +29460,7 @@
 	}
 
 	//滞空索敵弾
-	function set_sonde() {
+	function setSonde() {
 	    if (!(0, _jquery2['default'])("#lst_sonde").val()) {
 	        return;
 	    }
@@ -29398,7 +29472,7 @@
 	    var obj = bbobj.add_sonde((0, _jquery2['default'])("#name_sonde").val(), param[0], param[1], (0, _jquery2['default'])("#col_sonde").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29409,7 +29483,7 @@
 	}
 
 	//ND索敵センサー
-	function set_ndsensor() {
+	function setNdSensor() {
 	    if (!(0, _jquery2['default'])("#lst_ndsensor").val()) {
 	        return;
 	    }
@@ -29420,7 +29494,7 @@
 	    var obj = bbobj.add_ndsensor((0, _jquery2['default'])("#name_ndsensor").val(), (0, _jquery2['default'])("#lst_ndsensor").val(), (0, _jquery2['default'])("#col_ndsensor").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29431,7 +29505,7 @@
 	}
 
 	//Vセンサー
-	function set_vsensor() {
+	function setVSensor() {
 	    if (!(0, _jquery2['default'])("#lst_vsensor").val()) {
 	        return;
 	    }
@@ -29444,7 +29518,7 @@
 	    var obj = bbobj.add_vsensor((0, _jquery2['default'])("#name_vsensor").val(), param[0], param[1], (0, _jquery2['default'])("#col_vsensor").val(), 'A');
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29455,7 +29529,7 @@
 	}
 
 	//砲撃
-	function set_howitzer() {
+	function setHowitzer() {
 	    if (!(0, _jquery2['default'])("#lst_howitzer").val()) {
 	        return;
 	    }
@@ -29467,7 +29541,7 @@
 	    var obj = bbobj.add_howitzer((0, _jquery2['default'])("#name_howitzer").val(), param[0], param[1], param[2], (0, _jquery2['default'])("#col_howitzer").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29478,7 +29552,7 @@
 	}
 
 	//その他攻撃関連
-	function set_misc() {
+	function setMisc() {
 	    if (!(0, _jquery2['default'])("#lst_misc").val()) {
 	        return;
 	    }
@@ -29516,7 +29590,7 @@
 	    }
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29527,7 +29601,7 @@
 	}
 
 	//アイコン
-	function set_icon() {
+	function setIcon() {
 	    if (!(0, _jquery2['default'])("#lst_icon").val()) {
 	        return;
 	    }
@@ -29535,7 +29609,7 @@
 	        return;
 	    }
 
-	    var file = sanitize_filename((0, _jquery2['default'])("#lst_icon").val());
+	    var file = sanitizeFilePath((0, _jquery2['default'])("#lst_icon").val());
 	    if (file == null) {
 	        alert("アイコンファイル名エラー");
 	        return;
@@ -29544,7 +29618,7 @@
 	    var obj = bbobj.add_icon((0, _jquery2['default'])("#name_icon").val(), file, (0, _jquery2['default'])("#col_icon").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29555,7 +29629,7 @@
 	}
 
 	//ワフトローダー
-	function set_waft(file) {
+	function setWaft(file) {
 	    if (!file) {
 	        return;
 	    }
@@ -29563,7 +29637,7 @@
 	        return;
 	    }
 
-	    file = sanitize_filename(file);
+	    file = sanitizeFilePath(file);
 	    if (file == null) {
 	        alert("ワフト画像ファイル名エラー");
 	        return;
@@ -29572,7 +29646,7 @@
 	    var obj = bbobj.add_waft((0, _jquery2['default'])("#name_waft").val(), file, (0, _jquery2['default'])("#col_waft").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29583,7 +29657,7 @@
 	}
 
 	//円
-	function set_circle() {
+	function setCircle() {
 	    if (!(0, _jquery2['default'])("#rad_circle").val()) {
 	        return;
 	    }
@@ -29594,7 +29668,7 @@
 	    var obj = bbobj.add_circle((0, _jquery2['default'])("#name_circle").val(), (0, _jquery2['default'])("#rad_circle").val(), (0, _jquery2['default'])("#col_circle").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29605,7 +29679,7 @@
 	}
 
 	//直線
-	function set_line() {
+	function setLine() {
 	    if (!(0, _jquery2['default'])("#len_line").val()) {
 	        return;
 	    }
@@ -29616,7 +29690,7 @@
 	    var obj = bbobj.add_line((0, _jquery2['default'])("#name_line").val(), (0, _jquery2['default'])("#len_line").val(), (0, _jquery2['default'])("#col_line").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29627,11 +29701,11 @@
 	}
 
 	//点
-	function set_point() {
+	function setPoint() {
 	    var obj = bbobj.add_point((0, _jquery2['default'])("#name_point").val(), (0, _jquery2['default'])("#size_point").val(), (0, _jquery2['default'])("#col_point").val(), (0, _jquery2['default'])("#align_point").val());
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
 	            (0, _jquery2['default'])("#lst_object").val(obj.id);
@@ -29642,12 +29716,12 @@
 	}
 
 	//フリーハンド
-	function set_freehand() {
+	function setFreehand() {
 	    var obj = bbobj.add_freehand((0, _jquery2['default'])("#name_freehand").val(), (0, _jquery2['default'])("#col_freehand").val());
 	    closeMenuTab();
 
 	    if (obj) {
-	        add_object(obj.id, coalesce_name(obj));
+	        addObject(obj.id, coalesceName(obj));
 	        (0, _jquery2['default'])("button").attr("disabled", true);
 	        obj.start();
 	        freehandOnWrite = obj;
@@ -29673,30 +29747,12 @@
 	    }
 	}
 
-	//ズーム
-	function zoom_cnv(scale) {
-	    var newScale, chgScale;
-	    // var canvas = document.getElementById(CanvasName);
-
-	    newScale = scale;
-	    (0, _jquery2['default'])("#lst_scale").val(newScale);
-
-	    var liid = newScale.toString().replace(".", "_");
-
-	    chgScale = newScale / bbobj.zoomScale;
-	    if (bbobj.zoomScale != newScale) {
-	        //倍率が変化する場合は左上維持して拡大処理
-	        bbobj.zoom(chgScale);
-	        (0, _jquery2['default'])("#" + CanvasDivName).scrollLeft((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft() * chgScale).scrollTop((0, _jquery2['default'])("#" + CanvasDivName).scrollTop() * chgScale);
-	    }
-	}
-
 	//移動開始
-	function start_move() {
+	function startMove() {
 	    (0, _jquery2['default'])("button").attr("disabled", true);
 	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").addClass("selected");
-	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "move");
+	    (0, _jquery2['default'])("#" + CanvasName).css("cursor", "move");
 
 	    if (freehandOnWrite !== undefined) {
 	        freehandOnWrite.end();
@@ -29735,11 +29791,11 @@
 	}
 
 	//移動終了
-	function start_select() {
+	function startSelect() {
 	    (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
 	    (0, _jquery2['default'])("div#csr_select").addClass("selected");
 	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
-	    (0, _jquery2['default'])("canvas#" + CanvasName).css("cursor", "auto");
+	    (0, _jquery2['default'])("#" + CanvasName).css("cursor", "auto");
 
 	    bbobj.ourJc.start(CanvasName, true);
 	    (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousedown');
@@ -29755,63 +29811,23 @@
 	    }
 	}
 
-	//lst_objectへの追加
-	function add_object(id, name) {
-	    if ((0, _jquery2['default'])("#lst_object").children("option").get().length) {
-	        (0, _jquery2['default'])('<option value="' + id + '"></option>').text(name).insertBefore((0, _jquery2['default'])("#lst_object :first-child"));
-	    } else {
-	        (0, _jquery2['default'])("#lst_object").append((0, _jquery2['default'])('<option value="' + id + '"></option>').text(name));
-	    }
-	    (0, _jquery2['default'])("#lst_object").val(id);
-	}
-
-	//lst_objectを上に
-	function up_object() {
-	    (0, _jquery2['default'])("#lst_object option:not(:selected)").each(function () {
-	        while ((0, _jquery2['default'])(this).next().is(":selected")) {
-	            (0, _jquery2['default'])(this).insertAfter((0, _jquery2['default'])(this).next());
-	            bbobj.object((0, _jquery2['default'])(this).val()).down();
-	        }
-	    });
-	}
-
-	//lst_objectを下に
-	function down_object() {
-	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option:not(:selected)").get().reverse()).each(function () {
-	        while ((0, _jquery2['default'])(this).prev().is(":selected")) {
-	            (0, _jquery2['default'])(this).insertBefore((0, _jquery2['default'])(this).prev());
-	            bbobj.object((0, _jquery2['default'])(this).val()).up();
-	        }
-	    });
-	}
-	function hide_menu() {}
-	function show_menu() {}
-
-	//lst_objectから要素削除
-	function del_object() {
-	    (0, _jquery2['default'])("#lst_object option:selected").each(function () {
-	        bbobj.object((0, _jquery2['default'])(this).val()).del();
-	        (0, _jquery2['default'])(this).remove();
-	    });
-	}
-
-	// lst_objectから全要素削除
-	function delall_object() {
-	    (0, _jquery2['default'])("#lst_object option").each(function () {
-	        bbobj.object((0, _jquery2['default'])(this).val()).del();
-	        (0, _jquery2['default'])(this).remove();
-	    });
-	}
-
 	//URLクエリストリングからの復元
 	function setURL(querystr) {
-	    var queryobj = new _BBCQuery2['default'](bbobj, 'dummy');
+	    var queryobj = new _BBCQuery2['default'](getBbObj(), 'dummy');
 	    if (queryobj.fromBase64(querystr)) {
-	        changeMap(queryobj.map, function () {
+	        var map = queryobj.map;
+	        var stage = getStageFromMap(map);
+	        changeStageSelection(stage);
+	        changeMapSelection(map);
+	        loadMap(map, function (err) {
+	            if (err) {
+	                window.alert(err);
+	                return;
+	            }
 	            var objs = queryobj.applyObjects();
 	            for (var i = 0; i < objs.length; i++) {
-	                add_object(objs[i].id, coalesce_name(objs[i]));
 	                var obj = objs[i];
+	                addObject(obj.id, coalesceName(obj));
 	                obj.mousedown(function () {
 	                    (0, _jquery2['default'])("#lst_object").val(obj.id);
 	                    return false;
@@ -29844,7 +29860,7 @@
 	    'default': "(無名)"
 	};
 	//オブジェクトの名前が空白だった場合の対策関数
-	function coalesce_name(obj) {
+	function coalesceName(obj) {
 	    var name;
 	    if (obj._text.length != 0) {
 	        //名前指定がある場合はそのまま利用
@@ -29862,10 +29878,11 @@
 	// キャンバスのサイズ変更に合わせてキャンバスエリアのサイズを追従させる
 	function resizeCanvasArea() {
 	    var ua = navigator.userAgent;
+	    var $BBCompass = (0, _jquery2['default'])("#BBCompass");
 	    if (!forcePcMode && window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
-	        (0, _jquery2['default'])("#CanvasArea").height((0, _jquery2['default'])("#BBCompass").outerHeight() + scrollBarHeight);
+	        (0, _jquery2['default'])("#CanvasArea").height($BBCompass.outerHeight() + scrollBarHeight);
 	    } else {
-	        (0, _jquery2['default'])("#CanvasArea").width((0, _jquery2['default'])("#BBCompass").outerWidth() + scrollBarWidth).height((0, _jquery2['default'])("#BBCompass").outerHeight() + scrollBarHeight);
+	        (0, _jquery2['default'])("#CanvasArea").width($BBCompass.outerWidth() + scrollBarWidth).height($BBCompass.outerHeight() + scrollBarHeight);
 	    }
 	    getBbObj().chgScroll();
 	}
