@@ -27103,22 +27103,6 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-02-01",
-			"end_time": "2016-02-07",
-			"type": "national_battle_high",
-			"title": "【初公開】極地観測所セクター9〜天空への架け橋〜",
-			"url": "/map/23#opr-154",
-			"map": "sector_b"
-		},
-		{
-			"start_time": "2016-02-01",
-			"end_time": "2016-02-07",
-			"type": "national_battle_low",
-			"title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
-			"url": "/map/2#opr-5",
-			"map": "blouer_c"
-		},
-		{
 			"start_time": "2016-02-08",
 			"end_time": "2016-02-14",
 			"type": "union_battle",
@@ -27141,6 +27125,20 @@
 			"title": "第3採掘島〜臨海決戦〜【特殊×】",
 			"url": "/map/3#opr-11",
 			"map": "island_a"
+		},
+		{
+			"start_time": "2016-02-15",
+			"end_time": "2016-02-21",
+			"type": "event",
+			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜GRFの機略戦〜＞",
+			"url": "/news/332"
+		},
+		{
+			"start_time": "2016-02-29",
+			"end_time": "2016-03-06",
+			"type": "event",
+			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜EUSTの閃撃戦〜＞",
+			"url": ""
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
