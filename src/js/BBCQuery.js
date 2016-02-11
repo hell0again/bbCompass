@@ -58,7 +58,7 @@ class BufferView {
         // this function is quoted from
         // http://stackoverflow.com/questions/3077718/converting-a-decimal-value-to-a-32bit-floating-point-hexadecimal
 
-        var ret = Array();
+        // var ret = Array();
         var NAN_BITS = 0 | 0x7FC00000;
         var INF_BITS = 0 | 0x7F800000;
         var ZERO_BITS = 0 | 0x00000000;
@@ -90,10 +90,11 @@ class BufferView {
 
         if (biasedExp == 255)
             return signBits | INF_BITS;
+        var mantissa;
         if (biasedExp == 0) {
-            var mantissa = x * Math.pow(2.0, 23) / 2.0;
+            mantissa = x * Math.pow(2.0, 23) / 2.0;
         } else {
-            var mantissa = x * Math.pow(2.0, 23) - Math.pow(2.0, 23);
+            mantissa = x * Math.pow(2.0, 23) - Math.pow(2.0, 23);
         }
 
         var expBits = (biasedExp << 23) & EXP_MASK;
@@ -584,7 +585,7 @@ export default class BBCQuery {
                     default:
                         obj = undefined;
                         console.error("object type not supported (" + objtype + ")");
-                        view.seek(view.tell() + objlen - 1);
+                        // view.seek(view.tell() + objlen - 1);
                         break;
                 }
                 if (obj === undefined) break;

@@ -7,7 +7,7 @@ module.exports = {
     module: {
         preLoaders: [
             {
-                test: /\.js$/,
+                test: /src\/.*\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: "eslint-loader"
             }

@@ -218,7 +218,8 @@ var BBDB = {
         // セパレータをpush
         BBDB["current_map"].push({
             "disabled": true,
-            "label": el["label"]
+            // "label": el["label"]
+            "text": el["label"]
         });
 
         // mapsをpush
@@ -246,7 +247,8 @@ var BBDB = {
 
             BBDB["current_map"].push({
                 "value": value,
-                "label": label,
+                // "label": label,
+                "text": label,
                 "disabled": disabled
             });
         });

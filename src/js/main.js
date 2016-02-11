@@ -2,6 +2,7 @@ import $ from 'jquery';
 import BB from './BB';
 import BBCQuery from './BBCQuery';
 import BBDB from './BBDB';
+import './tap';
 
 // import 'jquery-ui/jquery-ui.min.js';
 // /*global require*/ // eslint
@@ -13,14 +14,15 @@ import BBDB from './BBDB';
 import 'jquery-simplecolorpicker/jquery.simplecolorpicker.js';
 require('jquery-simplecolorpicker/jquery.simplecolorpicker.css'); /*global require*/ // eslint
 
+
 //初期化
 var CanvasName = "BBCompass";
-var DivName = "CanvasArea";
+var CanvasDivName = "CanvasArea";
 var scrollBarWidth = 0;
 var scrollBarHeight = 0;
 var freehandOnWrite = undefined;
 var bbobj = "";
-var wideview = true;
+var forcePcMode = false;
 
 var debugMode = false;
 
@@ -33,7 +35,39 @@ var turretSpec = {
 };
 var turretCircle = 6;
 
+var appData = BBDB;
+var appDataStatic = {
+    "picker": [
+        {"value": "#FF0000", "text": "red"},
+        {"value": "#FF00FF", "text": "pink"},
+        {"value": "#FFA500", "text": "orange"},
+        {"value": "#FFFF00", "text": "yellow"},
+        {"value": "#00FF00", "text": "green"},
+        {"value": "#00FFFF", "text": "cyan"},
+        {"value": "#0000FF", "text": "blue"},
+        {"value": "#800080", "text": "purple"},
+    ],
+    "defaultLayer": [
+        {"value": "", "text": "通常"},
+    ],
+};
 
+function getMapsFromStage(stage) {
+    var maps = $.grep(appData["map"], function(el, it) {
+        return (el.hasOwnProperty("dataset") && el.dataset.stage == stage);
+    });
+    return maps;
+}
+function getStageFromMap(map) {
+    var stages = $.grep(appData["map"], function(el, it) {
+        return (el.value == map);
+    });
+    return stages[0].dataset.stage;
+}
+
+
+// optionに対応するオブジェクトのリストから
+// optionリストのdocumentFragmentを生成する
 function createOptionFragments(optionList) {
     var frag = document.createDocumentFragment();
     $.each(optionList, function(it, el) {
@@ -46,6 +80,9 @@ function createOptionFragments(optionList) {
         }
         if (el.hasOwnProperty("disabled") == true) {
             elOpt["disabled"] = el["disabled"];
+        }
+        if (el.hasOwnProperty("selected") == true) {
+            elOpt["selected"] = el["selected"];
         }
         if (el.hasOwnProperty("class") == true) {
             elOpt["class"] = el["class"];
@@ -65,14 +102,124 @@ function loadSelectionOption($select, optionList) {
     $select.empty().append(frag);
 }
 
+// マップ画像のパス
+function getMapImgPath(stage, map) {
+    return `./map/${stage}/${map}.jpg`;
+}
+// マップの階層画像のパス
+function getMapLayerImgPath(stage, map, layerIdx) {
+    return `./map/${stage}/${map}_${layerIdx + 1}.jpg`;
+}
+// マップデータ(ガンタレ、索敵施設)のパス
+function getMapDataPath(map) {
+    return `data/${map}.txt`;
+}
+//ファイル名・ディレクトリ名チェック
+function sanitizeFilePath(path) {
+    var controlCodes = /[\u0000-\u001F\u007F-\u009F]/g;
+    path.replace(controlCodes, "\uFFFD");
+    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
+        return path;
+    } else {
+        return null;
+    }
+}
+
+// is.gd で短縮する
+// callbackの引数は (error, shortenUrl)
+// 対応していないURL(localhostとか)なら変換せずにそのまま
+function shortenUrl(url, callback) {
+    if (url.match(/^https?:\/\//) && !url.match(/^http:\/\/localhost/)) {
+        $.ajax({
+            type: 'GET',
+            url: 'http://is.gd/create.php',
+            dataType: 'jsonp',
+            crossDomain: true,
+            cache: false,
+            jsonp: false,
+            data: {
+                url: url,
+                format: "json",
+                callback: "shortenurl",
+            },
+            jsonpCallback: 'shortenurl',
+            success: function(data, status) {
+                if (!data["errorcode"]) {
+                    callback(null, data["shorturl"]);
+                } else {
+                    callback("URL短縮エラー(" & data["errorcode"] & ")", url);
+                }
+            },
+            error: function() {
+                callback("URL短縮に失敗しました", url);
+            }
+        });
+    } else {
+        callback(null, url);
+    }
+}
+
+// //前景色を得る
+// function getFgColor($bgcol) {
+//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
+// 
+//     var $r = parseInt($bgcol.substr(1, 2),16);
+//     var $g = parseInt($bgcol.substr(3, 2),16);
+//     var $b = parseInt($bgcol.substr(5, 2),16);
+// 
+//     var $bright = (($r*299)+($g*587)+($b*114))/1000;
+//     if( $bright < 127.5 ) {
+//         return ("#FFFFFF");
+//     }
+//     return ("#000000");
+// }
+
+
+
+// メニュー関連 ///////////////////////////////////////
+
+// メニュータブの選択状態を切り替え
+// - $tab: タブ
+// - $target: タブに対応するメニュー要素
+// 選択した $tab, $target と .ribbonmenuに selectedクラスを追加する
+function toggleMenutab ($tab, $target) {
+    if ($tab == undefined || $tab.hasClass("selected")) {
+        $(".menutab").removeClass("selected");
+        $(".menucell").removeClass("selected");
+        $(".ribbonmenu").removeClass("selected");
+        $(".ribbonmenu-outer").fadeOut("fast");
+    } else {
+        $(".menutab").removeClass("selected");
+        $(".menucell").removeClass("selected");
+        $tab.addClass("selected");
+        $target.addClass("selected");
+        $(".ribbonmenu-outer").fadeIn("fast");
+        setTimeout(function() {
+            $(".ribbonmenu").addClass("selected");
+        }, 200);
+    }
+}
+// メニューを閉じる
+function closeMenuTab() {
+    toggleMenutab();
+}
+
+
+// ステージメニュー関連 //////////////////////////////////////////
 
 function loadStageList() {
     loadSelectionOption($("#current"), appData["current_map"]);
     loadSelectionOption($("#stage"), appData["stage"]);
 }
-function loadMapList(stage = null) {
+function loadStageMapList(stage = null) {
     if (stage != null) {
         var stageMaps = getMapsFromStage(stage);
+        stageMaps.unshift({
+            "value": undefined,
+            "label": "(マップを選択してください)",
+            "disabled": true,
+            "selected": true,
+        });
         loadSelectionOption($("#map"), stageMaps);
     } else {
         // いらない！！！
@@ -80,18 +227,51 @@ function loadMapList(stage = null) {
         loadSelectionOption($("#map"), optionList);
     }
 }
-function getMapsFromStage(stage) {
-    var maps = $.grep(appData["map"], function(el, it) {
-        return (el.hasOwnProperty("dataset") && el.dataset.stage == stage);
-    });
-    return maps;
+
+// ステージ選択を変更する。あわせてマップの選択肢を対応するマップのみに絞る
+function changeStageSelection(stage) {
+    var $stage = $("#stage");
+    if (stage == null) {
+        return;
+    }
+    $stage.val(stage);
+    loadStageMapList(stage);
 }
-function getStageFromMap(map) {
-    var stages = $.grep(appData["map"], function(el, it) {
-        return (el.value == map);
-    });
-    return stages[0].dataset.stage;
+// マップ選択を変更する。あわせて階層情報を更新する
+function changeMapSelection(map) {
+    var $map = $("#map");
+    if (map == null) {
+        return;
+    }
+    $map.val(map);
+    var stage= getStageFromMap(map);
+
+    // イベントとかの場合は #map にクラスを追加
+    var $selectedMap = $map.find("option:selected");
+    $map.removeClass("union event scramble squad");
+    var mapClass = $selectedMap.attr("class");
+    if (mapClass !== undefined) {
+        $map.addClass(mapClass);
+    }
+
+    // 階層選択を更新
+    var layer = eval($selectedMap.data("layer"));
+    var layerList = [];
+    layerList = appDataStatic["defaultLayer"].concat();
+    for (var i = 0; i < layer.length; i++) {
+        layerList.push({
+            "value": getMapLayerImgPath(stage, map, i),
+            "text": layer[i],
+        });
+    }
+    var $lstLayer = $("#lst_layer");
+    loadSelectionOption($lstLayer, layerList);
+    $lstLayer.val("");
 }
+
+
+// オブジェクトメニュー関連 /////////////////////////////////
+
 function loadObjectLists() {
     var elMap = {
         "object_scout": "#lst_scout",
@@ -109,25 +289,6 @@ function loadObjectLists() {
     });
 }
 
-var appData = BBDB;
-var appDataStatic = {
-    "picker": [
-        {"value": "#FF0000", "text": "red"},
-        {"value": "#FF00FF", "text": "pink"},
-        {"value": "#FFA500", "text": "orange"},
-        {"value": "#FFFF00", "text": "yellow"},
-        {"value": "#00FF00", "text": "green"},
-        {"value": "#00FFFF", "text": "cyan"},
-        {"value": "#0000FF", "text": "blue"},
-        {"value": "#800080", "text": "purple"},
-    ],
-    "defaultLayer": [
-        {"value": "", "text": "通常"},
-    ],
-};
-
-
-
 //メニューのオブジェクト選択
 var onObjectSelectorChanged = function($this, speed = "fast") {
     if ($this.hasClass("selected")) {
@@ -139,49 +300,201 @@ var onObjectSelectorChanged = function($this, speed = "fast") {
     var openid = $this.data("target");
 
     //リストの先頭を選択済みにする
-    $("#" + openid + " " + ".formlst option:first").attr('selected', true);
-    $("#" + openid + " " + ".formlst").change();
+    $(`#${openid} .formlst option:first`).attr('selected', true);
+    $(`#${openid} .formlst`).change();
 
     $("div.setobj:visible").fadeOut(speed, function() {
-        $("#" + openid).fadeIn(speed);
+        $(`#${openid}`).fadeIn(speed);
     });
 };
+
+// 表示メニュー関連 //////////////////////////////////////////
+
+//lst_objectへの追加
+function addObject(id, name) {
+    var $lstObject = $("#lst_object");
+    if ($lstObject.children("option").get().length) {
+        $(`<option value="${id}"></option>`).text(name).insertBefore($("#lst_object :first-child"));
+    } else {
+        $lstObject.append($(`<option value="${id}"></option>`).text(name));
+    }
+    $lstObject.val(id);
+}
+
+//lst_objectを上に
+function upObject() {
+    $("#lst_object option:not(:selected)").each(function() {
+        while ($(this).next().is(":selected")) {
+            $(this).insertAfter($(this).next());
+            bbobj.object($(this).val()).down();
+        }
+    });
+}
+
+//lst_objectを下に
+function downObject() {
+    $($("#lst_object option:not(:selected)").get().reverse()).each(function() {
+        while ($(this).prev().is(":selected")) {
+            $(this).insertBefore($(this).prev());
+            bbobj.object($(this).val()).up();
+        }
+    });
+}
+
+//lst_objectから要素削除
+function delObject() {
+    $("#lst_object option:selected").each(function() {
+        bbobj.object($(this).val()).del();
+        $(this).remove()
+    });
+}
+
+// lst_objectから全要素削除
+function delallObject() {
+    $("#lst_object option").each(function() {
+        bbobj.object($(this).val()).del();
+        $(this).remove()
+    });
+}
+
+//ズーム
+function zoomCnv(scale) {
+    var newScale, chgScale;
+    // var canvas = document.getElementById(CanvasName);
+
+    newScale = scale;
+    $("#lst_scale").val(newScale);
+
+    chgScale = newScale / bbobj.zoomScale;
+    if (bbobj.zoomScale != newScale) {
+        //倍率が変化する場合は左上維持して拡大処理
+        bbobj.zoom(chgScale);
+        var $CanvasArea = $("#" + CanvasDivName);
+        $CanvasArea
+            .scrollLeft($CanvasArea.scrollLeft() * chgScale)
+            .scrollTop($CanvasArea.scrollTop() * chgScale);
+    }
+}
+
+// 保存メニュー関連 //////////////////////////////////////////
+
+var execMakeImg = function() {
+    var $imgView = $("#SaveImgView");
+    var $SaveImgText = $("#SaveImgText");
+    var $SaveImgShortUrl = $("#SaveImgShortUrl");
+    var $map = $("#map");
+    var objs = new Array();
+
+    $imgView.attr("src", "");
+    $SaveImgText.attr("value", "");
+
+    $($("#lst_object option").get().reverse()).each(function() {
+        objs.push($(this).val());
+    });
+
+    var queryobj = new BBCQuery(getBbObj(), $map.val());
+    queryobj.fromObjects(objs);
+    var querystr = queryobj.toBase64();
+    var url = `${location.protocol}//${location.host}${location.pathname}?${querystr}`;
+    if ($SaveImgShortUrl.prop('checked')) {
+        shortenUrl(url, function(err, shorten) {
+            if (err) {
+                window.alert(err);
+            }
+            $SaveImgText.attr("value", shorten);
+        });
+    } else {
+        setTimeout(function() {
+            $SaveImgText.attr("value", url);
+        }, 200);
+    }
+
+    var imgSrc = $("#BBCompass")[0].toDataURL('image/png');
+    setTimeout(function() {
+        $imgView.attr("src", imgSrc);
+    }, 200);
+}
+
+function getBbObj() {
+    return bbobj;
+}
 
 
 // 読み込み時の処理
 $(document).ready(function() {
+    // デバイスごとの切り替え
+    forcePcMode = (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true");
+    if (forcePcMode) {
+        var viewport = (forcePcMode)?
+            'width=850, user-scalable=yes':
+            'width=device-width, user-scalable=no';
+        $("meta[name='viewport']").attr('content', viewport);
+    }
+    //スマホ用メニュー制御
+    // - PCだとウィンドウサイズに応じる。スタイルはmedia query任せ
+    // - モバイルだとモバイル版をデフォルトで表示＋設定に任せる
+    //   - モバイルでPC版表示にする場合はwidth=850＋ズームありで
+    //
+    //firefoxにはバグがある
+    // - metaの属性書き換えではなく、タグごと消して作り直す
+    // - 大人しくリロードする
+    // の2択となる。大人しくリロードする
+    var ua = navigator.userAgent;
+    var $viewsw = $("#viewsw");
+    if (window.TouchEvent &&
+        (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+        if (forcePcMode) {
+            $viewsw.text('スマホ版を表示する');
+        } else {
+            $viewsw.text('PC版を表示する');
+        }
+    } else {
+        $viewsw.hide();
+    }
 
-    // 現在の戦場選択メニューの設定
+    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
+    var canvas = document.getElementById(CanvasName);
+    if (!canvas || !canvas.getContext) {
+        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
+        return false;
+    }
+
+    bindEventHandler();
+    loadInitData();
+});
+
+// 各種ハンドラの設定
+function bindEventHandler() {
+
+    // 現在の戦場選択メニュー
     $("#current").change(function(e) {
         var map = $(this).val();
-        var stage = getStageFromMap(map);
-        $("#stage").val(stage);
-        $("#stage").change();
-        $("#map").val(map);
+        var stage= getStageFromMap(map);
+        changeStageSelection(stage);
+        changeMapSelection(map);
+        loadMap(map);
+        closeMenuTab();
     });
-
-    // ステージ選択メニューの設定
+    // ステージ選択メニュー
     $("#stage").change(function(e) {
         var stage = $(this).val();
-        // ステージ変更に連動してマップ一覧をフィルタしなおし
-        loadMapList(stage);
-        $("#map").change();
+        changeStageSelection(stage);
     });
-    // マップ選択メニューの設定
+    // マップ選択メニュー
     $("#map").change(function(e) {
-        // var map = $(this).val();
-        $("#map").removeClass("union event scramble");
-        var mapClass = $("#map option:selected").attr("class");
-        if (mapClass !== undefined) {
-            $("#map").addClass(mapClass);
-        }
+        var map = $(this).val();
+        changeMapSelection(map);
+        loadMap(map);
+        closeMenuTab();
     });
-    $("#change_map").bind('click', function(e) {
-        chg_map();
+    // 階層選択
+    $("#lst_layer").change(function() {
+        getBbObj().setbgdiff($("#lst_layer").val())
+        // closeMenuTab();
     });
 
     // オブジェクト選択メニューの設定
-    $("#objselector .option").click(function() {
+    $("#objselector .option").tap(function() {
         onObjectSelectorChanged($(this));
     });
 
@@ -214,17 +527,6 @@ $(document).ready(function() {
         $("#name_icon").val($(this).find("option:selected").text());
     });
 
-    // selectmenuだとタップしてメニュー展開という動作になってしまう。
-    // 開きっぱなしにしてほしいのでmenuのほうが適切っぽいけどmenuだとul, li。。
-    // $('#lst_scout').selectmenu({
-    //     change: function(ev, ui) {
-    //         $('#lst_scout option').attr('selected', false);
-    //         $('#lst_scout option:eq('+ ui.item.index +')').attr('selected', true);
-    //         $("#name_scout").val( ui.item.element.text() );
-    //     }
-    // });
-    // $('#lst_scout').selectmenu("open");
-
     // カラーピッカーの設定
     loadSelectionOption($('.colorpick'), appDataStatic["picker"]);
     $('select.colorpick').simplecolorpicker({
@@ -232,108 +534,149 @@ $(document).ready(function() {
     });
 
     //狭い時用メニューに関する初期化
-    $("div.menutab#menutab_map").click(function(ev) {
-        if ($("div.menucell#menu_map,div.menucell#menu_cont").is(":visible")) {
-            $("div.ribbonmenu").fadeOut("fast");
-            $("div.menutab").removeClass("selected");
-        } else {
-            $("div.menutab").removeClass("selected");
-            $("div.ribbonmenu").fadeOut("fast", function() {
-                $("div.ribbonmenu>*").hide();
-                $("div.menucell#menu_map,div.menucell#menu_cont").show();
-                $("div.ribbonmenu").fadeIn("fast");
-                $("div.menutab#menutab_map").addClass("selected");
-            });
-        }
+    $("#menutab_map").tap(function(ev) {
+        toggleMenutab($("#menutab_map"), $("#menu_map"));
     });
-    $("div.menutab#menutab_item").click(function(ev) {
-        if ($("div.menusubcell#subcell_graph").is(":visible")) {
-            $("div.ribbonmenu").fadeOut("fast");
-            $("div.menutab").removeClass("selected");
-        } else {
-            $("div.menutab").removeClass("selected");
-            $("div.ribbonmenu").fadeOut("fast", function() {
-                $("div.ribbonmenu>*").hide();
-                $("div.menusubcell#subcell_graph").show();
-                $("div.ribbonmenu").fadeIn("fast");
-                $("div.menutab#menutab_item").addClass("selected");
-            });
-        }
+    $("#menutab_item").tap(function(ev) {
+        toggleMenutab($("#menutab_item"), $("#menu_graph"));
     });
-
-    //メニュー部のタッチによるスクロール防止と、独自スクロール処理のbind
-    $("header,div.ribbonmenu").bind('touchmove', function(ev) {
-        if (wideview) return true;
-        ev.preventDefault();
+    $("#menutab_view").tap(function(ev) {
+        toggleMenutab($("#menutab_view"), $("#menu_cont"));
     });
-    bindScroll($("div#objselector"));
-
-    //コンテキストメニュー
-    $("div.ContextMenu").bind('contextmenu', function(ev) {
-        ev.preventDefault()
+    $("#menutab_save").tap(function(ev) {
+        toggleMenutab($("#menutab_save"), $("#menu_view"));
     });
-    $("div.ContextMenu li.hasChild").bind('click', function(ev) {
-        if (ev.target == ev.currentTarget) {
-            ev.stopPropagation()
-        }
+    $(".ribbonmenu-outer").tap(function(ev) {
+        toggleMenutab();        
     });
-    $("div#CanvasArea").bind('contextmenu', function(ev) {
-        if (!wideview) return true;
-        ev.preventDefault();
-        var offset = {
-            "top": ev.pageY,
-            "left": ev.pageX
-        };
-
-        //はみ出しそうなら収める
-        if (ev.clientY + $("div.ContextMenu").height() > $(window).height() - 3) {
-            offset.top = $(window).height() - $("div.ContextMenu").height() + $(window).scrollTop() - 3;
-        }
-
-        if (ev.clientX + $("div.ContextMenu").width() > $(window).width() - 3) {
-            offset.left = $(window).width() - $("div.ContextMenu").width() + $(window).scrollLeft() - 3;
-        }
-
-        $("div.ContextMenu").show().offset(offset);
-
-        //どこかクリックしたらメニューを消す
-        $(document).one('click', function() {
-            $("div.ContextMenu,div.ContextMenu div.ContextChild").hide();
-        });
-
-    });
-
-    //子メニュー表示部
-    $("div.ContextMenu li.hasChild").hover(
-        function(ev) {
-            var offset = {
-                top: $(this).offset().top,
-                left: $(this).offset().left + $(this).width() * 0.99
-            };
-
-            if ($(this).offset().top - $(window).scrollTop() + $(this).children(".ContextChild").height() > $(window).height()) {
-
-                offset.top = $(window).scrollTop() + $(window).height() - $(this).children(".ContextChild").height() - 3;
-            }
-
-            if ($(this).offset().left - $(window).scrollLeft() + $(this).width() * 0.99 + $(this).children(".ContextChild").width() > $(window).width()) {
-                offset.left = $(this).offset().left - $(this).children(".ContextChild").width() * 0.99;
-            }
-
-            $(this).children(".ContextChild").show()
-                .offset(offset);
-        },
-        function(ev) {
-            $(this).children(".ContextChild").hide();
-        }
-    );
 
     //ズーム
     $("#lst_scale").change(function() {
-        zoom_cnv($(this).val());
+        zoomCnv($(this).val());
     });
 
-    //changelog
+    // メニュー開閉
+    //メニュー隠す
+    $("#menusw_off").bind('tap', function(e) {
+        $("div.ribbonmenu").slideUp(function() {
+            $("#menusw_off").hide();
+            $("#menusw_on").show();
+        });
+    });
+    //メニュー出す
+    $("#menusw_on").bind('tap', function(e) {
+        $("div.ribbonmenu").slideDown(function() {
+            $("#menusw_on").hide();
+            $("#menusw_off").show();
+        });
+    });
+
+    // 各種オブジェクト設置
+    $("#submit_scout").bind('tap', function(e) {
+        setScout();
+    });
+    $("#submit_sensor").bind('tap', function(e) {
+        setSensor();
+    });
+    $("#submit_radar").bind('tap', function(e) {
+        setRadar();
+    });
+    $("#submit_sonde").bind('tap', function(e) {
+        setSonde();
+    });
+    $("#submit_ndsensor").bind('tap', function(e) {
+        setNdSensor();
+    });
+    $("#submit_vsensor").bind('tap', function(e) {
+        setVSensor();
+    });
+    $("#submit_howitzer").bind('tap', function(e) {
+        setHowitzer();
+    });
+    $("#submit_waft").bind('tap', function(e) {
+        setWaft('image/waft.png');
+    });
+    $("#submit_misc").bind('tap', function(e) {
+        setMisc();
+    });
+    $("#submit_circle").bind('tap', function(e) {
+        setCircle();
+    });
+    $("#submit_line").bind('tap', function(e) {
+        setLine();
+    });
+    $("#submit_point").bind('tap', function(e) {
+        setPoint();
+    });
+    $("#submit_icon").bind('tap', function(e) {
+        setIcon();
+    });
+    $("#submit_freehand").bind('tap', function(e) {
+        setFreehand();
+    }); // TODO: あとで
+
+    $("#csr_select").bind('tap', function(e) {
+        startSelect();
+    });
+    $("#csr_move").bind('tap', function(e) {
+        startMove();
+    });
+
+    $("#up_object").bind('tap', function(e) {
+        upObject();
+    });
+    $("#down_object").bind('tap', function(e) {
+        downObject();
+    });
+    $("#del_object").bind('tap', function(e) {
+        delObject();
+    });
+    $("#delall_object").bind('tap', function(e) {
+        delallObject();
+    });
+
+    $("#make_img").tap(function(e) {
+        execMakeImg()
+    });
+
+    $("#CanvasArea").scroll(function() {
+        getBbObj().chgScroll();
+    });
+
+    $("#viewsw").bind('tap', function(e) {
+        document.cookie = (forcePcMode)?
+            'pcmode=false;max-age=0':
+            'pcmode=true;max-age=2592000';
+        location.reload();
+    });
+}
+//各種初期化処理
+function loadInitData() {
+
+    // canvas要素の初期化
+    bbobj = new BB(CanvasName);
+    var cnvArea = document.getElementById("CanvasArea");
+    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
+    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6; // for win?
+    $("#CanvasArea")
+        // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
+        .height($("#" + CanvasName).outerHeight() + scrollBarHeight);
+
+    loadStageList();
+    loadStageMapList();
+    loadObjectLists();
+
+    //メニューの初期状態を設定
+    onObjectSelectorChanged($("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
+
+    if (window.location.search) {
+        //query stringがあれば再現処理に入る
+        setURL(window.location.search.substr(1));
+    } else {
+        // なければもっともらしいマップを選ぶ
+        $("#current").change();
+    }
+    // changelogロード
     $.ajax({
         url: "./Changelog.txt",
         dataType: 'text',
@@ -345,449 +688,81 @@ $(document).ready(function() {
             $("#changelog").val("更新履歴の取得に失敗しました");
         }
     });
+}
 
-    // メニュー開閉
-    $("#menusw_off").bind('click', function(e) {
-        hide_menu();
-    });
-    $("#menusw_on").bind('click', function(e) {
-        show_menu();
-    });
-
-    // 各種オブジェクト設置
-    $("#submit_scout").bind('click', function(e) {
-        set_scout();
-    });
-    $("#submit_sensor").bind('click', function(e) {
-        set_sensor();
-    });
-    $("#submit_radar").bind('click', function(e) {
-        set_radar();
-    });
-    $("#submit_sonde").bind('click', function(e) {
-        set_sonde();
-    });
-    $("#submit_ndsensor").bind('click', function(e) {
-        set_ndsensor();
-    });
-    $("#submit_vsensor").bind('click', function(e) {
-        set_vsensor();
-    });
-    $("#submit_howitzer").bind('click', function(e) {
-        set_howitzer();
-    });
-    $("#submit_waft").bind('click', function(e) {
-        set_waft('image/waft.png');
-    });
-    $("#submit_misc").bind('click', function(e) {
-        set_misc();
-    });
-    $("#submit_circle").bind('click', function(e) {
-        set_circle();
-    });
-    $("#submit_line").bind('click', function(e) {
-        set_line();
-    });
-    $("#submit_point").bind('click', function(e) {
-        set_point();
-    });
-    $("#submit_icon").bind('click', function(e) {
-        set_icon();
-    });
-    $("#submit_freehand").bind('click', function(e) {
-        set_freehand();
-    }); // TODO: あとで
-
-    $("#csr_select").bind('click', function(e) {
-        stop_move();
-    });
-    $("#csr_move").bind('click', function(e) {
-        start_move();
-    });
-
-    $("#up_object").bind('click', function(e) {
-        up_object();
-    });
-    $("#down_object").bind('click', function(e) {
-        down_object();
-    });
-    $("#del_object").bind('click', function(e) {
-        del_object();
-    });
-    $("#save_img").bind('click', function(e) {
-        saveImg();
-    });
-    $("#get_url").bind('click', function(e) {
-        getURL();
-    });
-    $("#contextSelectMode").bind('click', function(e) {
-        stop_move();
-    });
-    $("#contextMoveMode").bind('click', function(e) {
-        start_move();
-    });
-    $("#contextZoom_1").bind('click', function(e) {
-        zoom_cnv(1);
-    });
-    $("#contextZoom_1_5").bind('click', function(e) {
-        zoom_cnv(1.5);
-    });
-    $("#contextZoom_2").bind('click', function(e) {
-        zoom_cnv(2);
-    });
-    $("#contextZoom_4").bind('click', function(e) {
-        zoom_cnv(4);
-    });
-    $("#save_img2").bind('click', function(e) {
-        saveImg();
-    });
-    $("#get_url2").bind('click', function(e) {
-        getURL();
-    });
-
-    //ウィンドウサイズの変更に対する対処
-    wideview = $(".menutitle").is(":visible");
-    $(window).resize(function() {
-        //キャンバスエリアの幅を調整、jCanvaScriptの処理に反映させる
-        chgCanvasAreaSize();
-
-        //メニューの表示・非表示対処
-        if ($(".menutitle").is(":visible")) {
-            wideview = true;
-
-            //各ブロックをcssのデフォルトに戻す
-            $("body,header,div.ribbonmenu,div.ribbonmenu>div").removeAttr('style');
-
-            //メニュー全体はスイッチを基に表示：非表示を決める
-            if ($("span#menusw_on").is(":visible")) {
-                $("div.ribbonmenu").hide();
-            } else {
-                $("div.ribbonmenu").show();
-            }
-        } else {
-            wideview = false;
-
-            if ($("div.menutab#menutab_map").hasClass("selected")) {
-                $("div.menusubcell#subcell_graph").hide();
-                $("div.menucell#menu_map,div.menucell#menu_cont").show();
-                $("div.ribbonmenu").show();
-            } else if ($("div.menutab#menutab_item").hasClass("selected")) {
-                $("div.menucell#menu_map,div.menucell#menu_cont").hide();
-                $("div.menusubcell#subcell_graph").show();
-                $("div.ribbonmenu").show();
-            } else {
-                $("div.ribbonmenu").hide();
-            }
+// ロードしたマップデータ内のオブジェクト情報を反映させる
+function onLoadMapData(data, bbobj) {
+    var i;
+    // TODO: マップ同士のオフセット座標対応
+    resizeCanvasArea();
+    if ("turret" in data) {
+        var turretData = data["turret"];
+        for (i = 0; i < turretData.length; i++) {
+            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
+            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2],
+                turretSpec[turretData[i][3]][0],
+                turretSpec[turretData[i][3]][1],
+                turretCircle,
+                undefined, debugMode);
         }
-    });
-
-    // canvas要素の存在チェックとCanvas未対応ブラウザの対処
-    var canvas = document.getElementById(CanvasName);
-    if (!canvas || !canvas.getContext) {
-        alert("ブラウザがCanvas非対応なので、このブラウザでは動作しません");
-        return false;
     }
-
-    // canvas要素の初期化
-    bbobj = new BB(CanvasName);
-    var cnvArea = document.getElementById(DivName);
-    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
-    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6;
-    $("#" + DivName)
-        .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
-        .height($("#" + CanvasName).outerHeight() + scrollBarHeight);
-
-    $("#lst_layer").change(function() {
-        closeNav();
-        bbobj.setbgdiff($("#lst_layer").val())
-    });
-    $("#" + DivName).scroll(function() {
-        bbobj.chgScroll();
-    });
-
-    //スマホ用メニュー制御
-    var ua = navigator.userAgent;
-    if (window.TouchEvent &&
-        (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
-
-        //各種制御用変数
-        var pcmode = false,
-            intervalID = null,
-            timeoutID = null,
-            correctFlag = false,
-            headerHeight = $("header").outerHeight(),
-            headelem = document.getElementsByTagName("header")[0],
-            vp_width; //後でinitMenuScaleが初期化するため、ここでは触らない
-        // cookies  = document.cookie;
-
-        //向きが変わっていたら幅を取り直す
-        var media = window.matchMedia("(orientation: portrait)");
-        media.addListener(function(m) {
-            window.setTimeout(initMenuScale, 50);
-        });
-
-        //古いandroidの標準ブラウザの挙動が特殊なので、
-        //androidはY軸のスクロールに関する挙動からメニュー位置補正の方針を決める
-        if (ua.indexOf('Android') > 0) {
-            window.addEventListener('scroll', (function() {
-                    return function f() {
-                        correctFlag = (-headelem.getBoundingClientRect().top != window.pageYOffset);
-                        window.removeEventListener('scroll', f, true);
-                    }
-                })(),
-                true);
-            window.scrollTo(0, 1);
-        } else {
-            //iOSなどは常に補正ありで問題なさそう
-            correctFlag = true;
-            //inputやselectからフォーカスアウトした際に位置合わせしなおす
-            $("select, input, textarea").bind('blur', function() {
-                if (!wideview) {
-                    window.setTimeout(chgMenuScale, 200);
-                    window.setTimeout(chgMenuScale, 700);
-                }
-            });
+    if ("searcher" in data) {
+        var searcherData = data["searcher"];
+        for (i = 0; i < searcherData.length; i++) {
+            //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
+            bbobj.put_searcher(searcherData[i][0], searcherData[i][1],
+                searcherData[i][2],
+                turretCircle,
+                undefined, debugMode);
         }
-
-        //スクロール時のメニュー追従処理に使う関数を定義
-        function chgMenuScale() {
-            //幅広表示の時は座標の再計算だけして抜ける(無効化漏れのフォロー)
-            if (wideview) {
-                bbobj.chgScroll();
-                return false;
-            }
-
-            //headerとメニュー幅を固定・拡縮
-            var scale = window.innerWidth / vp_width;
-            $("header, div.ribbonmenu").css("transform", "scale(" + scale + ")")
-                .css("-ms-transform", "scale(" + scale + ")")
-                .css("-webkit-transform", "scale(" + scale + ")");
-
-            var headrect = headelem.getBoundingClientRect(),
-                docrect = document.documentElement.getBoundingClientRect();
-
-            if (correctFlag) {
-                var menuTop = Math.round(window.pageYOffset + docrect.top + headelem.offsetTop - headrect.top);
-                $("header").css("top", menuTop);
-                $("div.ribbonmenu").css("top", menuTop + headerHeight);
-
-                var menuLeft = Math.round(window.pageXOffset + docrect.left + headelem.offsetLeft - headrect.left);
-                $("header, div.ribbonmenu").css("left", menuLeft);
-            }
-            bbobj.chgScroll();
-            return true;
-        }
-
-        //スクロール終了待ち処理 タイマーをリセットするのみ
-        function doWhileScroll() {
-            if (timeoutID) window.clearTimeout(timeoutID);
-            timeoutID = window.setTimeout(doWhenScrollEnded, 60);
-        }
-
-        //スクロール停止後 改めて移動処理を行ってからbodyのマージンを変更
-        function doWhenScrollEnded() {
-            window.clearInterval(intervalID);
-            intervalID = null;
-            timeoutID = null;
-            window.removeEventListener('scroll', doWhileScroll);
-            if (chgMenuScale()) {
-                $("body").css("margin-top", (headerHeight + 5) * window.innerWidth / vp_width);
-
-                //処理遅れの救済処置
-                setTimeout(chgMenuScale, 100);
-                setTimeout(chgMenuScale, 300);
-                setTimeout(chgMenuScale, 500);
-            }
-        }
-
-        //PC版・スマホ版の切替機能を仕込む
-        //firefoxのバグ対策のため、metaの属性書き換えではなく、タグごと消して作り直す
-        var sw = $("span#viewsw");
-        sw.show();
-        sw.bind('click', function(ev) {
-            if (timeoutID) {
-                window.clearTimeout(timeoutID);
-                timeoutID = null;
-            }
-            if (intervalID) {
-                window.clearInterval(intervalID);
-                intervalID = null;
-            }
-            window.removeEventListener('scroll', doWhileScroll);
-            $("body, header, div.ribbonmenu, div.ribbonmenu>div").removeAttr('style');
-            if (pcmode) {
-                pcmode = false;
-                sw.text('PC版');
-                document.cookie = 'pcmode=false;max-age=0';
-                $('meta[name=viewport]').remove();
-                $('head').append('<meta name="viewport" content="width=device-width,initial-scale=1.0">');
-
-                //処理が遅れる場合があるようなので、少し遅延させる
-                setTimeout(initMenuScale, 100);
-            } else {
-                pcmode = true;
-                sw.text('スマホ版');
-                document.cookie = 'pcmode=true;max-age=2592000';
-                $('meta[name=viewport]').remove();
-                $('head').append('<meta name="viewport" content="width=980">');
-                //古いWebKit対策。少し遅らせてstyleに空白を設定しなおす
-                setTimeout(function() {
-                    $("body, header, div.ribbonmenu, div.ribbonmenu>div").attr('style', '')
-                }, 50);
-            }
-            $(window).resize();
-        });
-
-        // cookieに指定があればPCモードに切り替えておく
-        if (document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true") {
-            sw.click();
-        }
-
-        // スクロール関連のイベント定義
-        window.addEventListener('touchstart',
-            function(e) {
-                //幅広表示の時は何もしない
-                if (wideview) return;
-
-                window.removeEventListener('scroll', doWhileScroll);
-                if (!intervalID) {
-                    intervalID = window.setInterval(function() {
-                        chgMenuScale();
-                    }, 1000 / 30);
-                }
-            });
-
-        window.addEventListener('touchend',
-            function(e) {
-                //幅広表示の時は何もしない
-                if (wideview) return;
-
-                if (e.touches.length < 1) {
-                    //スクロール終了待ちに移行
-                    timeoutID = window.setTimeout(doWhenScrollEnded, 60);
-                    window.addEventListener('scroll', doWhileScroll);
-                }
-            });
-
-        function initMenuScale() {
-            vp_width = window.outerWidth || document.documentElement.getBoundingClientRect().width;
-            if (chgMenuScale()) {
-                $("body").css("margin-top", headerHeight * window.innerWidth / vp_width + 5);
-                $("header, div.ribbonmenu").css("width", vp_width);
-            }
-        }
-
-        //リロード時のウィンドウサイズ変更に対応
-        window.setTimeout(initMenuScale, 100);
-    }
-
-    loadInitData();
-});
-//各種初期化処理
-function loadInitData() {
-    loadStageList();
-    loadMapList();
-    loadObjectLists();
-
-    //メニューの初期状態を設定
-    onObjectSelectorChanged($("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
-
-    if (window.location.search) {
-        //query stringがあれば再現処理に入る
-        setURL(window.location.search.substr(1));
-    } else {
-        // なければもっともらしいマップを選ぶ
-        chg_map($("#current").val());
     }
 }
 
-//マップ変更
-function chg_map(map, callback) {
-    if (map== null) {
-        map= $("#map").val();
-    }
+//マップをロードする
+function loadMap(map, callback) {
     var stage= getStageFromMap(map);
-    $("#stage").val(stage);
-    $("#stage").change();
-    $("#map").val(map);
-    $("#map").change();
-    
-    var $map = $("#map option:selected");
-    map = sanitize_filename(map);
-    stage = sanitize_filename(stage);
-    var layer = eval($map.data("layer"));
-    var scale = eval($("#stage [value='" + stage + "']").data("scale"));
+    map = sanitizeFilePath(map);
+    stage = sanitizeFilePath(stage);
+    var scale = eval($("#stage").find(`[value="${stage}"]`).data("scale"));
 
     if ((map == null) || (stage == null)) {
-        alert("マップファイル名エラー");
+        if (callback !== undefined) {
+            callback("マップファイル名エラー");
+        }
         return;
     }
 
     $("#Loading").show();
-    $("#lst_object").children().remove();
+    delallObject(); // 設置オブジェクトを全削除
 
-    bbobj.setbg("./map/" + stage + "/" + map + ".jpg", scale[0], scale[1], function() {
+    var bbobj = getBbObj();
+    bbobj.setbg(getMapImgPath(stage, map), scale[0], scale[1], function() {
         $("#lst_scale").val(1);
-        $("ul#contextZoom").children("li").removeClass("checked");
-        $("li#contextZoom_1").addClass("checked");
-        $("div#Loading").hide();
+        $("#Loading").hide();
         $.ajax({
-            "url": "data/" + map + ".txt",
+            "url": getMapDataPath(map),
             dataType: "jsonp",
             crossDomain: true,
             cache: false,
             jsonp: false,
             jsonpCallback: "stageData",
             success: function(data, status) {
-                chgCanvasAreaSize();
-
-                if ("turret" in data) {
-                    var turretData = data["turret"];
-                    for (i = 0; i < turretData.length; i++) {
-                        //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
-                        bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2],
-                            turretSpec[turretData[i][3]][0],
-                            turretSpec[turretData[i][3]][1],
-                            turretCircle,
-                            // undefined, turretData[i][4]);
-                            undefined, debugMode);
-                    }
-                }
-                if ("searcher" in data) {
-                    var searcherData = data["searcher"];
-                    for (i = 0; i < searcherData.length; i++) {
-                        //x位置、y位置、範囲、中心円サイズ、色、テストフラグ
-                        bbobj.put_searcher(searcherData[i][0], searcherData[i][1],
-                            searcherData[i][2],
-                            turretCircle,
-                            // undefined, searcherData[i][3]);
-                            undefined, debugMode);
-                    }
-                }
+                onLoadMapData(data, bbobj);
                 if (callback !== undefined) {
                     callback.call();
                 }
             },
-            error: function() {}
+            error: function() {
+                if (callback !== undefined) {
+                    callback("マップデータの読み込みに失敗しました");
+                }
+            }
         });
     });
-
-    var layerList = [];
-    layerList = appDataStatic["defaultLayer"].concat();
-    for (var i = 0; i < layer.length; i++) {
-        layerList.push({
-            "value": './map/' + stage + '/' + map + '_' + (i + 1) + '.jpg',
-            "text": layer[i],
-        });
-    }
-    loadSelectionOption($("#lst_layer"), layerList);
-    $("#lst_layer").val("");
-
-    closeNav();
 }
 
 //偵察機
-function set_scout() {
+function setScout() {
     if (!$("#lst_scout").val()) {
         return;
     }
@@ -799,18 +774,18 @@ function set_scout() {
     var obj = bbobj.add_scout($("#name_scout").val(), param[0], param[1], param[2], $("#col_scout").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //センサー
-function set_sensor() {
+function setSensor() {
     if (!$("#lst_sensor").val()) {
         return;
     }
@@ -821,18 +796,18 @@ function set_sensor() {
     var obj = bbobj.add_sensor($("#name_sensor").val(), $("#lst_sensor").val(), $("#col_sensor").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //レーダー
-function set_radar() {
+function setRadar() {
     if (!$("#lst_radar").val()) {
         return;
     }
@@ -844,18 +819,18 @@ function set_radar() {
     var obj = bbobj.add_radar($("#name_radar").val(), param[0], param[1], $("#col_radar").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //滞空索敵弾
-function set_sonde() {
+function setSonde() {
     if (!$("#lst_sonde").val()) {
         return;
     }
@@ -867,18 +842,18 @@ function set_sonde() {
     var obj = bbobj.add_sonde($("#name_sonde").val(), param[0], param[1], $("#col_sonde").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //ND索敵センサー
-function set_ndsensor() {
+function setNdSensor() {
     if (!$("#lst_ndsensor").val()) {
         return;
     }
@@ -889,18 +864,18 @@ function set_ndsensor() {
     var obj = bbobj.add_ndsensor($("#name_ndsensor").val(), $("#lst_ndsensor").val(), $("#col_ndsensor").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //Vセンサー
-function set_vsensor() {
+function setVSensor() {
     if (!$("#lst_vsensor").val()) {
         return;
     }
@@ -915,18 +890,18 @@ function set_vsensor() {
         $("#col_vsensor").val(), 'A');
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //砲撃
-function set_howitzer() {
+function setHowitzer() {
     if (!$("#lst_howitzer").val()) {
         return;
     }
@@ -938,19 +913,19 @@ function set_howitzer() {
     var obj = bbobj.add_howitzer($("#name_howitzer").val(), param[0], param[1], param[2], $("#col_howitzer").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 
 //その他攻撃関連
-function set_misc() {
+function setMisc() {
     if (!$("#lst_misc").val()) {
         return;
     }
@@ -983,19 +958,19 @@ function set_misc() {
     }
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 
 //アイコン
-function set_icon() {
+function setIcon() {
     if (!$("#lst_icon").val()) {
         return;
     }
@@ -1003,7 +978,7 @@ function set_icon() {
         return;
     }
 
-    var file = sanitize_filename($("#lst_icon").val());
+    var file = sanitizeFilePath($("#lst_icon").val());
     if (file == null) {
         alert("アイコンファイル名エラー");
         return;
@@ -1012,19 +987,19 @@ function set_icon() {
     var obj = bbobj.add_icon($("#name_icon").val(), file, $("#col_icon").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 
 //ワフトローダー
-function set_waft(file) {
+function setWaft(file) {
     if (!file) {
         return;
     }
@@ -1032,7 +1007,7 @@ function set_waft(file) {
         return;
     }
 
-    file = sanitize_filename(file);
+    file = sanitizeFilePath(file);
     if (file == null) {
         alert("ワフト画像ファイル名エラー");
         return;
@@ -1041,19 +1016,19 @@ function set_waft(file) {
     var obj = bbobj.add_waft($("#name_waft").val(), file, $("#col_waft").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 
 //円
-function set_circle() {
+function setCircle() {
     if (!$("#rad_circle").val()) {
         return;
     }
@@ -1064,18 +1039,18 @@ function set_circle() {
     var obj = bbobj.add_circle($("#name_circle").val(), $("#rad_circle").val(), $("#col_circle").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //直線
-function set_line() {
+function setLine() {
     if (!$("#len_line").val()) {
         return;
     }
@@ -1086,38 +1061,38 @@ function set_line() {
     var obj = bbobj.add_line($("#name_line").val(), $("#len_line").val(), $("#col_line").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //点
-function set_point() {
+function setPoint() {
     var obj = bbobj.add_point($("#name_point").val(), $("#size_point").val(), $("#col_point").val(), $("#align_point").val());
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
-        obj.move($("#" + DivName).scrollLeft(), $("#" + DivName).scrollTop());
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
         obj.mousedown(function() {
             $("#lst_object").val(obj.id);
             return false;
         });
-        closeNav();
+        closeMenuTab();
     }
 }
 
 //フリーハンド
-function set_freehand() {
+function setFreehand() {
     var obj = bbobj.add_freehand($("#name_freehand").val(), $("#col_freehand").val());
-    closeNav();
+    closeMenuTab();
 
     if (obj) {
-        add_object(obj.id, coalesce_name(obj));
+        addObject(obj.id, coalesceName(obj));
         $("button").attr("disabled", true);
         obj.start();
         freehandOnWrite = obj;
@@ -1126,55 +1101,32 @@ function set_freehand() {
         }
         $("#col_freehand").bind('blur', colChg);
         $("#undo_freehand").attr("disabled", false)
-            .click(function() {
+            .tap(function() {
                 freehandOnWrite.undo();
             });
         $("#redo_freehand").attr("disabled", false)
-            .click(function() {
+            .tap(function() {
                 freehandOnWrite.redo();
             });
         $("#stop_freehand").attr("disabled", false)
-            .click(function() {
+            .tap(function() {
                 freehandOnWrite = undefined;
                 obj.end();
                 $("#col_freehand").unbind('blur', colChg);
                 $("button:not(.disable)").attr("disabled", false);
-                $("#stop_freehand").attr("disabled", true).unbind("click");
-                $("#undo_freehand").attr("disabled", true).unbind("click");
-                $("#redo_freehand").attr("disabled", true).unbind("click");
+                $("#stop_freehand").attr("disabled", true).unbind("tap");
+                $("#undo_freehand").attr("disabled", true).unbind("tap");
+                $("#redo_freehand").attr("disabled", true).unbind("tap");
             });
     }
 }
 
-//ズーム
-function zoom_cnv(scale) {
-    var newScale, chgScale;
-    // var canvas = document.getElementById(CanvasName);
-
-    newScale = scale;
-    $("#lst_scale").val(newScale);
-
-    var liid = newScale.toString().replace(".", "_");
-    $("ul#contextZoom").children("li").removeClass("checked");
-    $("li#contextZoom_" + liid).addClass("checked");
-
-    chgScale = newScale / bbobj.zoomScale;
-    if (bbobj.zoomScale != newScale) {
-        //倍率が変化する場合は左上維持して拡大処理
-        bbobj.zoom(chgScale);
-        $("#" + DivName).scrollLeft($("#" + DivName).scrollLeft() * chgScale)
-            .scrollTop($("#" + DivName).scrollTop() * chgScale);
-    }
-}
-
 //移動開始
-function start_move() {
+function startMove() {
     $("button").attr("disabled", true);
-    $("li#contextSelectMode").removeClass("checked");
-    $("li#contextMoveMode").addClass("checked");
     $("div#csr_select").removeClass("selected");
     $("div#csr_move").addClass("selected");
-    $("canvas#" + CanvasName).css("cursor", "move");
+    $("#" + CanvasName).css("cursor", "move");
 
     if (freehandOnWrite !== undefined) {
         freehandOnWrite.end();
@@ -1187,41 +1139,45 @@ function start_move() {
     mm = function(e) {
         var dx = e.pageX - base_x,
             dy = e.pageY - base_y;
-        $("#" + DivName).scrollLeft($("#" + DivName).scrollLeft() - dx);
-        $("#" + DivName).scrollTop($("#" + DivName).scrollTop() - dy);
+        $("#" + CanvasDivName).scrollLeft($("#" + CanvasDivName).scrollLeft() - dx);
+        $("#" + CanvasDivName).scrollTop($("#" + CanvasDivName).scrollTop() - dy);
         base_x = e.pageX;
         base_y = e.pageY;
         return false;
     };
 
     mu = function(e) {
-        $("#" + DivName).unbind('mousemove', mm);
-        $("#" + DivName).unbind('mouseup', mu);
+        $("#" + CanvasDivName).unbind('mousemove', mm);
+        $("#" + CanvasDivName).unbind('mouseup', mu);
         return false;
     };
     md = function(e) {
         base_x = e.pageX;
         base_y = e.pageY;
-        $("#" + DivName).bind('mousemove', mm);
-        $("#" + DivName).bind('mouseup', mu);
+        $("#" + CanvasDivName).bind('mousemove', mm);
+        $("#" + CanvasDivName).bind('mouseup', mu);
         return false;
     };
 
-    $("#" + DivName).mousedown(md);
+    $("#" + CanvasDivName).mousedown(md);
+    
+    // var img = $("#SaveArea");
+    // img.css("visibility", "hidden");
 
 }
 
 //移動終了
-function stop_move() {
+function startSelect() {
     $("button:not(.disable)").attr("disabled", false);
-    $("li#contextSelectMode").addClass("checked");
-    $("li#contextMoveMode").removeClass("checked");
     $("div#csr_select").addClass("selected");
     $("div#csr_move").removeClass("selected");
-    $("canvas#" + CanvasName).css("cursor", "auto");
+    $("#" + CanvasName).css("cursor", "auto");
 
     bbobj.ourJc.start(CanvasName, true);
-    $("#" + DivName).unbind('mousedown');
+    $("#" + CanvasDivName).unbind('mousedown');
+
+    // var img = $("#SaveArea");
+    // img.css("visibility", "hidden");
 
     //力技なのが気になる
     if (freehandOnWrite !== undefined) {
@@ -1231,120 +1187,24 @@ function stop_move() {
     }
 }
 
-//lst_objectへの追加
-function add_object(id, name) {
-    if ($("#lst_object").children("option").get().length) {
-        $('<option value="' + id + '"></option>').text(name).insertBefore($("#lst_object :first-child"));
-    } else {
-        $("#lst_object").append($('<option value="' + id + '"></option>').text(name));
-    }
-    $("#lst_object").val(id);
-}
-
-//lst_objectを上に
-function up_object() {
-    $("#lst_object option:not(:selected)").each(function() {
-        while ($(this).next().is(":selected")) {
-            $(this).insertAfter($(this).next());
-            bbobj.object($(this).val()).down();
-        }
-    });
-}
-
-//lst_objectを下に
-function down_object() {
-    $($("#lst_object option:not(:selected)").get().reverse()).each(function() {
-        while ($(this).prev().is(":selected")) {
-            $(this).insertBefore($(this).prev());
-            bbobj.object($(this).val()).up();
-        }
-    });
-}
-
-//メニュー隠す
-function hide_menu() {
-    $("div.ribbonmenu").slideUp(
-        function() {
-            $("#menusw_off").hide();
-            $("#menusw_on").show();
-        });
-}
-//メニュー出す
-function show_menu() {
-    $("div.ribbonmenu").slideDown(
-        function() {
-            $("#menusw_on").hide();
-            $("#menusw_off").show();
-        });
-}
-
-//lst_objectから要素削除
-function del_object() {
-    $("#lst_object option:selected").each(function() {
-        bbobj.object($(this).val()).del();
-        $(this).remove()
-    });
-}
-
-//画像保存
-function saveImg() {
-    $("#WorkArea").append($("<img id=DownloadImg src='" + bbobj.save() + "'>"));
-    window.open("./image.html", "test");
-}
-
-//現在の状態をURL化
-function getURL() {
-    var objs = new Array();
-    $($("#lst_object option").get().reverse()).each(function() {
-        objs.push($(this).val());
-    });
-
-    var queryobj = new BBCQuery(bbobj, $("select#map").val());
-    queryobj.fromObjects(objs);
-    var querystr = queryobj.toBase64(),
-        baseurl = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
-
-    if (baseurl.match(/^https?:\/\//)) {
-        $.ajax({
-            type: 'GET',
-            url: 'http://is.gd/create.php',
-            dataType: 'jsonp',
-            crossDomain: true,
-            cache: false,
-            jsonp: false,
-            data: {
-                url: baseurl,
-                format: "json",
-                callback: "shortenurl",
-            },
-            jsonpCallback: 'shortenurl',
-            success: function(data, status) {
-                if (!data["errorcode"]) {
-                    window.prompt("表示用URL", data["shorturl"]);
-                } else {
-                    alert("URL短縮エラー(" & data["errorcode"] & ")");
-                }
-            },
-            error: function() {
-                alert("URL短縮に失敗しました");
-            }
-        });
-    } else {
-        window.prompt("表示用URL", baseurl);
-    }
-
-    //delete queryobj;
-}
 
 //URLクエリストリングからの復元
 function setURL(querystr) {
-    var queryobj = new BBCQuery(bbobj, 'dummy');
+    var queryobj = new BBCQuery(getBbObj(), 'dummy');
     if (queryobj.fromBase64(querystr)) {
-        chg_map(queryobj.map, function() {
+        var map = queryobj.map;
+        var stage= getStageFromMap(map);
+        changeStageSelection(stage);
+        changeMapSelection(map);
+        loadMap(map, function(err) {
+            if (err) {
+                window.alert(err);
+                return;
+            }
             var objs = queryobj.applyObjects();
             for (var i = 0; i < objs.length; i++) {
-                add_object(objs[i].id, coalesce_name(objs[i]));
                 var obj = objs[i];
+                addObject(obj.id, coalesceName(obj));
                 obj.mousedown(function() {
                     $("#lst_object").val(obj.id);
                     return false;
@@ -1377,7 +1237,7 @@ var coalesceNames = {
     'default': "(無名)",
  };
 //オブジェクトの名前が空白だった場合の対策関数
-function coalesce_name(obj) {
+function coalesceName(obj) {
     var name;
     if (obj._text.length != 0) {
         //名前指定がある場合はそのまま利用
@@ -1392,142 +1252,21 @@ function coalesce_name(obj) {
     return name;
 }
 
-// //前景色を得る
-// function get_fgColor($bgcol) {
-//    if ($bgcol.search(/#[0-9a-fA-F]{6}/) == -1) return ("#000000") ;
-// 
-//     var $r = parseInt($bgcol.substr(1, 2),16);
-//     var $g = parseInt($bgcol.substr(3, 2),16);
-//     var $b = parseInt($bgcol.substr(5, 2),16);
-// 
-//     var $bright = (($r*299)+($g*587)+($b*114))/1000;
-//     if( $bright < 127.5 ) {
-//         return ("#FFFFFF");
-//     }
-//     return ("#000000");
-// }
-
-//ファイル名・ディレクトリ名チェック
-function sanitize_filename(path) {
-    var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
-    path.replace(control_codes, "\uFFFD");
-    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
-        return path;
+// キャンバスのサイズ変更に合わせてキャンバスエリアのサイズを追従させる
+function resizeCanvasArea() {
+    var ua = navigator.userAgent;
+    var $BBCompass = $("#BBCompass");
+    if (!forcePcMode &&
+        window.TouchEvent &&
+        (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
+        $("#CanvasArea")
+            .height($BBCompass.outerHeight() + scrollBarHeight);
     } else {
-        return null;
+        $("#CanvasArea")
+            .width($BBCompass.outerWidth() + scrollBarWidth)
+            .height($BBCompass.outerHeight() + scrollBarHeight);
     }
+    getBbObj().chgScroll();
 }
 
-//キャンバスエリアの幅を変更する
-function chgCanvasAreaSize() {
-    $("div#" + DivName).width($("canvas#" + CanvasName).outerWidth() + scrollBarWidth)
-        .height($("canvas#" + CanvasName).outerHeight() + scrollBarHeight);
-    bbobj.chgScroll();
-}
 
-//ナビゲーションタブエリアを非表示にする
-function closeNav() {
-    if ($("nav").is(":visible")) {
-        $("nav>div").removeClass("selected");
-        $("div.ribbonmenu").fadeOut();
-    }
-}
-
-//スクロール関連独自処理
-function bindScroll(ojQuery) {
-    ojQuery.each(function(i, elem) {
-        elem.addEventListener('wheel',
-            function(e) {
-                //スクロールが上限に達している場合はデフォルト動作を阻害する
-                if ((e.deltaX < 0) && (elem.scrollLeft <= 0) || (e.deltaX > 0) && (elem.scrollLeft >= elem.scrollWidth - elem.clientWidth) || (e.deltaY < 0) && (elem.scrollTop <= 0) || (e.deltaY > 0) && (elem.scrollTop >= elem.scrollHeight - elem.clientHeight)) {
-                    e.preventDefault();
-                    return;
-                }
-
-                if (e.deltaMode == 0) {
-                    elem.scrollLeft = elem.scrollLeft + e.deltaX;
-                    elem.scrollTop = elem.scrollTop + e.deltaY;
-                } else if (e.deltaMode == 1) {
-                    //elem.scrollLeft = elem.scrollLeft + e.deltaX * element.style.lineHeight;
-                    //elem.scrollTop  = elem.scrollTop + e.deltaY * element.style.lineHeight;
-                    elem.scrollLeft = elem.scrollLeft + e.deltaX * elem.style.lineHeight;
-                    elem.scrollTop = elem.scrollTop + e.deltaY * elem.style.lineHeight;
-                } else if (e.deltaMode == 2) {
-                    elem.scrollLeft = elem.scrollLeft + e.deltaX * document.documentElement.clientWidth;
-                    elem.scrollTop = elem.scrollTop + e.deltaY * document.documentElement.clientHeight;
-                } else {
-                    return;
-                }
-                e.preventDefault();
-                return;
-            },
-            false);
-
-        if (window.TouchEvent) {
-            var startX, startY, scrollStartX, scrollStartY,
-                // scrollLimitX, scrollLimitY,
-                flag, touchid;
-
-            function getTouch(ev) {
-                var touch;
-
-                switch (ev.type) {
-                    case "touchstart":
-                        touch = ev.touches[0];
-                        touchid = touch.identifier;
-                        break
-
-                    case "touchmove":
-                        for (i = 0; i < ev.changedTouches.length; i++) {
-                            if (ev.changedTouches[i].identifier == touchid) {
-                                touch = ev.changedTouches[i];
-                                break;
-                            }
-                        }
-                        break;
-                }
-
-                if (touch === undefined) {
-                    return undefined;
-                }
-                return touch;
-            }
-
-            elem.addEventListener('touchstart',
-                function(e) {
-                    var touch = getTouch(e);
-
-                    flag = true;
-                    startX = touch.clientX;
-                    startY = touch.clientY;
-                    scrollStartX = elem.scrollLeft;
-                    scrollStartY = elem.scrollTop;
-                    // scrollLimitX=elem.scrollWidth - elem.clientWidth;
-                    // scrollLimitY=elem.scrollHeight - elem.clientHeight;
-                    return;
-                },
-                false);
-
-            elem.addEventListener('touchmove',
-                function(e) {
-                    //touchstartで拾ったイベントがないなら何もしない
-                    if (!flag) return;
-                    var touch = getTouch(e);
-                    if (touch === undefined) {
-                        flag = false;
-                        return;
-                    }
-
-                    e.preventDefault();
-                    elem.scrollLeft = scrollStartX + (touch.clientX - startX) * (-1);
-                    elem.scrollTop = scrollStartY + (touch.clientY - startY) * (-1);
-                },
-                false);
-
-            elem.addEventListener('touchend',
-                function(e) {
-                    flag = false;
-                });
-        }
-    });
-}

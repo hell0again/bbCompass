@@ -137,7 +137,7 @@ class BB_base {
     }
     del() {
         delete this._bbObj.member[this.id];
-        var objs = this._ourJc.layer(this.id).objs;
+        // var objs = this._ourJc.layer(this.id).objs;
         this._ourJc.layer(this.id).del();
     }
 }
@@ -738,8 +738,8 @@ class BB_sonde extends BB_base {
                 tgtline.translateTo(x, y);
                 cross.translateTo(x, y);
             }
-            obj._markerx = point._x + point._transformdx;
-            obj._markery = point._y + point._transformdy;
+            obj._markerx = this._x + this._transformdx;
+            obj._markery = this._y + this._transformdy;
         };
 
         var tgtdrag = function() {
@@ -758,8 +758,8 @@ class BB_sonde extends BB_base {
             tgt.translateTo(base.x, base.y);
             tgtline.translateTo(base.x, base.y);
             cross.translateTo(base.x, base.y);
-            obj._markerx = point._x + point._transformdx;
-            obj._markery = point._y + point._transformdy;
+            obj._markerx = this._x + this._transformdx;
+            obj._markery = this._y + this._transformdy;
             return false;
         };
 
@@ -929,8 +929,8 @@ class BB_vsensor extends BB_base {
         this.regist();
         if (typeof(_callback) === "function") {
             _callback.apply(this);
-        };
-    };
+        }
+    }
 
     draw() {
         var px_rad, modecolor,
@@ -965,7 +965,7 @@ class BB_vsensor extends BB_base {
 
         this._ourJc.layer(this.id).draggable();
         return this;
-    };
+    }
 
     modechg() {
         if (this._mode == 'A') {
@@ -2393,7 +2393,7 @@ export default class BB {
             area.visible(visible);
             line.visible(visible);
         });
-    };
+    }
 
     //
     //オブジェクト描画
