@@ -27138,6 +27138,30 @@
 			"url": "/news/332"
 		},
 		{
+			"start_time": "2016-02-15",
+			"end_time": "2016-02-21",
+			"type": "national_battle_high",
+			"title": "キニシュ砂岸〜白砂進軍〜【ローテーション】",
+			"url": "/map/19#opr-128",
+			"map": "kinich_a"
+		},
+		{
+			"start_time": "2016-02-15",
+			"end_time": "2016-02-21",
+			"type": "national_battle_high",
+			"title": "キニシュ砂岸〜火花散る渚〜【ローテーション】",
+			"url": "/map/19#opr-129",
+			"map": "kinich_b"
+		},
+		{
+			"start_time": "2016-02-15",
+			"end_time": "2016-02-21",
+			"type": "national_battle_low",
+			"title": "トラザ山岳基地〜激震の岩峰〜【特殊×】",
+			"url": "/map/4#opr-24",
+			"map": "tlaza_f"
+		},
+		{
 			"start_time": "2016-02-29",
 			"end_time": "2016-03-06",
 			"type": "event",
