@@ -1,37 +1,79 @@
 #!/bin/sh
-# dockerコンテナを起動するコマンドを表示する。
-# コンテナはローカルフォルダをマウントする。
-# コマンドを実行するには表示したコマンドをevalする。
+# Just "display" docker-run command.
+# To run container, eval the displayed command.
 #
-# # アプリの起動コマンドの表示
+# # display docker-run command
 # ./docker/conn
 #
-# # アプリの起動
+# # run container
 # $(./docker/conn)
-# $(./docker/conn) npm run start
-# $(./docker/conn npm run start)
 #
-# # アプリのビルド
-# $(./docker/conn) npm run build
-#
-# # シェル
+# # run container with command
 # $(./docker/conn) bash
+# $(./docker/conn bash)
+#
 
 set -eu && [ ${SET_X:-false} = true ] && set -x
 SCRIPT_DIR=$(cd $(dirname $0); pwd) && cd ${SCRIPT_DIR}/..
-source ./docker/env.source
+. ./docker/env.source
+: ${APP_PORT:?}
+: ${TTY_PORT:?}
+: ${CONTAINER_WORKDIR:?}
+: ${CONTAINER_IMAGE_NAME:?}
+: ${CONTAINER_IMAGE_TAG:?}
 
 ## コンテナからgit操作する設定
 DEFAULT_GIT_COMMITTER_NAME=$(git config --global user.name) &&:
 DEFAULT_GIT_COMMITTER_EMAIL=$(git config --global user.email) &&:
 : ${GIT_COMMITTER_NAME:=${DEFAULT_GIT_COMMITTER_NAME}}
 : ${GIT_COMMITTER_EMAIL:=${DEFAULT_GIT_COMMITTER_EMAIL}}
-: ${GIT_COMMITTER_NAME:?}
-: ${GIT_COMMITTER_EMAIL:?}
+# : ${GIT_COMMITTER_NAME:?}
+# : ${GIT_COMMITTER_EMAIL:?}
 : ${GIT_AUTHOR_NAME:=${GIT_COMMITTER_NAME}}
 : ${GIT_AUTHOR_EMAIL:=${GIT_COMMITTER_EMAIL}}
-: ${GIT_AUTHOR_NAME:?}
-: ${GIT_AUTHOR_EMAIL:?}
+# : ${GIT_AUTHOR_NAME:?}
+# : ${GIT_AUTHOR_EMAIL:?}
+
+
+## コンテナからsshするための設定
+## obsoleted!! use ssh-agent container(whilp/ssh-agent)
+# ## boot2dockerでboot2docker ssh -Aせずに起動する場合、agent転送は無効になる
+# SSH_AGENT_OPTS=$(
+#     HOST_AUTH_SOCK=$(readlink -f ${SSH_AUTH_SOCK}) &&:
+#     if [ $? -eq 0 ]; then
+#         cat <<EOM
+# -v ${HOST_AUTH_SOCK}:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent
+# EOM
+#     else
+#         echo >&2 "[WARN] ssh agent forward disabled"
+#         echo ""
+#     fi
+# )
+
+: ${SSH_AGENT_CONTAINER_NAME:=ssh-agent}
+SSH_AGENT_OPTS=$(
+    if [ "$(docker ps -a --filter "name=${SSH_AGENT_CONTAINER_NAME}" -q)" != "" ]; then
+        echo "--volumes-from=${SSH_AGENT_CONTAINER_NAME} -e SSH_AUTH_SOCK=/root/.ssh/socket"
+    else
+        echo >&2 "[WARN] ssh-agent container is not running. ssh is not available!! (see: https://github.com/whilp/ssh-agent)"
+        echo ""
+    fi
+)
+
+
+## homeコンテナは/rootをボリュームとして定義している。
+## ssh-agentコンテナは/root/.sshをボリュームとして定義している。
+## homeとssh-agentを同時にマウントするとhome側が優先されるので
+## homeにssh-agentをマウントして利用すること
+: ${HOME_CONTAINER_NAME:=home}
+HOME_OPTS=$(
+    if [ "$(docker ps -a --filter "name=${HOME_CONTAINER_NAME}" -q)" != "" ]; then
+        echo "-p ${TTY_PORT}:10000 --volumes-from=${HOME_CONTAINER_NAME}"
+    else
+        echo >&2 "[WARN] home container is not running."
+        echo ""
+    fi
+)
 
 
 ## コンテナ内でset -xを有効にする設定
@@ -39,35 +81,32 @@ SET_X_OPTS=$(
     if [ ${SET_X:-false} = true ]; then
         echo "-e SET_X=true"
     else
-        :
+        echo "-e SET_X=false"
     fi
 )
 
-## コンテナからsshするための設定
-## boot2dockerでboot2docker ssh -Aせずに起動する場合、agent転送は無効になる
-SSH_AGENT_OPTS=$(
-    HOST_AUTH_SOCK=$(readlink -f ${SSH_AUTH_SOCK}) &&:
-    if [ $? -eq 0 ]; then
-        cat <<EOM
--v ${HOST_AUTH_SOCK}:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent
-EOM
-    else
-        echo >&2 "[WARN] ssh agent forward disabled"
-        echo ""
-    fi
-)
+
+if [ ${DOCKER_HOST:-undef} = "undef" ]; then
+    :
+else
+    echo >&2 "[WARN] DOCKER_HOST=${DOCKER_HOST}"
+fi
+
+
+MOUNT_OPTS="-v $(pwd):${CONTAINER_WORKDIR}"
 
 cat <<EOM
-docker run --rm\
- -it\
- -p ${APP_PORT}:8000\
- -v `pwd`:${CONTAINER_WORKDIR}\
- ${SSH_AGENT_OPTS}\
- ${SET_X_OPTS}\
- -e GIT_COMMITTER_NAME="${GIT_COMMITTER_NAME}" -e GIT_COMMITTER_EMAIL="${GIT_COMMITTER_EMAIL}"\
- -e GIT_AUTHOR_NAME="${GIT_AUTHOR_NAME}" -e GIT_AUTHOR_EMAIL="${GIT_AUTHOR_EMAIL}"\
- ${CONTAINER_IMAGE_NAME}:${CONTAINER_IMAGE_TAG}\
+docker run --rm -it
+ -p ${APP_PORT}:8000
+ ${MOUNT_OPTS}
+ ${HOME_OPTS}
+ ${SSH_AGENT_OPTS}
+ ${SET_X_OPTS}
+ -e GIT_COMMITTER_NAME="${GIT_COMMITTER_NAME}" -e GIT_COMMITTER_EMAIL="${GIT_COMMITTER_EMAIL}"
+ -e GIT_AUTHOR_NAME="${GIT_AUTHOR_NAME}" -e GIT_AUTHOR_EMAIL="${GIT_AUTHOR_EMAIL}"
+ ${CONTAINER_IMAGE_NAME}:${CONTAINER_IMAGE_TAG}
  $@
 EOM
 # -v ${HOME}/.config/hub:/root/.config/hub\
+
 

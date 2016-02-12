@@ -1,16 +1,19 @@
 FROM node:4
 MAINTAINER hell0again <hell00again@gmail.com>
 
-ENV HOME /root
+ENV WORKDIR /bbcompass
 ENV USER root
 
+WORKDIR ${WORKDIR}
+
 ## imagemagick
-RUN cd ${HOME} &&\
+RUN apt-get -y install wget &&\
+    cd ${WORKDIR} &&\
     wget http://www.imagemagick.org/download/ImageMagick.tar.gz &&\
     tar zxvf ImageMagick.tar.gz &&\
     cd ImageMagick-* &&\
     ./configure && make && make install &&\
-    cd .. && rm -rf ImageMagick.tar.gz ImageMagick-*
+    cd ${WORKDIR} && rm -rf ImageMagick.tar.gz ImageMagick-*
 
 RUN npm install -g\
     bower\
@@ -20,14 +23,22 @@ RUN npm install -g\
     browserify\
     testling
 
-WORKDIR ${HOME}/git/bbCompass
+## bbCompassの必要なファイルをもってくる
+RUN cd ${WORKDIR} &&\
+    git clone https://github.com/hell0again/bbCompass.git ${WORKDIR} &&\
+    npm install --dev
 
-# RUN mkdir ${HOME}/git/bbCompass || git clone https://github.com/hell0again/bbCompass.git ${HOME}/git/bbCompass
-COPY . ${HOME}/git/bbCompass
+## 最低限の読み書き
+RUN apt-get update &&\
+    apt-get -y install vim silversearcher-ag
 
-RUN npm install
-
+ENV HOME /root
+## rootでnpmのpostinstallが動かない対策
+## see: http://stackoverflow.com/questions/28763958/nodejs-unsafe-perm-not-working-on-package-json
+RUN echo 'unsafe-perm = true' >${HOME}/.npmrc
 
 CMD npm run start
+
+# npm run start
 EXPOSE 8000
 
