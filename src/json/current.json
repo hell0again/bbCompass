@@ -1,34 +1,11 @@
 [
     {
-        "start_time": "2016-02-08",
-        "end_time": "2016-02-14",
-        "type": "union_battle",
-        "title": "【ユニオンバトル】オルグレン湖水基地〜落水の迎撃戦〜",
-        "url": "/news/325",
-        "map": "algren_ub"
-    },
-    {
-        "start_time": "2016-02-08",
-        "end_time": "2016-02-14",
-        "type": "national_battle_high",
-        "title": "マリナセドナ大雪山〜掎角の氷穴〜【特殊×】",
-        "url": "/map/21#opr-143",
-        "map": "malinasedna_c"
-    },
-    {
-        "start_time": "2016-02-08",
-        "end_time": "2016-02-14",
-        "type": "national_battle_low",
-        "title": "第3採掘島〜臨海決戦〜【特殊×】",
-        "url": "/map/3#opr-11",
-        "map": "island_a"
-    },
-    {
         "start_time": "2016-02-15",
         "end_time": "2016-02-21",
         "type": "event",
         "title": "イベントバトル開催＜第二次 双覇大攻防戦〜GRFの機略戦〜＞",
-        "url": "/news/332"
+        "url": "/news/332",
+        "map": "beanavis_ea"
     },
     {
         "start_time": "2016-02-15",
