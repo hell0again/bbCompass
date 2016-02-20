@@ -27139,6 +27139,22 @@
 			"map": "tlaza_f"
 		},
 		{
+			"start_time": "2016-02-22",
+			"end_time": "2016-02-28",
+			"type": "national_battle_high",
+			"title": "【調整あり】ネソス島実験ドーム〜構造β‐05〜【特殊×】",
+			"url": "/map/20#opr-135",
+			"map": "nesos_b"
+		},
+		{
+			"start_time": "2016-02-22",
+			"end_time": "2016-02-28",
+			"type": "national_battle_low",
+			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
+			"url": "/map/6#opr-33",
+			"map": "d51_b"
+		},
+		{
 			"start_time": "2016-02-29",
 			"end_time": "2016-03-06",
 			"type": "event",
@@ -28502,7 +28518,7 @@
 				"layer": "[\"下段\"]",
 				"stage": "nesos"
 			},
-			"text": "構造α-01"
+			"text": "構造α‐01"
 		},
 		{
 			"value": "nesos_b",
@@ -28510,7 +28526,7 @@
 				"layer": "[]",
 				"stage": "nesos"
 			},
-			"text": "構造β-05"
+			"text": "構造β‐05"
 		},
 		{
 			"value": "nesos_c",
@@ -28518,7 +28534,7 @@
 				"layer": "[]",
 				"stage": "nesos"
 			},
-			"text": "構造α-66"
+			"text": "構造α‐66"
 		},
 		{
 			"value": "nesos_ua",
