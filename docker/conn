@@ -93,6 +93,7 @@ else
 fi
 
 
+MOUNT_OPTS=""
 MOUNT_OPTS="-v $(pwd):${CONTAINER_WORKDIR}"
 
 cat <<EOM

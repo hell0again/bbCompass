@@ -24,9 +24,20 @@ RUN npm install -g\
     testling
 
 ## bbCompassの必要なファイルをもってくる
+# RUN cd ${WORKDIR} &&\
+#     git clone https://github.com/hell0again/bbCompass.git ${WORKDIR} &&\
+#     npm install --dev
 RUN cd ${WORKDIR} &&\
-    git clone https://github.com/hell0again/bbCompass.git ${WORKDIR} &&\
-    npm install --dev
+    git clone https://github.com/hell0again/bbCompass.git ${WORKDIR}
+## low memory対策:(
+# RUN npm install --dev
+RUN npm install file-loader css-loader json-loader style-loader url-loader
+RUN npm install babel-loader intelli-espower-loader eslint-loader espower-loader
+RUN npm install babel-core babel-preset-es2015 babelify es6-collections es6-map eslint
+RUN npm install lodash power-assert request-json webpack
+RUN npm install extract-text-webpack-plugin bower-webpack-plugin
+RUN npm install tape
+RUN npm install --dev
 
 ## 最低限の読み書き
 RUN apt-get update &&\
