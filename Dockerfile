@@ -53,3 +53,5 @@ CMD npm run start
 # npm run start
 EXPOSE 8000
 
+RUN npm install -g react-tools
+

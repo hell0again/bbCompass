@@ -21,6 +21,7 @@ mkdir -p ${DST_DIR}
 
 # js-beautify --replace src/js/*.js
 webpack src/js/*
+jsx src/mapdiff.jsx > ${TMP_DIR}/mapdiff.js
 for f in Changelog.txt; do
     cp -r ${f} ${TMP_DIR}/${f}
 done
