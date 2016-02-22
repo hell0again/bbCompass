@@ -24,20 +24,20 @@ RUN npm install -g\
     testling
 
 ## bbCompassの必要なファイルをもってくる
-# RUN cd ${WORKDIR} &&\
-#     git clone https://github.com/hell0again/bbCompass.git ${WORKDIR} &&\
-#     npm install --dev
+## - いきなりmasterをcloneすると頻繁に変更が入ってビルドキャッシュが死ぬので安定版をcheckout。
+## - low memory対策で npm install を分割 :(
+## - masterのcheckoutは後回し
+# RUN cd ${WORKDIR} && git clone https://github.com/hell0again/bbCompass.git ${WORKDIR} && npm install --dev --unsafe-perm
 RUN cd ${WORKDIR} &&\
-    git clone https://github.com/hell0again/bbCompass.git ${WORKDIR}
-## low memory対策:(
-# RUN npm install --dev
+    git clone --no-checkout --branch 20160218 https://github.com/hell0again/bbCompass.git ${WORKDIR} &&\
+    git reset HEAD package.json bower.json && git checkout package.json bower.json
 RUN npm install file-loader css-loader json-loader style-loader url-loader
 RUN npm install babel-loader intelli-espower-loader eslint-loader espower-loader
 RUN npm install babel-core babel-preset-es2015 babelify es6-collections es6-map eslint
 RUN npm install lodash power-assert request-json webpack
 RUN npm install extract-text-webpack-plugin bower-webpack-plugin
 RUN npm install tape
-RUN npm install --dev
+# RUN npm install --dev --unsafe-perm
 
 ## 最低限の読み書き
 RUN apt-get update &&\
@@ -48,10 +48,10 @@ ENV HOME /root
 ## see: http://stackoverflow.com/questions/28763958/nodejs-unsafe-perm-not-working-on-package-json
 RUN echo 'unsafe-perm = true' >${HOME}/.npmrc
 
-CMD npm run start
 
-# npm run start
+CMD npm run start
 EXPOSE 8000
 
 RUN npm install -g react-tools
+RUN cd ${WORKDIR} && git checkout --force master && npm install --dev --unsafe-perm
 
