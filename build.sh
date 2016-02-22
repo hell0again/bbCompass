@@ -21,7 +21,6 @@ mkdir -p ${DST_DIR}
 
 # js-beautify --replace src/js/*.js
 webpack src/js/*
-cp src/js/main.js ${TMP_DIR}/bundle.js
 for f in Changelog.txt; do
     cp -r ${f} ${TMP_DIR}/${f}
 done

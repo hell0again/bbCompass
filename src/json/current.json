@@ -1,37 +1,5 @@
 [
     {
-        "start_time": "2016-02-15",
-        "end_time": "2016-02-21",
-        "type": "event",
-        "title": "イベントバトル開催＜第二次 双覇大攻防戦〜GRFの機略戦〜＞",
-        "url": "/news/332",
-        "map": "beanavis_ea"
-    },
-    {
-        "start_time": "2016-02-15",
-        "end_time": "2016-02-21",
-        "type": "national_battle_high",
-        "title": "キニシュ砂岸〜白砂進軍〜【ローテーション】",
-        "url": "/map/19#opr-128",
-        "map": "kinich_a"
-    },
-    {
-        "start_time": "2016-02-15",
-        "end_time": "2016-02-21",
-        "type": "national_battle_high",
-        "title": "キニシュ砂岸〜火花散る渚〜【ローテーション】",
-        "url": "/map/19#opr-129",
-        "map": "kinich_b"
-    },
-    {
-        "start_time": "2016-02-15",
-        "end_time": "2016-02-21",
-        "type": "national_battle_low",
-        "title": "トラザ山岳基地〜激震の岩峰〜【特殊×】",
-        "url": "/map/4#opr-24",
-        "map": "tlaza_f"
-    },
-    {
         "start_time": "2016-02-22",
         "end_time": "2016-02-28",
         "type": "national_battle_high",
@@ -48,11 +16,19 @@
         "map": "d51_b"
     },
     {
+        "start_time": "2016-02-25",
+        "end_time": "2016-02-28",
+        "type": "event",
+        "title": "SQUAD BATTLE",
+        "url": "/news/339",
+        "map": "24_sqb"
+    },
+    {
         "start_time": "2016-02-29",
         "end_time": "2016-03-06",
         "type": "event",
         "title": "イベントバトル開催＜第二次 双覇大攻防戦〜EUSTの閃撃戦〜＞",
-        "url": ""
+        "url": "/news/338"
     },
     {
         "title": "マグメル機体試験場〜FIELD-D〜",
