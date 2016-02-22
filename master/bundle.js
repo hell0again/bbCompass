@@ -55,28 +55,28 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*global jc*/ // eslint
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*global jc*/ // eslint
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	__webpack_require__(2);
 
 	var _uuid = __webpack_require__(3);
 
 	var _uuid2 = _interopRequireDefault(_uuid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	//
 	// 内部変数初期化
@@ -100,7 +100,7 @@
 	//BB_baseオブジェクト
 	//
 
-	var BB_base = (function () {
+	var BB_base = function () {
 	    function BB_base(_bbObj) {
 	        _classCallCheck(this, BB_base);
 
@@ -110,10 +110,6 @@
 	        this._bbObj = _bbObj;
 	        this._ourJc = _bbObj.ourJc;
 	    }
-
-	    //
-	    //BB_circleオブジェクト
-	    //
 
 	    _createClass(BB_base, [{
 	        key: 'draw',
@@ -264,47 +260,50 @@
 	    }]);
 
 	    return BB_base;
-	})();
+	}();
 
-	var BB_circle = (function (_BB_base) {
+	//
+	//BB_circleオブジェクト
+	//
+
+
+	var BB_circle = function (_BB_base) {
 	    _inherits(BB_circle, _BB_base);
 
 	    function BB_circle(_bbObj, _text, _radius, _color, _callback) {
 	        _classCallCheck(this, BB_circle);
 
-	        _get(Object.getPrototypeOf(BB_circle.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_circle).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(0, 51, 255)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this.id = _uuid2.default.v1();
 
-	        this.type = "circle";
-	        this._text = _text;
-	        this._radius = _radius;
-	        this._color = _color;
+	        _this.type = "circle";
+	        _this._text = _text;
+	        _this._radius = _radius;
+	        _this._color = _color;
 
-	        var px_rad = this._bbObj.meter_to_pixel(this._radius);
-	        this._ptpos = {
+	        var px_rad = _this._bbObj.meter_to_pixel(_this._radius);
+	        _this._ptpos = {
 	            x: px_rad,
 	            y: 0
 	        };
-	        this.move(px_rad, px_rad);
+	        _this.move(px_rad, px_rad);
 
-	        this.draw();
-	        this.regist();
+	        _this.draw();
+	        _this.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this);
 	        }
+	        return _this;
 	    }
-
-	    //
-	    //BB_lineオブジェクト
-	    //
 
 	    _createClass(BB_circle, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this = this;
+	            var _this2 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                ptx = this._ptpos.x,
@@ -347,8 +346,8 @@
 	                line.points([[0, 0], [pt._x + pt._transformdx, pt._y + pt._transformdy]]);
 	                area.attr('radius', newrad);
 	                areacol.attr('radius', newrad);
-	                radius.translateTo(centerx, centery - txtheight).string(Math.floor(_this._bbObj.pixel_to_meter(newrad)) + "m");
-	                obj._radius = _this._bbObj.pixel_to_meter(newrad);
+	                radius.translateTo(centerx, centery - txtheight).string(Math.floor(_this2._bbObj.pixel_to_meter(newrad)) + "m");
+	                obj._radius = _this2._bbObj.pixel_to_meter(newrad);
 	                obj._ptpos = {
 	                    x: pt._x + pt._transformdx,
 	                    y: pt._y + pt._transformdy
@@ -358,11 +357,11 @@
 	            pttra.draggable(callback);
 	            pttra.optns.drag.val = false;
 	            pttra.mouseover(function () {
-	                _this._ourJc.layer(obj.id).optns.drag.val = false;
+	                _this2._ourJc.layer(obj.id).optns.drag.val = false;
 	                pttra.optns.drag.val = true;
 	            });
 	            pttra.mouseout(function () {
-	                _this._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this2._ourJc.layer(obj.id).optns.drag.val = true;
 	                pttra.optns.drag.val = false;
 	            });
 	            return this;
@@ -378,48 +377,51 @@
 	    }]);
 
 	    return BB_circle;
-	})(BB_base);
+	}(BB_base);
+	//
+	//BB_lineオブジェクト
+	//
 
-	var BB_line = (function (_BB_base2) {
+
+	var BB_line = function (_BB_base2) {
 	    _inherits(BB_line, _BB_base2);
 
 	    function BB_line(_bbObj, _text, _length, _color, _callback) {
 	        _classCallCheck(this, BB_line);
 
-	        _get(Object.getPrototypeOf(BB_line.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_line).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(51, 153, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this3.id = _uuid2.default.v1();
 
-	        this.type = "line";
-	        this._text = _text;
-	        this._length = _length;
-	        this._color = _color;
+	        _this3.type = "line";
+	        _this3._text = _text;
+	        _this3._length = _length;
+	        _this3._color = _color;
 
-	        var px_len = this._bbObj.meter_to_pixel(this._length);
-	        this._pt1pos = {
+	        var px_len = _this3._bbObj.meter_to_pixel(_this3._length);
+	        _this3._pt1pos = {
 	            x: -1 * px_len / 2,
 	            y: 0
 	        };
-	        this._pt2pos = {
+	        _this3._pt2pos = {
 	            x: px_len / 2,
 	            y: 0
 	        };
 
-	        this.draw();
-	        this.move(100 + px_len / 2, 100);
-	        this.regist();
+	        _this3.draw();
+	        _this3.move(100 + px_len / 2, 100);
+	        _this3.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this3);
 	        }
+	        return _this3;
 	    }
 
-	    //
-	    //BB_pointオブジェクト
-	    //
-
 	    //座標の扱いが特殊なので座標関連の関数を一部オーバーライド
+
 
 	    _createClass(BB_line, [{
 	        key: 'position',
@@ -443,7 +445,7 @@
 	    }, {
 	        key: 'draw',
 	        value: function draw() {
-	            var _this2 = this;
+	            var _this4 = this;
 
 	            var above = 15,
 	                below = 5,
@@ -486,8 +488,8 @@
 	                pt2.translateTo(pos2.x, pos2.y);
 	                line.points([[pt1._x + pt1._transformdx, pt1._y + pt1._transformdy], [pt2._x + pt2._transformdx, pt2._y + pt2._transformdy]]);
 	                linename.translateTo(centerx, centery + above - txtheight);
-	                linelen.translateTo(centerx, centery - below - txtheight).string(Math.floor(_this2._bbObj.pixel_to_meter(newlen)) + "m");
-	                obj._length = _this2._bbObj.pixel_to_meter(newlen);
+	                linelen.translateTo(centerx, centery - below - txtheight).string(Math.floor(_this4._bbObj.pixel_to_meter(newlen)) + "m");
+	                obj._length = _this4._bbObj.pixel_to_meter(newlen);
 	                obj._pt1pos = {
 	                    x: pt1._x + pt1._transformdx,
 	                    y: pt1._y + pt1._transformdy
@@ -502,19 +504,19 @@
 	            pt2tra.draggable(callback);
 	            pt2tra.optns.drag.val = false;
 	            pt1tra.mouseover(function () {
-	                _this2._ourJc.layer(obj.id).optns.drag.val = false;
+	                _this4._ourJc.layer(obj.id).optns.drag.val = false;
 	                pt1tra.optns.drag.val = true;
 	            });
 	            pt1tra.mouseout(function () {
-	                _this2._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this4._ourJc.layer(obj.id).optns.drag.val = true;
 	                pt1tra.optns.drag.val = false;
 	            });
 	            pt2tra.mouseover(function () {
-	                _this2._ourJc.layer(obj.id).optns.drag.val = false;
+	                _this4._ourJc.layer(obj.id).optns.drag.val = false;
 	                pt2tra.optns.drag.val = true;
 	            });
 	            pt2.mouseout(function () {
-	                _this2._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this4._ourJc.layer(obj.id).optns.drag.val = true;
 	                pt2.optns.drag.val = false;
 	            });
 	            return this;
@@ -532,39 +534,42 @@
 	    }]);
 
 	    return BB_line;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_point = (function (_BB_base3) {
+	//
+	//BB_pointオブジェクト
+	//
+
+
+	var BB_point = function (_BB_base3) {
 	    _inherits(BB_point, _BB_base3);
 
 	    function BB_point(_bbObj, _text, _size, _color, _align, _callback) {
 	        _classCallCheck(this, BB_point);
 
-	        _get(Object.getPrototypeOf(BB_point.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_point).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(0, 0, 0)';
 	        }
 	        if (_align === undefined) {
 	            _align = 0;
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this5.id = _uuid2.default.v1();
 
-	        this.type = "point";
-	        this._text = _text;
-	        this._size = parseInt(_size);
-	        this._align = _align;
-	        this._color = _color;
-	        this.draw();
-	        this.move(100, 100);
-	        this.regist();
+	        _this5.type = "point";
+	        _this5._text = _text;
+	        _this5._size = parseInt(_size);
+	        _this5._align = _align;
+	        _this5._color = _color;
+	        _this5.draw();
+	        _this5.move(100, 100);
+	        _this5.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this5);
 	        }
+	        return _this5;
 	    }
-
-	    //
-	    //BB_scoutオブジェクト
-	    //
 
 	    _createClass(BB_point, [{
 	        key: 'draw',
@@ -585,44 +590,47 @@
 	    }]);
 
 	    return BB_point;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_scout = (function (_BB_base4) {
+	//
+	//BB_scoutオブジェクト
+	//
+
+
+	var BB_scout = function (_BB_base4) {
 	    _inherits(BB_scout, _BB_base4);
 
 	    function BB_scout(_bbObj, _text, _radius, _length, _duration, _color, _callback) {
 	        _classCallCheck(this, BB_scout);
 
-	        _get(Object.getPrototypeOf(BB_scout.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this6 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_scout).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this6.id = _uuid2.default.v1();
 
-	        this.type = "scout";
-	        this._text = _text;
-	        this._radius = _radius;
-	        this._length = _length;
-	        this._duration = _duration;
-	        this._color = _color;
+	        _this6.type = "scout";
+	        _this6._text = _text;
+	        _this6._radius = _radius;
+	        _this6._length = _length;
+	        _this6._duration = _duration;
+	        _this6._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
-	        this.draw();
-	        var px_rad = this._bbObj.meter_to_pixel(this._radius);
-	        this.move(px_rad, px_rad);
-	        this.regist();
+	        _this6.draw();
+	        var px_rad = _this6._bbObj.meter_to_pixel(_this6._radius);
+	        _this6.move(px_rad, px_rad);
+	        _this6.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this6);
 	        }
+	        return _this6;
 	    }
-
-	    //
-	    //BB_sensorオブジェクト
-	    //
 
 	    _createClass(BB_scout, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this3 = this;
+	            var _this7 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                px_len = this._bbObj.meter_to_pixel(this._length),
@@ -639,10 +647,10 @@
 
 	            //角度変更処理
 	            mask.mousedown(function (point) {
-	                var canvas = jc.canvas(_this3._bbObj.id),
-	                    tmpmask = _this3._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + _this3.id),
-	                    layer = _this3._ourJc.layer(_this3.id),
-	                    tmpLayer = _this3._ourJc.layer("tmp_" + _this3.id);
+	                var canvas = jc.canvas(_this7._bbObj.id),
+	                    tmpmask = _this7._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + _this7.id),
+	                    layer = _this7._ourJc.layer(_this7.id),
+	                    tmpLayer = _this7._ourJc.layer("tmp_" + _this7.id);
 	                tmpLayer.level('top');
 	                var pos_sct = scout.position();
 	                var startrad = Math.atan2(point.y - pos_sct.y, point.x - pos_sct.x),
@@ -653,15 +661,15 @@
 	                    layer.rotateTo(rad * 180 / Math.PI, 0, 0);
 	                });
 	                tmpmask.mouseup(function (point) {
-	                    _this3._ourJc.layer("tmp_" + _this3.id).del();
+	                    _this7._ourJc.layer("tmp_" + _this7.id).del();
 	                });
 	            });
 
 	            mask.mouseover(function () {
-	                _this3._ourJc.layer(_this3.id).optns.drag.val = false;
+	                _this7._ourJc.layer(_this7.id).optns.drag.val = false;
 	            }); // ドラッグ無効
 	            mask.mouseout(function () {
-	                _this3._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this7._ourJc.layer(obj.id).optns.drag.val = true;
 	            }); // ドラッグ有効
 
 	            //偵察機のアニメーション
@@ -684,37 +692,40 @@
 	    }]);
 
 	    return BB_scout;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_sensor = (function (_BB_base5) {
+	//
+	//BB_sensorオブジェクト
+	//
+
+
+	var BB_sensor = function (_BB_base5) {
 	    _inherits(BB_sensor, _BB_base5);
 
 	    function BB_sensor(_bbObj, _text, _radius, _color, _callback) {
 	        _classCallCheck(this, BB_sensor);
 
-	        _get(Object.getPrototypeOf(BB_sensor.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sensor).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this8.id = _uuid2.default.v1();
 
-	        this.type = "sensor";
-	        this._text = _text;
-	        this._radius = _radius;
-	        this._color = _color;
+	        _this8.type = "sensor";
+	        _this8._text = _text;
+	        _this8._radius = _radius;
+	        _this8._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
-	        this.draw();
-	        var px_rad = this._bbObj.meter_to_pixel(this._radius);
-	        this.move(px_rad, px_rad);
-	        this.regist();
+	        _this8.draw();
+	        var px_rad = _this8._bbObj.meter_to_pixel(_this8._radius);
+	        _this8.move(px_rad, px_rad);
+	        _this8.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this8);
 	        }
+	        return _this8;
 	    }
-
-	    //
-	    //BB_radarオブジェクト
-	    //
 
 	    _createClass(BB_sensor, [{
 	        key: 'draw',
@@ -730,52 +741,53 @@
 	    }]);
 
 	    return BB_sensor;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_radar = (function (_BB_base6) {
+	//
+	//BB_radarオブジェクト
+	//
+
+
+	var BB_radar = function (_BB_base6) {
 	    _inherits(BB_radar, _BB_base6);
 
 	    function BB_radar(_bbObj, _text, _radius, _angle, _color, _callback) {
-	        var _this4 = this;
-
 	        _classCallCheck(this, BB_radar);
 
-	        _get(Object.getPrototypeOf(BB_radar.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this9 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_radar).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this9.id = _uuid2.default.v1();
 
-	        this.type = "radar";
-	        this._text = _text;
-	        this._radius = _radius;
-	        this._angle = _angle;
-	        this._color = _color;
+	        _this9.type = "radar";
+	        _this9._text = _text;
+	        _this9._radius = _radius;
+	        _this9._angle = _angle;
+	        _this9._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
 	        //支援マークはファイル依存させないため手打ち。
-	        this._image = new Image();
-	        this._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wD/AP83WBt9AAAAZUlEQVR42qWRSwrAMAhEK4j3v64LMZQGk5hJsdRVxjw/g+TuVzlopo' + 'loJxYgBERTQabTYinZ6WgM6cgvNHQ8f930o1VVROCcKBj0bveNHuPOEuwNaeCyNzi8f1zHzJi5' + 'evlKfKMbjWF644wwKScAAAAASUVORK5CYII=';
-	        var obj = this;
-	        this._image.onload = function () {
+	        _this9._image = new Image();
+	        _this9._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wD/AP83WBt9AAAAZUlEQVR42qWRSwrAMAhEK4j3v64LMZQGk5hJsdRVxjw/g+TuVzlopo' + 'loJxYgBERTQabTYinZ6WgM6cgvNHQ8f930o1VVROCcKBj0bveNHuPOEuwNaeCyNzi8f1zHzJi5' + 'evlKfKMbjWF644wwKScAAAAASUVORK5CYII=';
+	        var obj = _this9;
+	        _this9._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this4._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this9._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this4._image;
+	            delete _this9._image;
 	        };
+	        return _this9;
 	    }
-
-	    //
-	    //BB_sondeオブジェクト
-	    //
 
 	    _createClass(BB_radar, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this5 = this;
+	            var _this10 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                obj = this,
@@ -795,13 +807,13 @@
 	            //移動処理(draggableでは回転できないため、独自定義)
 	            var mdEvent = function mdEvent(point) {
 	                var pos_base = area.position(),
-	                    canvas = jc.canvas(_this5._bbObj.id),
+	                    canvas = jc.canvas(_this10._bbObj.id),
 	                    radius = Math.sqrt(Math.pow(point.x - pos_base.x, 2) + Math.pow(point.y - pos_base.y, 2)),
 	                    startrad = Math.atan2(point.y - pos_base.y, point.x - pos_base.x),
-	                    baserad = _this5._ourJc.layer(obj.id).getAngle(),
-	                    tmpmask = _this5._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this5._ourJc.layer(obj.id),
-	                    tmpLayer = _this5._ourJc.layer("tmp_" + obj.id);
+	                    baserad = _this10._ourJc.layer(obj.id).getAngle(),
+	                    tmpmask = _this10._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this10._ourJc.layer(obj.id),
+	                    tmpLayer = _this10._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                tmpmask.mousemove(function (pos) {
 	                    var nowrad = Math.atan2(pos.y - pos_base.y, pos.x - pos_base.x),
@@ -816,18 +828,18 @@
 	            //扇形部分は角度変更
 	            area.mousedown(mdEvent);
 	            area.mouseover(function () {
-	                _this5._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this10._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            area.mouseout(function () {
-	                _this5._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this10._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            //文字列部分も角度変更
 	            text.mousedown(mdEvent);
 	            text.mouseover(function () {
-	                _this5._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this10._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            text.mouseout(function () {
-	                _this5._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this10._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 
 	            return this;
@@ -835,40 +847,43 @@
 	    }]);
 
 	    return BB_radar;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_sonde = (function (_BB_base7) {
+	//
+	//BB_sondeオブジェクト
+	//
+
+
+	var BB_sonde = function (_BB_base7) {
 	    _inherits(BB_sonde, _BB_base7);
 
 	    function BB_sonde(_bbObj, _text, _radius1, _radius2, _color, _callback) {
 	        _classCallCheck(this, BB_sonde);
 
-	        _get(Object.getPrototypeOf(BB_sonde.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this11 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sonde).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = '#00FF00';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this11.id = _uuid2.default.v1();
 
-	        this.type = "sonde";
-	        this._text = _text;
-	        this._radius1 = _radius1; //射程範囲
-	        this._radius2 = _radius2; //偵察範囲
-	        this._color = _color;
-	        this._markerx = 0;
-	        this._markery = 0;
+	        _this11.type = "sonde";
+	        _this11._text = _text;
+	        _this11._radius1 = _radius1; //射程範囲
+	        _this11._radius2 = _radius2; //偵察範囲
+	        _this11._color = _color;
+	        _this11._markerx = 0;
+	        _this11._markery = 0;
 	        //描画して登録。初期座標は有効射程分ずらす
-	        this.draw();
-	        var px_rad1 = this._bbObj.meter_to_pixel(this._radius1);
-	        this.move(px_rad1, px_rad1);
-	        this.regist();
+	        _this11.draw();
+	        var px_rad1 = _this11._bbObj.meter_to_pixel(_this11._radius1);
+	        _this11.move(px_rad1, px_rad1);
+	        _this11.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this11);
 	        }
+	        return _this11;
 	    }
-
-	    //
-	    //BB_ndsensor オブジェクト
-	    //
 
 	    _createClass(BB_sonde, [{
 	        key: 'draw',
@@ -970,53 +985,54 @@
 	    }]);
 
 	    return BB_sonde;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_ndsensor = (function (_BB_base8) {
+	//
+	//BB_ndsensor オブジェクト
+	//
+
+
+	var BB_ndsensor = function (_BB_base8) {
 	    _inherits(BB_ndsensor, _BB_base8);
 
 	    function BB_ndsensor(_bbObj, _text, _radius, _color, _callback) {
-	        var _this6 = this;
-
 	        _classCallCheck(this, BB_ndsensor);
 
-	        _get(Object.getPrototypeOf(BB_ndsensor.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this12 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_ndsensor).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this12.id = _uuid2.default.v1();
 
-	        this.type = "ndsensor";
-	        this._text = _text;
-	        this._radius = _radius;
-	        this._color = _color;
+	        _this12.type = "ndsensor";
+	        _this12._text = _text;
+	        _this12._radius = _radius;
+	        _this12._color = _color;
 
 	        //中央アイコンはファイル依存させないため手打ち。
-	        this._image = new Image();
-	        this._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wAAAP+JwC+QAAAAeElEQVR42q2QbQrAIAiG9WBBO1l0sgUdzFWSE1urwfoh6fvw+oEEBN' + 'sPRxpbER8lKRV5Znkz1YYOwBRCEDnGaFIgT3gqP/K9X5pVvk8ybmmgxU126YLmnJ1zHK2qc3bV' + 'tOlg6XK4eq/2+L+mdfyJltFlnrctlxe8AGPpa/QtEubEAAAAAElFTkSuQmCC';
+	        _this12._image = new Image();
+	        _this12._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wAAAP+JwC+QAAAAeElEQVR42q2QbQrAIAiG9WBBO1l0sgUdzFWSE1urwfoh6fvw+oEEBN' + 'sPRxpbER8lKRV5Znkz1YYOwBRCEDnGaFIgT3gqP/K9X5pVvk8ybmmgxU126YLmnJ1zHK2qc3bV' + 'tOlg6XK4eq/2+L+mdfyJltFlnrctlxe8AGPpa/QtEubEAAAAAElFTkSuQmCC';
 
 	        //描画して登録。初期座標はx方向に偵察半径+100、y方向に100ずらす
-	        var obj = this;
-	        this._image.onload = function () {
+	        var obj = _this12;
+	        _this12._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this6._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this12._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(100 + px_rad, 100);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this6._image;
+	            delete _this12._image;
 	        };
+	        return _this12;
 	    }
-
-	    //
-	    //BB_vsensorオブジェクト
-	    //
 
 	    _createClass(BB_ndsensor, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this7 = this;
+	            var _this13 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                obj = this,
@@ -1049,13 +1065,13 @@
 	            //移動処理(draggableでは回転できないため、独自定義)
 	            var mdEvent = function mdEvent(point) {
 	                var pos_base = center.position(),
-	                    canvas = jc.canvas(_this7._bbObj.id),
+	                    canvas = jc.canvas(_this13._bbObj.id),
 	                    radius = Math.sqrt(Math.pow(point.x, 2) + Math.pow(point.y, 2)),
 	                    startrad = Math.atan2(point.y - pos_base.y, point.x - pos_base.x),
-	                    baserad = _this7._ourJc.layer(obj.id).getAngle(),
-	                    tmpmask = _this7._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this7._ourJc.layer(obj.id),
-	                    tmpLayer = _this7._ourJc.layer("tmp_" + obj.id);
+	                    baserad = _this13._ourJc.layer(obj.id).getAngle(),
+	                    tmpmask = _this13._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this13._ourJc.layer(obj.id),
+	                    tmpLayer = _this13._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                tmpmask.mousemove(function (pos) {
 	                    var nowrad = Math.atan2(pos.y - pos_base.y, pos.x - pos_base.x),
@@ -1070,60 +1086,63 @@
 	            //端点は角度変更
 	            pt1tra.mousedown(mdEvent);
 	            pt1tra.mouseover(function () {
-	                _this7._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this13._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            pt1tra.mouseout(function () {
-	                _this7._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this13._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            pt2tra.mousedown(mdEvent);
 	            pt2tra.mouseover(function () {
-	                _this7._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this13._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            pt2tra.mouseout(function () {
-	                _this7._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this13._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            return this;
 	        }
 	    }]);
 
 	    return BB_ndsensor;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_vsensor = (function (_BB_base9) {
+	//
+	//BB_vsensorオブジェクト
+	//
+
+
+	var BB_vsensor = function (_BB_base9) {
 	    _inherits(BB_vsensor, _BB_base9);
 
 	    function BB_vsensor(_bbObj, _text, _radiusa, _radiusb, _color, _mode, _callback) {
 	        _classCallCheck(this, BB_vsensor);
 
-	        _get(Object.getPrototypeOf(BB_vsensor.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this14 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_vsensor).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(153, 0, 255)';
 	        }
 	        if (_mode === undefined) {
 	            _mode = 'A';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this14.id = _uuid2.default.v1();
 
-	        this.type = "vsensor";
-	        this._text = _text;
-	        this._radiusa = _radiusa;
-	        this._radiusb = _radiusb;
-	        this._color = _color;
-	        this._mode = _mode;
+	        _this14.type = "vsensor";
+	        _this14._text = _text;
+	        _this14._radiusa = _radiusa;
+	        _this14._radiusb = _radiusb;
+	        _this14._color = _color;
+	        _this14._mode = _mode;
 
 	        //描画して登録。初期座標は偵察半径分ずらす
-	        this.draw();
-	        var px_rad = _bbObj.meter_to_pixel(this._radiusa);
-	        this.move(px_rad, px_rad);
-	        this.regist();
+	        _this14.draw();
+	        var px_rad = _bbObj.meter_to_pixel(_this14._radiusa);
+	        _this14.move(px_rad, px_rad);
+	        _this14.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this14);
 	        }
+	        return _this14;
 	    }
-
-	    //
-	    //BB_howitzerオブジェクト
-	    //
 
 	    _createClass(BB_vsensor, [{
 	        key: 'draw',
@@ -1174,41 +1193,44 @@
 	    }]);
 
 	    return BB_vsensor;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_howitzer = (function (_BB_base10) {
+	//
+	//BB_howitzerオブジェクト
+	//
+
+
+	var BB_howitzer = function (_BB_base10) {
 	    _inherits(BB_howitzer, _BB_base10);
 
 	    function BB_howitzer(_bbObj, _text, _radius1, _radius2, _radius3, _color, _callback) {
 	        _classCallCheck(this, BB_howitzer);
 
-	        _get(Object.getPrototypeOf(BB_howitzer.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this15 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_howitzer).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = '#FFA500';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this15.id = _uuid2.default.v1();
 
-	        this.type = "howitzer";
-	        this._text = _text;
-	        this._radius1 = _radius1; //射程範囲
-	        this._radius2 = _radius2; //爆風範囲
-	        this._radius3 = _radius3; //誤差範囲
-	        this._color = _color;
-	        this._markerx = 0;
-	        this._markery = 0;
+	        _this15.type = "howitzer";
+	        _this15._text = _text;
+	        _this15._radius1 = _radius1; //射程範囲
+	        _this15._radius2 = _radius2; //爆風範囲
+	        _this15._radius3 = _radius3; //誤差範囲
+	        _this15._color = _color;
+	        _this15._markerx = 0;
+	        _this15._markery = 0;
 	        //描画して登録。初期座標は有効射程分ずらす
-	        this.draw();
-	        var px_rad1 = this._bbObj.meter_to_pixel(this._radius1);
-	        this.move(px_rad1, px_rad1);
-	        this.regist();
+	        _this15.draw();
+	        var px_rad1 = _this15._bbObj.meter_to_pixel(_this15._radius1);
+	        _this15.move(px_rad1, px_rad1);
+	        _this15.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this15);
 	        }
+	        return _this15;
 	    }
-
-	    //
-	    //BB_bunkerオブジェクト
-	    //
 
 	    _createClass(BB_howitzer, [{
 	        key: 'draw',
@@ -1315,38 +1337,41 @@
 	    }]);
 
 	    return BB_howitzer;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_bunker = (function (_BB_base11) {
+	//
+	//BB_bunkerオブジェクト
+	//
+
+
+	var BB_bunker = function (_BB_base11) {
 	    _inherits(BB_bunker, _BB_base11);
 
 	    function BB_bunker(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bunker);
 
-	        _get(Object.getPrototypeOf(BB_bunker.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this16 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bunker).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 165)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this16.id = _uuid2.default.v1();
 
-	        this.type = "bunker";
-	        this._text = _text;
-	        this._rad1 = 28; //攻撃範囲28m
-	        this._rad2 = 40; //爆風範囲40m
-	        this._color = _color;
+	        _this16.type = "bunker";
+	        _this16._text = _text;
+	        _this16._rad1 = 28; //攻撃範囲28m
+	        _this16._rad2 = 40; //爆風範囲40m
+	        _this16._color = _color;
 	        //描画して登録。初期座標は半径分ずらす
-	        this.draw();
-	        var px_rad = this._bbObj.meter_to_pixel(this._rad2);
-	        this.move(px_rad, px_rad);
-	        this.regist();
+	        _this16.draw();
+	        var px_rad = _this16._bbObj.meter_to_pixel(_this16._rad2);
+	        _this16.move(px_rad, px_rad);
+	        _this16.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this16);
 	        }
+	        return _this16;
 	    }
-
-	    //
-	    //BB_sentryオブジェクト
-	    //
 
 	    _createClass(BB_bunker, [{
 	        key: 'draw',
@@ -1365,52 +1390,53 @@
 	    }]);
 
 	    return BB_bunker;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_sentry = (function (_BB_base12) {
+	//
+	//BB_sentryオブジェクト
+	//
+
+
+	var BB_sentry = function (_BB_base12) {
 	    _inherits(BB_sentry, _BB_base12);
 
 	    function BB_sentry(_bbObj, _text, _color, _callback) {
-	        var _this8 = this;
-
 	        _classCallCheck(this, BB_sentry);
 
-	        _get(Object.getPrototypeOf(BB_sentry.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this17 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sentry).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this17.id = _uuid2.default.v1();
 
-	        this.type = "sentry";
-	        this._text = _text;
-	        this._radius = 80; //固定値
-	        this._angle = 120; //固定値
-	        this._color = _color;
+	        _this17.type = "sentry";
+	        _this17._text = _text;
+	        _this17._radius = 80; //固定値
+	        _this17._angle = 120; //固定値
+	        _this17._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
 	        //マークはファイル依存させないため手打ち。
-	        this._image = new Image();
-	        this._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnR' + 'STlMA/wD/AP83WBt9AAAAYUlEQVR42pWRUQ7AIAhD13txN7gbB2PLWMxUROSrJq8NVJjZVR4M' + 'NAAXYUpHP2h7/nVHt7xk3PkFrAyq6oKIgk1cMLOIZHtv0biTM7ra4NaAOOM1ZPRc4ln2bFv+T' + 'vXKZG6yP1bjQ2hwBAAAAABJRU5ErkJggg==';
-	        var obj = this;
-	        this._image.onload = function () {
+	        _this17._image = new Image();
+	        _this17._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnR' + 'STlMA/wD/AP83WBt9AAAAYUlEQVR42pWRUQ7AIAhD13txN7gbB2PLWMxUROSrJq8NVJjZVR4M' + 'NAAXYUpHP2h7/nVHt7xk3PkFrAyq6oKIgk1cMLOIZHtv0biTM7ra4NaAOOM1ZPRc4ln2bFv+T' + 'vXKZG6yP1bjQ2hwBAAAAABJRU5ErkJggg==';
+	        var obj = _this17;
+	        _this17._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this8._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this17._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this8._image;
+	            delete _this17._image;
 	        };
+	        return _this17;
 	    }
-
-	    //
-	    //BB_aerosentryオブジェクト
-	    //
 
 	    _createClass(BB_sentry, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this9 = this;
+	            var _this18 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                obj = this,
@@ -1430,13 +1456,13 @@
 	            //移動処理(draggableでは回転できないため、独自定義)
 	            var mdEvent = function mdEvent(point) {
 	                var pos_base = area.position(),
-	                    canvas = jc.canvas(_this9._bbObj.id),
+	                    canvas = jc.canvas(_this18._bbObj.id),
 	                    radius = Math.sqrt(Math.pow(point.x - pos_base.x, 2) + Math.pow(point.y - pos_base.y, 2)),
 	                    startrad = Math.atan2(point.y - pos_base.y, point.x - pos_base.x),
-	                    baserad = _this9._ourJc.layer(obj.id).getAngle(),
-	                    tmpmask = _this9._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this9._ourJc.layer(obj.id),
-	                    tmpLayer = _this9._ourJc.layer("tmp_" + obj.id);
+	                    baserad = _this18._ourJc.layer(obj.id).getAngle(),
+	                    tmpmask = _this18._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this18._ourJc.layer(obj.id),
+	                    tmpLayer = _this18._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                tmpmask.mousemove(function (pos) {
 	                    var nowrad = Math.atan2(pos.y - pos_base.y, pos.x - pos_base.x),
@@ -1451,18 +1477,18 @@
 	            //扇形部分は角度変更
 	            area.mousedown(mdEvent);
 	            area.mouseover(function () {
-	                _this9._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this18._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            area.mouseout(function () {
-	                _this9._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this18._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            //文字列部分も角度変更
 	            text.mousedown(mdEvent);
 	            text.mouseover(function () {
-	                _this9._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this18._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            text.mouseout(function () {
-	                _this9._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this18._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 
 	            return this;
@@ -1470,46 +1496,47 @@
 	    }]);
 
 	    return BB_sentry;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_aerosentry = (function (_BB_base13) {
+	//
+	//BB_aerosentryオブジェクト
+	//
+
+
+	var BB_aerosentry = function (_BB_base13) {
 	    _inherits(BB_aerosentry, _BB_base13);
 
 	    function BB_aerosentry(_bbObj, _text, _color, _callback) {
-	        var _this10 = this;
-
 	        _classCallCheck(this, BB_aerosentry);
 
-	        _get(Object.getPrototypeOf(BB_aerosentry.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this19 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_aerosentry).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this19.id = _uuid2.default.v1();
 
-	        this.type = "aerosentry";
-	        this._text = _text;
-	        this._radius = 40; //固定値
-	        this._color = _color;
+	        _this19.type = "aerosentry";
+	        _this19._text = _text;
+	        _this19._radius = 40; //固定値
+	        _this19._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
 	        //マークはファイル依存させないため手打ち。
-	        this._image = new Image();
-	        this._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAAXN' + 'SR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABsSURBVChT' + 'nYxBEoAwDAL7/09HWkgkNid3xnED6IqIdYAU98mEIjtVRnZ62FIKqbOkf9fPocJD3ijxkHzXI' + '1r4GqjsqDu0A2iSKE3+/lvlhBb3ugR4SFoN/JwrvGgUMPqeEk/B7XvkdqoZDSIeqpRXt5iMa4' + 'kAAAAASUVORK5CYII=';
-	        var obj = this;
-	        this._image.onload = function () {
+	        _this19._image = new Image();
+	        _this19._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAAXN' + 'SR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABsSURBVChT' + 'nYxBEoAwDAL7/09HWkgkNid3xnED6IqIdYAU98mEIjtVRnZ62FIKqbOkf9fPocJD3ijxkHzXI' + '1r4GqjsqDu0A2iSKE3+/lvlhBb3ugR4SFoN/JwrvGgUMPqeEk/B7XvkdqoZDSIeqpRXt5iMa4' + 'kAAAAASUVORK5CYII=';
+	        var obj = _this19;
+	        _this19._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this10._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this19._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this10._image;
+	            delete _this19._image;
 	        };
+	        return _this19;
 	    }
-
-	    //
-	    //BB_bomberオブジェクト
-	    //
 
 	    _createClass(BB_aerosentry, [{
 	        key: 'draw',
@@ -1534,44 +1561,47 @@
 	    }]);
 
 	    return BB_aerosentry;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_bomber = (function (_BB_base14) {
+	//
+	//BB_bomberオブジェクト
+	//
+
+
+	var BB_bomber = function (_BB_base14) {
 	    _inherits(BB_bomber, _BB_base14);
 
 	    function BB_bomber(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bomber);
 
-	        _get(Object.getPrototypeOf(BB_bomber.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this20 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bomber).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 165)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this20.id = _uuid2.default.v1();
 
-	        this.type = "bomber";
-	        this._text = _text;
-	        this._rad1 = 25; //爆風範囲
-	        this._rad2 = 0; //着弾誤差範囲
-	        this._center = [50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200, 215]; //爆心
-	        this._color = _color;
+	        _this20.type = "bomber";
+	        _this20._text = _text;
+	        _this20._rad1 = 25; //爆風範囲
+	        _this20._rad2 = 0; //着弾誤差範囲
+	        _this20._center = [50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200, 215]; //爆心
+	        _this20._color = _color;
 	        //描画して登録。初期座標は半径分ずらす
-	        this.draw();
-	        var px_rad = this._bbObj.meter_to_pixel(this._rad1);
-	        this.move(px_rad, px_rad);
-	        this.regist();
+	        _this20.draw();
+	        var px_rad = _this20._bbObj.meter_to_pixel(_this20._rad1);
+	        _this20.move(px_rad, px_rad);
+	        _this20.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this20);
 	        }
+	        return _this20;
 	    }
-
-	    //
-	    //BB_bascoutオブジェクト
-	    //
 
 	    _createClass(BB_bomber, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this11 = this;
+	            var _this21 = this;
 
 	            var i,
 	                px_rad1 = this._bbObj.meter_to_pixel(this._rad1),
@@ -1607,10 +1637,10 @@
 	            var mask = this._ourJc.scout_mask(0, 0, px_rad1, px_len).layer(this.id),
 	                obj = this;
 	            mask.mousedown(function (point) {
-	                var canvas = jc.canvas(_this11._bbObj.id),
-	                    tmpmask = _this11._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this11._ourJc.layer(obj.id),
-	                    tmpLayer = _this11._ourJc.layer("tmp_" + obj.id);
+	                var canvas = jc.canvas(_this21._bbObj.id),
+	                    tmpmask = _this21._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this21._ourJc.layer(obj.id),
+	                    tmpLayer = _this21._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                var pos_self = self.position();
 	                var startrad = Math.atan2(point.y - pos_self.y, point.x - pos_self.x),
@@ -1624,15 +1654,15 @@
 	                    }
 	                });
 	                tmpmask.mouseup(function (point) {
-	                    _this11._ourJc.layer("tmp_" + obj.id).del();
+	                    _this21._ourJc.layer("tmp_" + obj.id).del();
 	                });
 	            });
 
 	            mask.mouseover(function () {
-	                _this11._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this21._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            mask.mouseout(function () {
-	                _this11._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this21._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 
 	            return this;
@@ -1640,38 +1670,45 @@
 	    }]);
 
 	    return BB_bomber;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_bascout = (function (_BB_base15) {
+	//
+	//BB_bascoutオブジェクト
+	//
+
+
+	var BB_bascout = function (_BB_base15) {
 	    _inherits(BB_bascout, _BB_base15);
 
 	    function BB_bascout(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bascout);
 
-	        _get(Object.getPrototypeOf(BB_bascout.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this22 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bascout).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 165)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this22.id = _uuid2.default.v1();
 
-	        this.type = "bascout";
-	        this._text = _text;
-	        this._color = _color;
-	        this._visible = true;
+	        _this22.type = "bascout";
+	        _this22._text = _text;
+	        _this22._color = _color;
+	        _this22._visible = true;
 	        //描画して登録。初期座標はとりあえず100づつずらしておく
-	        this.draw();
-	        var px_rad = this._bbObj.meter_to_pixel(100);
-	        this.move(px_rad, px_rad);
-	        this.regist();
+	        _this22.draw();
+	        var px_rad = _this22._bbObj.meter_to_pixel(100);
+	        _this22.move(px_rad, px_rad);
+	        _this22.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(this);
+	            _callback.apply(_this22);
 	        }
+	        return _this22;
 	    }
 
 	    _createClass(BB_bascout, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this12 = this;
+	            var _this23 = this;
 
 	            var px_wid = this._bbObj.meter_to_pixel(500),
 	                px_len = this._bbObj.meter_to_pixel(1200),
@@ -1695,10 +1732,10 @@
 	            //角度変更処理
 	            var mdEvent = function mdEvent(point) {
 	                //if (this._ourJc.layer(obj.id).optns.drag.val==true){return false;}
-	                var canvas = jc.canvas(_this12._bbObj.id),
-	                    tmpmask = _this12._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this12._ourJc.layer(obj.id),
-	                    tmpLayer = _this12._ourJc.layer("tmp_" + obj.id);
+	                var canvas = jc.canvas(_this23._bbObj.id),
+	                    tmpmask = _this23._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this23._ourJc.layer(obj.id),
+	                    tmpLayer = _this23._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                var pos_self = centerf.position();
 	                var startrad = Math.atan2(point.y - pos_self.y, point.x - pos_self.x),
@@ -1719,7 +1756,7 @@
 
 	            //  ドラッグ無効
 	            var drugoff = function drugoff() {
-	                _this12._ourJc.layer(obj.id).optns.drag.val = false;
+	                _this23._ourJc.layer(obj.id).optns.drag.val = false;
 	            };
 	            areaf.mouseover(drugoff);
 	            arrow.mouseover(drugoff);
@@ -1727,7 +1764,7 @@
 
 	            //  ドラッグ有効
 	            var drugon = function drugon() {
-	                _this12._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this23._ourJc.layer(obj.id).optns.drag.val = true;
 	            };
 	            areaf.mouseout(drugon);
 	            arrow.mouseout(drugon);
@@ -1744,36 +1781,37 @@
 	    }]);
 
 	    return BB_bascout;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_icon = (function (_BB_base16) {
+	var BB_icon = function (_BB_base16) {
 	    _inherits(BB_icon, _BB_base16);
 
 	    function BB_icon(_bbObj, _text, _file, _color, _callback) {
-	        var _this13 = this;
-
 	        _classCallCheck(this, BB_icon);
 
-	        _get(Object.getPrototypeOf(BB_icon.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this24 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_icon).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(0, 255, 255)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this24.id = _uuid2.default.v1();
 
 	        if ((_file = sanitize_filepath(_file)) == null) {
-	            return null;
+	            var _ret;
+
+	            return _ret = null, _possibleConstructorReturn(_this24, _ret);
 	        }
 
-	        this.type = "icon";
-	        this._text = _text;
-	        this._file = _file;
-	        this._color = _color;
+	        _this24.type = "icon";
+	        _this24._text = _text;
+	        _this24._file = _file;
+	        _this24._color = _color;
 
 	        //描画して登録。初期座標は半径分ずらす
-	        this._image = new Image();
-	        this._image.src = _file + '?' + salt;
-	        var obj = this;
-	        this._image.onload = function () {
+	        _this24._image = new Image();
+	        _this24._image.src = _file + '?' + salt;
+	        var obj = _this24;
+	        _this24._image.onload = function () {
 	            var px_dia = Math.sqrt(Math.pow(obj._image.width, 2) + Math.pow(obj._image.height, 2));
 	            obj.draw();
 	            obj.move(px_dia, px_dia);
@@ -1781,13 +1819,10 @@
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this13._image;
+	            delete _this24._image;
 	        };
+	        return _this24;
 	    }
-
-	    //
-	    //BB_waftオブジェクト
-	    //
 
 	    _createClass(BB_icon, [{
 	        key: 'draw',
@@ -1807,56 +1842,59 @@
 	    }]);
 
 	    return BB_icon;
-	})(BB_base);
+	}(BB_base);
 
-	var BB_waft = (function (_BB_base17) {
+	//
+	//BB_waftオブジェクト
+	//
+
+
+	var BB_waft = function (_BB_base17) {
 	    _inherits(BB_waft, _BB_base17);
 
 	    function BB_waft(_bbObj, _text, _file, _color, _callback) {
-	        var _this14 = this;
-
 	        _classCallCheck(this, BB_waft);
 
-	        _get(Object.getPrototypeOf(BB_waft.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this25 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_waft).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(0, 255, 255)';
 	        }
-	        this.id = _uuid2['default'].v1();
+	        _this25.id = _uuid2.default.v1();
 
 	        if ((_file = sanitize_filepath(_file)) == null) {
-	            return null;
+	            var _ret2;
+
+	            return _ret2 = null, _possibleConstructorReturn(_this25, _ret2);
 	        }
 
-	        this.type = "waft";
-	        this._text = _text;
-	        this._file = _file;
-	        this._rad = 20; //大ざっぱに全長40m程度?
-	        this._color = _color;
+	        _this25.type = "waft";
+	        _this25._text = _text;
+	        _this25._file = _file;
+	        _this25._rad = 20; //大ざっぱに全長40m程度?
+	        _this25._color = _color;
 
 	        //描画して登録。初期座標は半径分ずらす
-	        this._image = new Image();
-	        this._image.src = _file + '?' + salt;
-	        var obj = this,
-	            px_rad = this._bbObj.meter_to_pixel(this._rad);
-	        this._image.onload = function () {
+	        _this25._image = new Image();
+	        _this25._image.src = _file + '?' + salt;
+	        var obj = _this25,
+	            px_rad = _this25._bbObj.meter_to_pixel(_this25._rad);
+	        _this25._image.onload = function () {
 	            obj.draw();
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this14._image;
+	            delete _this25._image;
 	        };
+	        return _this25;
 	    }
-
-	    //
-	    //BB_freehandオブジェクト
-	    //
 
 	    _createClass(BB_waft, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this15 = this;
+	            var _this26 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._rad),
 	                img_width = this._image.width,
@@ -1881,7 +1919,7 @@
 	            handle.mousedown(function (point) {
 	                var pos_hdl = handle.position();
 	                // マウスイベントフック用の四角形を最前面に展開
-	                var tmpmask = _this15._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id);
+	                var tmpmask = _this26._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id);
 	                jc.layer("tmp_" + obj.id).level('top');
 
 	                var startrad = Math.atan2(point.y - pos_hdl.y, point.x - pos_hdl.x),
@@ -1892,7 +1930,7 @@
 	                    layer.rotateTo(rad * 180 / Math.PI, 0, 0);
 	                });
 	                tmpmask.mouseup(function (point) {
-	                    _this15._ourJc.layer("tmp_" + obj.id).del();
+	                    _this26._ourJc.layer("tmp_" + obj.id).del();
 	                });
 	            });
 
@@ -1908,35 +1946,37 @@
 	    }]);
 
 	    return BB_waft;
-	})(BB_base);
+	}(BB_base);
+	//
+	//BB_freehandオブジェクト
+	//
 
-	var BB_freehand = (function (_BB_base18) {
+
+	var BB_freehand = function (_BB_base18) {
 	    _inherits(BB_freehand, _BB_base18);
 
 	    function BB_freehand(_bbObj, _text, _color) {
 	        _classCallCheck(this, BB_freehand);
 
-	        _get(Object.getPrototypeOf(BB_freehand.prototype), 'constructor', this).call(this, _bbObj);
+	        var _this27 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_freehand).call(this, _bbObj));
+
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 255, 255)';
 	        }
-	        this.id = _uuid2['default'].v1();
-	        this.type = "freehand";
-	        this._text = _text;
-	        this._color = _color;
-	        this._step = 0;
-	        this._stepcol = new Array();
-	        this._undoCache = new Array();
-	        this._hooker = undefined;
+	        _this27.id = _uuid2.default.v1();
+	        _this27.type = "freehand";
+	        _this27._text = _text;
+	        _this27._color = _color;
+	        _this27._step = 0;
+	        _this27._stepcol = new Array();
+	        _this27._undoCache = new Array();
+	        _this27._hooker = undefined;
 
 	        //layerを確保するためのダミー画像を設置するのみ
-	        this._ourJc.rect(0, 0, 1, 1, 'rgba(0, 0, 0, 0)').layer(this.id);
-	        this.regist();
+	        _this27._ourJc.rect(0, 0, 1, 1, 'rgba(0, 0, 0, 0)').layer(_this27.id);
+	        _this27.regist();
+	        return _this27;
 	    }
-
-	    //
-	    // BBオブジェクト定義
-	    //
 
 	    _createClass(BB_freehand, [{
 	        key: 'color',
@@ -2001,7 +2041,7 @@
 	    }, {
 	        key: 'start',
 	        value: function start() {
-	            var _this16 = this;
+	            var _this28 = this;
 
 	            var obj = this,
 
@@ -2014,7 +2054,7 @@
 	            this._undoCache.length = 0;
 
 	            // マウスイベントフック用の四角形を最前面に展開
-	            this._hooker = _uuid2['default'].v1();
+	            this._hooker = _uuid2.default.v1();
 	            var hooker = this._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer(this._hooker).level('top');
 
 	            hooker.click(function () {
@@ -2032,7 +2072,7 @@
 
 	                obj._step++;
 	                obj._stepcol[obj._step] = obj._color;
-	                var line = _this16._ourJc.line([[ptstart.x, ptstart.y], [ptstart.x, ptstart.y]], obj._color).layer(obj.id).id(obj._step).lineStyle({
+	                var line = _this28._ourJc.line([[ptstart.x, ptstart.y], [ptstart.x, ptstart.y]], obj._color).layer(obj.id).id(obj._step).lineStyle({
 	                    lineWidth: 3
 	                });
 	                hooker.mousemove(function (point) {
@@ -2105,9 +2145,14 @@
 	    }]);
 
 	    return BB_freehand;
-	})(BB_base);
+	}(BB_base);
 
-	var BB = (function () {
+	//
+	// BBオブジェクト定義
+	//
+
+
+	var BB = function () {
 	    function BB(canvasID) {
 	        _classCallCheck(this, BB);
 
@@ -2131,6 +2176,7 @@
 	    //
 	    // touchイベントからmouseイベントへのブリッジを設定
 	    //
+
 
 	    _createClass(BB, [{
 	        key: 'initTouchToMouse',
@@ -2258,6 +2304,7 @@
 	        //
 	        //jCanvaScriptへの関数、オブジェクト追加
 	        //
+
 	    }, {
 	        key: 'initExtendJCanvaScript',
 	        value: function initExtendJCanvaScript(jc) {
@@ -2285,7 +2332,7 @@
 	                swidth: false,
 	                sheight: false
 	            }, function (ctx) {
-	                var _this17 = this;
+	                var _this29 = this;
 
 	                if (this._width === false) {
 	                    this._width = this._image.width;
@@ -2302,10 +2349,10 @@
 	                ctx.globalCompositeOperation = opmode;
 	                this.getRect = function (type) {
 	                    return {
-	                        x: _this17._x,
-	                        y: _this17._y,
-	                        width: _this17._width,
-	                        height: _this17._height
+	                        x: _this29._x,
+	                        y: _this29._y,
+	                        width: _this29._width,
+	                        height: _this29._height
 	                    };
 	                };
 	            });
@@ -2319,7 +2366,7 @@
 	                color: 'rgb(255, 0, 0)',
 	                fill: false
 	            }, function (ctx) {
-	                var _this18 = this;
+	                var _this30 = this;
 
 	                var x = this._x,
 	                    y = this._y,
@@ -2333,10 +2380,10 @@
 	                ctx.closePath();
 	                this.getRect = function () {
 	                    return {
-	                        x: _this18._x,
-	                        y: _this18._y,
-	                        width: _this18._length + _this18._radius * 2,
-	                        height: _this18._radius * 2
+	                        x: _this30._x,
+	                        y: _this30._y,
+	                        width: _this30._length + _this30._radius * 2,
+	                        height: _this30._radius * 2
 	                    };
 	                };
 	            });
@@ -2349,7 +2396,7 @@
 	                color: 'rgba(0, 0, 0, 0)',
 	                fill: true
 	            }, function (ctx) {
-	                var _this19 = this;
+	                var _this31 = this;
 
 	                var x = this._x,
 	                    y = this._y,
@@ -2363,10 +2410,10 @@
 	                ctx.closePath();
 	                this.getRect = function () {
 	                    return {
-	                        x: _this19._x,
-	                        y: _this19._y,
-	                        width: _this19._length + _this19._radius,
-	                        height: _this19._radius * 2
+	                        x: _this31._x,
+	                        y: _this31._y,
+	                        width: _this31._length + _this31._radius,
+	                        height: _this31._radius * 2
 	                    };
 	                };
 	            });
@@ -2380,7 +2427,7 @@
 	                color: 'rgb(255, 0, 0)',
 	                fill: false
 	            }, function (ctx) {
-	                var _this20 = this;
+	                var _this32 = this;
 
 	                var x = this._x,
 	                    y = this._y,
@@ -2393,10 +2440,10 @@
 	                ctx.closePath();
 	                this.getRect = function () {
 	                    return {
-	                        x: _this20._x,
-	                        y: _this20._y,
-	                        width: _this20._radius,
-	                        height: 2 * Math.sin(_this20._angle * Math.PI / 360)
+	                        x: _this32._x,
+	                        y: _this32._y,
+	                        width: _this32._radius,
+	                        height: 2 * Math.sin(_this32._angle * Math.PI / 360)
 	                    };
 	                };
 	            });
@@ -2407,7 +2454,7 @@
 	                y: 0,
 	                color: 'rgb(255, 255, 255)'
 	            }, function (ctx) {
-	                var _this21 = this;
+	                var _this33 = this;
 
 	                var offset = 20;
 	                var dash = 6;
@@ -2432,8 +2479,8 @@
 	                ctx.lineWidth = 3;
 	                this.getRect = function () {
 	                    return {
-	                        x: _this21._x - offset,
-	                        y: _this21._y - offset,
+	                        x: _this33._x - offset,
+	                        y: _this33._y - offset,
 	                        width: offset * 2,
 	                        height: offset * 2
 	                    };
@@ -2444,6 +2491,7 @@
 	        //
 	        //縮尺計算
 	        //
+
 	    }, {
 	        key: 'meter_to_pixel',
 	        value: function meter_to_pixel(meter) {
@@ -2459,6 +2507,7 @@
 	        //背景
 	        //(画像ファイル, Dot per Meter, 画像縮小比率)
 	        //
+
 	    }, {
 	        key: 'setbg',
 	        value: function setbg(file, dpm, imgscale, callback) {
@@ -2514,6 +2563,7 @@
 	        //
 	        //オブジェクト管理メソッド
 	        //
+
 	    }, {
 	        key: 'object',
 	        value: function object(objid) {
@@ -2561,6 +2611,7 @@
 	        //
 	        //画像保管用
 	        //
+
 	    }, {
 	        key: 'save',
 	        value: function save() {
@@ -2571,6 +2622,7 @@
 
 	        //ターレット配置
 	        //
+
 	    }, {
 	        key: 'put_turret',
 	        value: function put_turret(x, y, rot, radius, angle, hookrad, color, test) {
@@ -2630,6 +2682,7 @@
 	        //
 	        //索敵装置配置
 	        //
+
 	    }, {
 	        key: 'put_searcher',
 	        value: function put_searcher(x, y, radius, hookrad, color, test) {
@@ -2680,6 +2733,7 @@
 	        //
 	        //オブジェクト描画
 	        //
+
 	    }, {
 	        key: 'add_scout',
 	        value: function add_scout(string, radius, length, duration, color, _callback) {
@@ -2774,6 +2828,7 @@
 	        //
 	        //拡大縮小
 	        //
+
 	    }, {
 	        key: 'zoom',
 	        value: function zoom(scale) {
@@ -2806,14 +2861,17 @@
 	    }]);
 
 	    return BB;
-	})();
+	}();
 
-	exports['default'] = BB;
-	module.exports = exports['default'];
+	exports.default = BB;
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	/*!
 	 * jCanvaScript JavaScript Library v 1.5.18
@@ -2822,8 +2880,6 @@
 	 * Copyright 2012, Alexander Savin
 	 * Dual licensed under the MIT or GPL Version 2 licenses.
 	 */
-	"use strict";
-
 	(function (ab, z) {
 	  var ad = [],
 	      ai = Math,
@@ -2847,14 +2903,14 @@
 	      Y = ai.pow,
 	      ap = ai.sqrt,
 	      M = 1000 / 60,
-	      c = (function () {
+	      c = function () {
 	    return ab.requestAnimationFrame || ab.webkitRequestAnimationFrame || ab.mozRequestAnimationFrame || ab.oRequestAnimationFrame || ab.msRequestAnimationFrame || function (ar, m) {
 	      return setTimeout(ar, M);
 	    };
-	  })(),
-	      I = (function () {
+	  }(),
+	      I = function () {
 	    return ab.cancelAnimationFrame || ab.webkitCancelRequestAnimationFrame || ab.mozCancelRequestAnimationFrame || ab.oCancelRequestAnimationFrame || ab.msCancelRequestAnimationFrame || clearTimeout;
-	  })();if (a != "" && a !== null) {
+	  }();if (a != "" && a !== null) {
 	    var A = parseInt(a[0].split(/[ \/\.]/i)[1]) < 7;
 	  }function ah(au, ar, aw) {
 	    var ax = ad[au].layers[ar].objs,
@@ -2903,7 +2959,7 @@
 	  }var P = function P(aD, m) {
 	    if (aD === z) {
 	      return this;
-	    }if (typeof aD == "object") {
+	    }if ((typeof aD === "undefined" ? "undefined" : _typeof(aD)) == "object") {
 	      m = aD;aD = z;
 	    }var aC = -1,
 	        au = -1,
@@ -3255,7 +3311,7 @@
 	        aA = ad[az.i].layers[az.j][au];aw.splice(m.optns.number, 1);m._level = m.optns.number = aA.length;aA[m._level] = m;at.number = az.j;ar.number = az.i;ar.id = ax.optns.canvas.id;j(m);return m;
 	  }function J(au, at) {
 	    for (var ar in at) {
-	      switch (typeof at[ar]) {case "function":
+	      switch (_typeof(at[ar])) {case "function":
 	          if (ar.substr(0, 2) == "on") {
 	            break;
 	          }if (au[ar] === z) {
@@ -3433,7 +3489,7 @@
 	    };this.mouseout = function (m) {
 	      return x.call(this, m, "mouseout");
 	    };this.attr = function (at, ar) {
-	      if (typeof at === "object") {
+	      if ((typeof at === "undefined" ? "undefined" : _typeof(at)) === "object") {
 	        var m = at;
 	      } else {
 	        if (ar === z) {
@@ -3493,7 +3549,7 @@
 	      } else {
 	        if (typeof m == "function") {
 	          ax = m;m = 1;
-	        }if (typeof m == "object") {
+	        }if ((typeof m === "undefined" ? "undefined" : _typeof(m)) == "object") {
 	          av = m;m = 1;
 	        }
 	      }if (av === z) {
@@ -3511,19 +3567,19 @@
 	          ax = aw;aw = false;
 	        }
 	      }if (aB.scale !== z) {
-	        this._scaleX = this._scaleY = 1;if (typeof aB.scale != "object") {
+	        this._scaleX = this._scaleY = 1;if (_typeof(aB.scale) != "object") {
 	          aB.scaleX = aB.scaleY = aB.scale;
 	        } else {
 	          aB.scaleX = aB.scale.x || 1;aB.scaleY = aB.scale.y || 1;
 	        }
 	      }if (aB.translate !== z) {
-	        this._translateX = this._translateY = 0;if (typeof aB.translate != "object") {
+	        this._translateX = this._translateY = 0;if (_typeof(aB.translate) != "object") {
 	          aB.translateX = aB.translateY = aB.translate;
 	        } else {
 	          aB.translateX = aB.translate.x || 0;aB.translateY = aB.translate.y || 0;
 	        }aB.translate = z;
 	      }if (aB.translateTo !== z) {
-	        var az = this.position();this._translateToX = az.x;this._translateToY = az.y;if (typeof aB.translateTo != "object") {
+	        var az = this.position();this._translateToX = az.x;this._translateToY = az.y;if (_typeof(aB.translateTo) != "object") {
 	          aB.translateToX = aB.translateToY = aB.translateTo;
 	        } else {
 	          aB.translateToX = aB.translateTo.x || 0;aB.translateToY = aB.translateTo.y || 0;
@@ -3663,7 +3719,7 @@
 	    };this.canvas = function (m) {
 	      return n(m, this, "objs");
 	    };this.draggable = function (av, au, ax) {
-	      if (au === z && typeof av == "object" && av.optns === z) {
+	      if (au === z && (typeof av === "undefined" ? "undefined" : _typeof(av)) == "object" && av.optns === z) {
 	        au = av.params;ax = av.drag;var ar = av.start,
 	            ay = av.stop,
 	            aw = av.disabled;av = av.object;
@@ -3740,7 +3796,7 @@
 	        return this._proto;
 	      }return this instanceof w[m];
 	    };this.base = function (ar, aw, m) {
-	      if (typeof ar == "object") {
+	      if ((typeof ar === "undefined" ? "undefined" : _typeof(ar)) == "object") {
 	        ar = af(ar, { x: 0, y: 0, service: false });m = ar.service;aw = ar.y;ar = ar.x;
 	      } else {
 	        if (m === z) {
@@ -3895,7 +3951,7 @@
 	    };this.draw = function (m) {
 	      m.arc(this._x, this._y, this._radius, 0, v, true);
 	    };this.base = function (ar, av, m, at, au) {
-	      if (typeof ar != "object") {
+	      if ((typeof ar === "undefined" ? "undefined" : _typeof(ar)) != "object") {
 	        ar = { x: ar, y: av, radius: m, color: at, fill: au };
 	      }ar = af(ar, { radius: 0 });w.circle.prototype.base.call(this, ar);this._radius = ar.radius;return this;
 	    };this._proto = "circle";
@@ -3905,7 +3961,7 @@
 	    };this.draw = function (m) {
 	      m.rect(this._x, this._y, this._width, this._height);
 	    };this.base = function (ar, aw, au, m, at, av) {
-	      if (typeof ar != "object") {
+	      if ((typeof ar === "undefined" ? "undefined" : _typeof(ar)) != "object") {
 	        ar = { x: ar, y: aw, width: au, height: m, color: at, fill: av };
 	      }ar = af(ar, { width: 0, height: 0 });w.rect.prototype.base.call(this, ar);this._width = ar.width;this._height = ar.height;return this;
 	    };this._proto = "rect";
@@ -3992,7 +4048,7 @@
 	        } else {
 	          aw = false;
 	        }
-	      }if (typeof ar != "object") {
+	      }if ((typeof ar === "undefined" ? "undefined" : _typeof(ar)) != "object") {
 	        ar = { x: ar, y: ay, radius: m, startAngle: av, endAngle: au, anticlockwise: aw, color: at, fill: ax };
 	      }ar = af(ar, { radius: 0, startAngle: 0, endAngle: 0, anticlockwise: true });w.arc.prototype.base.call(this, ar);this._radius = ar.radius;this._startAngle = ar.startAngle;this._endAngle = ar.endAngle;this._anticlockwise = ar.anticlockwise;return this;
 	    };this._proto = "arc";
@@ -4038,7 +4094,7 @@
 	            av = ar;
 	          }ar = au;au = false;
 	        }
-	      }if (typeof at != "object") {
+	      }if ((typeof at === "undefined" ? "undefined" : _typeof(at)) != "object") {
 	        at = { string: at, x: m, y: aw, maxWidth: au, color: ar, fill: av };
 	      }at = af(at, { string: "", maxWidth: false, fill: 1 });w.text.prototype.base.call(this, at);this._string = at.string;this._maxWidth = at.maxWidth;return this;
 	    };this._proto = "text";
@@ -4112,7 +4168,7 @@
 	        this.val.addColorStop(this["_pos" + m], "rgba(" + parseInt(this["_colorR" + m]) + "," + parseInt(this["_colorG" + m]) + "," + parseInt(this["_colorB" + m]) + "," + this["_alpha" + m] + ")");
 	      }
 	    };this.base = function (at, av, ar, au, m) {
-	      if (typeof at !== "object") {
+	      if ((typeof at === "undefined" ? "undefined" : _typeof(at)) !== "object") {
 	        at = { x1: at, y1: av, x2: ar, y2: au, colors: m };
 	      }at = af(at, { x1: 0, y1: 0, x2: 0, y2: 0 });w.lGradient.prototype.base.call(this, at.colors);this._x1 = at.x1;this._y1 = at.y1;this._x2 = at.x2;this._y2 = at.y2;return this;
 	    };this._proto = "lGradient";
@@ -4124,7 +4180,7 @@
 	        this.val.addColorStop(this["_pos" + m], "rgba(" + parseInt(this["_colorR" + m]) + "," + parseInt(this["_colorG" + m]) + "," + parseInt(this["_colorB" + m]) + "," + this["_alpha" + m] + ")");
 	      }
 	    };this.base = function (av, ax, au, at, aw, ar, m) {
-	      if (typeof av !== "object") {
+	      if ((typeof av === "undefined" ? "undefined" : _typeof(av)) !== "object") {
 	        av = { x1: av, y1: ax, r1: au, x2: at, y2: aw, r2: ar, colors: m };
 	      }av = af(av, { x1: 0, y1: 0, r1: 0, x2: 0, y2: 0, r2: 0 });w.rGradient.prototype.base.call(this, av.colors);this._x1 = av.x1;this._y1 = av.y1;this._r1 = av.r1;this._x2 = av.x2;this._y2 = av.y2;this._r2 = av.r2;return this;
 	    };this._proto = "rGradient";
@@ -4370,7 +4426,7 @@
 	    };this.draw = function (m) {
 	      m.drawImage(this._img, this._sx, this._sy, this._swidth, this._sheight, this._x, this._y, this._width, this._height);
 	    };this.base = function (at, ay, av, m, az, ax, aw, au, ar) {
-	      if (typeof at != "object" || at.src !== z || at.nodeName !== z) {
+	      if ((typeof at === "undefined" ? "undefined" : _typeof(at)) != "object" || at.src !== z || at.nodeName !== z) {
 	        at = { image: at, x: ay, y: av, width: m, height: az, sx: ax, sy: aw, swidth: au, sheight: ar };
 	      }at = af(at, { width: false, height: false, sx: 0, sy: 0, swidth: false, sheight: false });if (at.width === false) {
 	        at.width = at.image.width;at.height = at.image.height;
@@ -4420,7 +4476,7 @@
 	      }if (aB !== z) {
 	        for (av in aB) {
 	          if (aB.hasOwnProperty(av)) {
-	            if (typeof aB[av] != "object") {
+	            if (_typeof(aB[av]) != "object") {
 	              aB[av] = { val: aB[av], rel: "==" };
 	            }aD[aD.length] = { fn: "attr", args: [av], val: aB[av].val, rel: aB[av].rel };
 	          }
@@ -4457,7 +4513,7 @@
 	                if (!(az < ay)) {
 	                  aE = "del";
 	                }break;case "typeof":
-	                if (!(typeof az == ay)) {
+	                if (!((typeof az === "undefined" ? "undefined" : _typeof(az)) == ay)) {
 	                  aE = "del";
 	                }break;}if (aE == "del") {
 	              aC.unmatchedElements[aC.unmatchedElements.length] = ax;aC.elements.splice(aw, 1);aw--;break;
@@ -5002,25 +5058,25 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	/*global jc*/ //eslint
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	var _jsBase64 = __webpack_require__(6);
+	var _jsBase = __webpack_require__(6);
 
 	var _pako = __webpack_require__(11);
 
 	var _pako2 = _interopRequireDefault(_pako);
 
-	/*global jc*/ //eslint
-
 	__webpack_require__(2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	// this code is quoted from
 	// http://qiita.com/k_ui/items/e6c1661158bd584a4209
@@ -5032,7 +5088,7 @@
 
 	// バッファ arrayへの読み書き
 
-	var BufferView = (function () {
+	var BufferView = function () {
 	    function BufferView() {
 	        var bytes = arguments.length <= 0 || arguments[0] === undefined ? new Array() : arguments[0];
 
@@ -5047,8 +5103,8 @@
 	        value: function append(bytes) {
 	            this._buf = this._buf.concat(bytes);
 	        }
-
 	        // textToByteArray
+
 	    }, {
 	        key: 'getUint8',
 	        value: function getUint8() {
@@ -5185,8 +5241,8 @@
 	            }
 	            return ret;
 	        }
-
 	        // int8ToByteArray
+
 	    }, {
 	        key: 'setInt8',
 	        value: function setInt8(value) {
@@ -5194,8 +5250,8 @@
 	            ret[0] = value & 0x00ff;
 	            return ret;
 	        }
-
 	        // int16ToByteArray
+
 	    }, {
 	        key: 'setInt16',
 	        value: function setInt16(value) {
@@ -5204,8 +5260,8 @@
 	            ret[0] = value >> 8 & 0x00ff;
 	            return ret;
 	        }
-
 	        // floatToByteArray
+
 	    }, {
 	        key: 'floatToIntBits',
 	        value: function floatToIntBits(f) {
@@ -5292,9 +5348,9 @@
 	    }]);
 
 	    return BufferView;
-	})();
+	}();
 
-	var BBCQuery = (function () {
+	var BBCQuery = function () {
 	    function BBCQuery(bbobj, map) {
 	        _classCallCheck(this, BBCQuery);
 
@@ -5302,15 +5358,13 @@
 	        this.map = map;
 	        this._bv = new BufferView(BufferView.setStr(map));
 	    }
-
-	    // BBCQuery
-
 	    // setQueryString (str) {
+
 	    _createClass(BBCQuery, [{
 	        key: 'fromBase64',
 	        value: function fromBase64(str) {
-	            var data = _jsBase64.Base64.decode(str);
-	            this._bv = new BufferView(_pako2['default'].inflateRaw(data));
+	            var data = _jsBase.Base64.decode(str);
+	            this._bv = new BufferView(_pako2.default.inflateRaw(data));
 	            try {
 	                this.map = this._bv.getStr();
 	            } catch (e) {
@@ -5322,20 +5376,19 @@
 	            }
 	            return true;
 	        }
-
 	        // getQueryString () {
 	    }, {
 	        key: 'toBase64',
 	        value: function toBase64() {
 	            var buf = this._bv._buf;
-	            var data = _pako2['default'].deflateRaw(buf, {
+	            var data = _pako2.default.deflateRaw(buf, {
 	                to: "string"
 	            });
-	            return _jsBase64.Base64.encode(data);
+	            return _jsBase.Base64.encode(data);
 	        }
-
 	        // セットされているクエリパラメータからオブジェクトを復元する
 	        // setObjects
+
 	    }, {
 	        key: 'applyObjects',
 	        value: function applyObjects() {
@@ -5639,10 +5692,10 @@
 
 	            return objs;
 	        }
-
 	        // // オブジェクト配列をバイナリ化してバイナリArrayを返す
 	        // getObjects (objs) {
 	        // オブジェクト配列を格納する
+
 	    }, {
 	        key: 'fromObjects',
 	        value: function fromObjects(objs) {
@@ -5833,10 +5886,10 @@
 	    }]);
 
 	    return BBCQuery;
-	})();
+	}(); // BBCQuery
 
-	exports['default'] = BBCQuery;
-	module.exports = exports['default'];
+
+	exports.default = BBCQuery;
 
 /***/ },
 /* 6 */
@@ -6050,6 +6103,8 @@
 	 */
 	/* eslint-disable no-proto */
 
+	'use strict'
+
 	var base64 = __webpack_require__(8)
 	var ieee754 = __webpack_require__(9)
 	var isArray = __webpack_require__(10)
@@ -6132,8 +6187,10 @@
 	    return new Buffer(arg)
 	  }
 
-	  this.length = 0
-	  this.parent = undefined
+	  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+	    this.length = 0
+	    this.parent = undefined
+	  }
 
 	  // Common case.
 	  if (typeof arg === 'number') {
@@ -6264,6 +6321,10 @@
 	if (Buffer.TYPED_ARRAY_SUPPORT) {
 	  Buffer.prototype.__proto__ = Uint8Array.prototype
 	  Buffer.__proto__ = Uint8Array
+	} else {
+	  // pre-set for values that may exist in the future
+	  Buffer.prototype.length = undefined
+	  Buffer.prototype.parent = undefined
 	}
 
 	function allocate (that, length) {
@@ -6413,10 +6474,6 @@
 	  }
 	}
 	Buffer.byteLength = byteLength
-
-	// pre-set for values that may exist in the future
-	Buffer.prototype.length = undefined
-	Buffer.prototype.parent = undefined
 
 	function slowToString (encoding, start, end) {
 	  var loweredCase = false
@@ -7509,7 +7566,7 @@
 	      }
 
 	      // valid surrogate pair
-	      codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
+	      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
 	    } else if (leadSurrogate) {
 	      // valid bmp char, but last char was a lead
 	      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
@@ -7813,38 +7870,10 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	
-	/**
-	 * isArray
-	 */
+	var toString = {}.toString;
 
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
+	module.exports = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
 	};
 
 
@@ -14292,15 +14321,15 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _lodash = __webpack_require__(13);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/*global require*/ // eslint
 	//var Map = require('es6-map');
@@ -14357,7 +14386,7 @@
 	};
 
 	(function completeStage() {
-	    _lodash2['default'].each(stageJson, function (el, it) {
+	    _lodash2.default.each(stageJson, function (el, it) {
 	        BBDB["stage"].push({
 	            "value": el["value"],
 	            "dataset": {
@@ -14368,7 +14397,7 @@
 	    });
 	})();
 	(function completeMap() {
-	    _lodash2['default'].each(mapJson, function (el, it) {
+	    _lodash2.default.each(mapJson, function (el, it) {
 	        var map = {
 	            "value": el["value"],
 	            "dataset": {
@@ -14387,7 +14416,7 @@
 	    var tempMap = new Map(); // 終わったらclearしないとリーク
 
 	    // tempMap準備、日付関連
-	    _lodash2['default'].each(currentJson, function (el, it) {
+	    _lodash2.default.each(currentJson, function (el, it) {
 	        var now = new Date(); // タイムゾーン不明
 
 	        // new Date("2016/01/01") は 2016/01/01 00:00:00 GMT+0900 (JST)
@@ -14415,7 +14444,7 @@
 	        }
 	    });
 	    // mapとの紐付け。残念ながら O(map数 x tempMap数)
-	    _lodash2['default'].each(BBDB["map"], function (el, it) {
+	    _lodash2.default.each(BBDB["map"], function (el, it) {
 	        var map = el;
 	        tempMap.forEach(function (mv, mk) {
 	            if (mk["map"] != undefined && mk["map"] == map["value"]) {
@@ -14426,7 +14455,7 @@
 	        });
 	    });
 	    // stageとの紐付け。残念ながら O(stage数 x tempMap数)
-	    _lodash2['default'].each(BBDB["stage"], function (el, it) {
+	    _lodash2.default.each(BBDB["stage"], function (el, it) {
 	        var stage = el;
 	        tempMap.forEach(function (mv, mk) {
 	            if (mv["stageId"] != undefined && mv["stageId"] == stage["value"]) {
@@ -14435,7 +14464,7 @@
 	        });
 	    });
 	    // currentMapEx順で BBDB にpush
-	    _lodash2['default'].each(currentMapEx, function (el, it) {
+	    _lodash2.default.each(currentMapEx, function (el, it) {
 	        var mks = [];
 	        tempMap.forEach(function (mv, mk) {
 	            var t = mk.type || "undefined";
@@ -14455,7 +14484,7 @@
 	        });
 
 	        // mapsをpush
-	        _lodash2['default'].each(mks, function (mk) {
+	        _lodash2.default.each(mks, function (mk) {
 	            var mv = tempMap.get(mk);
 	            var value = mk["map"];
 	            var label = "";
@@ -14488,8 +14517,7 @@
 	    tempMap.clear();
 	})();
 
-	exports['default'] = BBDB;
-	module.exports = exports['default'];
+	exports.default = BBDB;
 
 /***/ },
 /* 13 */
@@ -27107,38 +27135,6 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-02-15",
-			"end_time": "2016-02-21",
-			"type": "event",
-			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜GRFの機略戦〜＞",
-			"url": "/news/332",
-			"map": "beanavis_ea"
-		},
-		{
-			"start_time": "2016-02-15",
-			"end_time": "2016-02-21",
-			"type": "national_battle_high",
-			"title": "キニシュ砂岸〜白砂進軍〜【ローテーション】",
-			"url": "/map/19#opr-128",
-			"map": "kinich_a"
-		},
-		{
-			"start_time": "2016-02-15",
-			"end_time": "2016-02-21",
-			"type": "national_battle_high",
-			"title": "キニシュ砂岸〜火花散る渚〜【ローテーション】",
-			"url": "/map/19#opr-129",
-			"map": "kinich_b"
-		},
-		{
-			"start_time": "2016-02-15",
-			"end_time": "2016-02-21",
-			"type": "national_battle_low",
-			"title": "トラザ山岳基地〜激震の岩峰〜【特殊×】",
-			"url": "/map/4#opr-24",
-			"map": "tlaza_f"
-		},
-		{
 			"start_time": "2016-02-22",
 			"end_time": "2016-02-28",
 			"type": "national_battle_high",
@@ -27155,11 +27151,19 @@
 			"map": "d51_b"
 		},
 		{
+			"start_time": "2016-02-25",
+			"end_time": "2016-02-28",
+			"type": "event",
+			"title": "SQUAD BATTLE",
+			"url": "/news/339",
+			"map": "24_sqb"
+		},
+		{
 			"start_time": "2016-02-29",
 			"end_time": "2016-03-06",
 			"type": "event",
 			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜EUSTの閃撃戦〜＞",
-			"url": ""
+			"url": "/news/338"
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
@@ -28668,8 +28672,6 @@
 
 	'use strict';
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 	var _jquery = __webpack_require__(20);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
@@ -28688,6 +28690,15 @@
 
 	__webpack_require__(21);
 
+	__webpack_require__(22);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	__webpack_require__(23); /*global require*/ // eslint
+
+	//初期化
+
+
 	// import 'jquery-ui/jquery-ui.min.js';
 	// /*global require*/ // eslint
 	// require('jquery-ui/themes/base/core.css');
@@ -28695,11 +28706,6 @@
 	// require('jquery-ui/themes/base/theme.css');
 	// require('jquery-ui/themes/smoothness/jquery-ui.min.css');
 
-	__webpack_require__(22);
-
-	__webpack_require__(23); /*global require*/ // eslint
-
-	//初期化
 	var CanvasName = "BBCompass";
 	var CanvasDivName = "CanvasArea";
 	var scrollBarWidth = 0;
@@ -28719,20 +28725,20 @@
 	};
 	var turretCircle = 6;
 
-	var appData = _BBDB2['default'];
+	var appData = _BBDB2.default;
 	var appDataStatic = {
 	    "picker": [{ "value": "#FF0000", "text": "red" }, { "value": "#FF00FF", "text": "pink" }, { "value": "#FFA500", "text": "orange" }, { "value": "#FFFF00", "text": "yellow" }, { "value": "#00FF00", "text": "green" }, { "value": "#00FFFF", "text": "cyan" }, { "value": "#0000FF", "text": "blue" }, { "value": "#800080", "text": "purple" }],
 	    "defaultLayer": [{ "value": "", "text": "通常" }]
 	};
 
 	function getMapsFromStage(stage) {
-	    var maps = _jquery2['default'].grep(appData["map"], function (el, it) {
+	    var maps = _jquery2.default.grep(appData["map"], function (el, it) {
 	        return el.hasOwnProperty("dataset") && el.dataset.stage == stage;
 	    });
 	    return maps;
 	}
 	function getStageFromMap(map) {
-	    var stages = _jquery2['default'].grep(appData["map"], function (el, it) {
+	    var stages = _jquery2.default.grep(appData["map"], function (el, it) {
 	        return el.value == map;
 	    });
 	    return stages[0].dataset.stage;
@@ -28742,11 +28748,11 @@
 	// optionリストのdocumentFragmentを生成する
 	function createOptionFragments(optionList) {
 	    var frag = document.createDocumentFragment();
-	    _jquery2['default'].each(optionList, function (it, el) {
+	    _jquery2.default.each(optionList, function (it, el) {
 	        var elOpt = document.createElement('option');
 	        elOpt["value"] = el["value"];
 	        if (el.hasOwnProperty("dataset") == true) {
-	            _jquery2['default'].each(el["dataset"], function (key, val) {
+	            _jquery2.default.each(el["dataset"], function (key, val) {
 	                elOpt["dataset"][key] = val;
 	            });
 	        }
@@ -28802,7 +28808,7 @@
 	// 対応していないURL(localhostとか)なら変換せずにそのまま
 	function shortenUrl(url, callback) {
 	    if (url.match(/^https?:\/\//) && !url.match(/^http:\/\/localhost/)) {
-	        _jquery2['default'].ajax({
+	        _jquery2.default.ajax({
 	            type: 'GET',
 	            url: 'http://is.gd/create.php',
 	            dataType: 'jsonp',
@@ -28854,18 +28860,18 @@
 	// 選択した $tab, $target と .ribbonmenuに selectedクラスを追加する
 	function toggleMenutab($tab, $target) {
 	    if ($tab == undefined || $tab.hasClass("selected")) {
-	        (0, _jquery2['default'])(".menutab").removeClass("selected");
-	        (0, _jquery2['default'])(".menucell").removeClass("selected");
-	        (0, _jquery2['default'])(".ribbonmenu").removeClass("selected");
-	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeOut("fast");
+	        (0, _jquery2.default)(".menutab").removeClass("selected");
+	        (0, _jquery2.default)(".menucell").removeClass("selected");
+	        (0, _jquery2.default)(".ribbonmenu").removeClass("selected");
+	        (0, _jquery2.default)(".ribbonmenu-outer").fadeOut("fast");
 	    } else {
-	        (0, _jquery2['default'])(".menutab").removeClass("selected");
-	        (0, _jquery2['default'])(".menucell").removeClass("selected");
+	        (0, _jquery2.default)(".menutab").removeClass("selected");
+	        (0, _jquery2.default)(".menucell").removeClass("selected");
 	        $tab.addClass("selected");
 	        $target.addClass("selected");
-	        (0, _jquery2['default'])(".ribbonmenu-outer").fadeIn("fast");
+	        (0, _jquery2.default)(".ribbonmenu-outer").fadeIn("fast");
 	        setTimeout(function () {
-	            (0, _jquery2['default'])(".ribbonmenu").addClass("selected");
+	            (0, _jquery2.default)(".ribbonmenu").addClass("selected");
 	        }, 200);
 	    }
 	}
@@ -28877,8 +28883,8 @@
 	// ステージメニュー関連 //////////////////////////////////////////
 
 	function loadStageList() {
-	    loadSelectionOption((0, _jquery2['default'])("#current"), appData["current_map"]);
-	    loadSelectionOption((0, _jquery2['default'])("#stage"), appData["stage"]);
+	    loadSelectionOption((0, _jquery2.default)("#current"), appData["current_map"]);
+	    loadSelectionOption((0, _jquery2.default)("#stage"), appData["stage"]);
 	}
 	function loadStageMapList() {
 	    var stage = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
@@ -28891,17 +28897,17 @@
 	            "disabled": true,
 	            "selected": true
 	        });
-	        loadSelectionOption((0, _jquery2['default'])("#map"), stageMaps);
+	        loadSelectionOption((0, _jquery2.default)("#map"), stageMaps);
 	    } else {
 	        // いらない！！！
 	        var optionList = appData["map"];
-	        loadSelectionOption((0, _jquery2['default'])("#map"), optionList);
+	        loadSelectionOption((0, _jquery2.default)("#map"), optionList);
 	    }
 	}
 
 	// ステージ選択を変更する。あわせてマップの選択肢を対応するマップのみに絞る
 	function changeStageSelection(stage) {
-	    var $stage = (0, _jquery2['default'])("#stage");
+	    var $stage = (0, _jquery2.default)("#stage");
 	    if (stage == null) {
 	        return;
 	    }
@@ -28910,7 +28916,7 @@
 	}
 	// マップ選択を変更する。あわせて階層情報を更新する
 	function changeMapSelection(map) {
-	    var $map = (0, _jquery2['default'])("#map");
+	    var $map = (0, _jquery2.default)("#map");
 	    if (map == null) {
 	        return;
 	    }
@@ -28935,7 +28941,7 @@
 	            "text": layer[i]
 	        });
 	    }
-	    var $lstLayer = (0, _jquery2['default'])("#lst_layer");
+	    var $lstLayer = (0, _jquery2.default)("#lst_layer");
 	    loadSelectionOption($lstLayer, layerList);
 	    $lstLayer.val("");
 	}
@@ -28954,8 +28960,8 @@
 	        "object_misc": "#lst_misc",
 	        "object_icon": "#lst_icon"
 	    };
-	    _jquery2['default'].each(elMap, function (name, selector) {
-	        loadSelectionOption((0, _jquery2['default'])(selector), appData[name]);
+	    _jquery2.default.each(elMap, function (name, selector) {
+	        loadSelectionOption((0, _jquery2.default)(selector), appData[name]);
 	    });
 	}
 
@@ -28966,17 +28972,17 @@
 	    if ($this.hasClass("selected")) {
 	        return false;
 	    } else {
-	        (0, _jquery2['default'])("#objselector .option.selected").removeClass("selected");
+	        (0, _jquery2.default)("#objselector .option.selected").removeClass("selected");
 	        $this.addClass("selected");
 	    }
 	    var openid = $this.data("target");
 
 	    //リストの先頭を選択済みにする
-	    (0, _jquery2['default'])('#' + openid + ' .formlst option:first').attr('selected', true);
-	    (0, _jquery2['default'])('#' + openid + ' .formlst').change();
+	    (0, _jquery2.default)('#' + openid + ' .formlst option:first').attr('selected', true);
+	    (0, _jquery2.default)('#' + openid + ' .formlst').change();
 
-	    (0, _jquery2['default'])("div.setobj:visible").fadeOut(speed, function () {
-	        (0, _jquery2['default'])('#' + openid).fadeIn(speed);
+	    (0, _jquery2.default)("div.setobj:visible").fadeOut(speed, function () {
+	        (0, _jquery2.default)('#' + openid).fadeIn(speed);
 	    });
 	};
 
@@ -28984,48 +28990,48 @@
 
 	//lst_objectへの追加
 	function addObject(id, name) {
-	    var $lstObject = (0, _jquery2['default'])("#lst_object");
+	    var $lstObject = (0, _jquery2.default)("#lst_object");
 	    if ($lstObject.children("option").get().length) {
-	        (0, _jquery2['default'])('<option value="' + id + '"></option>').text(name).insertBefore((0, _jquery2['default'])("#lst_object :first-child"));
+	        (0, _jquery2.default)('<option value="' + id + '"></option>').text(name).insertBefore((0, _jquery2.default)("#lst_object :first-child"));
 	    } else {
-	        $lstObject.append((0, _jquery2['default'])('<option value="' + id + '"></option>').text(name));
+	        $lstObject.append((0, _jquery2.default)('<option value="' + id + '"></option>').text(name));
 	    }
 	    $lstObject.val(id);
 	}
 
 	//lst_objectを上に
 	function upObject() {
-	    (0, _jquery2['default'])("#lst_object option:not(:selected)").each(function () {
-	        while ((0, _jquery2['default'])(this).next().is(":selected")) {
-	            (0, _jquery2['default'])(this).insertAfter((0, _jquery2['default'])(this).next());
-	            bbobj.object((0, _jquery2['default'])(this).val()).down();
+	    (0, _jquery2.default)("#lst_object option:not(:selected)").each(function () {
+	        while ((0, _jquery2.default)(this).next().is(":selected")) {
+	            (0, _jquery2.default)(this).insertAfter((0, _jquery2.default)(this).next());
+	            bbobj.object((0, _jquery2.default)(this).val()).down();
 	        }
 	    });
 	}
 
 	//lst_objectを下に
 	function downObject() {
-	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option:not(:selected)").get().reverse()).each(function () {
-	        while ((0, _jquery2['default'])(this).prev().is(":selected")) {
-	            (0, _jquery2['default'])(this).insertBefore((0, _jquery2['default'])(this).prev());
-	            bbobj.object((0, _jquery2['default'])(this).val()).up();
+	    (0, _jquery2.default)((0, _jquery2.default)("#lst_object option:not(:selected)").get().reverse()).each(function () {
+	        while ((0, _jquery2.default)(this).prev().is(":selected")) {
+	            (0, _jquery2.default)(this).insertBefore((0, _jquery2.default)(this).prev());
+	            bbobj.object((0, _jquery2.default)(this).val()).up();
 	        }
 	    });
 	}
 
 	//lst_objectから要素削除
 	function delObject() {
-	    (0, _jquery2['default'])("#lst_object option:selected").each(function () {
-	        bbobj.object((0, _jquery2['default'])(this).val()).del();
-	        (0, _jquery2['default'])(this).remove();
+	    (0, _jquery2.default)("#lst_object option:selected").each(function () {
+	        bbobj.object((0, _jquery2.default)(this).val()).del();
+	        (0, _jquery2.default)(this).remove();
 	    });
 	}
 
 	// lst_objectから全要素削除
 	function delallObject() {
-	    (0, _jquery2['default'])("#lst_object option").each(function () {
-	        bbobj.object((0, _jquery2['default'])(this).val()).del();
-	        (0, _jquery2['default'])(this).remove();
+	    (0, _jquery2.default)("#lst_object option").each(function () {
+	        bbobj.object((0, _jquery2.default)(this).val()).del();
+	        (0, _jquery2.default)(this).remove();
 	    });
 	}
 
@@ -29035,13 +29041,13 @@
 	    // var canvas = document.getElementById(CanvasName);
 
 	    newScale = scale;
-	    (0, _jquery2['default'])("#lst_scale").val(newScale);
+	    (0, _jquery2.default)("#lst_scale").val(newScale);
 
 	    chgScale = newScale / bbobj.zoomScale;
 	    if (bbobj.zoomScale != newScale) {
 	        //倍率が変化する場合は左上維持して拡大処理
 	        bbobj.zoom(chgScale);
-	        var $CanvasArea = (0, _jquery2['default'])("#" + CanvasDivName);
+	        var $CanvasArea = (0, _jquery2.default)("#" + CanvasDivName);
 	        $CanvasArea.scrollLeft($CanvasArea.scrollLeft() * chgScale).scrollTop($CanvasArea.scrollTop() * chgScale);
 	    }
 	}
@@ -29049,20 +29055,20 @@
 	// 保存メニュー関連 //////////////////////////////////////////
 
 	var execMakeImg = function execMakeImg() {
-	    var $imgView = (0, _jquery2['default'])("#SaveImgView");
-	    var $SaveImgText = (0, _jquery2['default'])("#SaveImgText");
-	    var $SaveImgShortUrl = (0, _jquery2['default'])("#SaveImgShortUrl");
-	    var $map = (0, _jquery2['default'])("#map");
+	    var $imgView = (0, _jquery2.default)("#SaveImgView");
+	    var $SaveImgText = (0, _jquery2.default)("#SaveImgText");
+	    var $SaveImgShortUrl = (0, _jquery2.default)("#SaveImgShortUrl");
+	    var $map = (0, _jquery2.default)("#map");
 	    var objs = new Array();
 
 	    $imgView.attr("src", "");
 	    $SaveImgText.attr("value", "");
 
-	    (0, _jquery2['default'])((0, _jquery2['default'])("#lst_object option").get().reverse()).each(function () {
-	        objs.push((0, _jquery2['default'])(this).val());
+	    (0, _jquery2.default)((0, _jquery2.default)("#lst_object option").get().reverse()).each(function () {
+	        objs.push((0, _jquery2.default)(this).val());
 	    });
 
-	    var queryobj = new _BBCQuery2['default'](getBbObj(), $map.val());
+	    var queryobj = new _BBCQuery2.default(getBbObj(), $map.val());
 	    queryobj.fromObjects(objs);
 	    var querystr = queryobj.toBase64();
 	    var url = location.protocol + '//' + location.host + location.pathname + '?' + querystr;
@@ -29079,7 +29085,7 @@
 	        }, 200);
 	    }
 
-	    var imgSrc = (0, _jquery2['default'])("#BBCompass")[0].toDataURL('image/png');
+	    var imgSrc = (0, _jquery2.default)("#BBCompass")[0].toDataURL('image/png');
 	    setTimeout(function () {
 	        $imgView.attr("src", imgSrc);
 	    }, 200);
@@ -29090,12 +29096,12 @@
 	}
 
 	// 読み込み時の処理
-	(0, _jquery2['default'])(document).ready(function () {
+	(0, _jquery2.default)(document).ready(function () {
 	    // デバイスごとの切り替え
 	    forcePcMode = document.cookie.replace(new RegExp("(?:^|.*;\\s*)pcmode\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1") == "true";
 	    if (forcePcMode) {
 	        var viewport = forcePcMode ? 'width=850, user-scalable=yes' : 'width=device-width, user-scalable=no';
-	        (0, _jquery2['default'])("meta[name='viewport']").attr('content', viewport);
+	        (0, _jquery2.default)("meta[name='viewport']").attr('content', viewport);
 	    }
 	    //スマホ用メニュー制御
 	    // - PCだとウィンドウサイズに応じる。スタイルはmedia query任せ
@@ -29107,7 +29113,7 @@
 	    // - 大人しくリロードする
 	    // の2択となる。大人しくリロードする
 	    var ua = navigator.userAgent;
-	    var $viewsw = (0, _jquery2['default'])("#viewsw");
+	    var $viewsw = (0, _jquery2.default)("#viewsw");
 	    if (window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
 	        if (forcePcMode) {
 	            $viewsw.text('スマホ版を表示する');
@@ -29133,8 +29139,8 @@
 	function bindEventHandler() {
 
 	    // 現在の戦場選択メニュー
-	    (0, _jquery2['default'])("#current").change(function (e) {
-	        var map = (0, _jquery2['default'])(this).val();
+	    (0, _jquery2.default)("#current").change(function (e) {
+	        var map = (0, _jquery2.default)(this).val();
 	        var stage = getStageFromMap(map);
 	        changeStageSelection(stage);
 	        changeMapSelection(map);
@@ -29142,174 +29148,174 @@
 	        closeMenuTab();
 	    });
 	    // ステージ選択メニュー
-	    (0, _jquery2['default'])("#stage").change(function (e) {
-	        var stage = (0, _jquery2['default'])(this).val();
+	    (0, _jquery2.default)("#stage").change(function (e) {
+	        var stage = (0, _jquery2.default)(this).val();
 	        changeStageSelection(stage);
 	    });
 	    // マップ選択メニュー
-	    (0, _jquery2['default'])("#map").change(function (e) {
-	        var map = (0, _jquery2['default'])(this).val();
+	    (0, _jquery2.default)("#map").change(function (e) {
+	        var map = (0, _jquery2.default)(this).val();
 	        changeMapSelection(map);
 	        loadMap(map);
 	        closeMenuTab();
 	    });
 	    // 階層選択
-	    (0, _jquery2['default'])("#lst_layer").change(function () {
-	        getBbObj().setbgdiff((0, _jquery2['default'])("#lst_layer").val());
+	    (0, _jquery2.default)("#lst_layer").change(function () {
+	        getBbObj().setbgdiff((0, _jquery2.default)("#lst_layer").val());
 	        // closeMenuTab();
 	    });
 
 	    // オブジェクト選択メニューの設定
-	    (0, _jquery2['default'])("#objselector .option").tap(function () {
-	        onObjectSelectorChanged((0, _jquery2['default'])(this));
+	    (0, _jquery2.default)("#objselector .option").tap(function () {
+	        onObjectSelectorChanged((0, _jquery2.default)(this));
 	    });
 
 	    // オブジェクトごとのリスト選択時の設定
-	    (0, _jquery2['default'])("#lst_scout").change(function () {
-	        (0, _jquery2['default'])("#name_scout").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_scout").change(function () {
+	        (0, _jquery2.default)("#name_scout").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_sensor").change(function () {
-	        (0, _jquery2['default'])("#name_sensor").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_sensor").change(function () {
+	        (0, _jquery2.default)("#name_sensor").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_radar").change(function () {
-	        (0, _jquery2['default'])("#name_radar").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_radar").change(function () {
+	        (0, _jquery2.default)("#name_radar").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_sonde").change(function () {
-	        (0, _jquery2['default'])("#name_sonde").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_sonde").change(function () {
+	        (0, _jquery2.default)("#name_sonde").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_ndsensor").change(function () {
-	        (0, _jquery2['default'])("#name_ndsensor").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_ndsensor").change(function () {
+	        (0, _jquery2.default)("#name_ndsensor").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_vsensor").change(function () {
-	        (0, _jquery2['default'])("#name_vsensor").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_vsensor").change(function () {
+	        (0, _jquery2.default)("#name_vsensor").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_howitzer").change(function () {
-	        (0, _jquery2['default'])("#name_howitzer").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_howitzer").change(function () {
+	        (0, _jquery2.default)("#name_howitzer").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_misc").change(function () {
-	        (0, _jquery2['default'])("#name_misc").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_misc").change(function () {
+	        (0, _jquery2.default)("#name_misc").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
-	    (0, _jquery2['default'])("#lst_icon").change(function () {
-	        (0, _jquery2['default'])("#name_icon").val((0, _jquery2['default'])(this).find("option:selected").text());
+	    (0, _jquery2.default)("#lst_icon").change(function () {
+	        (0, _jquery2.default)("#name_icon").val((0, _jquery2.default)(this).find("option:selected").text());
 	    });
 
 	    // カラーピッカーの設定
-	    loadSelectionOption((0, _jquery2['default'])('.colorpick'), appDataStatic["picker"]);
-	    (0, _jquery2['default'])('select.colorpick').simplecolorpicker({
+	    loadSelectionOption((0, _jquery2.default)('.colorpick'), appDataStatic["picker"]);
+	    (0, _jquery2.default)('select.colorpick').simplecolorpicker({
 	        picker: true
 	    });
 
 	    //狭い時用メニューに関する初期化
-	    (0, _jquery2['default'])("#menutab_map").tap(function (ev) {
-	        toggleMenutab((0, _jquery2['default'])("#menutab_map"), (0, _jquery2['default'])("#menu_map"));
+	    (0, _jquery2.default)("#menutab_map").tap(function (ev) {
+	        toggleMenutab((0, _jquery2.default)("#menutab_map"), (0, _jquery2.default)("#menu_map"));
 	    });
-	    (0, _jquery2['default'])("#menutab_item").tap(function (ev) {
-	        toggleMenutab((0, _jquery2['default'])("#menutab_item"), (0, _jquery2['default'])("#menu_graph"));
+	    (0, _jquery2.default)("#menutab_item").tap(function (ev) {
+	        toggleMenutab((0, _jquery2.default)("#menutab_item"), (0, _jquery2.default)("#menu_graph"));
 	    });
-	    (0, _jquery2['default'])("#menutab_view").tap(function (ev) {
-	        toggleMenutab((0, _jquery2['default'])("#menutab_view"), (0, _jquery2['default'])("#menu_cont"));
+	    (0, _jquery2.default)("#menutab_view").tap(function (ev) {
+	        toggleMenutab((0, _jquery2.default)("#menutab_view"), (0, _jquery2.default)("#menu_cont"));
 	    });
-	    (0, _jquery2['default'])("#menutab_save").tap(function (ev) {
-	        toggleMenutab((0, _jquery2['default'])("#menutab_save"), (0, _jquery2['default'])("#menu_view"));
+	    (0, _jquery2.default)("#menutab_save").tap(function (ev) {
+	        toggleMenutab((0, _jquery2.default)("#menutab_save"), (0, _jquery2.default)("#menu_view"));
 	    });
-	    (0, _jquery2['default'])(".ribbonmenu-outer").tap(function (ev) {
+	    (0, _jquery2.default)(".ribbonmenu-outer").tap(function (ev) {
 	        toggleMenutab();
 	    });
 
 	    //ズーム
-	    (0, _jquery2['default'])("#lst_scale").change(function () {
-	        zoomCnv((0, _jquery2['default'])(this).val());
+	    (0, _jquery2.default)("#lst_scale").change(function () {
+	        zoomCnv((0, _jquery2.default)(this).val());
 	    });
 
 	    // メニュー開閉
 	    //メニュー隠す
-	    (0, _jquery2['default'])("#menusw_off").bind('tap', function (e) {
-	        (0, _jquery2['default'])("div.ribbonmenu").slideUp(function () {
-	            (0, _jquery2['default'])("#menusw_off").hide();
-	            (0, _jquery2['default'])("#menusw_on").show();
+	    (0, _jquery2.default)("#menusw_off").bind('tap', function (e) {
+	        (0, _jquery2.default)("div.ribbonmenu").slideUp(function () {
+	            (0, _jquery2.default)("#menusw_off").hide();
+	            (0, _jquery2.default)("#menusw_on").show();
 	        });
 	    });
 	    //メニュー出す
-	    (0, _jquery2['default'])("#menusw_on").bind('tap', function (e) {
-	        (0, _jquery2['default'])("div.ribbonmenu").slideDown(function () {
-	            (0, _jquery2['default'])("#menusw_on").hide();
-	            (0, _jquery2['default'])("#menusw_off").show();
+	    (0, _jquery2.default)("#menusw_on").bind('tap', function (e) {
+	        (0, _jquery2.default)("div.ribbonmenu").slideDown(function () {
+	            (0, _jquery2.default)("#menusw_on").hide();
+	            (0, _jquery2.default)("#menusw_off").show();
 	        });
 	    });
 
 	    // 各種オブジェクト設置
-	    (0, _jquery2['default'])("#submit_scout").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_scout").bind('tap', function (e) {
 	        setScout();
 	    });
-	    (0, _jquery2['default'])("#submit_sensor").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_sensor").bind('tap', function (e) {
 	        setSensor();
 	    });
-	    (0, _jquery2['default'])("#submit_radar").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_radar").bind('tap', function (e) {
 	        setRadar();
 	    });
-	    (0, _jquery2['default'])("#submit_sonde").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_sonde").bind('tap', function (e) {
 	        setSonde();
 	    });
-	    (0, _jquery2['default'])("#submit_ndsensor").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_ndsensor").bind('tap', function (e) {
 	        setNdSensor();
 	    });
-	    (0, _jquery2['default'])("#submit_vsensor").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_vsensor").bind('tap', function (e) {
 	        setVSensor();
 	    });
-	    (0, _jquery2['default'])("#submit_howitzer").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_howitzer").bind('tap', function (e) {
 	        setHowitzer();
 	    });
-	    (0, _jquery2['default'])("#submit_waft").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_waft").bind('tap', function (e) {
 	        setWaft('image/waft.png');
 	    });
-	    (0, _jquery2['default'])("#submit_misc").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_misc").bind('tap', function (e) {
 	        setMisc();
 	    });
-	    (0, _jquery2['default'])("#submit_circle").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_circle").bind('tap', function (e) {
 	        setCircle();
 	    });
-	    (0, _jquery2['default'])("#submit_line").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_line").bind('tap', function (e) {
 	        setLine();
 	    });
-	    (0, _jquery2['default'])("#submit_point").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_point").bind('tap', function (e) {
 	        setPoint();
 	    });
-	    (0, _jquery2['default'])("#submit_icon").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_icon").bind('tap', function (e) {
 	        setIcon();
 	    });
-	    (0, _jquery2['default'])("#submit_freehand").bind('tap', function (e) {
+	    (0, _jquery2.default)("#submit_freehand").bind('tap', function (e) {
 	        setFreehand();
 	    }); // TODO: あとで
 
-	    (0, _jquery2['default'])("#csr_select").bind('tap', function (e) {
+	    (0, _jquery2.default)("#csr_select").bind('tap', function (e) {
 	        startSelect();
 	    });
-	    (0, _jquery2['default'])("#csr_move").bind('tap', function (e) {
+	    (0, _jquery2.default)("#csr_move").bind('tap', function (e) {
 	        startMove();
 	    });
 
-	    (0, _jquery2['default'])("#up_object").bind('tap', function (e) {
+	    (0, _jquery2.default)("#up_object").bind('tap', function (e) {
 	        upObject();
 	    });
-	    (0, _jquery2['default'])("#down_object").bind('tap', function (e) {
+	    (0, _jquery2.default)("#down_object").bind('tap', function (e) {
 	        downObject();
 	    });
-	    (0, _jquery2['default'])("#del_object").bind('tap', function (e) {
+	    (0, _jquery2.default)("#del_object").bind('tap', function (e) {
 	        delObject();
 	    });
-	    (0, _jquery2['default'])("#delall_object").bind('tap', function (e) {
+	    (0, _jquery2.default)("#delall_object").bind('tap', function (e) {
 	        delallObject();
 	    });
 
-	    (0, _jquery2['default'])("#make_img").tap(function (e) {
+	    (0, _jquery2.default)("#make_img").tap(function (e) {
 	        execMakeImg();
 	    });
 
-	    (0, _jquery2['default'])("#CanvasArea").scroll(function () {
+	    (0, _jquery2.default)("#CanvasArea").scroll(function () {
 	        getBbObj().chgScroll();
 	    });
 
-	    (0, _jquery2['default'])("#viewsw").bind('tap', function (e) {
+	    (0, _jquery2.default)("#viewsw").bind('tap', function (e) {
 	        document.cookie = forcePcMode ? 'pcmode=false;max-age=0' : 'pcmode=true;max-age=2592000';
 	        location.reload();
 	    });
@@ -29318,38 +29324,38 @@
 	function loadInitData() {
 
 	    // canvas要素の初期化
-	    bbobj = new _BB2['default'](CanvasName);
+	    bbobj = new _BB2.default(CanvasName);
 	    var cnvArea = document.getElementById("CanvasArea");
 	    scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
 	    scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6; // for win?
-	    (0, _jquery2['default'])("#CanvasArea")
+	    (0, _jquery2.default)("#CanvasArea")
 	    // .width($("#" + CanvasName).outerWidth() + scrollBarWidth)
-	    .height((0, _jquery2['default'])("#" + CanvasName).outerHeight() + scrollBarHeight);
+	    .height((0, _jquery2.default)("#" + CanvasName).outerHeight() + scrollBarHeight);
 
 	    loadStageList();
 	    loadStageMapList();
 	    loadObjectLists();
 
 	    //メニューの初期状態を設定
-	    onObjectSelectorChanged((0, _jquery2['default'])("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
+	    onObjectSelectorChanged((0, _jquery2.default)("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
 
 	    if (window.location.search) {
 	        //query stringがあれば再現処理に入る
 	        setURL(window.location.search.substr(1));
 	    } else {
 	        // なければもっともらしいマップを選ぶ
-	        (0, _jquery2['default'])("#current").change();
+	        (0, _jquery2.default)("#current").change();
 	    }
 	    // changelogロード
-	    _jquery2['default'].ajax({
+	    _jquery2.default.ajax({
 	        url: "./Changelog.txt",
 	        dataType: 'text',
 	        cache: false,
 	        success: function success(txt, status) {
-	            (0, _jquery2['default'])("#changelog").val(txt);
+	            (0, _jquery2.default)("#changelog").val(txt);
 	        },
 	        error: function error() {
-	            (0, _jquery2['default'])("#changelog").val("更新履歴の取得に失敗しました");
+	            (0, _jquery2.default)("#changelog").val("更新履歴の取得に失敗しました");
 	        }
 	    });
 	}
@@ -29380,7 +29386,7 @@
 	    var stage = getStageFromMap(map);
 	    map = sanitizeFilePath(map);
 	    stage = sanitizeFilePath(stage);
-	    var scale = eval((0, _jquery2['default'])("#stage").find('[value="' + stage + '"]').data("scale"));
+	    var scale = eval((0, _jquery2.default)("#stage").find('[value="' + stage + '"]').data("scale"));
 
 	    if (map == null || stage == null) {
 	        if (callback !== undefined) {
@@ -29389,14 +29395,14 @@
 	        return;
 	    }
 
-	    (0, _jquery2['default'])("#Loading").show();
+	    (0, _jquery2.default)("#Loading").show();
 	    delallObject(); // 設置オブジェクトを全削除
 
 	    var bbobj = getBbObj();
 	    bbobj.setbg(getMapImgPath(stage, map), scale[0], scale[1], function () {
-	        (0, _jquery2['default'])("#lst_scale").val(1);
-	        (0, _jquery2['default'])("#Loading").hide();
-	        _jquery2['default'].ajax({
+	        (0, _jquery2.default)("#lst_scale").val(1);
+	        (0, _jquery2.default)("#Loading").hide();
+	        _jquery2.default.ajax({
 	            "url": getMapDataPath(map),
 	            dataType: "jsonp",
 	            crossDomain: true,
@@ -29420,21 +29426,21 @@
 
 	//偵察機
 	function setScout() {
-	    if (!(0, _jquery2['default'])("#lst_scout").val()) {
+	    if (!(0, _jquery2.default)("#lst_scout").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_scout").val()) {
+	    if (!(0, _jquery2.default)("#col_scout").val()) {
 	        return;
 	    }
 
-	    var param = eval((0, _jquery2['default'])("#lst_scout").val());
-	    var obj = bbobj.add_scout((0, _jquery2['default'])("#name_scout").val(), param[0], param[1], param[2], (0, _jquery2['default'])("#col_scout").val());
+	    var param = eval((0, _jquery2.default)("#lst_scout").val());
+	    var obj = bbobj.add_scout((0, _jquery2.default)("#name_scout").val(), param[0], param[1], param[2], (0, _jquery2.default)("#col_scout").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29443,20 +29449,20 @@
 
 	//センサー
 	function setSensor() {
-	    if (!(0, _jquery2['default'])("#lst_sensor").val()) {
+	    if (!(0, _jquery2.default)("#lst_sensor").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_sensor").val()) {
+	    if (!(0, _jquery2.default)("#col_sensor").val()) {
 	        return;
 	    }
 
-	    var obj = bbobj.add_sensor((0, _jquery2['default'])("#name_sensor").val(), (0, _jquery2['default'])("#lst_sensor").val(), (0, _jquery2['default'])("#col_sensor").val());
+	    var obj = bbobj.add_sensor((0, _jquery2.default)("#name_sensor").val(), (0, _jquery2.default)("#lst_sensor").val(), (0, _jquery2.default)("#col_sensor").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29465,21 +29471,21 @@
 
 	//レーダー
 	function setRadar() {
-	    if (!(0, _jquery2['default'])("#lst_radar").val()) {
+	    if (!(0, _jquery2.default)("#lst_radar").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_radar").val()) {
+	    if (!(0, _jquery2.default)("#col_radar").val()) {
 	        return;
 	    }
 
-	    var param = eval((0, _jquery2['default'])("#lst_radar").val());
-	    var obj = bbobj.add_radar((0, _jquery2['default'])("#name_radar").val(), param[0], param[1], (0, _jquery2['default'])("#col_radar").val());
+	    var param = eval((0, _jquery2.default)("#lst_radar").val());
+	    var obj = bbobj.add_radar((0, _jquery2.default)("#name_radar").val(), param[0], param[1], (0, _jquery2.default)("#col_radar").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29488,21 +29494,21 @@
 
 	//滞空索敵弾
 	function setSonde() {
-	    if (!(0, _jquery2['default'])("#lst_sonde").val()) {
+	    if (!(0, _jquery2.default)("#lst_sonde").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_sonde").val()) {
+	    if (!(0, _jquery2.default)("#col_sonde").val()) {
 	        return;
 	    }
 
-	    var param = eval((0, _jquery2['default'])("#lst_sonde").val());
-	    var obj = bbobj.add_sonde((0, _jquery2['default'])("#name_sonde").val(), param[0], param[1], (0, _jquery2['default'])("#col_sonde").val());
+	    var param = eval((0, _jquery2.default)("#lst_sonde").val());
+	    var obj = bbobj.add_sonde((0, _jquery2.default)("#name_sonde").val(), param[0], param[1], (0, _jquery2.default)("#col_sonde").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29511,20 +29517,20 @@
 
 	//ND索敵センサー
 	function setNdSensor() {
-	    if (!(0, _jquery2['default'])("#lst_ndsensor").val()) {
+	    if (!(0, _jquery2.default)("#lst_ndsensor").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_ndsensor").val()) {
+	    if (!(0, _jquery2.default)("#col_ndsensor").val()) {
 	        return;
 	    }
 
-	    var obj = bbobj.add_ndsensor((0, _jquery2['default'])("#name_ndsensor").val(), (0, _jquery2['default'])("#lst_ndsensor").val(), (0, _jquery2['default'])("#col_ndsensor").val());
+	    var obj = bbobj.add_ndsensor((0, _jquery2.default)("#name_ndsensor").val(), (0, _jquery2.default)("#lst_ndsensor").val(), (0, _jquery2.default)("#col_ndsensor").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29533,22 +29539,22 @@
 
 	//Vセンサー
 	function setVSensor() {
-	    if (!(0, _jquery2['default'])("#lst_vsensor").val()) {
+	    if (!(0, _jquery2.default)("#lst_vsensor").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_vsensor").val()) {
+	    if (!(0, _jquery2.default)("#col_vsensor").val()) {
 	        return;
 	    }
 
-	    var param = eval((0, _jquery2['default'])("#lst_vsensor").val());
+	    var param = eval((0, _jquery2.default)("#lst_vsensor").val());
 
-	    var obj = bbobj.add_vsensor((0, _jquery2['default'])("#name_vsensor").val(), param[0], param[1], (0, _jquery2['default'])("#col_vsensor").val(), 'A');
+	    var obj = bbobj.add_vsensor((0, _jquery2.default)("#name_vsensor").val(), param[0], param[1], (0, _jquery2.default)("#col_vsensor").val(), 'A');
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29557,21 +29563,21 @@
 
 	//砲撃
 	function setHowitzer() {
-	    if (!(0, _jquery2['default'])("#lst_howitzer").val()) {
+	    if (!(0, _jquery2.default)("#lst_howitzer").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_howitzer").val()) {
+	    if (!(0, _jquery2.default)("#col_howitzer").val()) {
 	        return;
 	    }
 
-	    var param = eval((0, _jquery2['default'])("#lst_howitzer").val());
-	    var obj = bbobj.add_howitzer((0, _jquery2['default'])("#name_howitzer").val(), param[0], param[1], param[2], (0, _jquery2['default'])("#col_howitzer").val());
+	    var param = eval((0, _jquery2.default)("#lst_howitzer").val());
+	    var obj = bbobj.add_howitzer((0, _jquery2.default)("#name_howitzer").val(), param[0], param[1], param[2], (0, _jquery2.default)("#col_howitzer").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29580,47 +29586,47 @@
 
 	//その他攻撃関連
 	function setMisc() {
-	    if (!(0, _jquery2['default'])("#lst_misc").val()) {
+	    if (!(0, _jquery2.default)("#lst_misc").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_misc").val()) {
+	    if (!(0, _jquery2.default)("#col_misc").val()) {
 	        return;
 	    }
 
 	    var obj;
-	    switch ((0, _jquery2['default'])("#lst_misc").val()) {
+	    switch ((0, _jquery2.default)("#lst_misc").val()) {
 	        case "bunker":
 	            //サテライトバンカー
-	            obj = bbobj.add_bunker((0, _jquery2['default'])("#name_misc").val(), (0, _jquery2['default'])("#col_misc").val());
+	            obj = bbobj.add_bunker((0, _jquery2.default)("#name_misc").val(), (0, _jquery2.default)("#col_misc").val());
 	            break;
 
 	        case "sentry":
 	            //先生
-	            obj = bbobj.add_sentry((0, _jquery2['default'])("#name_misc").val(), (0, _jquery2['default'])("#col_misc").val());
+	            obj = bbobj.add_sentry((0, _jquery2.default)("#name_misc").val(), (0, _jquery2.default)("#col_misc").val());
 	            break;
 
 	        case "aerosent":
 	            //先生
-	            obj = bbobj.add_aerosentry((0, _jquery2['default'])("#name_misc").val(), (0, _jquery2['default'])("#col_misc").val());
+	            obj = bbobj.add_aerosentry((0, _jquery2.default)("#name_misc").val(), (0, _jquery2.default)("#col_misc").val());
 	            break;
 
 	        case "bomber":
 	            //爆撃通信機
-	            obj = bbobj.add_bomber((0, _jquery2['default'])("#name_misc").val(), (0, _jquery2['default'])("#col_misc").val());
+	            obj = bbobj.add_bomber((0, _jquery2.default)("#name_misc").val(), (0, _jquery2.default)("#col_misc").val());
 	            break;
 
 	        case "bascout":
 	            //偵察要請装置
-	            obj = bbobj.add_bascout((0, _jquery2['default'])("#name_misc").val(), (0, _jquery2['default'])("#col_misc").val());
+	            obj = bbobj.add_bascout((0, _jquery2.default)("#name_misc").val(), (0, _jquery2.default)("#col_misc").val());
 	            break;
 
 	    }
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29629,26 +29635,26 @@
 
 	//アイコン
 	function setIcon() {
-	    if (!(0, _jquery2['default'])("#lst_icon").val()) {
+	    if (!(0, _jquery2.default)("#lst_icon").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_icon").val()) {
+	    if (!(0, _jquery2.default)("#col_icon").val()) {
 	        return;
 	    }
 
-	    var file = sanitizeFilePath((0, _jquery2['default'])("#lst_icon").val());
+	    var file = sanitizeFilePath((0, _jquery2.default)("#lst_icon").val());
 	    if (file == null) {
 	        alert("アイコンファイル名エラー");
 	        return;
 	    }
 
-	    var obj = bbobj.add_icon((0, _jquery2['default'])("#name_icon").val(), file, (0, _jquery2['default'])("#col_icon").val());
+	    var obj = bbobj.add_icon((0, _jquery2.default)("#name_icon").val(), file, (0, _jquery2.default)("#col_icon").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29660,7 +29666,7 @@
 	    if (!file) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_waft").val()) {
+	    if (!(0, _jquery2.default)("#col_waft").val()) {
 	        return;
 	    }
 
@@ -29670,13 +29676,13 @@
 	        return;
 	    }
 
-	    var obj = bbobj.add_waft((0, _jquery2['default'])("#name_waft").val(), file, (0, _jquery2['default'])("#col_waft").val());
+	    var obj = bbobj.add_waft((0, _jquery2.default)("#name_waft").val(), file, (0, _jquery2.default)("#col_waft").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29685,20 +29691,20 @@
 
 	//円
 	function setCircle() {
-	    if (!(0, _jquery2['default'])("#rad_circle").val()) {
+	    if (!(0, _jquery2.default)("#rad_circle").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_circle").val()) {
+	    if (!(0, _jquery2.default)("#col_circle").val()) {
 	        return;
 	    }
 
-	    var obj = bbobj.add_circle((0, _jquery2['default'])("#name_circle").val(), (0, _jquery2['default'])("#rad_circle").val(), (0, _jquery2['default'])("#col_circle").val());
+	    var obj = bbobj.add_circle((0, _jquery2.default)("#name_circle").val(), (0, _jquery2.default)("#rad_circle").val(), (0, _jquery2.default)("#col_circle").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29707,20 +29713,20 @@
 
 	//直線
 	function setLine() {
-	    if (!(0, _jquery2['default'])("#len_line").val()) {
+	    if (!(0, _jquery2.default)("#len_line").val()) {
 	        return;
 	    }
-	    if (!(0, _jquery2['default'])("#col_line").val()) {
+	    if (!(0, _jquery2.default)("#col_line").val()) {
 	        return;
 	    }
 
-	    var obj = bbobj.add_line((0, _jquery2['default'])("#name_line").val(), (0, _jquery2['default'])("#len_line").val(), (0, _jquery2['default'])("#col_line").val());
+	    var obj = bbobj.add_line((0, _jquery2.default)("#name_line").val(), (0, _jquery2.default)("#len_line").val(), (0, _jquery2.default)("#col_line").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29729,13 +29735,13 @@
 
 	//点
 	function setPoint() {
-	    var obj = bbobj.add_point((0, _jquery2['default'])("#name_point").val(), (0, _jquery2['default'])("#size_point").val(), (0, _jquery2['default'])("#col_point").val(), (0, _jquery2['default'])("#align_point").val());
+	    var obj = bbobj.add_point((0, _jquery2.default)("#name_point").val(), (0, _jquery2.default)("#size_point").val(), (0, _jquery2.default)("#col_point").val(), (0, _jquery2.default)("#align_point").val());
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        obj.move((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft(), (0, _jquery2['default'])("#" + CanvasDivName).scrollTop());
+	        obj.move((0, _jquery2.default)("#" + CanvasDivName).scrollLeft(), (0, _jquery2.default)("#" + CanvasDivName).scrollTop());
 	        obj.mousedown(function () {
-	            (0, _jquery2['default'])("#lst_object").val(obj.id);
+	            (0, _jquery2.default)("#lst_object").val(obj.id);
 	            return false;
 	        });
 	        closeMenuTab();
@@ -29744,74 +29750,74 @@
 
 	//フリーハンド
 	function setFreehand() {
-	    var obj = bbobj.add_freehand((0, _jquery2['default'])("#name_freehand").val(), (0, _jquery2['default'])("#col_freehand").val());
+	    var obj = bbobj.add_freehand((0, _jquery2.default)("#name_freehand").val(), (0, _jquery2.default)("#col_freehand").val());
 	    closeMenuTab();
 
 	    if (obj) {
 	        addObject(obj.id, coalesceName(obj));
-	        (0, _jquery2['default'])("button").attr("disabled", true);
+	        (0, _jquery2.default)("button").attr("disabled", true);
 	        obj.start();
 	        freehandOnWrite = obj;
 	        var colChg = function colChg() {
-	            obj.color((0, _jquery2['default'])(this).val());
+	            obj.color((0, _jquery2.default)(this).val());
 	        };
-	        (0, _jquery2['default'])("#col_freehand").bind('blur', colChg);
-	        (0, _jquery2['default'])("#undo_freehand").attr("disabled", false).tap(function () {
+	        (0, _jquery2.default)("#col_freehand").bind('blur', colChg);
+	        (0, _jquery2.default)("#undo_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite.undo();
 	        });
-	        (0, _jquery2['default'])("#redo_freehand").attr("disabled", false).tap(function () {
+	        (0, _jquery2.default)("#redo_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite.redo();
 	        });
-	        (0, _jquery2['default'])("#stop_freehand").attr("disabled", false).tap(function () {
+	        (0, _jquery2.default)("#stop_freehand").attr("disabled", false).tap(function () {
 	            freehandOnWrite = undefined;
 	            obj.end();
-	            (0, _jquery2['default'])("#col_freehand").unbind('blur', colChg);
-	            (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	            (0, _jquery2['default'])("#stop_freehand").attr("disabled", true).unbind("tap");
-	            (0, _jquery2['default'])("#undo_freehand").attr("disabled", true).unbind("tap");
-	            (0, _jquery2['default'])("#redo_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2.default)("#col_freehand").unbind('blur', colChg);
+	            (0, _jquery2.default)("button:not(.disable)").attr("disabled", false);
+	            (0, _jquery2.default)("#stop_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2.default)("#undo_freehand").attr("disabled", true).unbind("tap");
+	            (0, _jquery2.default)("#redo_freehand").attr("disabled", true).unbind("tap");
 	        });
 	    }
 	}
 
 	//移動開始
 	function startMove() {
-	    (0, _jquery2['default'])("button").attr("disabled", true);
-	    (0, _jquery2['default'])("div#csr_select").removeClass("selected");
-	    (0, _jquery2['default'])("div#csr_move").addClass("selected");
-	    (0, _jquery2['default'])("#" + CanvasName).css("cursor", "move");
+	    (0, _jquery2.default)("button").attr("disabled", true);
+	    (0, _jquery2.default)("div#csr_select").removeClass("selected");
+	    (0, _jquery2.default)("div#csr_move").addClass("selected");
+	    (0, _jquery2.default)("#" + CanvasName).css("cursor", "move");
 
 	    if (freehandOnWrite !== undefined) {
 	        freehandOnWrite.end();
 	    }
 
 	    bbobj.ourJc.pause(CanvasName);
-	    var md, mm, mu, base_x, base_y;
+	    var md, mm, _mu, base_x, base_y;
 
-	    mm = function (e) {
+	    mm = function mm(e) {
 	        var dx = e.pageX - base_x,
 	            dy = e.pageY - base_y;
-	        (0, _jquery2['default'])("#" + CanvasDivName).scrollLeft((0, _jquery2['default'])("#" + CanvasDivName).scrollLeft() - dx);
-	        (0, _jquery2['default'])("#" + CanvasDivName).scrollTop((0, _jquery2['default'])("#" + CanvasDivName).scrollTop() - dy);
+	        (0, _jquery2.default)("#" + CanvasDivName).scrollLeft((0, _jquery2.default)("#" + CanvasDivName).scrollLeft() - dx);
+	        (0, _jquery2.default)("#" + CanvasDivName).scrollTop((0, _jquery2.default)("#" + CanvasDivName).scrollTop() - dy);
 	        base_x = e.pageX;
 	        base_y = e.pageY;
 	        return false;
 	    };
 
-	    mu = function (e) {
-	        (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousemove', mm);
-	        (0, _jquery2['default'])("#" + CanvasDivName).unbind('mouseup', mu);
+	    _mu = function mu(e) {
+	        (0, _jquery2.default)("#" + CanvasDivName).unbind('mousemove', mm);
+	        (0, _jquery2.default)("#" + CanvasDivName).unbind('mouseup', _mu);
 	        return false;
 	    };
-	    md = function (e) {
+	    md = function md(e) {
 	        base_x = e.pageX;
 	        base_y = e.pageY;
-	        (0, _jquery2['default'])("#" + CanvasDivName).bind('mousemove', mm);
-	        (0, _jquery2['default'])("#" + CanvasDivName).bind('mouseup', mu);
+	        (0, _jquery2.default)("#" + CanvasDivName).bind('mousemove', mm);
+	        (0, _jquery2.default)("#" + CanvasDivName).bind('mouseup', _mu);
 	        return false;
 	    };
 
-	    (0, _jquery2['default'])("#" + CanvasDivName).mousedown(md);
+	    (0, _jquery2.default)("#" + CanvasDivName).mousedown(md);
 
 	    // var img = $("#SaveArea");
 	    // img.css("visibility", "hidden");
@@ -29819,28 +29825,28 @@
 
 	//移動終了
 	function startSelect() {
-	    (0, _jquery2['default'])("button:not(.disable)").attr("disabled", false);
-	    (0, _jquery2['default'])("div#csr_select").addClass("selected");
-	    (0, _jquery2['default'])("div#csr_move").removeClass("selected");
-	    (0, _jquery2['default'])("#" + CanvasName).css("cursor", "auto");
+	    (0, _jquery2.default)("button:not(.disable)").attr("disabled", false);
+	    (0, _jquery2.default)("div#csr_select").addClass("selected");
+	    (0, _jquery2.default)("div#csr_move").removeClass("selected");
+	    (0, _jquery2.default)("#" + CanvasName).css("cursor", "auto");
 
 	    bbobj.ourJc.start(CanvasName, true);
-	    (0, _jquery2['default'])("#" + CanvasDivName).unbind('mousedown');
+	    (0, _jquery2.default)("#" + CanvasDivName).unbind('mousedown');
 
 	    // var img = $("#SaveArea");
 	    // img.css("visibility", "hidden");
 
 	    //力技なのが気になる
 	    if (freehandOnWrite !== undefined) {
-	        (0, _jquery2['default'])("button").attr("disabled", true);
+	        (0, _jquery2.default)("button").attr("disabled", true);
 	        freehandOnWrite.start();
-	        (0, _jquery2['default'])("#stop_freehand").attr("disabled", false);
+	        (0, _jquery2.default)("#stop_freehand").attr("disabled", false);
 	    }
 	}
 
 	//URLクエリストリングからの復元
 	function setURL(querystr) {
-	    var queryobj = new _BBCQuery2['default'](getBbObj(), 'dummy');
+	    var queryobj = new _BBCQuery2.default(getBbObj(), 'dummy');
 	    if (queryobj.fromBase64(querystr)) {
 	        var map = queryobj.map;
 	        var stage = getStageFromMap(map);
@@ -29856,7 +29862,7 @@
 	                var obj = objs[i];
 	                addObject(obj.id, coalesceName(obj));
 	                obj.mousedown(function () {
-	                    (0, _jquery2['default'])("#lst_object").val(obj.id);
+	                    (0, _jquery2.default)("#lst_object").val(obj.id);
 	                    return false;
 	                });
 	            }
@@ -29905,11 +29911,11 @@
 	// キャンバスのサイズ変更に合わせてキャンバスエリアのサイズを追従させる
 	function resizeCanvasArea() {
 	    var ua = navigator.userAgent;
-	    var $BBCompass = (0, _jquery2['default'])("#BBCompass");
+	    var $BBCompass = (0, _jquery2.default)("#BBCompass");
 	    if (!forcePcMode && window.TouchEvent && (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)) {
-	        (0, _jquery2['default'])("#CanvasArea").height($BBCompass.outerHeight() + scrollBarHeight);
+	        (0, _jquery2.default)("#CanvasArea").height($BBCompass.outerHeight() + scrollBarHeight);
 	    } else {
-	        (0, _jquery2['default'])("#CanvasArea").width($BBCompass.outerWidth() + scrollBarWidth).height($BBCompass.outerHeight() + scrollBarHeight);
+	        (0, _jquery2.default)("#CanvasArea").width($BBCompass.outerWidth() + scrollBarWidth).height($BBCompass.outerHeight() + scrollBarHeight);
 	    }
 	    getBbObj().chgScroll();
 	}
@@ -39136,11 +39142,11 @@
 
 	"use strict";
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 	var _jquery = __webpack_require__(20);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//////////////////////////////////////
 	// jquery mobile からイベント部分のみ抜き出し
@@ -39172,7 +39178,7 @@
 	        clickBlockList = [],
 	        blockMouseTriggers = false,
 	        blockTouchTriggers = false,
-	        eventCaptureSupported = ("addEventListener" in document),
+	        eventCaptureSupported = "addEventListener" in document,
 	        $document = $(document),
 	        nextTouchID = 1,
 	        lastTouchID = 0,
@@ -39647,7 +39653,7 @@
 	            }
 	        }, true);
 	    }
-	})(_jquery2["default"], window, document);
+	})(_jquery2.default, window, document);
 
 	/**
 	 * events/touch.js
@@ -39675,7 +39681,7 @@
 	        }
 	    });
 
-	    var supportTouch = ("ontouchend" in document),
+	    var supportTouch = "ontouchend" in document,
 	        scrollEvent = "touchmove scroll",
 	        touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 	        touchStopEvent = supportTouch ? "touchend" : "mouseup",
@@ -39852,7 +39858,7 @@
 	            }
 	        };
 	    });
-	})(_jquery2["default"], undefined);
+	})(_jquery2.default, undefined);
 	//////////////////////////////////////
 
 /***/ },
