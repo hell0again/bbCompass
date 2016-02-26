@@ -27166,6 +27166,22 @@
 			"url": "/news/338"
 		},
 		{
+			"start_time": "2016-02-29",
+			"end_time": "2016-03-06",
+			"type": "national_battle_high",
+			"title": "極地観測所セクター9〜天空への架け橋〜",
+			"url": "/map/23#opr-154",
+			"map": "sector_b"
+		},
+		{
+			"start_time": "2016-02-29",
+			"end_time": "2016-03-06",
+			"type": "national_battle_low",
+			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
+			"url": "/map/2#opr-3",
+			"map": "blouer_a"
+		},
+		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
 			"map": "24_sqa"
 		},
