@@ -1,4 +1,5 @@
-
+var React = require('react');
+var ReactDOM = require('react-dom');
 var OreController = React.createClass({
   getInitialState() {
     return {
@@ -71,6 +72,7 @@ var OreController = React.createClass({
       left: 10,
       opacity: this.state.opacity,
       transform: transform,
+      WebkitTransform: transform,
       transformOrigin: "top left",
       transition: "transform 0.2s",
       WebkitTransition: "-webkit-transform 0.2s",
@@ -97,7 +99,7 @@ var OreController = React.createClass({
     );
   }
 });
-React.render(
+ReactDOM.render(
   <div className="react-Root">
     <OreController label="base" />
     <OreController label="compare" />
