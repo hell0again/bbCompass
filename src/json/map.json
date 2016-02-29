@@ -124,6 +124,7 @@
     {"value":"longsha_c", "dataset": {"layer": "[\"洞窟内A\",\"洞窟内B\",\"全表示\"]", "stage": "longsha"}, "text": "眼下猛襲"},
     {"value":"longsha_d", "dataset": {"layer": "[\"洞窟内A\",\"洞窟内B\",\"全表示\"]", "stage": "longsha"}, "text": "霊峰急撃"},
     {"value":"longsha_e", "dataset": {"layer": "[]", "stage": "longsha"}, "text": "幽谷の異光"},
+    {"value":"longsha_ea", "dataset": {"layer": "[]", "stage": "longsha"}, "text": "激闘の山峰"},
     {"value":"longsha_ua", "dataset": {"layer": "[\"通路あり\"]", "stage": "longsha"}, "text": "晴嵐の連合戦", "class": "union"},
     {"value":"hopeside_a", "dataset": {"layer": "[\"中段\",\"下段\",\"全表示\"]", "stage": "hopeside"}, "text": "都市侵襲"},
     {"value":"hopeside_b", "dataset": {"layer": "[\"中段\",\"下段\",\"全表示\"]", "stage": "hopeside"}, "text": "運河に見ゆ"},
