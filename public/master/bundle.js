@@ -27135,35 +27135,12 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-02-22",
-			"end_time": "2016-02-28",
-			"type": "national_battle_high",
-			"title": "【調整あり】ネソス島実験ドーム〜構造β‐05〜【特殊×】",
-			"url": "/map/20#opr-135",
-			"map": "nesos_b"
-		},
-		{
-			"start_time": "2016-02-22",
-			"end_time": "2016-02-28",
-			"type": "national_battle_low",
-			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
-			"url": "/map/6#opr-33",
-			"map": "d51_b"
-		},
-		{
-			"start_time": "2016-02-25",
-			"end_time": "2016-02-28",
-			"type": "event",
-			"title": "SQUAD BATTLE",
-			"url": "/news/339",
-			"map": "24_sqb"
-		},
-		{
 			"start_time": "2016-02-29",
 			"end_time": "2016-03-06",
 			"type": "event",
 			"title": "イベントバトル開催＜第二次 双覇大攻防戦〜EUSTの閃撃戦〜＞",
-			"url": "/news/338"
+			"url": "/news/338",
+			"map": "longsha_ea"
 		},
 		{
 			"start_time": "2016-02-29",
@@ -27180,6 +27157,14 @@
 			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
 			"url": "/map/2#opr-3",
 			"map": "blouer_a"
+		},
+		{
+			"start_time": "2016-03-07",
+			"end_time": "2016-03-13",
+			"type": "union_battle",
+			"title": "【ユニオンバトル】ホープサイド市街地〜新都市連合戦〜",
+			"url": "/news/351",
+			"map": "hopeside_ub"
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
@@ -28404,6 +28389,14 @@
 				"stage": "longsha"
 			},
 			"text": "幽谷の異光"
+		},
+		{
+			"value": "longsha_ea",
+			"dataset": {
+				"layer": "[]",
+				"stage": "longsha"
+			},
+			"text": "激闘の山峰"
 		},
 		{
 			"value": "longsha_ua",
