@@ -2625,7 +2625,7 @@
 
 	    }, {
 	        key: 'put_turret',
-	        value: function put_turret(x, y, rot, radius, angle, hookrad, color, test) {
+	        value: function put_turret(x, y, rot, radius, angle, hookrad, color, test, type) {
 	            if (x === undefined) {
 	                return undefined;
 	            }
@@ -2661,7 +2661,8 @@
 	                this.ourJc.line([[x, y], [x, y - 20]], 'rgba(255,0,0,1)').rotateTo(rot, x, y).lineStyle({
 	                    lineWidth: 2
 	                });
-	                hooker.color('rgba(255,0,0,1)').level('top');
+	                var c = type == "L" ? 'rgba(255,0,0,1)' : type == "G" ? 'rgba(0,0,255,1)' : type == "M" ? 'rgba(0,255,255,1)' : type == "R" ? 'rgba(255,255,0,1)' : 'rgba(255,0,0,1)';
+	                hooker.color(c).level('top');
 	            }
 
 	            hooker.mouseover(function () {
@@ -2712,7 +2713,7 @@
 	                hooker = this.ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true).level(3).name("searchers");
 
 	            if (test) {
-	                hooker.color('rgba(255,255,255,1)').level('top');
+	                hooker.color('rgba(0,255,0,1)').level('top');
 	            }
 
 	            hooker.mouseover(function () {
@@ -29377,8 +29378,8 @@
 	    if ("turret" in data) {
 	        var turretData = data["turret"];
 	        for (i = 0; i < turretData.length; i++) {
-	            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
-	            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, debugMode);
+	            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ, 種類
+	            bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2], turretSpec[turretData[i][3]][0], turretSpec[turretData[i][3]][1], turretCircle, undefined, debugMode, turretData[i][3]);
 	        }
 	    }
 	    if ("searcher" in data) {
@@ -29431,6 +29432,9 @@
 	            }
 	        });
 	    });
+	}
+	if (debugMode) {
+	    window.loadMap = loadMap;
 	}
 
 	//偵察機
