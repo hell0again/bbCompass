@@ -32,6 +32,22 @@
         "map": "hopeside_ub"
     },
     {
+        "start_time": "2016-03-07",
+        "end_time": "2016-03-13",
+        "type": "national_battle_high",
+        "title": "極洋基地ベルスク〜純白の先途〜",
+        "url": "/map/9#opr-59",
+        "map": "belsk_b"
+    },
+    {
+        "start_time": "2016-03-07",
+        "end_time": "2016-03-13",
+        "type": "national_battle_low",
+        "title": "ベネヴィス高原地帯〜湧水の波紋〜【特殊×】",
+        "url": "/map/22#opr-139",
+        "map": "beanavis_a"
+    },
+    {
         "title": "マグメル機体試験場〜FIELD-D〜",
         "map": "24_sqa"
     },
