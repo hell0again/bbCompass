@@ -1,10 +1,7 @@
-import {
-    Base64 as Base64
-}
-from 'js-base64';
+import { Base64 as Base64 } from 'js-base64';
 import pako from 'pako';
-/*global jc*/ //eslint
-import 'jcscript';
+import jc from '../vendor/jcscript/jCanvaScript.1.5.18.min';
+
 
 // this code is quoted from
 // http://qiita.com/k_ui/items/e6c1661158bd584a4209

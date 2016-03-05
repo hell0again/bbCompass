@@ -11,8 +11,7 @@ import './tap';
 // require('jquery-ui/themes/base/theme.css');
 // require('jquery-ui/themes/smoothness/jquery-ui.min.css');
 
-import 'jquery-simplecolorpicker/jquery.simplecolorpicker.js';
-require('jquery-simplecolorpicker/jquery.simplecolorpicker.css'); /*global require*/ // eslint
+import '../vendor/jquery-simplecolorpicker/jquery.simplecolorpicker';
 
 
 //初期化
@@ -53,13 +52,13 @@ var appDataStatic = {
 };
 
 function getMapsFromStage(stage) {
-    var maps = $.grep(appData["map"], function(el, it) {
+    var maps = $.grep(appData["map"], (el, it) => {
         return (el.hasOwnProperty("dataset") && el.dataset.stage == stage);
     });
     return maps;
 }
 function getStageFromMap(map) {
-    var stages = $.grep(appData["map"], function(el, it) {
+    var stages = $.grep(appData["map"], (el, it) => {
         return (el.value == map);
     });
     return stages[0].dataset.stage;
