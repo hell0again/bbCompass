@@ -137,22 +137,42 @@ test('TestBbDb#load', (t) => {
 });
 class TestBbDbBeforeMapStart extends TestBbDb {
     getNow() {
-        return new Date("2016/01/01 07:29:59");
+        // "2016-01-01T07:29:59+0900"
+        var clientNow = new Date("2016-01-01"); // UTC0時
+        var timezoneOffsetJst = -9 * 60 * 60; // UTC0時をJST0時に補正
+        var time = 7*60*60 +30*60 + 0 -1;
+        clientNow.setSeconds(clientNow.getSeconds() +timezoneOffsetJst +time);
+        return clientNow;
     }
 }
 class TestBbDbMapStart extends TestBbDb {
     getNow() {
-        return new Date("2016/01/01 07:30:00");
+        // "2016-01-01T07:30:00+0900"
+        var clientNow = new Date("2016-01-01"); // UTC0時
+        var timezoneOffsetJst = -9 * 60 * 60; // UTC0時をJST0時に補正
+        var time = 7*60*60 +30*60 + 0;
+        clientNow.setSeconds(clientNow.getSeconds() +timezoneOffsetJst +time);
+        return clientNow;
     }
 }
 class TestBbDbBeforeMapEnd extends TestBbDb {
     getNow() {
-        return new Date("2016/01/04 07:29:59");
+        // "2016-01-04T07:29:59+0900"
+        var clientNow = new Date("2016-01-04"); // UTC0時
+        var timezoneOffsetJst = -9 * 60 * 60; // UTC0時をJST0時に補正
+        var time = 7*60*60 +30*60 + 0 -1;
+        clientNow.setSeconds(clientNow.getSeconds() +timezoneOffsetJst +time);
+        return clientNow;
     }
 }
 class TestBbDbMapEnd extends TestBbDb {
     getNow() {
-        return new Date("2016/01/04 07:30:00");
+        // "2016-01-04T07:30:00+0900"
+        var clientNow = new Date("2016-01-04"); // UTC0時
+        var timezoneOffsetJst = -9 * 60 * 60; // UTC0時をJST0時に補正
+        var time = 7*60*60 +30*60 + 0;
+        clientNow.setSeconds(clientNow.getSeconds() +timezoneOffsetJst +time);
+        return clientNow;
     }
 }
 test('TestBbDbBeforeMapStart# before map start', (t) => {

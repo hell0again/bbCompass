@@ -29,12 +29,12 @@
     "uuid": "~2.0.1"
   },
   "scripts": {
-    "test": "ava",
+    "test": "node_modules/ava/cli.js",
     "build": "./build.sh",
     "start": "ws --directory public/ --port 8000",
     "deploy": "git subtree push --prefix public/ origin gh-pages",
     "deploy-force": "git push origin $(git subtree split --prefix public/ origin gh-pages):gh-pages --force",
-    "postinstall": "bower --config.interactive=false --allow-root install"
+    "__postinstall__": "bower --config.interactive=false --allow-root install"
   },
   "repository": {
     "type": "git",

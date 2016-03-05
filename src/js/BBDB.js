@@ -56,7 +56,7 @@ class Conf {
     // objectを conf.key にロードする直前に呼ばれる
     beforeEachLoad(key) {
         if (! this.conf.hasOwnProperty(key)) {
-            throw new Error(`loading unexpected conf:({key})!!`);
+            throw new Error(`loading unexpected conf:(${key})!!`);
         }
     }
     // objectを conf.key にロードした直後に呼ばれる

@@ -16,10 +16,8 @@ RUN apt-get -y install wget &&\
     cd ${WORKDIR} && rm -rf ImageMagick.tar.gz ImageMagick-*
 
 RUN npm install -g\
-    bower\
     local-web-server\
     js-beautify\
-    webpack\
     browserify\
     testling
 
