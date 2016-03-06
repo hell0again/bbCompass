@@ -391,8 +391,7 @@ var execMakeImg = function() {
         objs.push($(this).val());
     });
 
-    var queryobj = new BBCQuery(getBbObj(), $map.val());
-    queryobj.fromObjects(objs);
+    var queryobj = BBCQuery.createFromMapAndObjects($map.val, objs);
     var querystr = queryobj.toBase64();
     var url = `${location.protocol}//${location.host}${location.pathname}?${querystr}`;
     if ($SaveImgShortUrl.prop('checked')) {
@@ -1186,12 +1185,11 @@ function startSelect() {
     }
 }
 
-
 //URLクエリストリングからの復元
 function setURL(querystr) {
-    var queryobj = new BBCQuery(getBbObj(), 'dummy');
-    if (queryobj.fromBase64(querystr)) {
-        var map = queryobj.map;
+    var queryobj = BBCQuery.createFromBase64(querystr);
+    var map = queryobj.map;
+    if (map != "dummy") {
         var stage= getStageFromMap(map);
         changeStageSelection(stage);
         changeMapSelection(map);
@@ -1200,7 +1198,8 @@ function setURL(querystr) {
                 window.alert(err);
                 return;
             }
-            var objs = queryobj.applyObjects();
+            var objs = queryobj.applyObjects(getBbObj());
+            // オブジェクト一覧に追加
             for (var i = 0; i < objs.length; i++) {
                 var obj = objs[i];
                 addObject(obj.id, coalesceName(obj));

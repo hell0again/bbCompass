@@ -1,4 +1,3 @@
-/*global jc*/ // eslint
 import jc from '../vendor/jcscript/jCanvaScript.1.5.18.min';
 import UUID from 'uuid';
 
