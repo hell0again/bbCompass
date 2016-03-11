@@ -2281,7 +2281,7 @@ export default class BB {
 
     //ターレット配置
     //
-    put_turret(x, y, rot, radius, angle, hookrad, color, test) {
+    put_turret(x, y, rot, radius, angle, hookrad, color, test, type) {
         if (x === undefined) {
             return undefined;
         }
@@ -2324,7 +2324,12 @@ export default class BB {
                 .rotateTo(rot, x, y).lineStyle({
                     lineWidth: 2
                 });
-            hooker.color('rgba(255,0,0,1)').level('top');
+            var c = (type == "L")? 'rgba(255,0,0,1)':
+                    (type == "G")? 'rgba(0,0,255,1)':
+                    (type == "M")? 'rgba(0,255,255,1)':
+                    (type == "R")? 'rgba(255,255,0,1)':
+                    'rgba(255,0,0,1)'
+            hooker.color(c).level('top');
         }
 
         hooker.mouseover(() => {
@@ -2376,7 +2381,7 @@ export default class BB {
             .level(3).name("searchers");
 
         if (test) {
-            hooker.color('rgba(255,255,255,1)').level('top');
+            hooker.color('rgba(0,255,0,1)').level('top');
         }
 
         hooker.mouseover(() => {
