@@ -1,4 +1,4 @@
-[
+{"map": [
     {"value":"map_a", "dataset": {"layer": "[]", "stage": "map"}, "text": "戦線突破"},
     {"value":"map_b", "dataset": {"layer": "[]", "stage": "map"}, "text": "砂上の激突"},
     {"value":"blouer_a", "dataset": {"layer": "[]", "stage": "blouer"}, "text": "熱戦の河畔"},
@@ -158,5 +158,5 @@
     {"value":"sector_b", "dataset": {"layer": "[]", "stage": "sector"}, "text": "天空への架け橋"},
     {"value":"24_sqa", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-D", "class": "squad"},
     {"value":"24_sqb", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-S", "class": "squad"}
-]
+]}
 

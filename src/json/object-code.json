@@ -1,0 +1,21 @@
+{
+    "BoardObjectCircle":     1,
+    "BoardObjectLine":       2,
+    "BoardObjectFreehand":   3,
+    "BoardObjectPoint":      4,
+    "BoardObjectIcon":       5,
+    "BoardObjectScout":      11,
+    "BoardObjectSensor":     12,
+    "BoardObjectRadar":      13,
+    "BoardObjectSonde":      14,
+    "BoardObjectNdSensor":   15,
+    "BoardObjectBaScout":    16,
+    "BoardObjectVSensor":    17,
+    "BoardObjectHowitzer":   21,
+    "BoardObjectBunker":     22,
+    "BoardObjectBomber":     23,
+    "BoardObjectSentry":     24,
+    "BoardObjectAeroSentry": 25,
+    "BoardObjectWaft":       26
+}
+

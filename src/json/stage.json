@@ -1,4 +1,4 @@
-[
+{"stage": [
     {"value": "map",          "dataset": {"scale": "[160/100*0.7]"}, "text": "スカービ渓谷"},
     {"value": "blouer",       "dataset": {"scale": "[1.137*0.7]"},   "text": "旧ブロア市街地"},
     {"value": "island",       "dataset": {"scale": "[1.378*0.7]"},   "text": "第三採掘島"},
@@ -23,5 +23,5 @@
     {"value": "malinasedna",  "dataset": {"scale": "[0.866*0.8]"},   "text": "マリナセドナ大雪山"},
     {"value": "sector",       "dataset": {"scale": "[0.836]"},       "text": "極地観測所セクター９"},
     {"value": "24",           "dataset": {"scale": "[1.515*0.7]"},   "text": "マグメル機体試験場"}
-]
+]}
 

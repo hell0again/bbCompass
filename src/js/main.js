@@ -11,8 +11,7 @@ import './tap';
 // require('jquery-ui/themes/base/theme.css');
 // require('jquery-ui/themes/smoothness/jquery-ui.min.css');
 
-import 'jquery-simplecolorpicker/jquery.simplecolorpicker.js';
-require('jquery-simplecolorpicker/jquery.simplecolorpicker.css'); /*global require*/ // eslint
+import '../vendor/jquery-simplecolorpicker/jquery.simplecolorpicker';
 
 
 //初期化
@@ -53,13 +52,13 @@ var appDataStatic = {
 };
 
 function getMapsFromStage(stage) {
-    var maps = $.grep(appData["map"], function(el, it) {
+    var maps = $.grep(appData["map"], (el, it) => {
         return (el.hasOwnProperty("dataset") && el.dataset.stage == stage);
     });
     return maps;
 }
 function getStageFromMap(map) {
-    var stages = $.grep(appData["map"], function(el, it) {
+    var stages = $.grep(appData["map"], (el, it) => {
         return (el.value == map);
     });
     return stages[0].dataset.stage;
@@ -392,8 +391,7 @@ var execMakeImg = function() {
         objs.push($(this).val());
     });
 
-    var queryobj = new BBCQuery(getBbObj(), $map.val());
-    queryobj.fromObjects(objs);
+    var queryobj = BBCQuery.createFromMapAndObjects($map.val, objs);
     var querystr = queryobj.toBase64();
     var url = `${location.protocol}//${location.host}${location.pathname}?${querystr}`;
     if ($SaveImgShortUrl.prop('checked')) {
@@ -1190,12 +1188,11 @@ function startSelect() {
     }
 }
 
-
 //URLクエリストリングからの復元
 function setURL(querystr) {
-    var queryobj = new BBCQuery(getBbObj(), 'dummy');
-    if (queryobj.fromBase64(querystr)) {
-        var map = queryobj.map;
+    var queryobj = BBCQuery.createFromBase64(querystr);
+    var map = queryobj.map;
+    if (map != "dummy") {
         var stage= getStageFromMap(map);
         changeStageSelection(stage);
         changeMapSelection(map);
@@ -1204,7 +1201,8 @@ function setURL(querystr) {
                 window.alert(err);
                 return;
             }
-            var objs = queryobj.applyObjects();
+            var objs = queryobj.applyObjects(getBbObj());
+            // オブジェクト一覧に追加
             for (var i = 0; i < objs.length; i++) {
                 var obj = objs[i];
                 addObject(obj.id, coalesceName(obj));
