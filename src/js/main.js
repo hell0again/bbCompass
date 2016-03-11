@@ -696,12 +696,12 @@ function onLoadMapData(data, bbobj) {
     if ("turret" in data) {
         var turretData = data["turret"];
         for (i = 0; i < turretData.length; i++) {
-            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ
+            //x位置、y位置、回転角度、扇形の角度、射程、中心円サイズ、色、テストフラグ、種類
             bbobj.put_turret(turretData[i][0], turretData[i][1], turretData[i][2],
                 turretSpec[turretData[i][3]][0],
                 turretSpec[turretData[i][3]][1],
                 turretCircle,
-                undefined, debugMode);
+                undefined, debugMode, turretData[i][3]);
         }
     }
     if ("searcher" in data) {
@@ -757,6 +757,9 @@ function loadMap(map, callback) {
             }
         });
     });
+}
+if (debugMode) {
+    window.loadMap = loadMap;
 }
 
 //偵察機
