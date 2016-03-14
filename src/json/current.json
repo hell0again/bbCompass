@@ -1,51 +1,26 @@
 [
     {
-        "start_time": "2016-02-29",
-        "end_time": "2016-03-06",
+        "start_time": "2016-03-14",
+        "end_time": "2016-03-20",
+        "type": "national_battle_high",
+        "title": "デ・ネブラ大落片〜崖下乱戦〜",
+        "url": "/map/12#opr-87",
+        "map": "denebra_f"
+    },
+    {
+        "start_time": "2016-03-14",
+        "end_time": "2016-03-20",
+        "type": "national_battle_low",
+        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+        "url": "/map/4#opr-19",
+        "map": "tlaza_a"
+    },
+    {
+        "start_time": "2016-03-14",
+        "end_time": "2016-03-21",
         "type": "event",
-        "title": "イベントバトル開催＜第二次 双覇大攻防戦〜EUSTの閃撃戦〜＞",
-        "url": "/news/338",
-        "map": "longsha_ea"
-    },
-    {
-        "start_time": "2016-02-29",
-        "end_time": "2016-03-06",
-        "type": "national_battle_high",
-        "title": "極地観測所セクター9〜天空への架け橋〜",
-        "url": "/map/23#opr-154",
-        "map": "sector_b"
-    },
-    {
-        "start_time": "2016-02-29",
-        "end_time": "2016-03-06",
-        "type": "national_battle_low",
-        "title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
-        "url": "/map/2#opr-3",
-        "map": "blouer_a"
-    },
-    {
-        "start_time": "2016-03-07",
-        "end_time": "2016-03-13",
-        "type": "union_battle",
-        "title": "【ユニオンバトル】ホープサイド市街地〜新都市連合戦〜",
-        "url": "/news/351",
-        "map": "hopeside_ub"
-    },
-    {
-        "start_time": "2016-03-07",
-        "end_time": "2016-03-13",
-        "type": "national_battle_high",
-        "title": "極洋基地ベルスク〜純白の先途〜",
-        "url": "/map/9#opr-59",
-        "map": "belsk_b"
-    },
-    {
-        "start_time": "2016-03-07",
-        "end_time": "2016-03-13",
-        "type": "national_battle_low",
-        "title": "ベネヴィス高原地帯〜湧水の波紋〜【特殊×】",
-        "url": "/map/22#opr-139",
-        "map": "beanavis_a"
+        "title": "イベントバトル開催<最新鋭ブラスト・ランナー　先行量産機フィールドテスト>",
+        "url": "/news/354"
     },
     {
         "title": "マグメル機体試験場〜FIELD-D〜",
