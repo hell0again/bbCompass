@@ -20,237 +20,7 @@ var sanitize_filepath = function(path) {
 }
 
 
-//
-//BB_baseオブジェクト
-//
-class BB_base {
-    constructor(_bbObj) {
-        //初期化は下位オブジェに任せる
-        this._text = "base";
-        this._color = "#000000";
-        this._bbObj = _bbObj;
-        this._ourJc = _bbObj.ourJc;
-    }
-    draw() {
-        //一応ダミーを定義
-    }
-    redraw() {
-        this._ourJc.layer(this.id).objects().del();
-        this.draw();
-    }
-    applyZoom(scale, _x, _y) {
-        var posx = jc.layer(this.id)._transformdx,
-            posy = jc.layer(this.id)._transformdy;
-        jc.layer(this.id).translate(posx * scale - posx, posy * scale - posy);
-        this.redraw();
-    }
-    toString() {
-        return this.id;
-    }
-    position() {
-        var posx = this._ourJc.layer(this.id)._transformdx;
-        var posy = this._ourJc.layer(this.id)._transformdy;
-        return {
-            x: posx,
-            y: posy
-        };
-    }
-    rotAngle() {
-        return (jc.layer(this.id).getAngle() * 180 / Math.PI);
-    }
-    click(fn) {
-        this._ourJc.layer(this.id).click(fn);
-        return this;
-    }
-    mouseup(fn) {
-        this._ourJc.layer(this.id).mouseup(fn);
-        return this;
-    }
-    mousedown(fn) {
-        this._ourJc.layer(this.id).mousedown(fn);
-        return this;
-    }
-    dblclick(fn) {
-        this._ourJc.layer(this.id).dblclick(fn);
-        return this;
-    }
-    move(_dx, _dy) {
-        this._ourJc.layer(this.id).translate(_dx, _dy);
-        return this;
-    }
-    rotateTo(_angle) {
-        this._ourJc.layer(this.id).rotateTo(_angle);
-        return this;
-    }
-    moveTo(_x, _y) {
-        //translateToはどこが原点かわからないので、
-        //現在までの変位をもとに相対的に移動させる
-        var posx = this._ourJc.layer(this.id)._transformdx;
-        var posy = this._ourJc.layer(this.id)._transformdy;
-        this._ourJc.layer(this.id).translate(_x - posx, _y - posy);
-        //this._ourJc.layer(this.id).translateTo(_x,_y);
-        return this;
-    }
-    color(_color) {
-        if (_color === undefined) {
-            return this._color;
-        }
-        this._color = _color;
-        this.redraw();
-        return this;
-    }
-    text(_text) {
-        if (_text === undefined) {
-            return this._text;
-        }
-        this._text = _text;
-        this.redraw();
-        return this;
-    }
-    regist() {
-        this._bbObj.member[this.id] = this;
-    }
-    up() {
-        var level = this._ourJc.layer(this.id).level();
-        var nextobj = this._bbObj.nextlevel(level);
 
-        if (nextobj["id"] !== undefined) {
-            this._ourJc.layer(nextobj["id"]).level(level);
-            this._ourJc.layer(this.id).level(nextobj["level"]);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    down() {
-        var level = this._ourJc.layer(this.id).level();
-        var prevobj = this._bbObj.prevlevel(level);
-
-        if (prevobj["id"] !== undefined) {
-            this._ourJc.layer(prevobj["id"]).level(level);
-            this._ourJc.layer(this.id).level(prevobj["level"]);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    del() {
-        delete this._bbObj.member[this.id];
-        // var objs = this._ourJc.layer(this.id).objs;
-        this._ourJc.layer(this.id).del();
-    }
-}
-
-//
-//BB_circleオブジェクト
-//
-class BB_circle extends BB_base {
-    constructor(_bbObj, _text, _radius, _color, _callback) {
-        super(_bbObj);
-        if (_color === undefined) {
-            _color = 'rgb(0, 51, 255)';
-        }
-        this.id = UUID.v1();
-
-        this.type = "circle";
-        this._text = _text;
-        this._radius = _radius;
-        this._color = _color;
-
-        var px_rad = this._bbObj.meter_to_pixel(this._radius);
-        this._ptpos = {
-            x: px_rad,
-            y: 0
-        };
-        this.move(px_rad, px_rad);
-
-        this.draw();
-        this.regist();
-        if (typeof(_callback) === "function") {
-            _callback.apply(this);
-        }
-    }
-    draw() {
-        var px_rad = this._bbObj.meter_to_pixel(this._radius),
-            ptx = this._ptpos.x,
-            pty = this._ptpos.y,
-            obj = this;
-
-        var area = this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.3).layer(this.id),
-            areacol = this._ourJc.circle(0, 0, px_rad, this._color, false)
-            .opacity(1).lineStyle({
-                lineWidth: 3
-            }).layer(this.id),
-            line = this._ourJc.line({
-                points: [
-                    [0, 0],
-                    [ptx, pty]
-                ],
-                color: this._color
-            })
-            .lineStyle({
-                lineWidth: 3
-            }).layer(this.id).opacity(1);
-        this._ourJc.circle(0, 0, 7, this._color, true).opacity(1).layer(this.id);
-
-        var center = this._ourJc.circle(0, 0, 5, "#FFFFFF", true).layer(this.id);
-        this._ourJc.text(this._text, 0, -10)
-            .layer(this.id).color('#FFFFFF').font('15px sans-serif').align('center');
-
-
-        var ptcol = this._ourJc.circle(ptx, pty, this._bbObj.ptcolsize, this._color, true).layer(this.id).opacity(1),
-            pt = this._ourJc.circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true).layer(this.id),
-            pttra = this._ourJc.circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id),
-            radius = this._ourJc.text(Math.floor(this._radius) + "m", ptx / 2, pty / 2).baseline("top")
-            .align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
-
-        this._ourJc.layer(this.id).draggable();
-
-        var txtheight = radius.getRect().height; //translateTo時に高さがずれるので補正項
-        var callback = () => {
-            var pos1 = center.position(),
-                pos2 = pttra.position(),
-                dx = pos2.x - pos1.x,
-                dy = pos2.y - pos1.y,
-                centerx = (pos1.x + pos2.x) / 2,
-                centery = (pos1.y + pos2.y) / 2,
-                newrad = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-            pt.translateTo(pos2.x, pos2.y);
-            ptcol.translateTo(pos2.x, pos2.y);
-            line.points([
-                [0, 0],
-                [pt._x + pt._transformdx, pt._y + pt._transformdy]
-            ]);
-            area.attr('radius', newrad);
-            areacol.attr('radius', newrad);
-            radius.translateTo(centerx, centery - txtheight)
-                .string(Math.floor(this._bbObj.pixel_to_meter(newrad)) + "m");
-            obj._radius = this._bbObj.pixel_to_meter(newrad);
-            obj._ptpos = {
-                x: pt._x + pt._transformdx,
-                y: pt._y + pt._transformdy
-            };
-        };
-
-        pttra.draggable(callback);
-        pttra.optns.drag.val = false;
-        pttra.mouseover(() => {
-            this._ourJc.layer(obj.id).optns.drag.val = false;
-            pttra.optns.drag.val = true;
-        });
-        pttra.mouseout(() => {
-            this._ourJc.layer(obj.id).optns.drag.val = true;
-            pttra.optns.drag.val = false;
-        });
-        return this;
-    }
-    applyZoom(scale, _x, _y) {
-        this._ptpos.x = this._ptpos.x * scale;
-        this._ptpos.y = this._ptpos.y * scale;
-        this._bbObj.BB_base.prototype.applyZoom.apply(this, arguments);
-        return this;
-    }
-}
 //
 //BB_lineオブジェクト
 //
@@ -1836,8 +1606,8 @@ export default class BB {
         this.initExtendJCanvaScript(jc);
 
         this.ptsize = 5, //オブジェクトの操作点を示す白点のサイズ
-            this.ptcolsize = 7, //操作点を縁取りする色つき円のサイズ
-            this.pttrasize = (window.TouchEvent) ? 15 : 7; //操作点そのもののサイズ
+        this.ptcolsize = 7, //操作点を縁取りする色つき円のサイズ
+        this.pttrasize = (window.TouchEvent) ? 15 : 7; //操作点そのもののサイズ
     }
 
     //
@@ -1853,15 +1623,19 @@ export default class BB {
             clkflag;
         var bbobj = this;
 
-        function dispatchMouseEvent(type, touch) {
+        dispatchMouseEvent(type, touch) => {
             var event = document.createEvent("MouseEvent");
-            event.initMouseEvent(type, true, true, window, ((type == 'dblclick') ? 2 : 1),
-                touch.screenX, touch.screenY, (touch.clientX + window.pageXOffset + document.documentElement.getBoundingClientRect().left), (touch.clientY + window.pageYOffset + document.documentElement.getBoundingClientRect().top),
+            event.initMouseEvent(
+                type, true, true, window,
+                ((type == 'dblclick') ? 2 : 1),
+                touch.screenX, touch.screenY,
+                (touch.clientX + window.pageXOffset + document.documentElement.getBoundingClientRect().left),
+                (touch.clientY + window.pageYOffset + document.documentElement.getBoundingClientRect().top),
                 false, false, false, false, 0, null);
             touch.target.dispatchEvent(event);
         }
 
-        function pointInObj(touch) {
+        pointInObj(touch) => {
             var cnvrect = document.getElementById(bbobj.id).getBoundingClientRect(),
                 x = touch.clientX - cnvrect.left,
                 y = touch.clientY - cnvrect.top,
@@ -1897,81 +1671,75 @@ export default class BB {
             return result;
         }
 
-        canvas.addEventListener('touchstart',
-            function(e) {
-                //マルチタッチの場合は変換処理を止める
-                if (e.touches.length >= 2) {
-                    touchflag = false;
-                    return;
-                }
+        canvas.addEventListener('touchstart', (e) => {
+            //マルチタッチの場合は変換処理を止める
+            if (e.touches.length >= 2) {
+                touchflag = false;
+                return;
+            }
 
-                var touch = e.touches[0];
-                touchflag = pointInObj(touch);
-                if (!touchflag) return;
+            var touch = e.touches[0];
+            touchflag = pointInObj(touch);
+            if (!touchflag) return;
 
-                mouseoverflag = true;
+            mouseoverflag = true;
 
-                startX = touch.pageX;
-                startY = touch.pageY;
+            startX = touch.pageX;
+            startY = touch.pageY;
 
-                clkflag = setTimeout(() => {
-                    clkflag = 0
-                }, 300);
+            clkflag = setTimeout(() => {
+                clkflag = 0
+            }, 300);
+            dispatchMouseEvent('mousemove', touch);
+            jc.canvas(BB.id).frame();
+            dispatchMouseEvent('mousedown', touch);
+            return false;
+        }, false);
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!touchflag) return;
+
+            var touch = e.changedTouches[0];
+            e.preventDefault();
+
+            var cnvrect = e.target.getBoundingClientRect();
+            var cnvx = cnvrect.left,
+                cnvy = cnvrect.top,
+                width = e.target.offsetWidth || e.target.width,
+                height = e.target.offsetHeight || e.target.height;
+            var clix = touch.clientX,
+                cliy = touch.clientY;
+
+            //canvasの枠内ならmousemove、枠外ならmouseout
+            if (clix > cnvx && cliy > cnvy && clix < cnvx + width && cliy < cnvy + height) {
+                if (!mouseoverflag) dispatchMouseEvent('mouseover', touch);
                 dispatchMouseEvent('mousemove', touch);
-                jc.canvas(BB.id).frame();
-                dispatchMouseEvent('mousedown', touch);
-                return false;
-            }, false
-        );
-
-        canvas.addEventListener('touchmove',
-            function(e) {
-                if (!touchflag) return;
-
-                var touch = e.changedTouches[0];
-                e.preventDefault();
-
-                var cnvrect = e.target.getBoundingClientRect();
-                var cnvx = cnvrect.left,
-                    cnvy = cnvrect.top,
-                    width = e.target.offsetWidth || e.target.width,
-                    height = e.target.offsetHeight || e.target.height;
-                var clix = touch.clientX,
-                    cliy = touch.clientY;
-
-                //canvasの枠内ならmousemove、枠外ならmouseout
-                if (clix > cnvx && cliy > cnvy && clix < cnvx + width && cliy < cnvy + height) {
-                    if (!mouseoverflag) dispatchMouseEvent('mouseover', touch);
-                    dispatchMouseEvent('mousemove', touch);
-                    mouseoverflag = true;
-                } else {
-                    if (mouseoverflag) dispatchMouseEvent('mouseout', touch);
-                    mouseoverflag = false;
-                }
-            }, false
-        );
-
-        canvas.addEventListener('touchend',
-            function(e) {
-                //touch処理中でなければpreventDefaultせずに抜ける
-                if (!touchflag) return;
-
-                e.preventDefault();
-
-                //mouseout時はpreventDefaultしてから抜ける
-                if (!mouseoverflag) return;
-
-                var touch = e.changedTouches[0];
-                dispatchMouseEvent('mouseup', touch);
-                //タッチ開始からの距離が閾値以下ならクリックイベントも発火
-                if (Math.abs(startX - touch.pageX) < clickthr && Math.abs(startY - touch.pageY) < clickthr && clkflag != 0) {
-
-                    if (clkflag) clearTimeout(clkflag);
-                    dispatchMouseEvent('click', touch)
-                }
+                mouseoverflag = true;
+            } else {
+                if (mouseoverflag) dispatchMouseEvent('mouseout', touch);
                 mouseoverflag = false;
-            }, false
-        );
+            }
+        }, false);
+
+        canvas.addEventListener('touchend', (e) => {
+            //touch処理中でなければpreventDefaultせずに抜ける
+            if (!touchflag) return;
+
+            e.preventDefault();
+
+            //mouseout時はpreventDefaultしてから抜ける
+            if (!mouseoverflag) return;
+
+            var touch = e.changedTouches[0];
+            dispatchMouseEvent('mouseup', touch);
+            //タッチ開始からの距離が閾値以下ならクリックイベントも発火
+            if (Math.abs(startX - touch.pageX) < clickthr && Math.abs(startY - touch.pageY) < clickthr && clkflag != 0) {
+
+                if (clkflag) clearTimeout(clkflag);
+                dispatchMouseEvent('click', touch)
+            }
+            mouseoverflag = false;
+        }, false);
 
     }
 
@@ -1980,91 +1748,84 @@ export default class BB {
     //
     initExtendJCanvaScript(jc) {
         //回転処理用に関数一個追加
-        jc.addFunction('rotateTo',
-            function(angle, x1, y1, duration, easing, onstep, fn) {
-                this.optns.rotateMatrix = [
-                    [1, 0, 0],
-                    [0, 1, 0]
-                ];
-                return this.rotate.apply(this, arguments);
-            }
-        );
+        jc.addFunction('rotateTo', function(angle, x1, y1, duration, easing, onstep, fn) {
+            this.optns.rotateMatrix = [
+                [1, 0, 0],
+                [0, 1, 0]
+            ];
+            return this.rotate.apply(this, arguments);
+        });
 
         //現在の角度を求める関数を追加
-        jc.addFunction('getAngle',
-            function() {
-                var matrix = this.optns.rotateMatrix;
-                return (matrix[1][0] > 0) ? Math.acos(matrix[0][0]) : (-1) * Math.acos(matrix[0][0]);
-            });
+        jc.addFunction('getAngle', function() {
+            var matrix = this.optns.rotateMatrix;
+            return (matrix[1][0] > 0) ? Math.acos(matrix[0][0]) : (-1) * Math.acos(matrix[0][0]);
+        });
 
         //CanvaSciprtに背景合成用のオブジェクト追加
         jc.addObject('imgdiff', {
-                image: new Image,
-                x: 0,
-                y: 0,
-                width: false,
-                height: false,
-                sx: 0,
-                sy: 0,
-                swidth: false,
-                sheight: false
-            },
-            function(ctx) {
-                if (this._width === false) {
-                    this._width = this._image.width;
-                    this._height = this._image.height;
-                }
-                if (this._swidth === false) {
-                    this._swidth = this._image.width;
-                    this._sheight = this._image.height;
-                }
-
-                var opmode = ctx.globalCompositeOperation;
-                ctx.globalCompositeOperation = "lighter";
-                ctx.drawImage(this._image, this._sx, this._sy, this._swidth, this._sheight,
-                    this._x, this._y, this._width, this._height);
-                ctx.globalCompositeOperation = opmode;
-                this.getRect = (type) => {
-                    return {
-                        x: this._x,
-                        y: this._y,
-                        width: this._width,
-                        height: this._height
-                    };
-                }
+            image: new Image,
+            x: 0,
+            y: 0,
+            width: false,
+            height: false,
+            sx: 0,
+            sy: 0,
+            swidth: false,
+            sheight: false
+        }, function(ctx) {
+            if (this._width === false) {
+                this._width = this._image.width;
+                this._height = this._image.height;
             }
-        );
+            if (this._swidth === false) {
+                this._swidth = this._image.width;
+                this._sheight = this._image.height;
+            }
+
+            var opmode = ctx.globalCompositeOperation;
+            ctx.globalCompositeOperation = "lighter";
+            ctx.drawImage(this._image, this._sx, this._sy, this._swidth, this._sheight,
+                this._x, this._y, this._width, this._height);
+            ctx.globalCompositeOperation = opmode;
+            this.getRect = (type) => {
+                return {
+                    x: this._x,
+                    y: this._y,
+                    width: this._width,
+                    height: this._height
+                };
+            }
+        });
 
         //CanvaSciprtに偵察機用オブジェクト追加
         jc.addObject('scout', {
-                x: 0,
-                y: 0,
-                radius: 0,
-                length: 0,
-                color: 'rgb(255, 0, 0)',
-                fill: false
-            },
-            function(ctx) {
-                var x = this._x,
-                    y = this._y,
-                    radius = this._radius,
-                    length = this._length;
-                ctx.moveTo(x + length * 0.5, y + radius);
-                ctx.arc(x, y, radius, Math.PI * 0.5, Math.PI * 1.5, false);
-                ctx.lineTo(x + length * 0.5, y - radius);
-                ctx.arc(x + length, y, radius, Math.PI * 1.5, Math.PI * 0.5, false);
-                ctx.lineTo(x + length * 0.5, y + radius);
-                ctx.closePath();
-                this.getRect = () => {
-                    return {
-                        x: (this._x),
-                        y: (this._y),
-                        width: (this._length + this._radius * 2),
-                        height: (this._radius * 2)
-                    };
+            x: 0,
+            y: 0,
+            radius: 0,
+            length: 0,
+            color: 'rgb(255, 0, 0)',
+            fill: false
+        }, function(ctx) {
+            var x = this._x,
+                y = this._y,
+                radius = this._radius,
+                length = this._length;
+            ctx.moveTo(x + length * 0.5, y + radius);
+            ctx.arc(x, y, radius, Math.PI * 0.5, Math.PI * 1.5, false);
+            ctx.lineTo(x + length * 0.5, y - radius);
+            ctx.arc(x + length, y, radius, Math.PI * 1.5, Math.PI * 0.5, false);
+            ctx.lineTo(x + length * 0.5, y + radius);
+            ctx.closePath();
+            this.getRect = () => {
+                return {
+                    x: (this._x),
+                    y: (this._y),
+                    width: (this._length + this._radius * 2),
+                    height: (this._radius * 2)
                 };
-            }
-        );
+            };
+        });
 
         jc.addObject('scout_mask', {
                 x: 0,

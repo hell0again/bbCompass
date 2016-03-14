@@ -1,5 +1,3 @@
-import jc from '../vendor/jcscript/jCanvaScript.1.5.18.min';
-
 import MyBuffer from './MyBuffer';
 import BoardObjectRegistry from './BoardObjectRegistry';
 
@@ -26,7 +24,6 @@ import BoardObjectRegistry from './BoardObjectRegistry';
 // export default class BBCQuery {
 export default class BbBoardSerializer {
     constructor() {
-        super();
         this.map = 'dummy';
         this.buffer = new MyBuffer();
     }
@@ -99,7 +96,7 @@ export default class BbBoardSerializer {
             buffer = this.buffer;
         try {
             while (buffer._offset < buffer._buf.length) {
-                var obj,
+                var obj;
                 var buffLen = buffer.readUint16();
                 var objName = buffer.readString255();
                 var objType = buffer.readUint8();
@@ -136,36 +133,13 @@ export default class BbBoardSerializer {
 
 
 
-
-
-class BoardObjectCircle extends BoardObject {
-    static getLabel() {
-        return "BoardObjectCircle";
-    }
-    static serialize(obj) {
-        var buffer = new MyBuffer();
-
-        buffer.writeColor(obj._color);
-        buffer.writeInt16(obj._radius);
-        buffer.writePoint(obj.position());
-        buffer.writePoint(obj._ptpos);
-        return buffer.readByteArray();
-    }
-    static deserialize(buffer, length, name, bbobj) {
-        var color = buffer.readColor(),
-            rad   = buffer.readUint16(),
-            pos   = buffer.readPoint(),
-            ptpos = buffer.readPoint();
-
-        var obj = bbobj.add_circle(name, rad, color, function() {
-            this._ptpos = ptpos;
-            this.moveTo(pos.x, pos.y)
-                .redraw();
-        });
-        return obj;
-    }
+class BoardObject {
+    // static getLabel()
+    // static serialize(obj)
+    // static deserialize(obj)
 }
-BoardObjectRegistry.getInstance().addByLabel(BoardObjectCircle.getLabel(), BoardObjectCircle);
+
+
 
 class BoardObjectLine extends BoardObject {
     static getLabel() {
@@ -203,7 +177,9 @@ class BoardObjectFreehand extends BoardObject {
     static getLabel() {
         return "BoardObjectFreehand";
     }
-    static serialize(obj) {
+    static serialize(obj, opts) {
+        var jc = opts.jc; //TODO: あとでなんとかする
+        debugger;
         var buffer = new MyBuffer();
     
         buffer.writeInt8(obj._step);
@@ -223,7 +199,9 @@ class BoardObjectFreehand extends BoardObject {
         }
         return buffer.readByteArray();
     }
-    static deserialize(buffer, length, name, bbobj) {
+    static deserialize(buffer, length, name, bbobj, opts) {
+        var jc = opts.jc; //TODO: あとでなんとかする
+        debugger;
         var obj = bbobj.add_freehand(name);
         obj._step = buffer.readUint8();
         for (i = 1; i <= obj._step; i++) {
@@ -234,7 +212,6 @@ class BoardObjectFreehand extends BoardObject {
                 var point = buffer.readPoint();
                 points.push([point.x, point.y]);
             }
-            // TODO: jc はどこから？
             jc.line(points, obj._stepcol[i])
                 .layer(obj.id).id(i).lineStyle({
                     lineWidth: 3

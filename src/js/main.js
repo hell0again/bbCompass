@@ -652,7 +652,7 @@ function bindEventHandler() {
 function loadInitData() {
 
     // canvas要素の初期化
-    bbobj = new BB(CanvasName);
+    bbobj = new BB(CanvasName, document, window);
     var cnvArea = document.getElementById("CanvasArea");
     scrollBarWidth = cnvArea.offsetWidth - cnvArea.clientWidth;
     scrollBarHeight = cnvArea.offsetHeight - cnvArea.clientHeight + 6; // for win?

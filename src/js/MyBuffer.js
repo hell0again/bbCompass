@@ -1,13 +1,14 @@
 import { Base64 as Base64 } from 'js-base64';
 import pako from 'pako';
+import Color from 'color';
 
-// this code is quoted from
-// http://qiita.com/k_ui/items/e6c1661158bd584a4209
-// canvasを利用して色情報をRGB値に変換する
-var canvas = document.createElement('canvas');
-canvas.width = 1;
-canvas.height = 1;
-var ctx = canvas.getContext('2d');
+// // this code is quoted from
+// // http://qiita.com/k_ui/items/e6c1661158bd584a4209
+// // canvasを利用して色情報をRGB値に変換する
+// var canvas = document.createElement('canvas');
+// canvas.width = 1;
+// canvas.height = 1;
+// var ctx = canvas.getContext('2d');
 
 // バッファ arrayへの読み書き
 export default class MyBuffer {
@@ -132,10 +133,12 @@ export default class MyBuffer {
         return this.writeByteArray(bytes);
     }
     writeColor(colorStr) {
-        ctx.fillStyle = colorStr;
-        ctx.fillRect(0, 0, 1, 1);
-        var col = ctx.getImageData(0, 0, 1, 1).data;
-        return this.writeByteArray([col[0], col[1], col[2]]);
+        var rgb = Color(colorStr).rgb();
+        return this.writeByteArray(rgb['r'], rgb['g'], rgb['b']);
+        // ctx.fillStyle = colorStr;
+        // ctx.fillRect(0, 0, 1, 1);
+        // var col = ctx.getImageData(0, 0, 1, 1).data;
+        // return this.writeByteArray([col[0], col[1], col[2]]);
     }
 
     readByteArray(length = 0) {
