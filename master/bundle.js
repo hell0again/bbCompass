@@ -27156,7 +27156,8 @@
 			"end_time": "2016-03-21",
 			"type": "event",
 			"title": "イベントバトル開催<最新鋭ブラスト・ランナー　先行量産機フィールドテスト>",
-			"url": "/news/354"
+			"url": "/news/354",
+			"map": "nesos_ea"
 		},
 		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
@@ -28557,7 +28558,16 @@
 				"stage": "nesos"
 			},
 			"text": "蜂巣争奪戦",
-			"class": "union"
+			"class": "scramble"
+		},
+		{
+			"value": "nesos_ea",
+			"dataset": {
+				"layer": "[]",
+				"stage": "nesos"
+			},
+			"text": "構造α‐8",
+			"class": "event"
 		},
 		{
 			"value": "beanavis_a",
