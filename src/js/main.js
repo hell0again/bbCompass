@@ -2,6 +2,7 @@ import $ from 'jquery';
 import BB from './BB';
 import BBCQuery from './BBCQuery';
 import BBDB from './BBDB';
+import query from './query';
 import './tap';
 
 // import 'jquery-ui/jquery-ui.min.js';
@@ -24,7 +25,8 @@ var freehandOnWrite = undefined;
 var bbobj = "";
 var forcePcMode = false;
 
-var debugMode = false;
+// var debugMode = false;
+window.debugMode = false;
 
 //ターレット関連データ
 var turretSpec = {
@@ -394,8 +396,11 @@ var execMakeImg = function() {
 
     var queryobj = new BBCQuery(getBbObj(), $map.val());
     queryobj.fromObjects(objs);
-    var querystr = queryobj.toBase64();
-    var url = `${location.protocol}//${location.host}${location.pathname}?${querystr}`;
+    var data = queryobj.toBase64();
+    var q = new query.Util.getCurrent().buildFromObject({
+        data: data,
+    });
+    var url = `${location.protocol}//${location.host}${location.pathname}${q.toString()}`;
     if ($SaveImgShortUrl.prop('checked')) {
         shortenUrl(url, function(err, shorten) {
             if (err) {
@@ -670,8 +675,15 @@ function loadInitData() {
     onObjectSelectorChanged($("#objselector .option:first"), 0); // オブジェクトをひとつ選んでおく
 
     if (window.location.search) {
-        //query stringがあれば再現処理に入る
-        setURL(window.location.search.substr(1));
+        // query stringがあればクエリ解析
+        // setURL(window.location.search.substr(1));
+        var q = query.Util.parse(location.search);
+        if (q.debug == true) {
+            window.debugMode = true;
+        }
+        if (q.data.length > 0) {
+            loadFromBase64(q.data);
+        }
     } else {
         // なければもっともらしいマップを選ぶ
         $("#current").change();
@@ -703,7 +715,7 @@ function onLoadMapData(data, bbobj) {
                 turretSpec[turretData[i][3]][0],
                 turretSpec[turretData[i][3]][1],
                 turretCircle,
-                undefined, debugMode, turretData[i][3]);
+                undefined, window.debugMode, turretData[i][3]);
         }
     }
     if ("searcher" in data) {
@@ -713,7 +725,7 @@ function onLoadMapData(data, bbobj) {
             bbobj.put_searcher(searcherData[i][0], searcherData[i][1],
                 searcherData[i][2],
                 turretCircle,
-                undefined, debugMode);
+                undefined, window.debugMode);
         }
     }
 }
@@ -759,10 +771,6 @@ function loadMap(map, callback) {
             }
         });
     });
-}
-if (debugMode) {
-    window.loadMap = loadMap;
-    window.debugMode = debugMode;
 }
 
 //偵察機
@@ -1192,10 +1200,10 @@ function startSelect() {
 }
 
 
-//URLクエリストリングからの復元
-function setURL(querystr) {
+//Base64からマップデータを復元
+function loadFromBase64(base64) {
     var queryobj = new BBCQuery(getBbObj(), 'dummy');
-    if (queryobj.fromBase64(querystr)) {
+    if (queryobj.fromBase64(base64)) {
         var map = queryobj.map;
         var stage= getStageFromMap(map);
         changeStageSelection(stage);

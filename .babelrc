@@ -1,5 +1,32 @@
 {
-    "presets": ["es2015", "react"],
-    "plugins": ["transform-object-assign", "add-module-exports"]
+    "presets": [
+        "es2015",
+        "react",
+        "stage-2"
+    ],
+    "plugins": [
+        "transform-object-assign",
+        ["transform-runtime", {
+            "polyfill": true,
+            "regenerator": true
+        }],
+        "add-module-exports"
+    ],
+    "env": {
+        "development": {
+            "presets": [
+                "power-assert"
+            ],
+            "retainLines": true
+        },
+        "coverage": {
+            "sourceMaps": "inline"
+        },
+        "production": {
+            "plugins": [
+                "unassert"
+            ]
+        }
+    }
 }
 

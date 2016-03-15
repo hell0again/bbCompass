@@ -1,9 +1,29 @@
 {
   "name": "bbCompass",
-  "version": "0.0.0",
   "description": "BBコンパスもどき",
-  "main": "main.js",
+  "version": "0.0.0",
+  "author": "hell0again <hell00again@gmail.com>",
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "bugs": {
+    "url": "https://github.com/hell0again/bbCompass/issues"
+  },
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-plugin-unassert": "^2.1.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-register": "^6.9.0",
+    "bower": "^1.7.9",
+    "local-web-server": "^1.2.1",
+    "minimist": "^1.2.0"
+  },
   "devDependencies": {
+    "ava": "^0.15.2",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-object-assign": "~6.5.0",
@@ -32,30 +52,24 @@
     "url-loader": "~0.5.7",
     "webpack": "~1.12.13"
   },
-  "dependencies": {
-    "bower": "^1.7.9",
-    "local-web-server": "^1.2.1"
+  "directories": {
+    "test": "wip/power-assert/test/"
   },
-  "scripts": {
-    "test": "tape test/*.js",
-    "build": "./build.sh",
-    "update": "./update.sh",
-    "start": "ws --directory public/ --port ${PORT:-8000}",
-    "deploy": "git subtree push --prefix public/ origin gh-pages",
-    "deploy-force": "git push origin $(git subtree split --prefix public/ origin gh-pages):gh-pages --force",
-    "postinstall": "./node_modules/bower/bin/bower --config.interactive=false --allow-root install"
-  },
+  "homepage": "https://github.com/hell0again/bbCompass",
+  "license": "MIT",
+  "main": "main.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/hell0again/bbCompass.git"
   },
-  "author": "hell0again <hell00again@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hell0again/bbCompass/issues"
-  },
-  "directories": {
-    "test": "wip/power-assert/test/"
+  "scripts": {
+    "build": "./build.sh",
+    "deploy": "git subtree push --prefix public/ origin gh-pages",
+    "deploy-force": "git push origin $(git subtree split --prefix public/ origin gh-pages):gh-pages --force",
+    "postinstall": "./node_modules/bower/bin/bower --config.interactive=false --allow-root install",
+    "start": "ws --directory public/ --port ${PORT:-8000}",
+    "test": "tape test/*.js",
+    "update": "./update.sh"
   },
   "testling": {
     "harness": "mocha",
@@ -69,6 +83,5 @@
       "ipad/6",
       "android-browser/latest"
     ]
-  },
-  "homepage": "https://github.com/hell0again/bbCompass"
+  }
 }
