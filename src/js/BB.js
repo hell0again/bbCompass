@@ -177,12 +177,19 @@ class BB_circle extends BB_base {
             pty = this._ptpos.y,
             obj = this;
 
-        var area = this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.3).layer(this.id),
-            areacol = this._ourJc.circle(0, 0, px_rad, this._color, false)
-            .opacity(1).lineStyle({
+        var area = this._ourJc
+            .circle(0, 0, px_rad, this._color, true)
+            .opacity(0.3)
+            .layer(this.id);
+        var areacol = this._ourJc
+            .circle(0, 0, px_rad, this._color, false)
+            .opacity(1)
+            .lineStyle({
                 lineWidth: 3
-            }).layer(this.id),
-            line = this._ourJc.line({
+            })
+            .layer(this.id);
+        var line = this._ourJc
+            .line({
                 points: [
                     [0, 0],
                     [ptx, pty]
@@ -191,19 +198,49 @@ class BB_circle extends BB_base {
             })
             .lineStyle({
                 lineWidth: 3
-            }).layer(this.id).opacity(1);
-        this._ourJc.circle(0, 0, 7, this._color, true).opacity(1).layer(this.id);
+            })
+            .layer(this.id)
+            .opacity(1);
+        this._ourJc
+            .circle(0, 0, 7, this._color, true)
+            .opacity(1)
+            .layer(this.id);
 
-        var center = this._ourJc.circle(0, 0, 5, "#FFFFFF", true).layer(this.id);
-        this._ourJc.text(this._text, 0, -10)
-            .layer(this.id).color('#FFFFFF').font('15px sans-serif').align('center');
+        var center = this._ourJc
+            .circle(0, 0, 5, "#FFFFFF", true)
+            .layer(this.id);
+        this._ourJc
+            .text(this._text, 0, -10)
+            .layer(this.id)
+            .color('#FFFFFF')
+            .font('15px sans-serif')
+            .align('center');
 
-
-        var ptcol = this._ourJc.circle(ptx, pty, this._bbObj.ptcolsize, this._color, true).layer(this.id).opacity(1),
-            pt = this._ourJc.circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true).layer(this.id),
-            pttra = this._ourJc.circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id),
-            radius = this._ourJc.text(Math.floor(this._radius) + "m", ptx / 2, pty / 2).baseline("top")
-            .align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
+        var ptcol = this._ourJc
+            .circle(ptx, pty, this._bbObj.ptcolsize, this._color, true)
+            .layer(this.id)
+            .opacity(1);
+        var pt = this._ourJc
+            .circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true)
+            .layer(this.id);
+        var pttra = this._ourJc
+            .circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true)
+            .layer(this.id);
+        var radius = this._ourJc
+            .text(Math.floor(this._radius) + "m", ptx / 2, pty / 2)
+            .baseline("top")
+            .align('center')
+            .color('#FFFFFF')
+            .font('15px sans-serif')
+            .layer(this.id);
+        var cp = center.position();
+        var position = this._ourJc
+            .text("("+ cp.x +","+ cp.y +")", ptx/2, pty/2 + 30)
+            .baseline("top")
+            .align('center')
+            .color('#FFFFFF')
+            .font('15px sans-serif')
+            .layer(this.id);
 
         this._ourJc.layer(this.id).draggable();
 
@@ -427,20 +464,62 @@ class BB_point extends BB_base {
 
     draw() {
         var text;
-        this._ourJc.circle(0, 0, this._size, this._color, true).opacity(1).layer(this.id);
-        this._ourJc.circle(0, 0, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id);
+        this._ourJc
+            .circle(0, 0, this._size, this._color, true)
+            .opacity(1)
+            .layer(this.id);
+        this._ourJc
+            .circle(0, 0, this._bbObj.pttrasize, "rgba(0,0,0,0)", true)
+            .layer(this.id);
         if (this._align == 1) {
             // 左側
-            text = this._ourJc.text(this._text, (-1) * (this._size + 5), 0)
-                .layer(this.id).color('#FFFFFF').font('15px sans-serif')
-                .align('right').baseline('middle');
+            text = this._ourJc
+                .text(this._text, (-1) * (this._size + 5), 0)
+                .layer(this.id)
+                .color('#FFFFFF')
+                .font('15px sans-serif')
+                .align('right')
+                .baseline('middle');
         } else {
             // 右側
-            text = this._ourJc.text(this._text, this._size + 5, 0)
-                .layer(this.id).color('#FFFFFF').font('15px sans-serif')
-                .align('left').baseline('middle');
+            text = this._ourJc
+                .text(this._text, this._size + 5, 0)
+                .layer(this.id)
+                .color('#FFFFFF')
+                .font('15px sans-serif')
+                .align('left')
+                .baseline('middle');
         }
-        this._ourJc.layer(this.id).draggable();
+
+        if (!window.debugMode) {
+            this._ourJc.layer(this.id).draggable();
+        } else {
+            var pixelP = this.position();
+            var meterP = {
+                x: this._bbObj.pixel_to_meter(pixelP.x),
+                y: this._bbObj.pixel_to_meter(pixelP.y),
+            };
+            var pixelPosStr = `(${Math.floor(pixelP.x)}px, ${Math.floor(pixelP.y)}px)`;
+            var meterPosStr = `(${Math.floor(meterP.x)}m, ${Math.floor(meterP.y)}m)`;
+            var debugPos = this._ourJc
+                .text(pixelPosStr +"/"+ meterPosStr, 0, 20)
+                .layer(this.id)
+                .color(this._color)
+                .font('15px sans-serif')
+                .align('left')
+                .baseline('middle');
+            var callback = () => {
+                var pixelP = this.position();
+                var meterP = {
+                    x: this._bbObj.pixel_to_meter(pixelP.x),
+                    y: this._bbObj.pixel_to_meter(pixelP.y),
+                };
+                var pixelPosStr = `(${Math.floor(pixelP.x)}px, ${Math.floor(pixelP.y)}px)`;
+                var meterPosStr = `(${Math.floor(meterP.x)}m, ${Math.floor(meterP.y)}m)`;
+                debugPos.string(`${pixelPosStr} / ${meterPosStr}`);
+            };
+            this._ourJc.layer(this.id).draggable(callback);
+        }
         return this;
     }
 }
@@ -2308,21 +2387,34 @@ export default class BB {
             test = false;
         }
 
-        var visible = false,
-            px_rad = this.meter_to_pixel(radius),
-            area = this.ourJc.sector(x, y, px_rad, angle, color, true)
-            .rotateTo(rot - 90, x, y).opacity(0.3).visible(visible).level(1),
-            line = this.ourJc.sector(x, y, px_rad, angle, this.color, false).level(1)
-            .rotateTo(rot - 90, x, y).opacity(1).visible(visible),
-            hooker = this.ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true)
-            .rotateTo(rot - 90, x, y).level(3).name("turrets");
+        var visible = false;
+        var px_rad = this.meter_to_pixel(radius);
+        var area = this.ourJc
+            .sector(x, y, px_rad, angle, color, true)
+            .rotateTo(rot - 90, x, y)
+            .opacity(0.3)
+            .visible(visible)
+            .level(1);
+        var line = this.ourJc
+            .sector(x, y, px_rad, angle, this.color, false)
+            .level(1)
+            .rotateTo(rot - 90, x, y)
+            .opacity(1)
+            .visible(visible);
+        var hooker = this.ourJc
+            .circle(x, y, hookrad, 'rgba(0,0,0,0)', true)
+            .rotateTo(rot - 90, x, y)
+            .level(3)
+            .name("turrets");
 
         if (test) {
-            this.ourJc.line([
+            this.ourJc
+                .line([
                     [x, y],
                     [x, y - 20]
                 ], 'rgba(255,0,0,1)')
-                .rotateTo(rot, x, y).lineStyle({
+                .rotateTo(rot, x, y)
+                .lineStyle({
                     lineWidth: 2
                 });
             var c = (type == "L")? 'rgba(255,0,0,1)':

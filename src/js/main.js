@@ -762,6 +762,7 @@ function loadMap(map, callback) {
 }
 if (debugMode) {
     window.loadMap = loadMap;
+    window.debugMode = debugMode;
 }
 
 //偵察機
