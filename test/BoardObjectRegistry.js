@@ -2,7 +2,11 @@ import test from 'ava';
 import 'babel-register';
 
 import BoardObjectRegistry from '../src/js/BoardObjectRegistry';
-test('boo', (t) => {
-    t.ok(1 == 1);
+
+test('#getTypeCodeFromLabel', (t) => {
+    let registry = BoardObjectRegistry.getInstance();
+    registry.init();
+
+    t.ok(1 == registry.getTypeCodeFromLabel("BoardObjectCircle"));
 });
 

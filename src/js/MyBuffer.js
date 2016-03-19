@@ -2,14 +2,6 @@ import { Base64 as Base64 } from 'js-base64';
 import pako from 'pako';
 import Color from 'color';
 
-// // this code is quoted from
-// // http://qiita.com/k_ui/items/e6c1661158bd584a4209
-// // canvasを利用して色情報をRGB値に変換する
-// var canvas = document.createElement('canvas');
-// canvas.width = 1;
-// canvas.height = 1;
-// var ctx = canvas.getContext('2d');
-
 // バッファ arrayへの読み書き
 export default class MyBuffer {
     constructor(byteArray = new Array()) {
@@ -21,7 +13,7 @@ export default class MyBuffer {
         var data = pako.deflateRaw(buf, {
             to: "string"
         });
-        return Base64.encode(data);
+        return Base64.encode(data); // Uint8Array
     }
     static base64ToByteArray(b64) {
         var data = Base64.decode(b64);
@@ -33,23 +25,23 @@ export default class MyBuffer {
         this._buf = this._buf.concat(byteArray);
         return this;
     }
-    writeInt8(intNum) {
+    writeUint8(intNum) {
         var bytes = Array();
-        bytes[0] = intNum & 0x00ff;
+        bytes[0] = intNum & 0xff;
         return this.writeByteArray(bytes);
     }
-    writeInt16(intNum) {
+    writeUint16(intNum) {
         var bytes = Array();
-        bytes[0] = (intNum >> 8) & 0x00ff;
-        bytes[1] = intNum & 0x00ff;
+        bytes[0] = (intNum >>> 8) & 0xff;
+        bytes[1] = intNum & 0xff;
         return this.writeByteArray(bytes);
     }
-    writeInt32(intNum) {
+    writeUint32(intNum) {
         var bytes = Array();
-        bytes[0] = (intNum >> 24) & 0x00ff;
-        bytes[1] = (intNum >> 16) & 0x00ff;
-        bytes[2] = (intNum >> 8)  & 0x00ff;
-        bytes[3] = (intNum >> 0)  & 0x00ff;
+        bytes[0] = (intNum >> 24) & 0xff;
+        bytes[1] = (intNum >> 16) & 0xff;
+        bytes[2] = (intNum >> 8)  & 0xff;
+        bytes[3] = (intNum >> 0)  & 0xff;
         return this.writeByteArray(bytes);
     }
     writeString255(text) {
@@ -57,7 +49,7 @@ export default class MyBuffer {
         var code;
         bytes[0] = text.length;
         if (255 < text.length) {
-            throw "String size error (too long)";
+            throw new Error("String size error (too long)");
         }
         for (var i = 0; i < text.length; i++) {
             code = text.charCodeAt(i);
@@ -119,7 +111,7 @@ export default class MyBuffer {
     }
     writeFloat32(floatNum) {
         var bits = MyBuffer.floatToInt32Bits(floatNum);
-        return this.writeInt32(bits);
+        return this.writeUint32(bits);
     }
     writePoint(point) {
         var bytes = new Array(3);
@@ -134,11 +126,7 @@ export default class MyBuffer {
     }
     writeColor(colorStr) {
         var rgb = Color(colorStr).rgb();
-        return this.writeByteArray(rgb['r'], rgb['g'], rgb['b']);
-        // ctx.fillStyle = colorStr;
-        // ctx.fillRect(0, 0, 1, 1);
-        // var col = ctx.getImageData(0, 0, 1, 1).data;
-        // return this.writeByteArray([col[0], col[1], col[2]]);
+        return this.writeByteArray([rgb['r'], rgb['g'], rgb['b']]);
     }
 
     readByteArray(length = 0) {
@@ -169,6 +157,10 @@ export default class MyBuffer {
         this._offset += 2;
         return (b1 << 8) + b0;
     }
+    // NOTE: jsのbit演算は32bitベース
+    // そして <<, >> は signed 32bit integerを返す
+    // >>> は unsigned 32bit integerを返す
+    // see ECMA-262 5.1
     readUint32() {
         if (this._buf.length < this._offset + 3) {
             throw "Buffer size error (get Uint32)";
@@ -178,7 +170,7 @@ export default class MyBuffer {
         var b1 = this._buf[this._offset + 2];
         var b0 = this._buf[this._offset + 3];
         this._offset += 4;
-        return (b3 << 24) +(b2 << 16) +(b1 << 8) +b0;
+        return (b3 <<24 >>>0) +(b2 <<16) +(b1 <<8) +b0;
     }
     // stringは先頭8bitにバイナリlength＋バイナリの形で格納
     readString255() {
@@ -214,11 +206,11 @@ export default class MyBuffer {
             y: ysign * (((b & 0x07) << 8) | c)
         };
     }
-    readFloat32() {
-        var b0 = this.readUint8(),
-            b1 = this.readUint8(),
-            b2 = this.readUint8(),
-            b3 = this.readUint8();
+    static int32BitsToFloat(int32Bits) {
+        var b0 = int32Bits >>24 & 0xff,
+            b1 = int32Bits >>16 & 0xff,
+            b2 = int32Bits >>8  & 0xff,
+            b3 = int32Bits >>0  & 0xff;
         var sign = 1 - (2 * (b0 >> 7)),
             exponent = (((b0 << 1) & 0xff) | (b1 >> 7)) - 127,
             mantissa = ((b1 & 0x7f) << 16) | (b2 << 8) | b3;
@@ -234,28 +226,32 @@ export default class MyBuffer {
         }
         return sign * (1 + mantissa * Math.pow(2, -23)) * Math.pow(2, exponent);
     }
+    readFloat32() {
+        var b = this.readUint32();
+        return MyBuffer.int32BitsToFloat(b);
+    }
     readColor() {
-        var a = (this.readUint8()).toString(16),
-            b = (this.readUint8()).toString(16),
-            c = (this.readUint8()).toString(16),
+        var a = this.readUint8().toString(16),
+            b = this.readUint8().toString(16),
+            c = this.readUint8().toString(16),
             ret;
         ret = "#" + (a.length == 1 ? ("0" + a) : a) + (b.length == 1 ? ("0" + b) : b) + (c.length == 1 ? ("0" + c) : c);
         return ret;
     }
 
-    static int8ToByteArray(intNum) {
+    static uint8ToByteArray(intNum) {
         var b = new MyBuffer();
-        b.writeInt8(intNum);
+        b.writeUint8(intNum);
         return b._buf;
     }
-    static int16ToByteArray(intNum) {
+    static uint16ToByteArray(intNum) {
         var b = new MyBuffer();
-        b.writeInt16(intNum);
+        b.writeUint16(intNum);
         return b._buf;
     }
-    static int32ToByteArray(intNum) {
+    static uint32ToByteArray(intNum) {
         var b = new MyBuffer();
-        b.writeInt32(intNum);
+        b.writeUint32(intNum);
         return b._buf;
     }
     static string255ToByteArray(text) {

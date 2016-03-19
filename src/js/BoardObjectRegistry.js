@@ -12,7 +12,7 @@ export default class BoardObjectRegistry {
     }
     static getInstance() {
         if (_instance === null) {
-            _instance = new BoardObjectRegistry();
+            _instance = new this.prototype.constructor();
             _instance.init();
         }
         return _instance;
@@ -31,7 +31,7 @@ export default class BoardObjectRegistry {
     }
     addByLabel(label, obj) {
         var typeCode = this.getTypeCodeFromLabel(label);
-        // TODO: should validate implemented interface
+        // TODO: should validate if interface implemented
         this._add(typeCode, obj);
     }
     getByTypeCode(typeCode) {
