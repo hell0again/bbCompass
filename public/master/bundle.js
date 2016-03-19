@@ -310,11 +310,11 @@
 	                pty = this._ptpos.y,
 	                obj = this;
 
-	            var area = this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.3).layer(this.id),
-	                areacol = this._ourJc.circle(0, 0, px_rad, this._color, false).opacity(1).lineStyle({
+	            var area = this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.3).layer(this.id);
+	            var areacol = this._ourJc.circle(0, 0, px_rad, this._color, false).opacity(1).lineStyle({
 	                lineWidth: 3
-	            }).layer(this.id),
-	                line = this._ourJc.line({
+	            }).layer(this.id);
+	            var line = this._ourJc.line({
 	                points: [[0, 0], [ptx, pty]],
 	                color: this._color
 	            }).lineStyle({
@@ -325,10 +325,12 @@
 	            var center = this._ourJc.circle(0, 0, 5, "#FFFFFF", true).layer(this.id);
 	            this._ourJc.text(this._text, 0, -10).layer(this.id).color('#FFFFFF').font('15px sans-serif').align('center');
 
-	            var ptcol = this._ourJc.circle(ptx, pty, this._bbObj.ptcolsize, this._color, true).layer(this.id).opacity(1),
-	                pt = this._ourJc.circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true).layer(this.id),
-	                pttra = this._ourJc.circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id),
-	                radius = this._ourJc.text(Math.floor(this._radius) + "m", ptx / 2, pty / 2).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
+	            var ptcol = this._ourJc.circle(ptx, pty, this._bbObj.ptcolsize, this._color, true).layer(this.id).opacity(1);
+	            var pt = this._ourJc.circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true).layer(this.id);
+	            var pttra = this._ourJc.circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id);
+	            var radius = this._ourJc.text(Math.floor(this._radius) + "m", ptx / 2, pty / 2).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
+	            var cp = center.position();
+	            var position = this._ourJc.text("(" + cp.x + "," + cp.y + ")", ptx / 2, pty / 2 + 30).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
 
 	            this._ourJc.layer(this.id).draggable();
 
@@ -574,6 +576,8 @@
 	    _createClass(BB_point, [{
 	        key: 'draw',
 	        value: function draw() {
+	            var _this6 = this;
+
 	            var text;
 	            this._ourJc.circle(0, 0, this._size, this._color, true).opacity(1).layer(this.id);
 	            this._ourJc.circle(0, 0, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id);
@@ -584,7 +588,30 @@
 	                // 右側
 	                text = this._ourJc.text(this._text, this._size + 5, 0).layer(this.id).color('#FFFFFF').font('15px sans-serif').align('left').baseline('middle');
 	            }
-	            this._ourJc.layer(this.id).draggable();
+
+	            if (!window.debugMode) {
+	                this._ourJc.layer(this.id).draggable();
+	            } else {
+	                var pixelP = this.position();
+	                var meterP = {
+	                    x: this._bbObj.pixel_to_meter(pixelP.x),
+	                    y: this._bbObj.pixel_to_meter(pixelP.y)
+	                };
+	                var pixelPosStr = '(' + Math.floor(pixelP.x) + 'px, ' + Math.floor(pixelP.y) + 'px)';
+	                var meterPosStr = '(' + Math.floor(meterP.x) + 'm, ' + Math.floor(meterP.y) + 'm)';
+	                var debugPos = this._ourJc.text(pixelPosStr + "/" + meterPosStr, 0, 20).layer(this.id).color(this._color).font('15px sans-serif').align('left').baseline('middle');
+	                var callback = function callback() {
+	                    var pixelP = _this6.position();
+	                    var meterP = {
+	                        x: _this6._bbObj.pixel_to_meter(pixelP.x),
+	                        y: _this6._bbObj.pixel_to_meter(pixelP.y)
+	                    };
+	                    var pixelPosStr = '(' + Math.floor(pixelP.x) + 'px, ' + Math.floor(pixelP.y) + 'px)';
+	                    var meterPosStr = '(' + Math.floor(meterP.x) + 'm, ' + Math.floor(meterP.y) + 'm)';
+	                    debugPos.string(pixelPosStr + ' / ' + meterPosStr);
+	                };
+	                this._ourJc.layer(this.id).draggable(callback);
+	            }
 	            return this;
 	        }
 	    }]);
@@ -603,34 +630,34 @@
 	    function BB_scout(_bbObj, _text, _radius, _length, _duration, _color, _callback) {
 	        _classCallCheck(this, BB_scout);
 
-	        var _this6 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_scout).call(this, _bbObj));
+	        var _this7 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_scout).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        _this6.id = _uuid2.default.v1();
+	        _this7.id = _uuid2.default.v1();
 
-	        _this6.type = "scout";
-	        _this6._text = _text;
-	        _this6._radius = _radius;
-	        _this6._length = _length;
-	        _this6._duration = _duration;
-	        _this6._color = _color;
+	        _this7.type = "scout";
+	        _this7._text = _text;
+	        _this7._radius = _radius;
+	        _this7._length = _length;
+	        _this7._duration = _duration;
+	        _this7._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
-	        _this6.draw();
-	        var px_rad = _this6._bbObj.meter_to_pixel(_this6._radius);
-	        _this6.move(px_rad, px_rad);
-	        _this6.regist();
+	        _this7.draw();
+	        var px_rad = _this7._bbObj.meter_to_pixel(_this7._radius);
+	        _this7.move(px_rad, px_rad);
+	        _this7.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this6);
+	            _callback.apply(_this7);
 	        }
-	        return _this6;
+	        return _this7;
 	    }
 
 	    _createClass(BB_scout, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this7 = this;
+	            var _this8 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                px_len = this._bbObj.meter_to_pixel(this._length),
@@ -647,10 +674,10 @@
 
 	            //角度変更処理
 	            mask.mousedown(function (point) {
-	                var canvas = jc.canvas(_this7._bbObj.id),
-	                    tmpmask = _this7._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + _this7.id),
-	                    layer = _this7._ourJc.layer(_this7.id),
-	                    tmpLayer = _this7._ourJc.layer("tmp_" + _this7.id);
+	                var canvas = jc.canvas(_this8._bbObj.id),
+	                    tmpmask = _this8._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + _this8.id),
+	                    layer = _this8._ourJc.layer(_this8.id),
+	                    tmpLayer = _this8._ourJc.layer("tmp_" + _this8.id);
 	                tmpLayer.level('top');
 	                var pos_sct = scout.position();
 	                var startrad = Math.atan2(point.y - pos_sct.y, point.x - pos_sct.x),
@@ -661,15 +688,15 @@
 	                    layer.rotateTo(rad * 180 / Math.PI, 0, 0);
 	                });
 	                tmpmask.mouseup(function (point) {
-	                    _this7._ourJc.layer("tmp_" + _this7.id).del();
+	                    _this8._ourJc.layer("tmp_" + _this8.id).del();
 	                });
 	            });
 
 	            mask.mouseover(function () {
-	                _this7._ourJc.layer(_this7.id).optns.drag.val = false;
+	                _this8._ourJc.layer(_this8.id).optns.drag.val = false;
 	            }); // ドラッグ無効
 	            mask.mouseout(function () {
-	                _this7._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this8._ourJc.layer(obj.id).optns.drag.val = true;
 	            }); // ドラッグ有効
 
 	            //偵察機のアニメーション
@@ -705,26 +732,26 @@
 	    function BB_sensor(_bbObj, _text, _radius, _color, _callback) {
 	        _classCallCheck(this, BB_sensor);
 
-	        var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sensor).call(this, _bbObj));
+	        var _this9 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sensor).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        _this8.id = _uuid2.default.v1();
+	        _this9.id = _uuid2.default.v1();
 
-	        _this8.type = "sensor";
-	        _this8._text = _text;
-	        _this8._radius = _radius;
-	        _this8._color = _color;
+	        _this9.type = "sensor";
+	        _this9._text = _text;
+	        _this9._radius = _radius;
+	        _this9._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
-	        _this8.draw();
-	        var px_rad = _this8._bbObj.meter_to_pixel(_this8._radius);
-	        _this8.move(px_rad, px_rad);
-	        _this8.regist();
+	        _this9.draw();
+	        var px_rad = _this9._bbObj.meter_to_pixel(_this9._radius);
+	        _this9.move(px_rad, px_rad);
+	        _this9.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this8);
+	            _callback.apply(_this9);
 	        }
-	        return _this8;
+	        return _this9;
 	    }
 
 	    _createClass(BB_sensor, [{
@@ -754,40 +781,40 @@
 	    function BB_radar(_bbObj, _text, _radius, _angle, _color, _callback) {
 	        _classCallCheck(this, BB_radar);
 
-	        var _this9 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_radar).call(this, _bbObj));
+	        var _this10 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_radar).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        _this9.id = _uuid2.default.v1();
+	        _this10.id = _uuid2.default.v1();
 
-	        _this9.type = "radar";
-	        _this9._text = _text;
-	        _this9._radius = _radius;
-	        _this9._angle = _angle;
-	        _this9._color = _color;
+	        _this10.type = "radar";
+	        _this10._text = _text;
+	        _this10._radius = _radius;
+	        _this10._angle = _angle;
+	        _this10._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
 	        //支援マークはファイル依存させないため手打ち。
-	        _this9._image = new Image();
-	        _this9._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wD/AP83WBt9AAAAZUlEQVR42qWRSwrAMAhEK4j3v64LMZQGk5hJsdRVxjw/g+TuVzlopo' + 'loJxYgBERTQabTYinZ6WgM6cgvNHQ8f930o1VVROCcKBj0bveNHuPOEuwNaeCyNzi8f1zHzJi5' + 'evlKfKMbjWF644wwKScAAAAASUVORK5CYII=';
-	        var obj = _this9;
-	        _this9._image.onload = function () {
+	        _this10._image = new Image();
+	        _this10._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wD/AP83WBt9AAAAZUlEQVR42qWRSwrAMAhEK4j3v64LMZQGk5hJsdRVxjw/g+TuVzlopo' + 'loJxYgBERTQabTYinZ6WgM6cgvNHQ8f930o1VVROCcKBj0bveNHuPOEuwNaeCyNzi8f1zHzJi5' + 'evlKfKMbjWF644wwKScAAAAASUVORK5CYII=';
+	        var obj = _this10;
+	        _this10._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this9._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this10._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this9._image;
+	            delete _this10._image;
 	        };
-	        return _this9;
+	        return _this10;
 	    }
 
 	    _createClass(BB_radar, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this10 = this;
+	            var _this11 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                obj = this,
@@ -807,13 +834,13 @@
 	            //移動処理(draggableでは回転できないため、独自定義)
 	            var mdEvent = function mdEvent(point) {
 	                var pos_base = area.position(),
-	                    canvas = jc.canvas(_this10._bbObj.id),
+	                    canvas = jc.canvas(_this11._bbObj.id),
 	                    radius = Math.sqrt(Math.pow(point.x - pos_base.x, 2) + Math.pow(point.y - pos_base.y, 2)),
 	                    startrad = Math.atan2(point.y - pos_base.y, point.x - pos_base.x),
-	                    baserad = _this10._ourJc.layer(obj.id).getAngle(),
-	                    tmpmask = _this10._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this10._ourJc.layer(obj.id),
-	                    tmpLayer = _this10._ourJc.layer("tmp_" + obj.id);
+	                    baserad = _this11._ourJc.layer(obj.id).getAngle(),
+	                    tmpmask = _this11._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this11._ourJc.layer(obj.id),
+	                    tmpLayer = _this11._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                tmpmask.mousemove(function (pos) {
 	                    var nowrad = Math.atan2(pos.y - pos_base.y, pos.x - pos_base.x),
@@ -828,18 +855,18 @@
 	            //扇形部分は角度変更
 	            area.mousedown(mdEvent);
 	            area.mouseover(function () {
-	                _this10._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this11._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            area.mouseout(function () {
-	                _this10._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this11._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            //文字列部分も角度変更
 	            text.mousedown(mdEvent);
 	            text.mouseover(function () {
-	                _this10._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this11._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            text.mouseout(function () {
-	                _this10._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this11._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 
 	            return this;
@@ -860,29 +887,29 @@
 	    function BB_sonde(_bbObj, _text, _radius1, _radius2, _color, _callback) {
 	        _classCallCheck(this, BB_sonde);
 
-	        var _this11 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sonde).call(this, _bbObj));
+	        var _this12 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sonde).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = '#00FF00';
 	        }
-	        _this11.id = _uuid2.default.v1();
+	        _this12.id = _uuid2.default.v1();
 
-	        _this11.type = "sonde";
-	        _this11._text = _text;
-	        _this11._radius1 = _radius1; //射程範囲
-	        _this11._radius2 = _radius2; //偵察範囲
-	        _this11._color = _color;
-	        _this11._markerx = 0;
-	        _this11._markery = 0;
+	        _this12.type = "sonde";
+	        _this12._text = _text;
+	        _this12._radius1 = _radius1; //射程範囲
+	        _this12._radius2 = _radius2; //偵察範囲
+	        _this12._color = _color;
+	        _this12._markerx = 0;
+	        _this12._markery = 0;
 	        //描画して登録。初期座標は有効射程分ずらす
-	        _this11.draw();
-	        var px_rad1 = _this11._bbObj.meter_to_pixel(_this11._radius1);
-	        _this11.move(px_rad1, px_rad1);
-	        _this11.regist();
+	        _this12.draw();
+	        var px_rad1 = _this12._bbObj.meter_to_pixel(_this12._radius1);
+	        _this12.move(px_rad1, px_rad1);
+	        _this12.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this11);
+	            _callback.apply(_this12);
 	        }
-	        return _this11;
+	        return _this12;
 	    }
 
 	    _createClass(BB_sonde, [{
@@ -998,41 +1025,41 @@
 	    function BB_ndsensor(_bbObj, _text, _radius, _color, _callback) {
 	        _classCallCheck(this, BB_ndsensor);
 
-	        var _this12 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_ndsensor).call(this, _bbObj));
+	        var _this13 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_ndsensor).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        _this12.id = _uuid2.default.v1();
+	        _this13.id = _uuid2.default.v1();
 
-	        _this12.type = "ndsensor";
-	        _this12._text = _text;
-	        _this12._radius = _radius;
-	        _this12._color = _color;
+	        _this13.type = "ndsensor";
+	        _this13._text = _text;
+	        _this13._radius = _radius;
+	        _this13._color = _color;
 
 	        //中央アイコンはファイル依存させないため手打ち。
-	        _this12._image = new Image();
-	        _this12._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wAAAP+JwC+QAAAAeElEQVR42q2QbQrAIAiG9WBBO1l0sgUdzFWSE1urwfoh6fvw+oEEBN' + 'sPRxpbER8lKRV5Znkz1YYOwBRCEDnGaFIgT3gqP/K9X5pVvk8ybmmgxU126YLmnJ1zHK2qc3bV' + 'tOlg6XK4eq/2+L+mdfyJltFlnrctlxe8AGPpa/QtEubEAAAAAElFTkSuQmCC';
+	        _this13._image = new Image();
+	        _this13._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnRS' + 'TlMA/wAAAP+JwC+QAAAAeElEQVR42q2QbQrAIAiG9WBBO1l0sgUdzFWSE1urwfoh6fvw+oEEBN' + 'sPRxpbER8lKRV5Znkz1YYOwBRCEDnGaFIgT3gqP/K9X5pVvk8ybmmgxU126YLmnJ1zHK2qc3bV' + 'tOlg6XK4eq/2+L+mdfyJltFlnrctlxe8AGPpa/QtEubEAAAAAElFTkSuQmCC';
 
 	        //描画して登録。初期座標はx方向に偵察半径+100、y方向に100ずらす
-	        var obj = _this12;
-	        _this12._image.onload = function () {
+	        var obj = _this13;
+	        _this13._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this12._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this13._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(100 + px_rad, 100);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this12._image;
+	            delete _this13._image;
 	        };
-	        return _this12;
+	        return _this13;
 	    }
 
 	    _createClass(BB_ndsensor, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this13 = this;
+	            var _this14 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                obj = this,
@@ -1065,13 +1092,13 @@
 	            //移動処理(draggableでは回転できないため、独自定義)
 	            var mdEvent = function mdEvent(point) {
 	                var pos_base = center.position(),
-	                    canvas = jc.canvas(_this13._bbObj.id),
+	                    canvas = jc.canvas(_this14._bbObj.id),
 	                    radius = Math.sqrt(Math.pow(point.x, 2) + Math.pow(point.y, 2)),
 	                    startrad = Math.atan2(point.y - pos_base.y, point.x - pos_base.x),
-	                    baserad = _this13._ourJc.layer(obj.id).getAngle(),
-	                    tmpmask = _this13._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this13._ourJc.layer(obj.id),
-	                    tmpLayer = _this13._ourJc.layer("tmp_" + obj.id);
+	                    baserad = _this14._ourJc.layer(obj.id).getAngle(),
+	                    tmpmask = _this14._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this14._ourJc.layer(obj.id),
+	                    tmpLayer = _this14._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                tmpmask.mousemove(function (pos) {
 	                    var nowrad = Math.atan2(pos.y - pos_base.y, pos.x - pos_base.x),
@@ -1086,17 +1113,17 @@
 	            //端点は角度変更
 	            pt1tra.mousedown(mdEvent);
 	            pt1tra.mouseover(function () {
-	                _this13._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this14._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            pt1tra.mouseout(function () {
-	                _this13._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this14._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            pt2tra.mousedown(mdEvent);
 	            pt2tra.mouseover(function () {
-	                _this13._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this14._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            pt2tra.mouseout(function () {
-	                _this13._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this14._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            return this;
 	        }
@@ -1116,7 +1143,7 @@
 	    function BB_vsensor(_bbObj, _text, _radiusa, _radiusb, _color, _mode, _callback) {
 	        _classCallCheck(this, BB_vsensor);
 
-	        var _this14 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_vsensor).call(this, _bbObj));
+	        var _this15 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_vsensor).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(153, 0, 255)';
@@ -1124,24 +1151,24 @@
 	        if (_mode === undefined) {
 	            _mode = 'A';
 	        }
-	        _this14.id = _uuid2.default.v1();
+	        _this15.id = _uuid2.default.v1();
 
-	        _this14.type = "vsensor";
-	        _this14._text = _text;
-	        _this14._radiusa = _radiusa;
-	        _this14._radiusb = _radiusb;
-	        _this14._color = _color;
-	        _this14._mode = _mode;
+	        _this15.type = "vsensor";
+	        _this15._text = _text;
+	        _this15._radiusa = _radiusa;
+	        _this15._radiusb = _radiusb;
+	        _this15._color = _color;
+	        _this15._mode = _mode;
 
 	        //描画して登録。初期座標は偵察半径分ずらす
-	        _this14.draw();
-	        var px_rad = _bbObj.meter_to_pixel(_this14._radiusa);
-	        _this14.move(px_rad, px_rad);
-	        _this14.regist();
+	        _this15.draw();
+	        var px_rad = _bbObj.meter_to_pixel(_this15._radiusa);
+	        _this15.move(px_rad, px_rad);
+	        _this15.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this14);
+	            _callback.apply(_this15);
 	        }
-	        return _this14;
+	        return _this15;
 	    }
 
 	    _createClass(BB_vsensor, [{
@@ -1206,30 +1233,30 @@
 	    function BB_howitzer(_bbObj, _text, _radius1, _radius2, _radius3, _color, _callback) {
 	        _classCallCheck(this, BB_howitzer);
 
-	        var _this15 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_howitzer).call(this, _bbObj));
+	        var _this16 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_howitzer).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = '#FFA500';
 	        }
-	        _this15.id = _uuid2.default.v1();
+	        _this16.id = _uuid2.default.v1();
 
-	        _this15.type = "howitzer";
-	        _this15._text = _text;
-	        _this15._radius1 = _radius1; //射程範囲
-	        _this15._radius2 = _radius2; //爆風範囲
-	        _this15._radius3 = _radius3; //誤差範囲
-	        _this15._color = _color;
-	        _this15._markerx = 0;
-	        _this15._markery = 0;
+	        _this16.type = "howitzer";
+	        _this16._text = _text;
+	        _this16._radius1 = _radius1; //射程範囲
+	        _this16._radius2 = _radius2; //爆風範囲
+	        _this16._radius3 = _radius3; //誤差範囲
+	        _this16._color = _color;
+	        _this16._markerx = 0;
+	        _this16._markery = 0;
 	        //描画して登録。初期座標は有効射程分ずらす
-	        _this15.draw();
-	        var px_rad1 = _this15._bbObj.meter_to_pixel(_this15._radius1);
-	        _this15.move(px_rad1, px_rad1);
-	        _this15.regist();
+	        _this16.draw();
+	        var px_rad1 = _this16._bbObj.meter_to_pixel(_this16._radius1);
+	        _this16.move(px_rad1, px_rad1);
+	        _this16.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this15);
+	            _callback.apply(_this16);
 	        }
-	        return _this15;
+	        return _this16;
 	    }
 
 	    _createClass(BB_howitzer, [{
@@ -1350,27 +1377,27 @@
 	    function BB_bunker(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bunker);
 
-	        var _this16 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bunker).call(this, _bbObj));
+	        var _this17 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bunker).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 165)';
 	        }
-	        _this16.id = _uuid2.default.v1();
+	        _this17.id = _uuid2.default.v1();
 
-	        _this16.type = "bunker";
-	        _this16._text = _text;
-	        _this16._rad1 = 28; //攻撃範囲28m
-	        _this16._rad2 = 40; //爆風範囲40m
-	        _this16._color = _color;
+	        _this17.type = "bunker";
+	        _this17._text = _text;
+	        _this17._rad1 = 28; //攻撃範囲28m
+	        _this17._rad2 = 40; //爆風範囲40m
+	        _this17._color = _color;
 	        //描画して登録。初期座標は半径分ずらす
-	        _this16.draw();
-	        var px_rad = _this16._bbObj.meter_to_pixel(_this16._rad2);
-	        _this16.move(px_rad, px_rad);
-	        _this16.regist();
+	        _this17.draw();
+	        var px_rad = _this17._bbObj.meter_to_pixel(_this17._rad2);
+	        _this17.move(px_rad, px_rad);
+	        _this17.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this16);
+	            _callback.apply(_this17);
 	        }
-	        return _this16;
+	        return _this17;
 	    }
 
 	    _createClass(BB_bunker, [{
@@ -1403,40 +1430,40 @@
 	    function BB_sentry(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_sentry);
 
-	        var _this17 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sentry).call(this, _bbObj));
+	        var _this18 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_sentry).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        _this17.id = _uuid2.default.v1();
+	        _this18.id = _uuid2.default.v1();
 
-	        _this17.type = "sentry";
-	        _this17._text = _text;
-	        _this17._radius = 80; //固定値
-	        _this17._angle = 120; //固定値
-	        _this17._color = _color;
+	        _this18.type = "sentry";
+	        _this18._text = _text;
+	        _this18._radius = 80; //固定値
+	        _this18._angle = 120; //固定値
+	        _this18._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
 	        //マークはファイル依存させないため手打ち。
-	        _this17._image = new Image();
-	        _this17._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnR' + 'STlMA/wD/AP83WBt9AAAAYUlEQVR42pWRUQ7AIAhD13txN7gbB2PLWMxUROSrJq8NVJjZVR4M' + 'NAAXYUpHP2h7/nVHt7xk3PkFrAyq6oKIgk1cMLOIZHtv0biTM7ra4NaAOOM1ZPRc4ln2bFv+T' + 'vXKZG6yP1bjQ2hwBAAAAABJRU5ErkJggg==';
-	        var obj = _this17;
-	        _this17._image.onload = function () {
+	        _this18._image = new Image();
+	        _this18._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAABnR' + 'STlMA/wD/AP83WBt9AAAAYUlEQVR42pWRUQ7AIAhD13txN7gbB2PLWMxUROSrJq8NVJjZVR4M' + 'NAAXYUpHP2h7/nVHt7xk3PkFrAyq6oKIgk1cMLOIZHtv0biTM7ra4NaAOOM1ZPRc4ln2bFv+T' + 'vXKZG6yP1bjQ2hwBAAAAABJRU5ErkJggg==';
+	        var obj = _this18;
+	        _this18._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this17._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this18._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this17._image;
+	            delete _this18._image;
 	        };
-	        return _this17;
+	        return _this18;
 	    }
 
 	    _createClass(BB_sentry, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this18 = this;
+	            var _this19 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._radius),
 	                obj = this,
@@ -1456,13 +1483,13 @@
 	            //移動処理(draggableでは回転できないため、独自定義)
 	            var mdEvent = function mdEvent(point) {
 	                var pos_base = area.position(),
-	                    canvas = jc.canvas(_this18._bbObj.id),
+	                    canvas = jc.canvas(_this19._bbObj.id),
 	                    radius = Math.sqrt(Math.pow(point.x - pos_base.x, 2) + Math.pow(point.y - pos_base.y, 2)),
 	                    startrad = Math.atan2(point.y - pos_base.y, point.x - pos_base.x),
-	                    baserad = _this18._ourJc.layer(obj.id).getAngle(),
-	                    tmpmask = _this18._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this18._ourJc.layer(obj.id),
-	                    tmpLayer = _this18._ourJc.layer("tmp_" + obj.id);
+	                    baserad = _this19._ourJc.layer(obj.id).getAngle(),
+	                    tmpmask = _this19._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this19._ourJc.layer(obj.id),
+	                    tmpLayer = _this19._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                tmpmask.mousemove(function (pos) {
 	                    var nowrad = Math.atan2(pos.y - pos_base.y, pos.x - pos_base.x),
@@ -1477,18 +1504,18 @@
 	            //扇形部分は角度変更
 	            area.mousedown(mdEvent);
 	            area.mouseover(function () {
-	                _this18._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this19._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            area.mouseout(function () {
-	                _this18._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this19._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 	            //文字列部分も角度変更
 	            text.mousedown(mdEvent);
 	            text.mouseover(function () {
-	                _this18._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this19._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            text.mouseout(function () {
-	                _this18._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this19._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 
 	            return this;
@@ -1509,33 +1536,33 @@
 	    function BB_aerosentry(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_aerosentry);
 
-	        var _this19 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_aerosentry).call(this, _bbObj));
+	        var _this20 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_aerosentry).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 0)';
 	        }
-	        _this19.id = _uuid2.default.v1();
+	        _this20.id = _uuid2.default.v1();
 
-	        _this19.type = "aerosentry";
-	        _this19._text = _text;
-	        _this19._radius = 40; //固定値
-	        _this19._color = _color;
+	        _this20.type = "aerosentry";
+	        _this20._text = _text;
+	        _this20._radius = 40; //固定値
+	        _this20._color = _color;
 	        //描画して登録。初期座標は偵察半径分ずらす
 	        //マークはファイル依存させないため手打ち。
-	        _this19._image = new Image();
-	        _this19._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAAXN' + 'SR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABsSURBVChT' + 'nYxBEoAwDAL7/09HWkgkNid3xnED6IqIdYAU98mEIjtVRnZ62FIKqbOkf9fPocJD3ijxkHzXI' + '1r4GqjsqDu0A2iSKE3+/lvlhBb3ugR4SFoN/JwrvGgUMPqeEk/B7XvkdqoZDSIeqpRXt5iMa4' + 'kAAAAASUVORK5CYII=';
-	        var obj = _this19;
-	        _this19._image.onload = function () {
+	        _this20._image = new Image();
+	        _this20._image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAAXN' + 'SR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABsSURBVChT' + 'nYxBEoAwDAL7/09HWkgkNid3xnED6IqIdYAU98mEIjtVRnZ62FIKqbOkf9fPocJD3ijxkHzXI' + '1r4GqjsqDu0A2iSKE3+/lvlhBb3ugR4SFoN/JwrvGgUMPqeEk/B7XvkdqoZDSIeqpRXt5iMa4' + 'kAAAAASUVORK5CYII=';
+	        var obj = _this20;
+	        _this20._image.onload = function () {
 	            obj.draw();
-	            var px_rad = _this19._bbObj.meter_to_pixel(obj._radius);
+	            var px_rad = _this20._bbObj.meter_to_pixel(obj._radius);
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this19._image;
+	            delete _this20._image;
 	        };
-	        return _this19;
+	        return _this20;
 	    }
 
 	    _createClass(BB_aerosentry, [{
@@ -1574,34 +1601,34 @@
 	    function BB_bomber(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bomber);
 
-	        var _this20 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bomber).call(this, _bbObj));
+	        var _this21 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bomber).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 165)';
 	        }
-	        _this20.id = _uuid2.default.v1();
+	        _this21.id = _uuid2.default.v1();
 
-	        _this20.type = "bomber";
-	        _this20._text = _text;
-	        _this20._rad1 = 25; //爆風範囲
-	        _this20._rad2 = 0; //着弾誤差範囲
-	        _this20._center = [50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200, 215]; //爆心
-	        _this20._color = _color;
+	        _this21.type = "bomber";
+	        _this21._text = _text;
+	        _this21._rad1 = 25; //爆風範囲
+	        _this21._rad2 = 0; //着弾誤差範囲
+	        _this21._center = [50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200, 215]; //爆心
+	        _this21._color = _color;
 	        //描画して登録。初期座標は半径分ずらす
-	        _this20.draw();
-	        var px_rad = _this20._bbObj.meter_to_pixel(_this20._rad1);
-	        _this20.move(px_rad, px_rad);
-	        _this20.regist();
+	        _this21.draw();
+	        var px_rad = _this21._bbObj.meter_to_pixel(_this21._rad1);
+	        _this21.move(px_rad, px_rad);
+	        _this21.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this20);
+	            _callback.apply(_this21);
 	        }
-	        return _this20;
+	        return _this21;
 	    }
 
 	    _createClass(BB_bomber, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this21 = this;
+	            var _this22 = this;
 
 	            var i,
 	                px_rad1 = this._bbObj.meter_to_pixel(this._rad1),
@@ -1637,10 +1664,10 @@
 	            var mask = this._ourJc.scout_mask(0, 0, px_rad1, px_len).layer(this.id),
 	                obj = this;
 	            mask.mousedown(function (point) {
-	                var canvas = jc.canvas(_this21._bbObj.id),
-	                    tmpmask = _this21._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this21._ourJc.layer(obj.id),
-	                    tmpLayer = _this21._ourJc.layer("tmp_" + obj.id);
+	                var canvas = jc.canvas(_this22._bbObj.id),
+	                    tmpmask = _this22._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this22._ourJc.layer(obj.id),
+	                    tmpLayer = _this22._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                var pos_self = self.position();
 	                var startrad = Math.atan2(point.y - pos_self.y, point.x - pos_self.x),
@@ -1654,15 +1681,15 @@
 	                    }
 	                });
 	                tmpmask.mouseup(function (point) {
-	                    _this21._ourJc.layer("tmp_" + obj.id).del();
+	                    _this22._ourJc.layer("tmp_" + obj.id).del();
 	                });
 	            });
 
 	            mask.mouseover(function () {
-	                _this21._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
+	                _this22._ourJc.layer(obj.id).optns.drag.val = false; // ドラッグ無効
 	            });
 	            mask.mouseout(function () {
-	                _this21._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
+	                _this22._ourJc.layer(obj.id).optns.drag.val = true; // ドラッグ有効
 	            });
 
 	            return this;
@@ -1683,32 +1710,32 @@
 	    function BB_bascout(_bbObj, _text, _color, _callback) {
 	        _classCallCheck(this, BB_bascout);
 
-	        var _this22 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bascout).call(this, _bbObj));
+	        var _this23 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_bascout).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 0, 165)';
 	        }
-	        _this22.id = _uuid2.default.v1();
+	        _this23.id = _uuid2.default.v1();
 
-	        _this22.type = "bascout";
-	        _this22._text = _text;
-	        _this22._color = _color;
-	        _this22._visible = true;
+	        _this23.type = "bascout";
+	        _this23._text = _text;
+	        _this23._color = _color;
+	        _this23._visible = true;
 	        //描画して登録。初期座標はとりあえず100づつずらしておく
-	        _this22.draw();
-	        var px_rad = _this22._bbObj.meter_to_pixel(100);
-	        _this22.move(px_rad, px_rad);
-	        _this22.regist();
+	        _this23.draw();
+	        var px_rad = _this23._bbObj.meter_to_pixel(100);
+	        _this23.move(px_rad, px_rad);
+	        _this23.regist();
 	        if (typeof _callback === "function") {
-	            _callback.apply(_this22);
+	            _callback.apply(_this23);
 	        }
-	        return _this22;
+	        return _this23;
 	    }
 
 	    _createClass(BB_bascout, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this23 = this;
+	            var _this24 = this;
 
 	            var px_wid = this._bbObj.meter_to_pixel(500),
 	                px_len = this._bbObj.meter_to_pixel(1200),
@@ -1732,10 +1759,10 @@
 	            //角度変更処理
 	            var mdEvent = function mdEvent(point) {
 	                //if (this._ourJc.layer(obj.id).optns.drag.val==true){return false;}
-	                var canvas = jc.canvas(_this23._bbObj.id),
-	                    tmpmask = _this23._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
-	                    layer = _this23._ourJc.layer(obj.id),
-	                    tmpLayer = _this23._ourJc.layer("tmp_" + obj.id);
+	                var canvas = jc.canvas(_this24._bbObj.id),
+	                    tmpmask = _this24._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id),
+	                    layer = _this24._ourJc.layer(obj.id),
+	                    tmpLayer = _this24._ourJc.layer("tmp_" + obj.id);
 	                tmpLayer.level('top');
 	                var pos_self = centerf.position();
 	                var startrad = Math.atan2(point.y - pos_self.y, point.x - pos_self.x),
@@ -1756,7 +1783,7 @@
 
 	            //  ドラッグ無効
 	            var drugoff = function drugoff() {
-	                _this23._ourJc.layer(obj.id).optns.drag.val = false;
+	                _this24._ourJc.layer(obj.id).optns.drag.val = false;
 	            };
 	            areaf.mouseover(drugoff);
 	            arrow.mouseover(drugoff);
@@ -1764,7 +1791,7 @@
 
 	            //  ドラッグ有効
 	            var drugon = function drugon() {
-	                _this23._ourJc.layer(obj.id).optns.drag.val = true;
+	                _this24._ourJc.layer(obj.id).optns.drag.val = true;
 	            };
 	            areaf.mouseout(drugon);
 	            arrow.mouseout(drugon);
@@ -1789,29 +1816,29 @@
 	    function BB_icon(_bbObj, _text, _file, _color, _callback) {
 	        _classCallCheck(this, BB_icon);
 
-	        var _this24 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_icon).call(this, _bbObj));
+	        var _this25 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_icon).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(0, 255, 255)';
 	        }
-	        _this24.id = _uuid2.default.v1();
+	        _this25.id = _uuid2.default.v1();
 
 	        if ((_file = sanitize_filepath(_file)) == null) {
 	            var _ret;
 
-	            return _ret = null, _possibleConstructorReturn(_this24, _ret);
+	            return _ret = null, _possibleConstructorReturn(_this25, _ret);
 	        }
 
-	        _this24.type = "icon";
-	        _this24._text = _text;
-	        _this24._file = _file;
-	        _this24._color = _color;
+	        _this25.type = "icon";
+	        _this25._text = _text;
+	        _this25._file = _file;
+	        _this25._color = _color;
 
 	        //描画して登録。初期座標は半径分ずらす
-	        _this24._image = new Image();
-	        _this24._image.src = _file + '?' + salt;
-	        var obj = _this24;
-	        _this24._image.onload = function () {
+	        _this25._image = new Image();
+	        _this25._image.src = _file + '?' + salt;
+	        var obj = _this25;
+	        _this25._image.onload = function () {
 	            var px_dia = Math.sqrt(Math.pow(obj._image.width, 2) + Math.pow(obj._image.height, 2));
 	            obj.draw();
 	            obj.move(px_dia, px_dia);
@@ -1819,9 +1846,9 @@
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this24._image;
+	            delete _this25._image;
 	        };
-	        return _this24;
+	        return _this25;
 	    }
 
 	    _createClass(BB_icon, [{
@@ -1855,46 +1882,46 @@
 	    function BB_waft(_bbObj, _text, _file, _color, _callback) {
 	        _classCallCheck(this, BB_waft);
 
-	        var _this25 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_waft).call(this, _bbObj));
+	        var _this26 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_waft).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(0, 255, 255)';
 	        }
-	        _this25.id = _uuid2.default.v1();
+	        _this26.id = _uuid2.default.v1();
 
 	        if ((_file = sanitize_filepath(_file)) == null) {
 	            var _ret2;
 
-	            return _ret2 = null, _possibleConstructorReturn(_this25, _ret2);
+	            return _ret2 = null, _possibleConstructorReturn(_this26, _ret2);
 	        }
 
-	        _this25.type = "waft";
-	        _this25._text = _text;
-	        _this25._file = _file;
-	        _this25._rad = 20; //大ざっぱに全長40m程度?
-	        _this25._color = _color;
+	        _this26.type = "waft";
+	        _this26._text = _text;
+	        _this26._file = _file;
+	        _this26._rad = 20; //大ざっぱに全長40m程度?
+	        _this26._color = _color;
 
 	        //描画して登録。初期座標は半径分ずらす
-	        _this25._image = new Image();
-	        _this25._image.src = _file + '?' + salt;
-	        var obj = _this25,
-	            px_rad = _this25._bbObj.meter_to_pixel(_this25._rad);
-	        _this25._image.onload = function () {
+	        _this26._image = new Image();
+	        _this26._image.src = _file + '?' + salt;
+	        var obj = _this26,
+	            px_rad = _this26._bbObj.meter_to_pixel(_this26._rad);
+	        _this26._image.onload = function () {
 	            obj.draw();
 	            obj.move(px_rad, px_rad);
 	            obj.regist();
 	            if (typeof _callback === "function") {
 	                _callback.apply(obj);
 	            }
-	            delete _this25._image;
+	            delete _this26._image;
 	        };
-	        return _this25;
+	        return _this26;
 	    }
 
 	    _createClass(BB_waft, [{
 	        key: 'draw',
 	        value: function draw() {
-	            var _this26 = this;
+	            var _this27 = this;
 
 	            var px_rad = this._bbObj.meter_to_pixel(this._rad),
 	                img_width = this._image.width,
@@ -1919,7 +1946,7 @@
 	            handle.mousedown(function (point) {
 	                var pos_hdl = handle.position();
 	                // マウスイベントフック用の四角形を最前面に展開
-	                var tmpmask = _this26._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id);
+	                var tmpmask = _this27._ourJc.rect(0, 0, canvas.width(), canvas.height(), 'rgba(0, 0, 0, 0)').layer("tmp_" + obj.id);
 	                jc.layer("tmp_" + obj.id).level('top');
 
 	                var startrad = Math.atan2(point.y - pos_hdl.y, point.x - pos_hdl.x),
@@ -1930,7 +1957,7 @@
 	                    layer.rotateTo(rad * 180 / Math.PI, 0, 0);
 	                });
 	                tmpmask.mouseup(function (point) {
-	                    _this26._ourJc.layer("tmp_" + obj.id).del();
+	                    _this27._ourJc.layer("tmp_" + obj.id).del();
 	                });
 	            });
 
@@ -1958,24 +1985,24 @@
 	    function BB_freehand(_bbObj, _text, _color) {
 	        _classCallCheck(this, BB_freehand);
 
-	        var _this27 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_freehand).call(this, _bbObj));
+	        var _this28 = _possibleConstructorReturn(this, Object.getPrototypeOf(BB_freehand).call(this, _bbObj));
 
 	        if (_color === undefined) {
 	            _color = 'rgb(255, 255, 255)';
 	        }
-	        _this27.id = _uuid2.default.v1();
-	        _this27.type = "freehand";
-	        _this27._text = _text;
-	        _this27._color = _color;
-	        _this27._step = 0;
-	        _this27._stepcol = new Array();
-	        _this27._undoCache = new Array();
-	        _this27._hooker = undefined;
+	        _this28.id = _uuid2.default.v1();
+	        _this28.type = "freehand";
+	        _this28._text = _text;
+	        _this28._color = _color;
+	        _this28._step = 0;
+	        _this28._stepcol = new Array();
+	        _this28._undoCache = new Array();
+	        _this28._hooker = undefined;
 
 	        //layerを確保するためのダミー画像を設置するのみ
-	        _this27._ourJc.rect(0, 0, 1, 1, 'rgba(0, 0, 0, 0)').layer(_this27.id);
-	        _this27.regist();
-	        return _this27;
+	        _this28._ourJc.rect(0, 0, 1, 1, 'rgba(0, 0, 0, 0)').layer(_this28.id);
+	        _this28.regist();
+	        return _this28;
 	    }
 
 	    _createClass(BB_freehand, [{
@@ -2041,7 +2068,7 @@
 	    }, {
 	        key: 'start',
 	        value: function start() {
-	            var _this28 = this;
+	            var _this29 = this;
 
 	            var obj = this,
 
@@ -2072,7 +2099,7 @@
 
 	                obj._step++;
 	                obj._stepcol[obj._step] = obj._color;
-	                var line = _this28._ourJc.line([[ptstart.x, ptstart.y], [ptstart.x, ptstart.y]], obj._color).layer(obj.id).id(obj._step).lineStyle({
+	                var line = _this29._ourJc.line([[ptstart.x, ptstart.y], [ptstart.x, ptstart.y]], obj._color).layer(obj.id).id(obj._step).lineStyle({
 	                    lineWidth: 3
 	                });
 	                hooker.mousemove(function (point) {
@@ -2332,7 +2359,7 @@
 	                swidth: false,
 	                sheight: false
 	            }, function (ctx) {
-	                var _this29 = this;
+	                var _this30 = this;
 
 	                if (this._width === false) {
 	                    this._width = this._image.width;
@@ -2349,10 +2376,10 @@
 	                ctx.globalCompositeOperation = opmode;
 	                this.getRect = function (type) {
 	                    return {
-	                        x: _this29._x,
-	                        y: _this29._y,
-	                        width: _this29._width,
-	                        height: _this29._height
+	                        x: _this30._x,
+	                        y: _this30._y,
+	                        width: _this30._width,
+	                        height: _this30._height
 	                    };
 	                };
 	            });
@@ -2366,7 +2393,7 @@
 	                color: 'rgb(255, 0, 0)',
 	                fill: false
 	            }, function (ctx) {
-	                var _this30 = this;
+	                var _this31 = this;
 
 	                var x = this._x,
 	                    y = this._y,
@@ -2380,10 +2407,10 @@
 	                ctx.closePath();
 	                this.getRect = function () {
 	                    return {
-	                        x: _this30._x,
-	                        y: _this30._y,
-	                        width: _this30._length + _this30._radius * 2,
-	                        height: _this30._radius * 2
+	                        x: _this31._x,
+	                        y: _this31._y,
+	                        width: _this31._length + _this31._radius * 2,
+	                        height: _this31._radius * 2
 	                    };
 	                };
 	            });
@@ -2396,7 +2423,7 @@
 	                color: 'rgba(0, 0, 0, 0)',
 	                fill: true
 	            }, function (ctx) {
-	                var _this31 = this;
+	                var _this32 = this;
 
 	                var x = this._x,
 	                    y = this._y,
@@ -2410,10 +2437,10 @@
 	                ctx.closePath();
 	                this.getRect = function () {
 	                    return {
-	                        x: _this31._x,
-	                        y: _this31._y,
-	                        width: _this31._length + _this31._radius,
-	                        height: _this31._radius * 2
+	                        x: _this32._x,
+	                        y: _this32._y,
+	                        width: _this32._length + _this32._radius,
+	                        height: _this32._radius * 2
 	                    };
 	                };
 	            });
@@ -2427,7 +2454,7 @@
 	                color: 'rgb(255, 0, 0)',
 	                fill: false
 	            }, function (ctx) {
-	                var _this32 = this;
+	                var _this33 = this;
 
 	                var x = this._x,
 	                    y = this._y,
@@ -2440,10 +2467,10 @@
 	                ctx.closePath();
 	                this.getRect = function () {
 	                    return {
-	                        x: _this32._x,
-	                        y: _this32._y,
-	                        width: _this32._radius,
-	                        height: 2 * Math.sin(_this32._angle * Math.PI / 360)
+	                        x: _this33._x,
+	                        y: _this33._y,
+	                        width: _this33._radius,
+	                        height: 2 * Math.sin(_this33._angle * Math.PI / 360)
 	                    };
 	                };
 	            });
@@ -2454,7 +2481,7 @@
 	                y: 0,
 	                color: 'rgb(255, 255, 255)'
 	            }, function (ctx) {
-	                var _this33 = this;
+	                var _this34 = this;
 
 	                var offset = 20;
 	                var dash = 6;
@@ -2479,8 +2506,8 @@
 	                ctx.lineWidth = 3;
 	                this.getRect = function () {
 	                    return {
-	                        x: _this33._x - offset,
-	                        y: _this33._y - offset,
+	                        x: _this34._x - offset,
+	                        y: _this34._y - offset,
 	                        width: offset * 2,
 	                        height: offset * 2
 	                    };
@@ -2651,11 +2678,11 @@
 	                test = false;
 	            }
 
-	            var visible = false,
-	                px_rad = this.meter_to_pixel(radius),
-	                area = this.ourJc.sector(x, y, px_rad, angle, color, true).rotateTo(rot - 90, x, y).opacity(0.3).visible(visible).level(1),
-	                line = this.ourJc.sector(x, y, px_rad, angle, this.color, false).level(1).rotateTo(rot - 90, x, y).opacity(1).visible(visible),
-	                hooker = this.ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true).rotateTo(rot - 90, x, y).level(3).name("turrets");
+	            var visible = false;
+	            var px_rad = this.meter_to_pixel(radius);
+	            var area = this.ourJc.sector(x, y, px_rad, angle, color, true).rotateTo(rot - 90, x, y).opacity(0.3).visible(visible).level(1);
+	            var line = this.ourJc.sector(x, y, px_rad, angle, this.color, false).level(1).rotateTo(rot - 90, x, y).opacity(1).visible(visible);
+	            var hooker = this.ourJc.circle(x, y, hookrad, 'rgba(0,0,0,0)', true).rotateTo(rot - 90, x, y).level(3).name("turrets");
 
 	            if (test) {
 	                this.ourJc.line([[x, y], [x, y - 20]], 'rgba(255,0,0,1)').rotateTo(rot, x, y).lineStyle({
@@ -27160,6 +27187,28 @@
 			"map": "nesos_ea"
 		},
 		{
+			"start_time": "2016-03-21",
+			"end_time": "2016-03-27",
+			"type": "national_battle_high",
+			"title": "【初公開】ベネヴィス高原地帯〜嘘誘の壊橋〜【特殊×】",
+			"url": ""
+		},
+		{
+			"start_time": "2016-03-21",
+			"end_time": "2016-03-27",
+			"type": "national_battle_low",
+			"title": "ダリーヤ遺跡群〜河底の弾雨〜【特殊×】",
+			"url": "/map/5#opr-28",
+			"map": "darya_b"
+		},
+		{
+			"start_time": "2016-03-24",
+			"end_time": "2016-03-27",
+			"type": "event",
+			"title": "＜わさビーフCUP＞SQUAD BATTLE",
+			"url": "/news/358"
+		},
+		{
 			"title": "マグメル機体試験場〜FIELD-D〜",
 			"map": "24_sqa"
 		},
@@ -29436,6 +29485,7 @@
 	}
 	if (debugMode) {
 	    window.loadMap = loadMap;
+	    window.debugMode = debugMode;
 	}
 
 	//偵察機
