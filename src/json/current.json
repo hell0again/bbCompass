@@ -24,6 +24,28 @@
         "map": "nesos_ea"
     },
     {
+        "start_time": "2016-03-21",
+        "end_time": "2016-03-27",
+        "type": "national_battle_high",
+        "title": "【初公開】ベネヴィス高原地帯〜嘘誘の壊橋〜【特殊×】",
+        "url": ""
+    },
+    {
+        "start_time": "2016-03-21",
+        "end_time": "2016-03-27",
+        "type": "national_battle_low",
+        "title": "ダリーヤ遺跡群〜河底の弾雨〜【特殊×】",
+        "url": "/map/5#opr-28",
+        "map": "darya_b"
+    },
+    {
+        "start_time": "2016-03-24",
+        "end_time": "2016-03-27",
+        "type": "event",
+        "title": "＜わさビーフCUP＞SQUAD BATTLE",
+        "url": "/news/358"
+    },
+    {
         "title": "マグメル機体試験場〜FIELD-D〜",
         "map": "24_sqa"
     },
