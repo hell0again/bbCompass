@@ -151,6 +151,7 @@
     {"value":"beanavis_c", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "石橋の眼下"},
     {"value":"beanavis_d", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "蒼天の黒火龍"},
     {"value":"beanavis_e", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "教会堂を望む"},
+    {"value":"beanavis_f", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "嘘誘の壊橋"},
     {"value":"beanavis_ea", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "激闘の忘城"},
     {"value":"malinasedna_a", "dataset": {"layer": "[]", "stage": "malinasedna"}, "text": "雪濠の凱歌"},
     {"value":"malinasedna_b", "dataset": {"layer": "[]", "stage": "malinasedna"}, "text": "霜夜の裏の裏"},
