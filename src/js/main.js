@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import BB from './BB';
-import BBCQuery from './BBCQuery';
+import BbBoardSerializer from './BbBoardSerializer';
 import BBDB from './BBDB';
 import './tap';
 
@@ -391,8 +391,8 @@ var execMakeImg = function() {
         objs.push($(this).val());
     });
 
-    var queryobj = BBCQuery.createFromMapAndObjects($map.val, objs);
-    var querystr = queryobj.toBase64();
+    var serializer = BbBoardSerializer.createFromMapAndObjects($map.val, objs);
+    var querystr = serializer.toBase64();
     var url = `${location.protocol}//${location.host}${location.pathname}?${querystr}`;
     if ($SaveImgShortUrl.prop('checked')) {
         shortenUrl(url, function(err, shorten) {
@@ -1037,7 +1037,13 @@ function setCircle() {
         return;
     }
 
-    var obj = bbobj.add_circle($("#name_circle").val(), $("#rad_circle").val(), $("#col_circle").val());
+    var Circle = bbobj.getBoardObject("circle");
+    var obj = new Circle(
+        bbobj,
+        $("#name_circle").val(),
+        $("#rad_circle").val(),
+        $("#col_circle").val()
+    );
 
     if (obj) {
         addObject(obj.id, coalesceName(obj));
@@ -1189,11 +1195,11 @@ function startSelect() {
 }
 
 //URLクエリストリングからの復元
-function setURL(querystr) {
-    var queryobj = BBCQuery.createFromBase64(querystr);
-    var map = queryobj.map;
+function setURL(queryStr) {
+    let serializer = BbBoardSerializer.createFromBase64(queryStr);
+    let map = serializer.readMap();
     if (map != "dummy") {
-        var stage= getStageFromMap(map);
+        let stage = getStageFromMap(map);
         changeStageSelection(stage);
         changeMapSelection(map);
         loadMap(map, function(err) {
@@ -1201,10 +1207,10 @@ function setURL(querystr) {
                 window.alert(err);
                 return;
             }
-            var objs = queryobj.applyObjects(getBbObj());
+            let objs = serializer.readBoardObjects(getBbObj());
             // オブジェクト一覧に追加
-            for (var i = 0; i < objs.length; i++) {
-                var obj = objs[i];
+            for (let i = 0; i < objs.length; i++) {
+                let obj = objs[i];
                 addObject(obj.id, coalesceName(obj));
                 obj.mousedown(function() {
                     $("#lst_object").val(obj.id);

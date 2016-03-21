@@ -1,12 +1,12 @@
 import 'babel-polyfill';
 import _ from 'lodash';
-var stageObject = require('../json/stage.json');
-var mapObject = require('../json/map.json');
-var objectsObject = require('../json/objects.json');
-var currentObject = require('../json/current.json');
+const stageObject = require('../json/stage.json');
+const mapObject = require('../json/map.json');
+const objectsObject = require('../json/objects.json');
+const currentObject = require('../json/current.json');
 
 // NOTE: currentMapはこの順序で並べる
-var currentMapLabels = [
+const currentMapLabels = [
     {"type": "national_battle_high", "label": "▼ 全国対戦(上位) ▼"},
     {"type": "event",                "label": "▼ イベントバトル ▼"},
     {"type": "union_battle",         "label": "▼ ユニオンバトル ▼"},
@@ -15,7 +15,7 @@ var currentMapLabels = [
     {"type": "national_battle_low",  "label": "▼ 全国対戦(下位) ▼"},
     {"type": "undefined",            "label": "▼ その他 ▼"},
 ];
-var confSchema = {
+const confSchema = {
     // 現在の戦場
     "current_map": [], // {"value": "24_sqa", "label": ".."}
 
@@ -92,35 +92,35 @@ export default class BbConf extends Conf {
     }
     // current_mapを埋める。mapとstageがロードしてからcurrent_mapを埋める
     completeCurrentMap (currentObject) {
-        var tempMap = new Map(); // ES6 map!! 使い終わったらclearしないとリーク
+        let tempMap = new Map(); // ES6 map!! 使い終わったらclearしないとリーク
 
         // tempMap準備、日付関連
         _.each(currentObject, (el, it) => {
             // new Date("2016/01/01") は 2016/01/01 00:00:00 GMT+0900 (JST)
             // new Date("2016-01-01") は 2016/01/01 09:00:00 GMT+0900 (JST) ## i.e. "/"区切りはJST時間、"-"はUTC時間ということ。UTC0時がJST9時
 
-            // var timezoneOffset = now.getTimezoneOffset();
-            var timezoneOffsetJst = -9 * 60; // JST9時をJST0時に補正
-            var startDate = new Date(el["start_time"]); // 2016/01/01 なら 2016/01/01 07:30:00 (JST) から
+            // let timezoneOffset = now.getTimezoneOffset();
+            let timezoneOffsetJst = -9 * 60; // JST9時をJST0時に補正
+            let startDate = new Date(el["start_time"]); // 2016/01/01 なら 2016/01/01 07:30:00 (JST) から
             startDate.setMinutes(startDate.getMinutes() +timezoneOffsetJst +7*60 +30);
-            var endDate = new Date(el["end_time"]); // 2016/01/01 なら 2016/01/02 07:29:59 (JST) まで
+            let endDate = new Date(el["end_time"]); // 2016/01/01 なら 2016/01/02 07:29:59 (JST) まで
             endDate.setMinutes(endDate.getMinutes() +timezoneOffsetJst +24*60 +7*60 +30);
 
             if (endDate.getTime()/1000 <= this.getNow().getTime()/1000) { return; } // 終了したマップは除外
 
-            var mv = {};
+            let mv = {};
             tempMap.set(el, mv);
 
             if (this.getNow().getTime()/1000 < startDate.getTime()/1000) {
                 // get〜の日付関数は現地の日付を返すのでJST3時をUTC3時に読み替えて getUTC〜 を使う
-                var dispStartDate = new Date(startDate.getTime());
+                let dispStartDate = new Date(startDate.getTime());
                 dispStartDate.setMinutes(dispStartDate.getMinutes() -timezoneOffsetJst); // JST3時 > JST12時＝UTC3時
                 mv["datePrefix"] = `${dispStartDate.getUTCMonth() + 1}/${dispStartDate.getUTCDate()}〜`;
             }
         });
         // mapとの紐付け。残念ながら O(map数 x tempMap数)
         _.each(this.conf["map"], (el, it) => {
-            var map = el;
+            let map = el;
             tempMap.forEach((mv, mk) => {
                 if (mk["map"] != undefined && mk["map"] == map["value"]) {
                     // mv["mapId"] = map["value"];
@@ -131,7 +131,7 @@ export default class BbConf extends Conf {
         });
         // stageとの紐付け。残念ながら O(stage数 x tempMap数)
         _.each(this.conf["stage"], (el, it) => {
-            var stage = el;
+            let stage = el;
             tempMap.forEach( (mv, mk) => {
                 if (mv["stageId"] != undefined && mv["stageId"] == stage["value"]) {
                     mv["stageName"] = stage["text"];
@@ -140,9 +140,9 @@ export default class BbConf extends Conf {
         });
         // currentMapLabels順でpush
         _.each(currentMapLabels, (el, it) => {
-            var mks = [];
+            let mks = [];
             tempMap.forEach( (mv, mk) => {
-                var t = mk.type || "undefined";
+                let t = mk.type || "undefined";
                 if (t == el["type"]) {
                     mks.push(mk);
                 }
@@ -158,10 +158,10 @@ export default class BbConf extends Conf {
 
             // mapsをpush
             _.each(mks, (mk) => {
-                var mv = tempMap.get(mk);
-                var value = mk["map"];
-                var label = "";
-                var disabled = false;
+                let mv = tempMap.get(mk);
+                let value = mk["map"];
+                let label = "";
+                let disabled = false;
 
                 if (mv["datePrefix"] != undefined) {
                     label = `[${mv["datePrefix"]}]`;

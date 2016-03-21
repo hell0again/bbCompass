@@ -1,4 +1,4 @@
-var objectCodeJson = require('../json/object-code.json');
+const objectCodeJson = require('../json/object-code.json');
 let _instance = null;
 export default class BoardObjectRegistry {
     constructor() {
@@ -30,7 +30,7 @@ export default class BoardObjectRegistry {
         return this._labelToTypeCode[label];
     }
     addByLabel(label, obj) {
-        var typeCode = this.getTypeCodeFromLabel(label);
+        let typeCode = this.getTypeCodeFromLabel(label);
         // TODO: should validate if interface implemented
         this._add(typeCode, obj);
     }

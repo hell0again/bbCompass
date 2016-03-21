@@ -1,77 +1,27 @@
+import BoardObjectBaseJC from './BoardObjectBase';
+import BoardObjectRegistry from './BoardObjectRegistry';
 
 let mixin = (mixins, base) => {
-    var klass = base || class {};
-    var tail;
+    let klass = base || class {};
+    let tail;
     while (tail = mixins.pop()) {
         klass = tail(klass);
     }
     return klass();
 }
-/*
-BoardComponent
-    Drawable
-        draw
-    Serializer
-        serialize
-        deserialize
-    BoardJCanvasViewAdapter
-        BoardPositionViewModel
-    BoardJCanvasEventAdapter
 
-*/
-
-
-class BoardComponentCircle extend mixin([
-    BoardSerializerCircleMixin,
-    BoardDrawableCircleMixin,
-], BoardObjectBase) {
-    static getLabel() { return "BoardObjectCircle"; }
-}
-
-let BoardSerializerCircleMixin = (Base) => class extends mixin([BoardSerializerMixin], Base) {
-    static serialize(obj) {
-        var buffer = new MyBuffer();
-
-        buffer.writeColor(obj._color);
-        buffer.writeInt16(obj._radius);
-        buffer.writePoint(obj.position());
-        buffer.writePoint(obj._ptpos);
-        return buffer.readByteArray();
-    }
-    static deserialize(buffer, length, name, bbobj) {
-        var color = buffer.readColor(),
-            rad   = buffer.readUint16(),
-            pos   = buffer.readPoint(),
-            ptpos = buffer.readPoint();
-
-        var obj = bbobj.add_circle(name, rad, color, function() {
-            this._ptpos = ptpos;
-            this.moveTo(pos.x, pos.y)
-                .redraw();
-        });
-        return obj;
-    }
-}
-
-// 円
-// 原点は中心点
-// ptposは外周の点を表す
-//class BbCircle extends BbBase {
-
-let BoardDrawableCircleMixin = (Base) => class extends mixin([BoardDrawableMixin], Base) {
-    initDrawable(_bbObj, _text, _radius, _color, _callback) {
-        super(_bbObj);
-        if (_color === undefined) {
-            _color = 'rgb(0, 51, 255)';
+export default class BoardObjectCircle extends BoardObjectBaseJC {
+    constructor(bb, text, radius, color, callback) {
+        super(bb);
+        if (color === undefined) {
+            color = 'rgb(0, 51, 255)';
         }
-        this.id = UUID.v1();
-
         this.type = "circle";
-        this.text(_text);
-        this.radius(_radius);
-        this.color(_color);
+        this.text(text);
+        this.radius(radius);
+        this.color(color);
 
-        var px_rad = this.bb.meter_to_pixel(this.radius);
+        let px_rad = this.bb.meter_to_pixel(this.radius);
         this._ptpos = {
             x: px_rad,
             y: 0
@@ -80,45 +30,73 @@ let BoardDrawableCircleMixin = (Base) => class extends mixin([BoardDrawableMixin
 
         this.draw();
         this.register();
-        if (typeof(_callback) === "function") {
-            _callback.apply(this);
+        if (typeof(callback) === "function") {
+            callback.apply(this);
         }
     }
-    draw() {
-        var px_rad = this.bb.meter_to_pixel(this.radius),
-            ptx = this._ptpos.x,
-            pty = this._ptpos.y,
+    get radius() {
+        return this.radius;
+    }
+    set radius(v) {
+        this.radius = v;
+    }
+    static serialize(that) {
+        let buffer = new MyBuffer();
 
-        var area = this.jc
+        buffer.writeColor(that.color);
+        buffer.writeInt16(that.radius);
+        buffer.writePoint(that.position);
+        buffer.writePoint(that._ptpos);
+        return buffer.readByteArray();
+    }
+    static deserialize(buffer, length, name, bb) {
+        let color = buffer.readColor(),
+            rad   = buffer.readUint16(),
+            pos   = buffer.readPoint(),
+            ptpos = buffer.readPoint();
+
+        return new BoardObjectCircle(bb, name, rad, color, function() {
+            this._ptpos = ptpos;
+            this.moveTo(pos.x, pos.y)
+                .redraw();
+        });
+    }
+
+    draw() {
+        let px_rad = this.bb.meter_to_pixel(this.radius),
+            ptx = this._ptpos.x,
+            pty = this._ptpos.y;
+
+        let area = this.jc
             .circle(0, 0, px_rad, this.color, true)
             .opacity(0.3)
             .layer(this.id);
-        var areacol = this.jc
+        let areacol = this.jc
             .circle(0, 0, px_rad, this.color, false)
             .opacity(1)
             .lineStyle({
                 lineWidth: 3
             })
             .layer(this.id);
-        var line = this.jc
+        let line = this.jc
             .opacity(1)
             .line({
                 points: [
                     [0, 0],
                     [ptx, pty]
                 ],
-                color: this._color
+                color: this.color
             })
             .lineStyle({
                 lineWidth: 3
             })
             .layer(this.id);
         this.jc
-            .circle(0, 0, 7, this._color, true)
+            .circle(0, 0, 7, this.color, true)
             .opacity(1)
             .layer(this.id);
         
-        var center = this.jc
+        let center = this.jc
             .circle(0, 0, 5, "#FFFFFF", true)
             .layer(this.id);
         this.jc
@@ -128,17 +106,17 @@ let BoardDrawableCircleMixin = (Base) => class extends mixin([BoardDrawableMixin
             .align('center')
             .layer(this.id);
         
-        var ptcol = this.jc
-            .circle(ptx, pty, this.bb.ptcolsize, this._color, true)
+        let ptcol = this.jc
+            .circle(ptx, pty, this.bb.ptcolsize, this.color, true)
             .layer(this.id)
             .opacity(1);
-        var pt = this.jc
+        let pt = this.jc
             .circle(ptx, pty, this.bb.ptsize, "#FFFFFF", true)
             .layer(this.id);
-        var pttra = this.jc
+        let pttra = this.jc
             .circle(ptx, pty, this.bb.pttrasize, "rgba(0,0,0,0)", true)
             .layer(this.id);
-        var radius = this.jc
+        let radius = this.jc
             .text(Math.floor(this.radius) + "m", ptx / 2, pty / 2)
             .baseline("top")
             .align('center')
@@ -148,9 +126,9 @@ let BoardDrawableCircleMixin = (Base) => class extends mixin([BoardDrawableMixin
 
         this.jc.layer(this.id).draggable();
 
-        var txtheight = radius.getRect().height; //translateTo時に高さがずれるので補正項
-        var callback = () => {
-            var pos1 = center.position(),
+        let txtheight = radius.getRect().height; //translateTo時に高さがずれるので補正項
+        let callback = () => {
+            let pos1 = center.position(),
                 pos2 = pttra.position(),
                 dx = pos2.x - pos1.x,
                 dy = pos2.y - pos1.y,
@@ -194,9 +172,8 @@ let BoardDrawableCircleMixin = (Base) => class extends mixin([BoardDrawableMixin
         return this;
     }
 }
-
 BoardObjectRegistry.getInstance().addByLabel(
-    BoardComponentCircle.getLabel(),
-    BoardComponentCircle
+    BoardObjectCircle.type,
+    BoardObjectCircle
 );
 
