@@ -329,13 +329,42 @@
 	            var pt = this._ourJc.circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true).layer(this.id);
 	            var pttra = this._ourJc.circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id);
 	            var radius = this._ourJc.text(Math.floor(this._radius) + "m", ptx / 2, pty / 2).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
-	            var cp = center.position();
-	            var position = this._ourJc.text("(" + cp.x + "," + cp.y + ")", ptx / 2, pty / 2 + 30).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
-
-	            this._ourJc.layer(this.id).draggable();
+	            var debugPos;
+	            var debugCb;
+	            if (!window.debugMode) {
+	                this._ourJc.layer(this.id).draggable();
+	            } else {
+	                var pixelP = center.position();
+	                var meterP = {
+	                    x: this._bbObj.pixel_to_meter(pixelP.x),
+	                    y: this._bbObj.pixel_to_meter(pixelP.y)
+	                };
+	                var ptpos = pttra.position();
+	                var pixelPosStr = '(' + Math.floor(pixelP.x) + 'px, ' + Math.floor(pixelP.y) + 'px)';
+	                var meterPosStr = '(' + Math.floor(meterP.x) + 'm, ' + Math.floor(meterP.y) + 'm)';
+	                var angle = Math.floor(Math.atan2(ptpos.y - pixelP.y, ptpos.x - pixelP.x) * 360 / (2 * Math.PI));
+	                angle = (360 + 90 + angle) % 360;
+	                debugPos = this._ourJc.text(pixelPosStr + '/' + meterPosStr + '(' + angle + ')', 0, 20).layer(this.id).color("#ffffff").font('15px sans-serif').align('left').baseline('middle');
+	                this._ourJc.layer(this.id).draggable();
+	                debugCb = function debugCb() {
+	                    var pixelP = center.position();
+	                    var meterP = {
+	                        x: _this2._bbObj.pixel_to_meter(pixelP.x),
+	                        y: _this2._bbObj.pixel_to_meter(pixelP.y)
+	                    };
+	                    var ptpos = pttra.position();
+	                    var pixelPosStr = '(' + Math.floor(pixelP.x) + 'px, ' + Math.floor(pixelP.y) + 'px)';
+	                    var meterPosStr = '(' + Math.floor(meterP.x) + 'm, ' + Math.floor(meterP.y) + 'm)';
+	                    var angle = Math.floor(Math.atan2(ptpos.y - pixelP.y, ptpos.x - pixelP.x) * 360 / (2 * Math.PI));
+	                    angle = (360 + 90 + angle) % 360;
+	                    console.log([ptpos.x - pixelP.x, ptpos.y - pixelP.y]);
+	                    debugPos.string(pixelPosStr + ' / ' + meterPosStr + '(' + angle + ')');
+	                };
+	                this._ourJc.layer(this.id).draggable(debugCb);
+	            }
 
 	            var txtheight = radius.getRect().height; //translateTo時に高さがずれるので補正項
-	            var callback = function callback() {
+	            var pttraCallback = function pttraCallback() {
 	                var pos1 = center.position(),
 	                    pos2 = pttra.position(),
 	                    dx = pos2.x - pos1.x,
@@ -354,9 +383,12 @@
 	                    x: pt._x + pt._transformdx,
 	                    y: pt._y + pt._transformdy
 	                };
+	                if (window.debugMode) {
+	                    debugCb.apply(_this2);
+	                }
 	            };
 
-	            pttra.draggable(callback);
+	            pttra.draggable(pttraCallback);
 	            pttra.optns.drag.val = false;
 	            pttra.mouseover(function () {
 	                _this2._ourJc.layer(obj.id).optns.drag.val = false;
