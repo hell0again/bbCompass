@@ -27164,22 +27164,6 @@
 	module.exports = [
 		{
 			"start_time": "2016-03-14",
-			"end_time": "2016-03-20",
-			"type": "national_battle_high",
-			"title": "デ・ネブラ大落片〜崖下乱戦〜",
-			"url": "/map/12#opr-87",
-			"map": "denebra_f"
-		},
-		{
-			"start_time": "2016-03-14",
-			"end_time": "2016-03-20",
-			"type": "national_battle_low",
-			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-			"url": "/map/4#opr-19",
-			"map": "tlaza_a"
-		},
-		{
-			"start_time": "2016-03-14",
 			"end_time": "2016-03-21",
 			"type": "event",
 			"title": "イベントバトル開催<最新鋭ブラスト・ランナー　先行量産機フィールドテスト>",
@@ -27191,7 +27175,8 @@
 			"end_time": "2016-03-27",
 			"type": "national_battle_high",
 			"title": "【初公開】ベネヴィス高原地帯〜嘘誘の壊橋〜【特殊×】",
-			"url": ""
+			"url": "",
+			"map": "beanavis_f"
 		},
 		{
 			"start_time": "2016-03-21",
@@ -28657,6 +28642,14 @@
 				"stage": "beanavis"
 			},
 			"text": "教会堂を望む"
+		},
+		{
+			"value": "beanavis_f",
+			"dataset": {
+				"layer": "[]",
+				"stage": "beanavis"
+			},
+			"text": "嘘誘の壊橋"
 		},
 		{
 			"value": "beanavis_ea",
