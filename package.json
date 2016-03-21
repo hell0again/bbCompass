@@ -27,7 +27,8 @@
     "react-dom": "~0.14.7",
     "request-json": "~0.5.5",
     "tape": "~4.4.0",
-    "uuid": "~2.0.1"
+    "uuid": "~2.0.1",
+    "babel-plugin-transform-es2015-parameters": "~6.7.0"
   },
   "scripts": {
     "test": "node_modules/ava/cli.js",

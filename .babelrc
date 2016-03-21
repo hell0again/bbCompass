@@ -1,5 +1,9 @@
 {
     "presets": ["es2015", "react"],
-    "plugins": ["transform-object-assign", "add-module-exports"]
+    "plugins": [
+        "transform-object-assign",
+        "add-module-exports",
+        "transform-es2015-parameters"
+    ]
 }
 
