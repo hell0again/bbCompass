@@ -27195,19 +27195,11 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-03-14",
-			"end_time": "2016-03-21",
-			"type": "event",
-			"title": "イベントバトル開催<最新鋭ブラスト・ランナー　先行量産機フィールドテスト>",
-			"url": "/news/354",
-			"map": "nesos_ea"
-		},
-		{
 			"start_time": "2016-03-21",
 			"end_time": "2016-03-27",
 			"type": "national_battle_high",
 			"title": "【初公開】ベネヴィス高原地帯〜嘘誘の壊橋〜【特殊×】",
-			"url": "",
+			"url": "/map/22#opr-158",
 			"map": "beanavis_f"
 		},
 		{
@@ -27223,13 +27215,11 @@
 			"end_time": "2016-03-27",
 			"type": "event",
 			"title": "＜わさビーフCUP＞SQUAD BATTLE",
-			"url": "/news/358"
-		},
-		{
-			"title": "マグメル機体試験場〜FIELD-D〜",
+			"url": "/news/363",
 			"map": "24_sqa"
 		},
 		{
+			"type": "event",
 			"title": "マグメル機体試験場〜FIELD-S〜",
 			"map": "24_sqb"
 		}
