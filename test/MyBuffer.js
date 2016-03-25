@@ -1,5 +1,5 @@
 import test from 'ava';
-import 'babel-register';
+// import 'babel-register';
 
 import MyBuffer from '../src/js/MyBuffer';
 

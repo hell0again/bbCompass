@@ -1,49 +1,88 @@
-import jc from '../vendor/jcscript/jCanvaScript.1.5.18.min';
+// import jc from '../vendor/jcscript/jCanvaScript.1.5.18.min';
 import UUID from 'uuid';
 
-//
-// 内部変数初期化
-//
-let salt = Math.round((new Date()).getTime() / 1000);
-
-//
-// 内部関数定義
-//
-let sanitize_filepath = function(path) {
-    var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
-    path.replace(control_codes, "\uFFFD");
-    if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
-        return path;
-    } else {
-        return null;
-    }
-}
-
-//
-// BBオブジェクト定義
-//
-export default class BB {
-    constructor(canvasID) {
-        this.member = {};
-        this.id = canvasID;
-        this.ourJc = jc.start(canvasID, true);
+class BbBase {
+    constructor() {
+        this.salt = this._getSalt();
+        this.boardObjects = {};
         this.scale = 1;
         this.zoomScale = 1;
-        this.imgscale = 1;
-
-        var canvas = document.getElementById(this.id); // !!!!! notice
-
-        this.initTouchToMouse(canvas);
-        this.initExtendJCanvaScript(jc);
+        this.imgScale = 1;
 
         this.ptsize = 5, //オブジェクトの操作点を示す白点のサイズ
         this.ptcolsize = 7, //操作点を縁取りする色つき円のサイズ
-        this.pttrasize = (window.TouchEvent) ? 15 : 7; //操作点そのもののサイズ
+        this.pttrasize = 7; //操作点そのもののサイズ
+    }
+    _getSalt { // テスト時に差し替え
+        return Math.round((new Date()).getTime() / 1000);
+    }
+    // 縮尺計算
+    meter_to_pixel(meter) {
+        return (meter * (this.scale * this.zoomScale));
+    }
+    pixel_to_meter(pixel) {
+        return (pixel / (this.scale * this.zoomScale));
     }
 
-    //
+    sanitize_filepath(path) {
+        var control_codes = /[\u0000-\u001F\u007F-\u009F]/g;
+        path.replace(control_codes, "\uFFFD");
+        if (path.match(/^([.~]?\/)?([A-Za-z0-9_-][A-Za-z0-9_.-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]+$/)) {
+            return path;
+        } else {
+            return null;
+        }
+    }
+
+    // オブジェクト管理メソッド
+    getBoardObjectById(objId) {
+        return this.boardObjects[objId];
+    }
+    getBoardObjectClass(typeCode) {
+        return BoardObjectRegistry.getInstance().getByTypeCode(typeCode);
+    }
+    addBoardObject(typeCode, ...args) {
+        let BoardObj = BoardObjectRegistry.getInstance().getByTypeCode(typeCode);
+        return new BoardObj(...args);
+    }
+
+    // zoom (scale) {
+    zoomBy(scale) {
+        this.zoomScale = this.zoomScale * scale;
+        for (var objId in (this.boardObjects)) {
+            this.getBoardObjectById(objId).applyZoom(scale);
+        }
+    }
+    zoomTo(scale) {
+        return this.zoomBy(scale / this.zoomScale);
+    }
+    // applyZoom(scale) {
+    //     // if (scale === undefined) return (this.zoomScale);
+    //     this.zoomScale = this.zoomScale * scale;
+    //     for (var objId in (this.boardObjects)) {
+    //         this.getBoardObjectById(objId).applyZoom(scale);
+    //     }
+    // }
+}
+//
+// BBオブジェクト定義
+//
+export default class Bb extends BbBase {
+    constructor(canvasID) {
+        super();
+        this.id = canvasID;
+        this.ourJc = jc.start(canvasID, true);
+
+        this.initTouchToMouse(this.canvas);
+        this.initExtendJCanvaScript(jc);
+
+        this.pttrasize = (window.TouchEvent) ? 15 : 7; //操作点そのもののサイズ
+    }
+    get canvas {
+        return document.getElementById(this.id);
+    }
+
     // touchイベントからmouseイベントへのブリッジを設定
-    //
     initTouchToMouse(canvas) {
         var clickthr = 5; // クリックとみなす範囲の閾値
 
@@ -72,12 +111,12 @@ export default class BB {
                 y = touch.clientY - cnvrect.top,
                 result = false;
 
-            for (var objid in (bbobj.member)) {
-                if ((bbobj.object(objid)).type != "freehand") {
+            for (var objid in (bbobj.boardObjects)) {
+                if ((bbobj.getBoardObjectById(objid)).type != "freehand") {
                     result = jc.layer(objid).isPointIn(x, y);
                 } else {
                     //freehandオブジェクトは書き込み中であればオブジェクトありとみなす
-                    result = ((bbobj.object(objid))._hooker !== undefined);
+                    result = ((bbobj.getBoardObjectById(objid))._hooker !== undefined);
                 }
                 if (result) {
                     break;
@@ -359,16 +398,6 @@ export default class BB {
     }
 
     //
-    //縮尺計算
-    //
-    meter_to_pixel(meter) {
-        return (meter * (this.scale * this.zoomScale));
-    }
-    pixel_to_meter(pixel) {
-        return (pixel / (this.scale * this.zoomScale));
-    }
-
-    //
     //背景
     //(画像ファイル, Dot per Meter, 画像縮小比率)
     //
@@ -380,11 +409,11 @@ export default class BB {
             imgscale = 1;
         }
 
-        if ((file = sanitize_filepath(file)) == null) {
+        if ((file = this.sanitize_filepath(file)) == null) {
             return null;
         }
 
-        image.src = file + '?' + salt;
+        image.src = file + '?' + this.salt;
         image.onload = () => {
             var canvas = document.getElementById(id);
             canvas.width = image.width * imgscale;
@@ -395,19 +424,19 @@ export default class BB {
             jc.start(id, true);
         };
         this.scale = dpm * imgscale;
-        this.imgscale = imgscale;
+        this.imgScale = imgscale;
         this.zoomScale = 1;
-        this.member = {};
+        this.boardObjects = {};
     }
     setbgdiff(file) {
         var image = new Image;
         var ourJc = this.ourJc;
         var id = this.id;
-        var imgscale = this.imgscale;
+        var imgscale = this.imgScale;
 
         if (file) {
             //ファイル指定があれば差分を出力し、即時再描画
-            image.src = file + '?' + salt;
+            image.src = file + '?' + this.salt;
             image.onload = () => {
                 ourJc("#bgdiff").del();
                 ourJc.imgdiff(image, 0, 0, image.width * imgscale, image.height * imgscale)
@@ -421,16 +450,10 @@ export default class BB {
         }
     }
 
-    //
-    //オブジェクト管理メソッド
-    //
-    object(objid) {
-        return this.member[objid];
-    }
     nextlevel(level) {
         var nextlevel = undefined,
             nextid = undefined;
-        for (var id in this.member) {
+        for (var id in this.boardObjects) {
             if ((nextlevel === undefined) && (this.ourJc.layer(id).level() > level)) {
                 nextlevel = this.ourJc.layer(id).level();
                 nextid = id;
@@ -447,7 +470,7 @@ export default class BB {
     prevlevel(level) {
         var prevlevel = undefined,
             previd = undefined;
-        for (var id in this.member) {
+        for (var id in this.boardObjects) {
             if ((prevlevel === undefined) && (this.ourJc.layer(id).level() < level)) {
                 prevlevel = this.ourJc.layer(id).level();
                 previd = id;
@@ -462,17 +485,12 @@ export default class BB {
         };
     }
 
-    //
     //画像保管用
-    //
     save() {
         return (jc.canvas(this.id).toDataURL('image/png'));
     }
 
-    //
-
     //ターレット配置
-    //
     put_turret(x, y, rot, radius, angle, hookrad, color, test, type) {
         if (x === undefined) {
             return undefined;
@@ -591,13 +609,6 @@ export default class BB {
         });
     }
 
-    getBoardObject(typeCode) {
-        return BoardObjectRegistry.getInstance().getByTypeCode(typeCode);
-    }
-    addBoardObject(typeCode, ...args) {
-        let BoardObj = BoardObjectRegistry.getInstance().getByTypeCode(typeCode);
-        return new BoardObj(...args);
-    }
     /*
     //
     //オブジェクト描画
@@ -675,22 +686,16 @@ export default class BB {
     }
     */
 
-    //
     //拡大縮小
-    //
-    zoom(scale) {
-        if (scale === undefined) return (this.zoomScale);
+    //zoom(scale) {
+    zoomBy(scale) {
+        super.zoomBy(scale);
+        let canvas = this.canvas;
+        //var canvas = jc.canvas(this.id).cnv;
+        //     baseLayer = jc.canvas(this.id).layers[0];
 
-        var canvas = jc.canvas(this.id).cnv,
-            baseLayer = jc.canvas(this.id).layers[0];
-
-        //倍率書き換えて、背景レイヤと各オブジェクトの拡大を実施
-        this.zoomScale = this.zoomScale * scale;
-        baseLayer.scale(scale);
-
-        for (var objid in (this.member)) {
-            this.object(objid).applyZoom(scale);
-        }
+        // this.zoomScale = this.zoomScale * scale;
+        // baseLayer.scale(scale);
 
         //キャンバスの大きさを合わせる
         canvas.width = jc("#bg").getRect().width;
@@ -699,6 +704,9 @@ export default class BB {
 
         jc.canvas(this.id).frame();
         return this;
+    }
+    zoomTo(scale) {
+        return this.zoomBy(scale / this.zoomScale);
     }
 
     chgScroll() {

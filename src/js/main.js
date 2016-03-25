@@ -1037,7 +1037,7 @@ function setCircle() {
         return;
     }
 
-    var Circle = bbobj.getBoardObject("circle");
+    var Circle = bbobj.getBoardObjectClass("circle");
     var obj = new Circle(
         bbobj,
         $("#name_circle").val(),
