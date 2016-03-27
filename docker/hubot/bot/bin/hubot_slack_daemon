@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+# npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+# For Slack
+## - token は .env に書き込まない
+## - coffee --nodejs "--harmony --require dotenv/config" を forever -c に渡すとクオートが展開されてしまう
+## - foreveはhubotをstartさせると自信はstatus 0 で終了してしまう。同時にコンテナが終了しないように tail -f
+run_slack() {
+  local script_dir=$(cd $(dirname $0); pwd)
+  : ${HUBOT_SLACK_TOKEN:?}
+  node_modules/.bin/forever start -a -l forever.log -o out.log -e err.log -c ${script_dir}/coffee node_modules/.bin/hubot --adapter slack "$@"
+  tail -f ${HOME}/.forever/forever.log
+}
+run_slack
+

@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+# For Slack
+## token は .env に書き込まない
+run_slack() {
+  local script_dir=$(cd $(dirname $0); pwd)
+  : ${HUBOT_SLACK_TOKEN:?}
+  ${script_dir}/coffee node_modules/.bin/hubot --adapter slack "$@"
+}
+run_slack
+

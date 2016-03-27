@@ -1,0 +1,105 @@
+## run like docker-compose run --rm -p 8080:8080 bbcompass npm run start
+version: '2'
+services:
+
+  ## ssh-agent用コンテナ
+  # - NOTE: volumes: /sshagent
+  # please . /sshagent/env
+  sshagent:
+    image: sshagent
+    build: ./docker/sshagent
+  ## 鍵設定用の捨てコンテナ
+  # - メインコンテナのdepends_onに追加する
+  # - run時にentrypointを実行して鍵を追加する
+  # TODO: id_rsa以外の名前に対応する
+  sshagentaddsshkey:
+    image: sshagent
+    environment:
+      - SSH_AUTH_SOCK=/sshagent/socket
+    volumes_from:
+      - sshagent
+    volumes:
+      - ~/.ssh:/ssh
+    entrypoint: ssh-add /ssh/id_rsa
+    restart: always
+
+
+  ## gotty用コンテナ
+  # - NOTE: volumes: /gotty
+  # - please . /gotty/env
+  gotty:
+    build: ./docker/gotty
+
+
+  ## ubuntuベースでのvimenvを提供するコンテナ
+  ## data-volume-containerとして起動後、
+  ## インストール用捨てコンテナでvimをインストール
+  ## - NOTE: volumes: /vimenv
+  ## please . /vimenv/env
+  vimenv:
+    image: vimenv
+    build: ./docker/vimenv
+  ## vimインストール用の捨てコンテナ
+  vimenvinstall:
+    image: vimenv
+    volumes_from:
+      - vimenv
+    command: '/vimenv/install-tag v7.4a.047'
+
+
+  # ## ubuntuベースのanyenv base
+  # ## これを元に *env を設定したコンテナを用意する。
+  # # mainコンテナと同じimageから言語バイナリをビルドすれば
+  # # マウントするだけで動くはず
+  # ## NOTE: anyenvbaseとanyenvで分離してもanyenvが先にビルドされると死ぬ
+  # anyenvbase:
+  #   build:
+  #     context: ./docker/anyenv
+  #     dockerfile: Dockerfile-ubuntu-base
+  #   image: anyenvbase
+  # ## - provide node v4.2.3
+  # ## - NOTE: volumes: /anyenv
+  # ## - please . /anyenv/env
+  # anyenv:
+  #   build: ./docker/anyenv
+
+  ## hubot開発用コンテナ(テンプレ)
+  hubotlocal:
+    build: ./docker/hubot
+    volumes:
+      - ./docker/hubot/bot:/hubot/bot
+    #environment:
+    #  - HUBOT_SLACK_TOKEN=xoxb-
+
+  ## deploy用hubotコンテナ(テンプレ)
+  hubot:
+    build: ./docker/hubot
+    #environment:
+    #  - HUBOT_SLACK_TOKEN=xoxb-
+
+
+  ## NOTE: nodeはubuntuベース
+  bbcompass:
+    image: node
+    build: .
+    environment:
+      - LANG=ja_JP.UTF-8 ## vim用
+      - SSH_AUTH_SOCK=/sshagent/socket ## . /sshagent/env できるなら不要
+      # - PATH=$$PATH:/gotty ## $PATH は実行環境(ie. mac)側のPATHを展開する、$$PATHだとシェルが起動できない。 . /gotty/env できるなら不要
+    volumes_from:
+      - sshagent
+      - gotty
+      - vimenv
+      # - anyenv
+    depends_on:
+      - sshagentaddsshkey
+      - vimenvinstall
+    ports: ## docker-compose runのときは run -p 8080:8080が必要
+      - "8000"
+      - "8080"
+    command: sh
+
+## 
+# hubot:
+
+
