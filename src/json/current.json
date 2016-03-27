@@ -75,5 +75,9 @@
         "type": "event",
         "title": "マグメル機体試験場〜FIELD-S〜",
         "map": "24_sqb"
+    },
+    {
+        "type": "event",
+        "title": "マグメル機体試験場〜FIELD-A〜"
     }
 ]
