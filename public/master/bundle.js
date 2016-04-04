@@ -27195,85 +27195,37 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-03-21",
-			"end_time": "2016-03-27",
+			"start_time": "2016-04-04",
+			"end_time": "2016-04-10",
 			"type": "national_battle_high",
-			"title": "【初公開】ベネヴィス高原地帯〜嘘誘の壊橋〜【特殊×】",
-			"url": "/map/22#opr-158",
-			"map": "beanavis_f"
+			"title": "マデルロンド大空洞〜深部暗闘〜",
+			"url": "/map/15#opr-103",
+			"map": "madelrond_b"
 		},
 		{
-			"start_time": "2016-03-21",
-			"end_time": "2016-03-27",
+			"start_time": "2016-04-04",
+			"end_time": "2016-04-10",
 			"type": "national_battle_low",
-			"title": "ダリーヤ遺跡群〜河底の弾雨〜【特殊×】",
-			"url": "/map/5#opr-28",
-			"map": "darya_b"
+			"title": "第3採掘島〜臨海決戦〜【特殊×】",
+			"url": "/map/3#opr-11",
+			"map": "island_a"
 		},
 		{
-			"start_time": "2016-03-24",
-			"end_time": "2016-03-27",
+			"start_time": "2016-04-07",
+			"end_time": "2016-04-10",
 			"type": "event",
-			"title": "＜わさビーフCUP＞SQUAD BATTLE",
-			"url": "/news/363",
+			"title": "SQUAD BATTLE",
+			"url": "/news/374"
+		},
+		{
+			"type": "event",
+			"title": "マグメル機体試験場〜FIELD-D〜",
 			"map": "24_sqa"
-		},
-		{
-			"start_time": "2016-03-28",
-			"end_time": "2016-04-03",
-			"type": "national_battle_high",
-			"title": "ネソス島実験ドーム〜構造α−8〜",
-			"url": "/map/20#opr-157",
-			"map": "nesos_ea"
-		},
-		{
-			"start_time": "2016-03-28",
-			"end_time": "2016-04-03",
-			"type": "national_battle_low",
-			"title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
-			"url": "/map/2#opr-5",
-			"map": "blouer_c"
-		},
-		{
-			"start_time": "2016-03-28",
-			"end_time": "2016-04-03",
-			"type": "union_battle",
-			"title": "城塞都市バレリオ〜山塞の迎撃戦〜【ローテーション】",
-			"url": "/map/8#opr-56",
-			"map": "valerio_ub"
-		},
-		{
-			"start_time": "2016-03-28",
-			"end_time": "2016-04-03",
-			"type": "union_battle",
-			"title": "ゲルベルク要塞跡〜黒煙の連合戦〜【ローテーション】",
-			"url": "/map/16#opr-114",
-			"map": "gerberg_ub"
-		},
-		{
-			"start_time": "2016-03-28",
-			"end_time": "2016-04-03",
-			"type": "union_battle",
-			"title": "旧ブロア市街地〜石路の連合戦〜【ローテーション】",
-			"url": "/map/2#opr-9",
-			"map": "blouer_ua"
-		},
-		{
-			"start_time": "2016-03-28",
-			"end_time": "2016-04-03",
-			"type": "union_battle",
-			"title": "ネソス島実験ドーム〜魔窟迎撃戦〜【ローテーション】",
-			"url": "/map/20#opr-136",
-			"map": "nesos_ua"
 		},
 		{
 			"type": "event",
 			"title": "マグメル機体試験場〜FIELD-S〜",
 			"map": "24_sqb"
-		},
-		{
-			"type": "event",
-			"title": "マグメル機体試験場〜FIELD-A〜"
 		}
 	];
 
