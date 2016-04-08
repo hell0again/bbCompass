@@ -27215,17 +27215,8 @@
 			"end_time": "2016-04-10",
 			"type": "event",
 			"title": "SQUAD BATTLE",
-			"url": "/news/374"
-		},
-		{
-			"type": "event",
-			"title": "マグメル機体試験場〜FIELD-D〜",
-			"map": "24_sqa"
-		},
-		{
-			"type": "event",
-			"title": "マグメル機体試験場〜FIELD-S〜",
-			"map": "24_sqb"
+			"url": "/news/374",
+			"map": "24_sqc"
 		}
 	];
 
@@ -28741,6 +28732,15 @@
 				"stage": "24"
 			},
 			"text": "FIELD-S",
+			"class": "squad"
+		},
+		{
+			"value": "24_sqc",
+			"dataset": {
+				"layer": "[]",
+				"stage": "24"
+			},
+			"text": "FIELD-A",
 			"class": "squad"
 		}
 	];
