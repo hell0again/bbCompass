@@ -1,26 +1,31 @@
 [
     {
-        "start_time": "2016-04-04",
-        "end_time": "2016-04-10",
+        "start_time": "2016-04-11",
+        "end_time": "2016-04-17",
         "type": "national_battle_high",
-        "title": "マデルロンド大空洞〜深部暗闘〜",
-        "url": "/map/15#opr-103",
-        "map": "madelrond_b"
+        "title": "【初公開】キニシュ砂岸〜晩景の遊撃〜【特殊×】",
+        "url": "/map/19#opr-160"
     },
     {
-        "start_time": "2016-04-04",
-        "end_time": "2016-04-10",
+        "start_time": "2016-04-11",
+        "end_time": "2016-04-17",
         "type": "national_battle_low",
-        "title": "第3採掘島〜臨海決戦〜【特殊×】",
-        "url": "/map/3#opr-11",
-        "map": "island_a"
+        "title": "トラザ山岳基地〜激震の岩峰〜【特殊×】",
+        "url": "/map/4#opr-24",
+        "map": "tlaza_f"
     },
     {
-        "start_time": "2016-04-07",
-        "end_time": "2016-04-10",
+        "start_time": "2016-04-14",
+        "end_time": "2016-04-17",
         "type": "event",
-        "title": "SQUAD BATTLE",
-        "url": "/news/374",
-        "map": "24_sqc"
+        "title": "スクランブルバトル",
+        "url": "/news/379"
+    },
+    {
+        "start_time": "2016-04-18",
+        "end_time": "2016-04-24",
+        "type": "event",
+        "title": "大攻防戦",
+        "url": "/news/380"
     }
 ]
