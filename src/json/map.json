@@ -137,6 +137,7 @@
     {"value":"kinich_b", "dataset": {"layer": "[\"通路表示あり\"]", "stage": "kinich"}, "text": "火花散る渚"},
     {"value":"kinich_c", "dataset": {"layer": "[\"通路表示あり\"]", "stage": "kinich"}, "text": "波打際の熱闘"},
     {"value":"kinich_d", "dataset": {"layer": "[]", "stage": "kinich"}, "text": "遠浅の射光"},
+    {"value":"kinich_e", "dataset": {"layer": "[]", "stage": "kinich"}, "text": "晩景の遊撃"},
     {"value":"kinich_ea", "dataset": {"layer": "[]", "stage": "kinich"}, "text": "激闘の海岸線", "class": "event"},
     {"value":"kinich_ua", "dataset": {"layer": "[\"通路表示あり\"]", "stage": "kinich"}, "text": "南海の迎撃戦", "class": "union"},
     {"value":"kinich_ub", "dataset": {"layer": "[]", "stage": "kinich"}, "text": "汀の連合戦", "class": "union"},

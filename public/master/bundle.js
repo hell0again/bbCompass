@@ -27199,7 +27199,8 @@
 			"end_time": "2016-04-17",
 			"type": "national_battle_high",
 			"title": "【初公開】キニシュ砂岸〜晩景の遊撃〜【特殊×】",
-			"url": "/map/19#opr-160"
+			"url": "/map/19#opr-160",
+			"map": "kinich_e"
 		},
 		{
 			"start_time": "2016-04-11",
@@ -28546,6 +28547,14 @@
 				"stage": "kinich"
 			},
 			"text": "遠浅の射光"
+		},
+		{
+			"value": "kinich_e",
+			"dataset": {
+				"layer": "[]",
+				"stage": "kinich"
+			},
+			"text": "晩景の遊撃"
 		},
 		{
 			"value": "kinich_ea",
