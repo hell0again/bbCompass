@@ -27223,6 +27223,21 @@
 			"type": "event",
 			"title": "大攻防戦",
 			"url": "/news/380"
+		},
+		{
+			"start_time": "2016-04-18",
+			"end_time": "2016-04-24",
+			"type": "national_battle_high",
+			"title": "城塞都市バレリオ〜強攻水路〜",
+			"url": "/map/8#opr-48"
+		},
+		{
+			"start_time": "2016-04-18",
+			"end_time": "2016-04-24",
+			"type": "national_battle_low",
+			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
+			"url": "/map/6#opr-33",
+			"map": "d51_b"
 		}
 	];
 
