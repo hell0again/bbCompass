@@ -49,7 +49,7 @@
     {"value":"wuhai_f", "dataset": {"layer": "[\"上段\",\"下段\",\"全表示\"]", "stage": "wuhai"}, "text": "海港の戦渦"},
     {"value":"wuhai_ea", "dataset": {"layer": "[\"上段\",\"下段\",\"全表示\"]", "stage": "wuhai"}, "text": "激闘の港湾", "class": "event"},
     {"value":"wuhai_sa", "dataset": {"layer": "[]", "stage": "wuhai"}, "text": "赤闇の争奪戦", "class": "scramble"},
-    {"value":"valerio_a", "dataset": {"layer": "[\"建築物内部\"]", "stage": "valerio"}, "text": "強行水路"},
+    {"value":"valerio_a", "dataset": {"layer": "[\"建築物内部\"]", "stage": "valerio"}, "text": "強攻水路"},
     {"value":"valerio_b", "dataset": {"layer": "[\"建築物内部\"]", "stage": "valerio"}, "text": "巨影侵撃"},
     {"value":"valerio_c", "dataset": {"layer": "[\"建築物内部\"]", "stage": "valerio"}, "text": "血戦の城壁"},
     {"value":"valerio_d", "dataset": {"layer": "[\"建築物内部\"]", "stage": "valerio"}, "text": "高地の煙硝"},
