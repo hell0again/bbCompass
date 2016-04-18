@@ -27195,41 +27195,20 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-04-11",
-			"end_time": "2016-04-17",
-			"type": "national_battle_high",
-			"title": "【初公開】キニシュ砂岸〜晩景の遊撃〜【特殊×】",
-			"url": "/map/19#opr-160",
-			"map": "kinich_e"
-		},
-		{
-			"start_time": "2016-04-11",
-			"end_time": "2016-04-17",
-			"type": "national_battle_low",
-			"title": "トラザ山岳基地〜激震の岩峰〜【特殊×】",
-			"url": "/map/4#opr-24",
-			"map": "tlaza_f"
-		},
-		{
-			"start_time": "2016-04-14",
-			"end_time": "2016-04-17",
-			"type": "event",
-			"title": "スクランブルバトル",
-			"url": "/news/379"
-		},
-		{
 			"start_time": "2016-04-18",
 			"end_time": "2016-04-24",
 			"type": "event",
 			"title": "大攻防戦",
-			"url": "/news/380"
+			"url": "/news/380",
+			"map": "adora_ea"
 		},
 		{
 			"start_time": "2016-04-18",
 			"end_time": "2016-04-24",
 			"type": "national_battle_high",
 			"title": "城塞都市バレリオ〜強攻水路〜",
-			"url": "/map/8#opr-48"
+			"url": "/map/8#opr-48",
+			"map": "valerio_a"
 		},
 		{
 			"start_time": "2016-04-18",
@@ -27839,7 +27818,7 @@
 				"layer": "[\"建築物内部\"]",
 				"stage": "valerio"
 			},
-			"text": "強行水路"
+			"text": "強攻水路"
 		},
 		{
 			"value": "valerio_b",
