@@ -15,7 +15,8 @@ deploy() {
 export -f deploy
 
 bbcompass_cicommit() {
-    local git_cicommit=$(which git-cicommit 2>/dev/null) &&:
+    local git_cicommit
+    git_cicommit=$(which git-cicommit 2>/dev/null) && :
     if [ $? -ne 0 ]; then
         git_cicommit=".git-cicommit"
         if [ ! -f ${git_cicommit} ]; then
