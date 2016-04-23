@@ -30,5 +30,21 @@
         "title": "【ユニオンバトル】ナヴァル岩石砂漠〜赤土の連合戦〜",
         "url": "/news/388",
         "map": "navar_ua"
+    },
+    {
+        "start_time": "2016-04-25",
+        "end_time": "2016-05-01",
+        "type": "national_battle_high",
+        "title": "極地観測所セクター9〜軋轢の天望坐〜",
+        "url": "/map/23#opr-146",
+        "map": "sector_a"
+    },
+    {
+        "start_time": "2016-04-25",
+        "end_time": "2016-05-01",
+        "type": "national_battle_low",
+        "title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
+        "url": "/map/2#opr-3",
+        "map": "blouer_a"
     }
 ]
