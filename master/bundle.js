@@ -27195,30 +27195,6 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-04-18",
-			"end_time": "2016-04-24",
-			"type": "event",
-			"title": "大攻防戦",
-			"url": "/news/380",
-			"map": "adora_ea"
-		},
-		{
-			"start_time": "2016-04-18",
-			"end_time": "2016-04-24",
-			"type": "national_battle_high",
-			"title": "城塞都市バレリオ〜強攻水路〜",
-			"url": "/map/8#opr-48",
-			"map": "valerio_a"
-		},
-		{
-			"start_time": "2016-04-18",
-			"end_time": "2016-04-24",
-			"type": "national_battle_low",
-			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
-			"url": "/map/6#opr-33",
-			"map": "d51_b"
-		},
-		{
 			"start_time": "2016-04-25",
 			"end_time": "2016-05-01",
 			"type": "union_battle",
@@ -27241,6 +27217,22 @@
 			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
 			"url": "/map/2#opr-3",
 			"map": "blouer_a"
+		},
+		{
+			"start_time": "2016-05-02",
+			"end_time": "2016-05-08",
+			"type": "national_battle_high",
+			"title": "マリナセドナ大雪山〜雪濠の凱歌〜",
+			"url": "/map/21#opr-137",
+			"map": "malinasedna_a"
+		},
+		{
+			"start_time": "2016-05-02",
+			"end_time": "2016-05-08",
+			"type": "national_battle_low",
+			"title": "ベネヴィス高原地帯〜湧水の波紋〜【特殊×】",
+			"url": "/map/22#opr-139",
+			"map": "beanavis_a"
 		}
 	];
 
