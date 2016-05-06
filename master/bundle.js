@@ -27195,30 +27195,6 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-04-25",
-			"end_time": "2016-05-01",
-			"type": "union_battle",
-			"title": "【ユニオンバトル】ナヴァル岩石砂漠〜赤土の連合戦〜",
-			"url": "/news/388",
-			"map": "navar_ua"
-		},
-		{
-			"start_time": "2016-04-25",
-			"end_time": "2016-05-01",
-			"type": "national_battle_high",
-			"title": "極地観測所セクター9〜軋轢の天望坐〜",
-			"url": "/map/23#opr-146",
-			"map": "sector_a"
-		},
-		{
-			"start_time": "2016-04-25",
-			"end_time": "2016-05-01",
-			"type": "national_battle_low",
-			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
-			"url": "/map/2#opr-3",
-			"map": "blouer_a"
-		},
-		{
 			"start_time": "2016-05-02",
 			"end_time": "2016-05-08",
 			"type": "national_battle_high",
@@ -27233,6 +27209,14 @@
 			"title": "ベネヴィス高原地帯〜湧水の波紋〜【特殊×】",
 			"url": "/map/22#opr-139",
 			"map": "beanavis_a"
+		},
+		{
+			"start_time": "2016-05-02",
+			"end_time": "2016-05-08",
+			"type": "union_battle",
+			"title": "【ユニオンバトル】第3採掘島〜沿岸迎撃戦〜",
+			"url": "/news/388",
+			"map": "island_ub"
 		}
 	];
 
