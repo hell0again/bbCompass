@@ -27195,28 +27195,36 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-05-02",
-			"end_time": "2016-05-08",
+			"start_time": "2016-05-09",
+			"end_time": "2016-05-15",
 			"type": "national_battle_high",
-			"title": "マリナセドナ大雪山〜雪濠の凱歌〜",
-			"url": "/map/21#opr-137",
-			"map": "malinasedna_a"
+			"title": "ホープサイド市街地〜都市侵襲〜",
+			"url": "/map/18#opr-121",
+			"map": "hopeside_a"
 		},
 		{
-			"start_time": "2016-05-02",
-			"end_time": "2016-05-08",
+			"start_time": "2016-05-09",
+			"end_time": "2016-05-15",
 			"type": "national_battle_low",
-			"title": "ベネヴィス高原地帯〜湧水の波紋〜【特殊×】",
-			"url": "/map/22#opr-139",
-			"map": "beanavis_a"
+			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+			"url": "/map/4#opr-19",
+			"map": "tlaza_a"
 		},
 		{
-			"start_time": "2016-05-02",
-			"end_time": "2016-05-08",
-			"type": "union_battle",
-			"title": "【ユニオンバトル】第3採掘島〜沿岸迎撃戦〜",
-			"url": "/news/388",
-			"map": "island_ub"
+			"start_time": "2016-05-16",
+			"end_time": "2016-05-22",
+			"type": "national_battle_high",
+			"title": "第19号高層サイト〜天柱の兵火〜【特殊×】",
+			"url": "/map/13#opr-88",
+			"map": "highrisesite_a"
+		},
+		{
+			"start_time": "2016-05-16",
+			"end_time": "2016-05-22",
+			"type": "national_battle_low",
+			"title": "ダリーヤ遺跡群〜河底の弾雨〜【特殊×】",
+			"url": "/map/5#opr-28",
+			"map": "darya_b"
 		}
 	];
 
