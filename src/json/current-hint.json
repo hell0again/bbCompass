@@ -70,6 +70,18 @@
         "filter": {
             "url": "/news/380"
         }
+    },
+    {
+        "hint": "デ・ネブラ大落片〜激闘の高地〜",
+        "filter": {
+            "url": "/news/399"
+        }
+    },
+    {
+        "hint": "マグメル機体試験場 ～FIELD-A～",
+        "filter": {
+            "url": "/news/401"
+        }
     }
 ]
 

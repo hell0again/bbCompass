@@ -1,21 +1,5 @@
 [
     {
-        "start_time": "2016-05-09",
-        "end_time": "2016-05-15",
-        "type": "national_battle_high",
-        "title": "ホープサイド市街地〜都市侵襲〜",
-        "url": "/map/18#opr-121",
-        "map": "hopeside_a"
-    },
-    {
-        "start_time": "2016-05-09",
-        "end_time": "2016-05-15",
-        "type": "national_battle_low",
-        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-        "url": "/map/4#opr-19",
-        "map": "tlaza_a"
-    },
-    {
         "start_time": "2016-05-16",
         "end_time": "2016-05-22",
         "type": "national_battle_high",
@@ -30,5 +14,37 @@
         "title": "ダリーヤ遺跡群〜河底の弾雨〜【特殊×】",
         "url": "/map/5#opr-28",
         "map": "darya_b"
+    },
+    {
+        "start_time": "2016-05-19",
+        "end_time": "2016-05-22",
+        "type": "event",
+        "title": "＜Razer CUP＞SQUAD BATTLE",
+        "url": "/news/401",
+        "map": "24_sqc"
+    },
+    {
+        "start_time": "2016-05-23",
+        "end_time": "2016-05-29",
+        "type": "event",
+        "title": "イベントバトル開催＜大攻防戦＞",
+        "url": "/news/399",
+        "map": "denebra_ea"
+    },
+    {
+        "start_time": "2016-05-23",
+        "end_time": "2016-05-29",
+        "type": "national_battle_high",
+        "title": "ゲルベルク要塞跡〜埋伏攻路〜",
+        "url": "/map/16#opr-115",
+        "map": "gerberg_e"
+    },
+    {
+        "start_time": "2016-05-23",
+        "end_time": "2016-05-29",
+        "type": "national_battle_low",
+        "title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
+        "url": "/map/2#opr-5",
+        "map": "blouer_c"
     }
 ]
