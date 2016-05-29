@@ -1,29 +1,5 @@
 [
     {
-        "start_time": "2016-05-16",
-        "end_time": "2016-05-22",
-        "type": "national_battle_high",
-        "title": "第19号高層サイト〜天柱の兵火〜【特殊×】",
-        "url": "/map/13#opr-88",
-        "map": "highrisesite_a"
-    },
-    {
-        "start_time": "2016-05-16",
-        "end_time": "2016-05-22",
-        "type": "national_battle_low",
-        "title": "ダリーヤ遺跡群〜河底の弾雨〜【特殊×】",
-        "url": "/map/5#opr-28",
-        "map": "darya_b"
-    },
-    {
-        "start_time": "2016-05-19",
-        "end_time": "2016-05-22",
-        "type": "event",
-        "title": "＜Razer CUP＞SQUAD BATTLE",
-        "url": "/news/401",
-        "map": "24_sqc"
-    },
-    {
         "start_time": "2016-05-23",
         "end_time": "2016-05-29",
         "type": "event",
@@ -46,5 +22,29 @@
         "title": "旧ブロア市街地〜街路制圧戦〜【特殊×】",
         "url": "/map/2#opr-5",
         "map": "blouer_c"
+    },
+    {
+        "start_time": "2016-05-30",
+        "end_time": "2016-06-05",
+        "type": "union_battle",
+        "title": "【ユニオンバトル】旧ブロア市街地〜緑野の迎撃戦〜",
+        "url": "/news/405",
+        "map": "blouer_ub"
+    },
+    {
+        "start_time": "2016-05-30",
+        "end_time": "2016-06-05",
+        "type": "national_battle_high",
+        "title": "【調整あり】ロンシャ深山 〜白霧潜攻〜【特殊×】",
+        "url": "/map/17#opr-117",
+        "map": "longsha_b"
+    },
+    {
+        "start_time": "2016-05-30",
+        "end_time": "2016-06-05",
+        "type": "national_battle_low",
+        "title": "第3採掘島〜臨海決戦〜【特殊×】",
+        "url": "/map/3#opr-11",
+        "map": "island_a"
     }
 ]
