@@ -21,7 +21,7 @@
     {"value": "nesos",        "dataset": {"scale": "[1.515*0.7]"},   "text": "ネソス島実験ドーム"},
     {"value": "beanavis",     "dataset": {"scale": "[0.895]"},       "text": "ベネヴィス高原地帯"},
     {"value": "malinasedna",  "dataset": {"scale": "[0.866*0.8]"},   "text": "マリナセドナ大雪山"},
-    {"value": "sector",       "dataset": {"scale": "[0.836]"},       "text": "極地観測所セクター９"},
+    {"value": "sector",       "dataset": {"scale": "[0.836]"},       "text": "極地観測所セクター9"},
     {"value": "24",           "dataset": {"scale": "[1.515*0.7]"},   "text": "マグメル機体試験場"}
 ]
 
