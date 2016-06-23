@@ -1,41 +1,18 @@
 [
     {
-        "start_time": "2016-06-13",
-        "end_time": "2016-06-19",
-        "type": "union_battle",
-        "title": "【ユニオンバトル】ベネヴィス高原地帯〜湿地帯の連合戦〜",
-        "url": "/news/412"
-    },
-    {
-        "start_time": "2016-06-13",
-        "end_time": "2016-06-19",
+        "start_time": "2016-06-23",
+        "end_time": "2016-06-26",
         "type": "national_battle_high",
-        "title": "極洋基地ベルスク〜反目の凍視線〜",
-        "url": "/map/9#opr-152",
-        "map": "belsk_f"
+        "title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
+        "url": "/map/25#opr-163",
+        "map": "25_a"
     },
     {
-        "start_time": "2016-06-13",
-        "end_time": "2016-06-19",
+        "start_time": "2016-06-23",
+        "end_time": "2016-06-26",
         "type": "national_battle_low",
-        "title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
-        "url": "/map/6#opr-33",
-        "map": "d51_b"
-    },
-    {
-        "start_time": "2016-06-20",
-        "end_time": "2016-06-22",
-        "type": "national_battle_high",
-        "title": "第3採掘島〜夕暮れの戦火〜【特殊×】",
-        "url": "/map/3#opr-12",
-        "map": "island_b"
-    },
-    {
-        "start_time": "2016-06-20",
-        "end_time": "2016-06-22",
-        "type": "national_battle_low",
-        "title": "第3採掘島〜臨海決戦〜【特殊×】　",
-        "url": "/map/3#opr-11",
-        "map": "island_a"
+        "title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
+        "url": "/map/25#opr-163",
+        "map": "25_a"
     }
 ]
