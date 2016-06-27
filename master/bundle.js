@@ -27195,20 +27195,34 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-06-23",
-			"end_time": "2016-06-26",
+			"start_time": "2016-06-27",
+			"end_time": "2016-07-03",
 			"type": "national_battle_high",
+			"title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜",
+			"url": "/map/25#opr-163",
+			"map": "25_a"
+		},
+		{
+			"start_time": "2016-06-27",
+			"end_time": "2016-07-03",
+			"type": "national_battle_low",
 			"title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
 			"url": "/map/25#opr-163",
 			"map": "25_a"
 		},
 		{
-			"start_time": "2016-06-23",
-			"end_time": "2016-06-26",
-			"type": "national_battle_low",
-			"title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
-			"url": "/map/25#opr-163",
-			"map": "25_a"
+			"start_time": "2016-07-01",
+			"end_time": "2016-07-03",
+			"type": "event",
+			"title": "スカッドバトル",
+			"url": "/news/438"
+		},
+		{
+			"start_time": "2016-07-04",
+			"end_time": "2016-07-10",
+			"type": "event",
+			"title": "拠点制圧戦",
+			"url": "/news/437"
 		}
 	];
 
