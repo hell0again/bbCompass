@@ -2496,7 +2496,7 @@ export default class BB {
             test = false;
         }
 
-        var visible = false,
+        var visible = true,
             px_rad = this.meter_to_pixel(radius),
             area = this.ourJc.circle(x, y, px_rad, color, true)
             .opacity(0.3).visible(visible).level(1),
