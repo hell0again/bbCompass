@@ -2765,7 +2765,7 @@
 	                test = false;
 	            }
 
-	            var visible = false,
+	            var visible = true,
 	                px_rad = this.meter_to_pixel(radius),
 	                area = this.ourJc.circle(x, y, px_rad, color, true).opacity(0.3).visible(visible).level(1),
 	                line = this.ourJc.circle(x, y, px_rad, color, false).opacity(1).visible(visible).level(1),
@@ -14422,11 +14422,11 @@
 	    ],
 
 	    // valueは[偵察範囲,進む距離,進む時間]
-	    "object_scout": [{ "value": "[80,200,5.5]", "label": "ラーク偵察機", "text": "ラーク" }, { "value": "[50,500,8]", "label": "ファルコン偵察機", "text": "ファルコン" }, { "value": "[120,200,11]", "label": "アウル偵察機", "text": "アウル" }, { "value": "[250,20,0.6]", "label": "ロビン偵察機", "text": "ロビン" }, { "value": "[90,50,20]", "label": "ストーク偵察機", "text": "ストーク" }, { "value": "[100,200,11]", "label": "ギィ", "text": "ギィ" }],
+	    "object_scout": [{ "value": "[80,200,5.5]", "label": "ラーク偵察機", "text": "ラーク" }, { "value": "[65,500,8]", "label": "ファルコン偵察機", "text": "ファルコン" }, { "value": "[120,200,11]", "label": "アウル偵察機", "text": "アウル" }, { "value": "[250,20,0.6]", "label": "ロビン偵察機", "text": "ロビン" }, { "value": "[100,50,20]", "label": "ストーク偵察機", "text": "ストーク" }, { "value": "[100,200,11]", "label": "ギィ", "text": "ギィ" }],
 	    // valueは 索敵半径を指定
-	    "object_sensor": [{ "value": "60", "label": "索敵センサー", "text": "初期センサー" }, { "value": "45", "label": "小型索敵センサー", "text": "小型センサー" }, { "value": "90", "label": "広域索敵センサー", "text": "広域センサー" }, { "value": "55", "label": "軽量索敵センサー", "text": "軽量センサー" }],
+	    "object_sensor": [{ "value": "60", "label": "索敵センサー", "text": "初期センサー" }, { "value": "45", "label": "小型索敵センサー", "text": "小型センサー" }, { "value": "95", "label": "広域索敵センサー", "text": "広域センサー" }, { "value": "55", "label": "軽量索敵センサー", "text": "軽量センサー" }],
 	    // valueは [索敵半径,角度]
-	    "object_radar": [{ "value": "[200,60]", "label": "レーダー", "text": "レーダー" }, { "value": "[160,120]", "label": "レーダーII", "text": "レーダーII" }, { "value": "[130,360]", "label": "レーダーIII", "text": "レーダーIII" }],
+	    "object_radar": [{ "value": "[210,60]", "label": "レーダー", "text": "レーダー" }, { "value": "[170,120]", "label": "レーダーII", "text": "レーダーII" }, { "value": "[140,360]", "label": "レーダーIII", "text": "レーダーIII" }],
 	    // valueは [射出半径,索敵半径]
 	    "object_sonde": [{ "value": "[350,65]", "label": "滞空索敵弾", "text": "滞空索敵弾" }, { "value": "[450,55]", "label": "小型索敵弾", "text": "小型索敵弾" }, { "value": "[250,80]", "label": "広域索敵弾", "text": "広域索敵弾" }],
 	    // valueは 索敵半径
