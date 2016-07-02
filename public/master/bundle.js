@@ -312,7 +312,7 @@
 
 	            var area = this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.3).layer(this.id);
 	            var areacol = this._ourJc.circle(0, 0, px_rad, this._color, false).opacity(1).lineStyle({
-	                lineWidth: 3
+	                lineWidth: 1
 	            }).layer(this.id);
 	            var line = this._ourJc.line({
 	                points: [[0, 0], [ptx, pty]],
@@ -328,7 +328,8 @@
 	            var ptcol = this._ourJc.circle(ptx, pty, this._bbObj.ptcolsize, this._color, true).layer(this.id).opacity(1);
 	            var pt = this._ourJc.circle(ptx, pty, this._bbObj.ptsize, "#FFFFFF", true).layer(this.id);
 	            var pttra = this._ourJc.circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true).layer(this.id);
-	            var radius = this._ourJc.text(Math.floor(this._radius) + "m", ptx / 2, pty / 2).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
+	            var rText = !window.debugMode ? Math.floor(this._radius) + "m" : Math.floor(this._bbObj.meter_to_pixel(this._radius)) + "px, " + Math.floor(this._radius) + "m";
+	            var radius = this._ourJc.text(rText, ptx / 2, pty / 2).baseline("top").align('center').color('#FFFFFF').font('15px sans-serif').layer(this.id);
 	            var debugPos;
 	            var debugCb;
 	            if (!window.debugMode) {
@@ -357,7 +358,7 @@
 	                    var meterPosStr = '(' + Math.floor(meterP.x) + 'm, ' + Math.floor(meterP.y) + 'm)';
 	                    var angle = Math.floor(Math.atan2(ptpos.y - pixelP.y, ptpos.x - pixelP.x) * 360 / (2 * Math.PI));
 	                    angle = (360 + 90 + angle) % 360;
-	                    console.log([ptpos.x - pixelP.x, ptpos.y - pixelP.y]);
+	                    // console.log([ptpos.x - pixelP.x, ptpos.y - pixelP.y]);
 	                    debugPos.string(pixelPosStr + ' / ' + meterPosStr + '(' + angle + ')');
 	                };
 	                this._ourJc.layer(this.id).draggable(debugCb);
@@ -377,7 +378,8 @@
 	                line.points([[0, 0], [pt._x + pt._transformdx, pt._y + pt._transformdy]]);
 	                area.attr('radius', newrad);
 	                areacol.attr('radius', newrad);
-	                radius.translateTo(centerx, centery - txtheight).string(Math.floor(_this2._bbObj.pixel_to_meter(newrad)) + "m");
+	                var rText = !window.debugMode ? Math.floor(newrad) + "m" : Math.floor(_this2._bbObj.meter_to_pixel(newrad)) + "px, " + Math.floor(newrad) + "m";
+	                radius.translateTo(centerx, centery - txtheight).string(rText);
 	                obj._radius = _this2._bbObj.pixel_to_meter(newrad);
 	                obj._ptpos = {
 	                    x: pt._x + pt._transformdx,
@@ -27215,7 +27217,8 @@
 			"end_time": "2016-07-03",
 			"type": "event",
 			"title": "スカッドバトル",
-			"url": "/news/438"
+			"url": "/news/438",
+			"map": "26_a"
 		},
 		{
 			"start_time": "2016-07-04",
@@ -27223,6 +27226,22 @@
 			"type": "event",
 			"title": "拠点制圧戦",
 			"url": "/news/437"
+		},
+		{
+			"start_time": "2016-07-04",
+			"end_time": "2016-07-10",
+			"type": "national_battle_high",
+			"title": "ネソス実験島ドーム〜構造α-66〜",
+			"url": "/map/20#opr-145",
+			"map": "nesos_c"
+		},
+		{
+			"start_time": "2016-07-04",
+			"end_time": "2016-07-10",
+			"type": "national_battle_low",
+			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
+			"url": "/map/2#opr-3",
+			"map": "blouer_a"
 		}
 	];
 
@@ -27405,6 +27424,13 @@
 				"scale": "[1.138*0.7]"
 			},
 			"text": "第5再開発島ラナクア"
+		},
+		{
+			"value": "26",
+			"dataset": {
+				"scale": "[1]"
+			},
+			"text": "マグメル操練場"
 		}
 	];
 
@@ -28779,6 +28805,14 @@
 				"stage": "25"
 			},
 			"text": "晴空下の熱風"
+		},
+		{
+			"value": "26_a",
+			"dataset": {
+				"layer": "[]",
+				"stage": "26"
+			},
+			"text": "PLAN-U2"
 		}
 	];
 

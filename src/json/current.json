@@ -20,7 +20,8 @@
         "end_time": "2016-07-03",
         "type": "event",
         "title": "スカッドバトル",
-        "url": "/news/438"
+        "url": "/news/438",
+        "map": "26_a"
     },
     {
         "start_time": "2016-07-04",
@@ -28,5 +29,21 @@
         "type": "event",
         "title": "拠点制圧戦",
         "url": "/news/437"
+    },
+    {
+        "start_time": "2016-07-04",
+        "end_time": "2016-07-10",
+        "type": "national_battle_high",
+        "title": "ネソス実験島ドーム〜構造α-66〜",
+        "url": "/map/20#opr-145",
+        "map": "nesos_c"
+    },
+    {
+        "start_time": "2016-07-04",
+        "end_time": "2016-07-10",
+        "type": "national_battle_low",
+        "title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
+        "url": "/map/2#opr-3",
+        "map": "blouer_a"
     }
 ]

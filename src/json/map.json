@@ -163,6 +163,7 @@
     {"value":"24_sqa", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-D", "class": "squad"},
     {"value":"24_sqb", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-S", "class": "squad"},
     {"value":"24_sqc", "dataset": {"layer": "[]", "stage": "24"}, "text": "FIELD-A", "class": "squad"},
-    {"value":"25_a", "dataset": {"layer": "[]", "stage": "25"}, "text": "晴空下の熱風"}
+    {"value":"25_a", "dataset": {"layer": "[]", "stage": "25"}, "text": "晴空下の熱風"},
+    {"value":"26_a", "dataset": {"layer": "[]", "stage": "26"}, "text": "PLAN-U2"}
 ]
 

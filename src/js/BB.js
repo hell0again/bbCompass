@@ -185,7 +185,7 @@ class BB_circle extends BB_base {
             .circle(0, 0, px_rad, this._color, false)
             .opacity(1)
             .lineStyle({
-                lineWidth: 3
+                lineWidth: 1
             })
             .layer(this.id);
         var line = this._ourJc
@@ -226,8 +226,11 @@ class BB_circle extends BB_base {
         var pttra = this._ourJc
             .circle(ptx, pty, this._bbObj.pttrasize, "rgba(0,0,0,0)", true)
             .layer(this.id);
+        var rText = (!window.debugMode) ?
+            Math.floor(this._radius) + "m":
+            Math.floor(this._bbObj.meter_to_pixel(this._radius)) + "px, " + Math.floor(this._radius) + "m";
         var radius = this._ourJc
-            .text(Math.floor(this._radius) + "m", ptx / 2, pty / 2)
+            .text(rText, ptx / 2, pty / 2)
             .baseline("top")
             .align('center')
             .color('#FFFFFF')
@@ -267,7 +270,7 @@ class BB_circle extends BB_base {
                 var meterPosStr = `(${Math.floor(meterP.x)}m, ${Math.floor(meterP.y)}m)`;
                 var angle = Math.floor(Math.atan2(ptpos.y - pixelP.y, ptpos.x - pixelP.x) * 360 / (2 * Math.PI));
                 angle = (360 + 90 + angle) % 360;
-                console.log([ptpos.x - pixelP.x, ptpos.y - pixelP.y]);
+                // console.log([ptpos.x - pixelP.x, ptpos.y - pixelP.y]);
                 debugPos.string(`${pixelPosStr} / ${meterPosStr}(${angle})`);
             };
             this._ourJc.layer(this.id).draggable(debugCb);
@@ -290,8 +293,11 @@ class BB_circle extends BB_base {
             ]);
             area.attr('radius', newrad);
             areacol.attr('radius', newrad);
+            var rText = (!window.debugMode) ?
+                Math.floor(newrad) + "m":
+                Math.floor(this._bbObj.meter_to_pixel(newrad)) + "px, " + Math.floor(newrad) + "m";
             radius.translateTo(centerx, centery - txtheight)
-                .string(Math.floor(this._bbObj.pixel_to_meter(newrad)) + "m");
+                .string(rText);
             obj._radius = this._bbObj.pixel_to_meter(newrad);
             obj._ptpos = {
                 x: pt._x + pt._transformdx,

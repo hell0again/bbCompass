@@ -23,6 +23,7 @@
     {"value": "malinasedna",  "dataset": {"scale": "[0.866*0.8]"},   "text": "マリナセドナ大雪山"},
     {"value": "sector",       "dataset": {"scale": "[0.836]"},       "text": "極地観測所セクター9"},
     {"value": "24",           "dataset": {"scale": "[1.515*0.7]"},   "text": "マグメル機体試験場"},
-    {"value": "25",           "dataset": {"scale": "[1.138*0.7]"},   "text": "第5再開発島ラナクア"}
+    {"value": "25",           "dataset": {"scale": "[1.138*0.7]"},   "text": "第5再開発島ラナクア"},
+    {"value": "26",           "dataset": {"scale": "[1]"},   "text": "マグメル操練場"}
 ]
 
