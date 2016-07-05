@@ -27197,35 +27197,12 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-06-27",
-			"end_time": "2016-07-03",
-			"type": "national_battle_high",
-			"title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜",
-			"url": "/map/25#opr-163",
-			"map": "25_a"
-		},
-		{
-			"start_time": "2016-06-27",
-			"end_time": "2016-07-03",
-			"type": "national_battle_low",
-			"title": "【初公開】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
-			"url": "/map/25#opr-163",
-			"map": "25_a"
-		},
-		{
-			"start_time": "2016-07-01",
-			"end_time": "2016-07-03",
-			"type": "event",
-			"title": "スカッドバトル",
-			"url": "/news/438",
-			"map": "26_a"
-		},
-		{
 			"start_time": "2016-07-04",
 			"end_time": "2016-07-10",
 			"type": "event",
 			"title": "拠点制圧戦",
-			"url": "/news/437"
+			"url": "/news/437",
+			"map": "darya_ec"
 		},
 		{
 			"start_time": "2016-07-04",
@@ -27242,6 +27219,14 @@
 			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
 			"url": "/map/2#opr-3",
 			"map": "blouer_a"
+		},
+		{
+			"start_time": "2016-07-11",
+			"end_time": "2016-07-18",
+			"type": "union_battle",
+			"title": "【ユニオンバトル】城塞都市バレリオ〜山塞の迎撃戦〜",
+			"url": "/map/8#opr-56",
+			"map": "valerio_ub"
 		}
 	];
 
@@ -27283,7 +27268,7 @@
 			"dataset": {
 				"scale": "[107/63*0.7]"
 			},
-			"text": "ダリーヤ遺跡"
+			"text": "ダリーヤ遺跡群"
 		},
 		{
 			"value": "d51",
@@ -27709,6 +27694,15 @@
 				"stage": "darya"
 			},
 			"text": "炎雨降らす砲座",
+			"class": "event"
+		},
+		{
+			"value": "darya_ec",
+			"dataset": {
+				"layer": "[]",
+				"stage": "darya"
+			},
+			"text": "旧跡奪取戦",
 			"class": "event"
 		},
 		{

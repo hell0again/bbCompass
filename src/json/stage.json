@@ -3,7 +3,7 @@
     {"value": "blouer",       "dataset": {"scale": "[1.137*0.7]"},   "text": "旧ブロア市街地"},
     {"value": "island",       "dataset": {"scale": "[1.378*0.7]"},   "text": "第三採掘島"},
     {"value": "tlaza",        "dataset": {"scale": "[160/100*0.7]"}, "text": "トラザ山岳基地"},
-    {"value": "darya",        "dataset": {"scale": "[107/63*0.7]"},  "text": "ダリーヤ遺跡"},
+    {"value": "darya",        "dataset": {"scale": "[107/63*0.7]"},  "text": "ダリーヤ遺跡群"},
     {"value": "d51",          "dataset": {"scale": "[1.540*0.7]"},   "text": "放棄区画D51"},
     {"value": "wuhai",        "dataset": {"scale": "[1.336*0.7]"},   "text": "ウーハイ産業港"},
     {"value": "valerio",      "dataset": {"scale": "[1.068*0.7]"},   "text": "城塞都市バレリオ"},
