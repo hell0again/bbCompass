@@ -588,7 +588,7 @@ export default class BBCQuery {
                                 rad = buff.getUint16(),
                                 pos = buff.getPos();
 
-                            obj = bbobj.add_clearingSonar(objname, rad, color,
+                            obj = bbobj.add_clearingsonar(objname, rad, color,
                                 function() {
                                     this.moveTo(pos.x, pos.y)
                                         .redraw();

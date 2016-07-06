@@ -178,11 +178,15 @@ class QueryV1 {
         let qs = str.split("&")
         let o = {}
         for (let i=0; i<qs.length; i++) {
-            let kv = qs[i].split("=")
-            if (kv.length == 2) {
-                o[kv[0]] = kv[1]
+            let pos = qs[i].indexOf("=")
+            if (0 < pos) {
+                let key = qs[i].substring(0, pos)
+                let val = qs[i].substring(pos + 1)
+                o[key] = val
             } else {
-                throw new Error("invalid query")
+                if (0 < qs[i].length) {
+                    throw new Error("invalid query")
+                }
             }
         }
         return o
