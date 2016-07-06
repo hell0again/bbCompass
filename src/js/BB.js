@@ -785,6 +785,42 @@ class BB_radar extends BB_base {
 }
 
 //
+//BB_clearingSonarオブジェクト
+//
+class BB_clearingsonar extends BB_base {
+    constructor(_bbObj, _text, _radius, _color, _callback) {
+        super(_bbObj);
+        if (_color === undefined) {
+            _color = 'rgb(255, 0, 0)';
+        }
+        this.id = UUID.v1();
+
+        this.type = "clearingsonar";
+        this._text = _text;
+        this._radius = _radius;
+        this._color = _color;
+        //描画して登録。初期座標は偵察半径分ずらす
+        this.draw();
+        var px_rad = this._bbObj.meter_to_pixel(this._radius);
+        this.move(px_rad, px_rad);
+        this.regist();
+        if (typeof(_callback) === "function") {
+            _callback.apply(this);
+        }
+    }
+    draw() {
+        var px_rad = this._bbObj.meter_to_pixel(this._radius);
+        this._ourJc.circle(0, 0, px_rad, this._color, false).opacity(1).layer(this.id);
+        this._ourJc.circle(0, 0, px_rad, this._color, true).opacity(0.5).layer(this.id);
+        this._ourJc.circle(0, 0, this._bbObj.ptsize, this._color, true).layer(this.id).color('#FFFFFF');
+        this._ourJc.text(this._text, 0, -10)
+            .align('center').layer(this.id).color('#FFFFFF').font('15px sans-serif');
+        this._ourJc.layer(this.id).draggable();
+        return this;
+    }
+}
+
+//
 //BB_sondeオブジェクト
 //
 class BB_sonde extends BB_base {
@@ -2568,6 +2604,10 @@ export default class BB {
 
     add_sensor(string, radius, color, _callback) {
         return new BB_sensor(this, string, radius, color, _callback);
+    }
+
+    add_clearingsonar(string, radius, color, _callback) {
+        return new BB_clearingsonar(this, string, radius, color, _callback);
     }
 
     add_radar(string, radius, angle, color, _callback) {

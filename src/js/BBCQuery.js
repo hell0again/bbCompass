@@ -582,6 +582,20 @@ export default class BBCQuery {
                         }());
                         break;
 
+                    case 0x31:
+                        (function() { //clearingsonar
+                            var color = buff.getCol(),
+                                rad = buff.getUint16(),
+                                pos = buff.getPos();
+
+                            obj = bbobj.add_clearingSonar(objname, rad, color,
+                                function() {
+                                    this.moveTo(pos.x, pos.y)
+                                        .redraw();
+                                });
+                        }());
+                        break;
+
                     default:
                         obj = undefined;
                         console.error("object type not supported (" + objtype + ")");
@@ -772,6 +786,13 @@ export default class BBCQuery {
                     objdata = objdata.concat(BufferView.setStr(obj._file));
                     objdata = objdata.concat(BufferView.setPos(obj.position()));
                     objdata = objdata.concat(BufferView.setFloat32(obj.rotAngle()));
+                    break;
+
+                case 'clearingsonar':
+                    objdata.unshift(0x31);
+                    objdata = objdata.concat(BufferView.setCol(obj._color));
+                    objdata = objdata.concat(BufferView.setInt16(obj._radius));
+                    objdata = objdata.concat(BufferView.setPos(obj.position()));
                     break;
 
                 default:

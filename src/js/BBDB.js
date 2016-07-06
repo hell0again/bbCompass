@@ -76,6 +76,11 @@ var BBDB = {
         {"value": "[55,160]", "label": "Vセンサー投射機", "text": "Vセンサー"},
         {"value": "[40,130]", "label": "小型Vセンサー投射機", "text": "小型Vセンサー"},
     ],
+    // valueは 索敵半径
+    "object_clearingsonar": [
+        {"value": "80", "label": "ソナー", "text": "ソナー"},
+        {"value": "60", "label": "ソナーM", "text": "ソナーM"},
+    ],
     // valueは [射程,爆発半径,着弾誤差半径]
     "object_howitzer": [
         {"value": "[300,25,15]", "label": "タイタン榴弾砲", "text": "タイタン"},

@@ -279,6 +279,7 @@ function loadObjectLists() {
         "object_scout": "#lst_scout",
         "object_sensor": "#lst_sensor",
         "object_radar": "#lst_radar",
+        "object_clearingsonar": "#lst_clearingsonar",
         "object_sonde": "#lst_sonde",
         "object_ndsensor": "#lst_ndsensor",
         "object_vsensor": "#lst_vsensor",
@@ -513,6 +514,9 @@ function bindEventHandler() {
     $("#lst_radar").change(function() {
         $("#name_radar").val($(this).find("option:selected").text());
     });
+    $("#lst_clearingsonar").change(function() {
+        $("#name_clearingsonar").val($(this).find("option:selected").text());
+    });
     $("#lst_sonde").change(function() {
         $("#name_sonde").val($(this).find("option:selected").text());
     });
@@ -585,6 +589,9 @@ function bindEventHandler() {
     });
     $("#submit_radar").bind('tap', function(e) {
         setRadar();
+    });
+    $("#submit_clearingsonar").bind('tap', function(e) {
+        setClearingSonar();
     });
     $("#submit_sonde").bind('tap', function(e) {
         setSonde();
@@ -734,7 +741,7 @@ function onLoadMapData(data, bbobj) {
             //x位置、y位置、種類、テストフラグ
             bbobj.put_logo(logoData[i][0], logoData[i][1],
                 logoData[i][2],
-                debugMode);
+                window.debugMode);
         }
     }
 }
@@ -849,6 +856,29 @@ function setRadar() {
         closeMenuTab();
     }
 }
+
+//クリアリングソナー
+function setClearingSonar() {
+    if (!$("#lst_clearingsonar").val()) {
+        return;
+    }
+    if (!$("#col_clearingsonar").val()) {
+        return;
+    }
+
+    var obj = bbobj.add_clearingsonar($("#name_clearingsonar").val(), $("#lst_clearingsonar").val(), $("#col_clearingsonar").val());
+
+    if (obj) {
+        addObject(obj.id, coalesceName(obj));
+        obj.move($("#" + CanvasDivName).scrollLeft(), $("#" + CanvasDivName).scrollTop());
+        obj.mousedown(function() {
+            $("#lst_object").val(obj.id);
+            return false;
+        });
+        closeMenuTab();
+    }
+}
+
 
 //滞空索敵弾
 function setSonde() {
@@ -1240,6 +1270,7 @@ var coalesceNames = {
     "scout": "(偵察機)",
     "sensor": "(センサー)",
     "radar": "(レーダー)",
+    "clearingsonar": "(ソナー)",
     'sonde': "(索敵弾)",
     'ndsensor': "(ND)",
     'vsensor': "(Vセンサー)",
