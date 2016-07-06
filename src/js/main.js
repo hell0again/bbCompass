@@ -728,6 +728,15 @@ function onLoadMapData(data, bbobj) {
                 undefined, window.debugMode);
         }
     }
+    if ("logo" in data) {
+        var logoData = data["logo"];
+        for (i = 0; i < logoData.length; i++) {
+            //x位置、y位置、種類、テストフラグ
+            bbobj.put_logo(logoData[i][0], logoData[i][1],
+                logoData[i][2],
+                debugMode);
+        }
+    }
 }
 
 //マップをロードする

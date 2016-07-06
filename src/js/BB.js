@@ -2531,6 +2531,35 @@ export default class BB {
     }
 
     //
+    //ロゴ配置
+    //
+    put_logo(x, y, type, test) {
+        if (x === undefined) {
+            return undefined;
+        }
+        if (y === undefined) {
+            return undefined;
+        }
+        if (test === undefined) {
+            test = false;
+        }
+        var path =
+            (type === "grf")? "image/grf.png":
+            (type === "eust")? "image/eust.png": "";
+        if (path === undefined) {
+            return undefined;
+        }
+        var visible = true;
+        var image = new Image;
+        image.src = path + '?' + salt;
+        image.onload = () => {
+            var i = this.ourJc.image(image, x + image.width * (-0.5), y + image.height * (-0.5), image.width, image.height)
+                .opacity(0.9).visible(visible).level(1);
+            // .layer(this.id);
+        }
+    }
+
+    //
     //オブジェクト描画
     //
     add_scout(string, radius, length, duration, color, _callback) {
