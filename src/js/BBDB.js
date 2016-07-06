@@ -104,7 +104,7 @@ var BBDB = {
     "object_icon": [
         {"value": "image/assault.png", "label": "強襲", "text": "強襲"},
         {"value": "image/heavy.png", "label": "重火力", "text": "重火力"},
-        {"value": "image/snipe.png", "label": "狙撃", "text": "狙撃"},
+        {"value": "image/scout.png", "label": "遊撃", "text": "遊撃"},
         {"value": "image/support.png", "label": "支援", "text": "支援"},
         {"value": "image/absorb.png", "label": "吸収装置", "text": "吸収装置"},
         {"value": "image/mine.png", "label": "マイン", "text": "マイン"},
