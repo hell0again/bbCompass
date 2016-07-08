@@ -85,12 +85,15 @@
       <div class="celltitle" id="head_graph">オブジェクト</div>
       <div id="objsel_area">
         <div id="objselector" class="selector">
-          <div class="option" data-target="objscout"><img src="./image/menu/scout.png" alt="メニュー偵察機"><br>偵察機</div>
           <div class="option" data-target="objsensor"><img src="./image/menu/sensor.png" alt="メニューセンサー"><br>センサー</div>
-          <div class="option" data-target="objradar"><img src="./image/menu/radar.png" alt="メニューレーダー"><br>レーダー</div>
-          <div class="option" data-target="objsonde"><img src="./image/menu/sonde.png" alt="メニュー滞空"><br>滞空索敵</div>
           <div class="option" data-target="objndsensor"><img src="./image/menu/ndsensor.png" alt="メニューＮＤ"><br>ＮＤ索敵</div>
           <div class="option" data-target="objvsensor"><img src="./image/menu/vsensor.png" alt="メニューV"><br>Ｖセンサ</div>
+          <div class="option" data-target="objsonde"><img src="./image/menu/sonde.png" alt="メニュー滞空"><br>滞空索敵</div>
+
+          <div class="option" data-target="objscout"><img src="./image/menu/scout.png" alt="メニュー偵察機"><br>偵察機</div>
+          <div class="option" data-target="objradar"><img src="./image/menu/radar.png" alt="メニューレーダー"><br>レーダー</div>
+          <div class="option" data-target="objclearingsonar"><img src="./image/menu/clearingsonar.png" alt="メニュークリアリングソナー"><br>ソナー</div>
+
           <div class="option" data-target="objhowitzer"><img src="./image/menu/howitzer.png" alt="メニュー砲撃"><br>砲撃</div>
           <div class="option" data-target="objwaft"><img src="./image/menu/waft.png" alt="メニューワフト"><br>ワフト</div>
           <div class="option" data-target="objmisc"><img src="./image/menu/misc.png" alt="メニューその他"><br>その他</div>
@@ -101,26 +104,6 @@
           <div class="option" data-target="objfreehand"><img src="./image/menu/freehand.png" alt="メニュー手書き"><br>手書き</div>
         </div>
       </div>
-
-      <!--偵察機-->
-      <div class="setobj" id="objscout"><form name="scout">
-        <div class="name">名前&nbsp;</div>
-        <div class="form"><input id="name_scout" type="text" class="formtext"></div>
-        <div class="name">色&nbsp;</div>
-        <div class="form">
-          <select id="col_scout" class="colorpick">
-            <!-- ... -->
-          </select>
-        </div>
-
-        <div class="name">種別&nbsp;</div>
-        <div class="form">
-          <select id="lst_scout" size="4" class="formlst">
-            <!-- ... -->
-          </select>
-        </div>
-        <div class="submitbtn"><button id="submit_scout" type="button">設置</button></div>
-      </form></div>
 
       <!--センサー-->
       <div class="setobj hidden" id="objsensor"><form name="sensor">
@@ -139,44 +122,6 @@
             </select>
         </div>
         <div class="submitbtn"><button id="submit_sensor" type="button">設置</button></div>
-      </form></div>
-
-      <!--レーダー-->
-      <div class="setobj hidden" id="objradar"><form name="radar">
-        <div class="name">名前：</div>
-        <div class="form"><input id="name_radar" type="text" class="formtext"></div>
-        <div class="name">色：</div>
-        <div class="form">
-          <select id="col_radar" class="colorpick">
-            <!-- ... -->
-          </select>
-        </div>
-        <div class="name">種別：</div>
-        <div class="form">
-          <select id="lst_radar" size="4" class="formlst">
-            <!-- ... -->
-          </select>
-        </div>
-        <div class="submitbtn"><button id="submit_radar" type="button">設置</button></div>
-      </form></div>
-
-      <!--滞空索敵弾ー-->
-      <div class="setobj hidden" id="objsonde"><form name="sonde">
-        <div class="name">名前：</div>
-        <div class="form"><input id="name_sonde" type="text" class="formtext"></div>
-        <div class="name">色：</div>
-        <div class="form">
-          <select id="col_sonde" class="colorpick">
-            <!-- ... -->
-          </select>
-        </div>
-        <div class="name">種別：</div>
-        <div class="form">
-          <select id="lst_sonde" size="4" class="formlst">
-            <!-- ... -->
-          </select>
-        </div>
-        <div class="submitbtn"><button id="submit_sonde" type="button">設置</button></div>
       </form></div>
 
       <!--ND索敵センサー-->
@@ -215,6 +160,83 @@
           </select>
         </div>
         <div class="submitbtn"><button id="submit_vsensor" type="button">設置</button></div>
+      </form></div>
+
+      <!--滞空索敵弾ー-->
+      <div class="setobj hidden" id="objsonde"><form name="sonde">
+        <div class="name">名前：</div>
+        <div class="form"><input id="name_sonde" type="text" class="formtext"></div>
+        <div class="name">色：</div>
+        <div class="form">
+          <select id="col_sonde" class="colorpick">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="name">種別：</div>
+        <div class="form">
+          <select id="lst_sonde" size="4" class="formlst">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="submitbtn"><button id="submit_sonde" type="button">設置</button></div>
+      </form></div>
+
+      <!--偵察機-->
+      <div class="setobj" id="objscout"><form name="scout">
+        <div class="name">名前&nbsp;</div>
+        <div class="form"><input id="name_scout" type="text" class="formtext"></div>
+        <div class="name">色&nbsp;</div>
+        <div class="form">
+          <select id="col_scout" class="colorpick">
+            <!-- ... -->
+          </select>
+        </div>
+
+        <div class="name">種別&nbsp;</div>
+        <div class="form">
+          <select id="lst_scout" size="4" class="formlst">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="submitbtn"><button id="submit_scout" type="button">設置</button></div>
+      </form></div>
+
+      <!--レーダー-->
+      <div class="setobj hidden" id="objradar"><form name="radar">
+        <div class="name">名前：</div>
+        <div class="form"><input id="name_radar" type="text" class="formtext"></div>
+        <div class="name">色：</div>
+        <div class="form">
+          <select id="col_radar" class="colorpick">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="name">種別：</div>
+        <div class="form">
+          <select id="lst_radar" size="4" class="formlst">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="submitbtn"><button id="submit_radar" type="button">設置</button></div>
+      </form></div>
+
+      <!--クリアリングソナー-->
+      <div class="setobj hidden" id="objclearingsonar"><form name="clearingsonar">
+        <div class="name">名前：</div>
+        <div class="form"><input id="name_clearingsonar" type="text" class="formtext"></div>
+        <div class="name">色：</div>
+        <div class="form">
+          <select id="col_clearingsonar" class="colorpick">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="name">種別：</div>
+        <div class="form">
+          <select id="lst_clearingsonar" size="4" class="formlst">
+            <!-- ... -->
+          </select>
+        </div>
+        <div class="submitbtn"><button id="submit_clearingsonar" type="button">設置</button></div>
       </form></div>
 
       <!--榴弾-->
