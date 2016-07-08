@@ -13,14 +13,7 @@
     "url": "https://github.com/hell0again/bbCompass/issues"
   },
   "dependencies": {
-    "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-plugin-unassert": "^2.1.0",
-    "babel-preset-power-assert": "^1.0.0",
-    "babel-preset-stage-2": "^6.5.0",
-    "babel-register": "^6.9.0",
-    "bower": "^1.7.9",
-    "local-web-server": "^1.2.1",
-    "minimist": "^1.2.0"
+    "http-server": "^0.9.0"
   },
   "devDependencies": {
     "ava": "^0.15.2",
@@ -28,10 +21,16 @@
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-object-assign": "~6.5.0",
     "babel-plugin-transform-react-jsx": "~6.5.2",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-plugin-unassert": "^2.1.0",
     "babel-preset-es2015": "^6.5.0",
+    "babel-preset-power-assert": "^1.0.0",
     "babel-preset-react": "~6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-register": "^6.9.0",
     "babel-runtime": "^6.9.2",
     "babelify": "~7.2.0",
+    "bower": "^1.7.9",
     "bower-webpack-plugin": "~0.1.9",
     "css-loader": "~0.18.0",
     "es6-collections": "^0.5.5",
@@ -44,6 +43,7 @@
     "intelli-espower-loader": "~1.0.1",
     "json-loader": "~0.5.4",
     "lodash": "~3.10.1",
+    "minimist": "^1.2.0",
     "power-assert": "~1.2.0",
     "react": "~0.14.7",
     "react-dom": "~0.14.7",
@@ -68,7 +68,7 @@
     "deploy": "git subtree push --prefix public/ origin gh-pages",
     "deploy-force": "git push origin $(git subtree split --prefix public/ origin gh-pages):gh-pages --force",
     "postinstall": "./node_modules/bower/bin/bower --config.interactive=false --allow-root install",
-    "start": "ws --directory public/ --port ${PORT:-8000}",
+    "start": "http-server --port ${PORT:-8000} ./public",
     "test": "tape test/*.js",
     "update": "./update.sh"
   },
