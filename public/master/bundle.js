@@ -27189,6 +27189,22 @@
 		},
 		{
 			"start_time": "2016-07-11",
+			"end_time": "2016-07-17",
+			"type": "national_battle_high",
+			"title": " 旧ブロア市街地〜激戦の丘〜【特殊×】",
+			"url": "/map/2#opr-4",
+			"map": "blouer_b"
+		},
+		{
+			"start_time": "2016-07-11",
+			"end_time": "2016-07-17",
+			"type": "national_battle_low",
+			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+			"url": "/map/4#opr-19",
+			"map": "tlaza_a"
+		},
+		{
+			"start_time": "2016-07-11",
 			"end_time": "2016-07-18",
 			"type": "union_battle",
 			"title": "【ユニオンバトル】城塞都市バレリオ〜山塞の迎撃戦〜",
