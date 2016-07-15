@@ -149,7 +149,7 @@
     {"value":"nesos_sa", "dataset": {"layer": "[]", "stage": "nesos"}, "text": "蜂巣争奪戦", "class": "scramble"},
     {"value":"nesos_ea", "dataset": {"layer": "[]", "stage": "nesos"}, "text": "構造α‐8", "class":"event"},
     {"value":"beanavis_a", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "湧水の波紋"},
-    {"value":"beanavis_b", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "祝福無き礼拝堂"},
+    {"value":"beanavis_b", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "祝福なき礼拝堂"},
     {"value":"beanavis_c", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "石橋の眼下"},
     {"value":"beanavis_d", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "蒼天の黒火龍"},
     {"value":"beanavis_e", "dataset": {"layer": "[]", "stage": "beanavis"}, "text": "教会堂を望む"},
