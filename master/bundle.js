@@ -13849,7 +13849,8 @@
 	    // valueは [索敵半径(Aモード),索敵半径(Bモード)]
 	    "object_vsensor": [
 	    { "value": "[55,160]", "label": "Vセンサー投射機", "text": "Vセンサー" }, 
-	    { "value": "[40,130]", "label": "小型Vセンサー投射機", "text": "小型Vセンサー" }], 
+	    { "value": "[40,130]", "label": "小型Vセンサー投射機", "text": "小型Vセンサー" }, 
+	    { "value": "[85,220]", "label": "広域Vセンサー投射機", "text": "広域Vセンサー" }], 
 
 	    // valueは 索敵半径
 	    "object_clearingsonar": [
@@ -27164,36 +27165,20 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-07-11",
-			"end_time": "2016-07-18",
-			"type": "union_battle",
-			"title": "【ユニオンバトル】城塞都市バレリオ〜山塞の迎撃戦〜",
-			"url": "/map/8#opr-56",
-			"map": "valerio_ub"
-		},
-		{
-			"start_time": "2016-07-18",
-			"end_time": "2016-07-24",
-			"type": "event",
-			"title": "【大攻防戦】ゲルベルク要塞跡〜激闘の塁砦〜",
-			"url": "/news/460",
-			"map": "gerberg_ea"
-		},
-		{
-			"start_time": "2016-07-18",
-			"end_time": "2016-07-24",
+			"start_time": "2016-07-25",
+			"end_time": "2016-07-31",
 			"type": "national_battle_high",
-			"title": "キニシュ砂岸〜白砂進軍〜",
-			"url": "/map/19#opr-128",
-			"map": "kinich_a"
+			"title": "【初公開】ウーハイ産業港〜朝駆けの外港〜【特殊×】",
+			"url": "/map/7#opr-166",
+			"map": "wuhai_g"
 		},
 		{
-			"start_time": "2016-07-18",
-			"end_time": "2016-07-24",
+			"start_time": "2016-07-25",
+			"end_time": "2016-07-31",
 			"type": "national_battle_low",
-			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
-			"url": "/map/6#opr-33",
-			"map": "d51_b"
+			"title": "第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
+			"url": "/map/25#opr-163",
+			"map": "25_a"
 		}
 	];
 
@@ -27793,6 +27778,14 @@
 				"stage": "wuhai"
 			},
 			"text": "海港の戦渦"
+		},
+		{
+			"value": "wuhai_g",
+			"dataset": {
+				"layer": "[]",
+				"stage": "wuhai"
+			},
+			"text": "朝駆けの外港"
 		},
 		{
 			"value": "wuhai_ea",
