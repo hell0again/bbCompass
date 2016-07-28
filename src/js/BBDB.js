@@ -75,6 +75,7 @@ var BBDB = {
     "object_vsensor": [
         {"value": "[55,160]", "label": "Vセンサー投射機", "text": "Vセンサー"},
         {"value": "[40,130]", "label": "小型Vセンサー投射機", "text": "小型Vセンサー"},
+        {"value": "[85,220]", "label": "広域Vセンサー投射機", "text": "広域Vセンサー"},
     ],
     // valueは 索敵半径
     "object_clearingsonar": [

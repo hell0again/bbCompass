@@ -48,6 +48,7 @@
     {"value":"wuhai_d", "dataset": {"layer": "[\"上段\",\"下段\",\"全表示\"]", "stage": "wuhai"}, "text": "艦上の交錯線"},
     {"value":"wuhai_e", "dataset": {"layer": "[\"上段\",\"下段\",\"全表示\"]", "stage": "wuhai"}, "text": "残照の閃光"},
     {"value":"wuhai_f", "dataset": {"layer": "[\"上段\",\"下段\",\"全表示\"]", "stage": "wuhai"}, "text": "海港の戦渦"},
+    {"value":"wuhai_g", "dataset": {"layer": "[]", "stage": "wuhai"}, "text": "朝駆けの外港"},
     {"value":"wuhai_ea", "dataset": {"layer": "[\"上段\",\"下段\",\"全表示\"]", "stage": "wuhai"}, "text": "激闘の港湾", "class": "event"},
     {"value":"wuhai_sa", "dataset": {"layer": "[]", "stage": "wuhai"}, "text": "赤闇の争奪戦", "class": "scramble"},
     {"value":"valerio_a", "dataset": {"layer": "[\"建築物内部\"]", "stage": "valerio"}, "text": "強攻水路"},
