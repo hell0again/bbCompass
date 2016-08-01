@@ -27165,20 +27165,27 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-07-25",
-			"end_time": "2016-07-31",
+			"start_time": "2016-08-01",
+			"end_time": "2016-08-07",
 			"type": "national_battle_high",
-			"title": "【初公開】ウーハイ産業港〜朝駆けの外港〜【特殊×】",
-			"url": "/map/7#opr-166",
-			"map": "wuhai_g"
+			"title": "【調整あり】極地観測所セクター9〜軋轢の天望坐〜",
+			"url": "/map/23#opr-146",
+			"map": "sector_a"
 		},
 		{
-			"start_time": "2016-07-25",
-			"end_time": "2016-07-31",
+			"start_time": "2016-08-01",
+			"end_time": "2016-08-07",
 			"type": "national_battle_low",
-			"title": "第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
-			"url": "/map/25#opr-163",
-			"map": "25_a"
+			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
+			"url": "/map/2#opr-3",
+			"map": "blouer_a"
+		},
+		{
+			"start_time": "2016-08-05",
+			"end_time": "2016-08-07",
+			"type": "event",
+			"title": "スカッドバトル",
+			"url": "/news/477"
 		}
 	];
 
