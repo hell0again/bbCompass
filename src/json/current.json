@@ -22,5 +22,29 @@
         "title": "スカッドバトル",
         "url": "/news/477",
         "map": "26_a"
+    },
+    {
+        "start_time": "2016-08-08",
+        "end_time": "2016-08-14",
+        "type": "national_battle_high",
+        "title": "極洋基地ベルスク〜純白の先途〜",
+        "url": "/map/9#opr-59",
+        "map": "belsk_b"
+    },
+    {
+        "start_time": "2016-08-08",
+        "end_time": "2016-08-14",
+        "type": "national_battle_low",
+        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+        "url": "/map/4#opr-19",
+        "map": "tlaza_a"
+    },
+    {
+        "start_time": "2016-08-08",
+        "end_time": "2016-08-14",
+        "type": "union_battle",
+        "title": "【ユニオンバトル】ホープサイド市街地〜新都市連合戦〜",
+        "url": "/news/484",
+        "map": "hopeside_ub"
     }
 ]
