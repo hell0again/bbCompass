@@ -27165,43 +27165,35 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-08-08",
-			"end_time": "2016-08-14",
-			"type": "national_battle_low",
-			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-			"url": "/map/4#opr-19",
-			"map": "tlaza_a"
-		},
-		{
-			"start_time": "2016-08-08",
-			"end_time": "2016-08-14",
-			"type": "union_battle",
-			"title": "【ユニオンバトル】ホープサイド市街地〜新都市連合戦〜",
-			"url": "/news/484",
-			"map": "hopeside_ub"
-		},
-		{
-			"start_time": "2016-08-08",
-			"end_time": "2016-08-14",
-			"type": "national_battle_high",
-			"title": "【全国A】極洋基地ベルスク〜純白の先途〜",
-			"url": "/map/9#opr-59",
-			"map": "belsk_b"
-		},
-		{
-			"start_time": "2016-08-13",
-			"end_time": "2016-08-14",
-			"type": "national_battle_high",
-			"title": "【全国B】【14時〜22時】【調整あり】アドラ火山連峰〜渦巻く炎海〜【特殊×】",
-			"url": "/map/10#opr-70",
-			"map": "adora_e"
-		},
-		{
 			"start_time": "2016-08-15",
 			"end_time": "2016-08-21",
 			"type": "union_battle",
 			"title": "【ユニオンバトル】極地観測所セクター9〜駆動壁の迎撃戦〜",
 			"url": "news/487"
+		},
+		{
+			"start_time": "2016-08-15",
+			"end_time": "2016-08-21",
+			"type": "national_battle_high",
+			"title": "【全国A】ロンシャ深山〜山門の抗衡〜【特殊×】",
+			"url": "/map/17#opr-116",
+			"map": "longsha_a"
+		},
+		{
+			"start_time": "2016-08-15",
+			"end_time": "2016-08-21",
+			"type": "national_battle_high",
+			"title": "【全国B】【14時〜22時】トラザ山岳基地〜砂塵の死線〜【特殊×】【要請×】",
+			"url": "/map/4#opr-19",
+			"map": "tlaza_a"
+		},
+		{
+			"start_time": "2016-08-15",
+			"end_time": "2016-08-21",
+			"type": "national_battle_low",
+			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
+			"url": "/map/6#opr-33",
+			"map": "d51_b"
 		}
 	];
 
