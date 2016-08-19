@@ -27194,6 +27194,29 @@
 			"title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
 			"url": "/map/6#opr-33",
 			"map": "d51_b"
+		},
+		{
+			"start_time": "2016-08-22",
+			"end_time": "2016-08-28",
+			"type": "event",
+			"title": "【拠点制圧戦】【初公開】極洋基地ベルスク〜極寒衝突戦〜",
+			"url": "/news/498"
+		},
+		{
+			"start_time": "2016-08-22",
+			"end_time": "2016-08-28",
+			"type": "national_battle_high",
+			"title": "放棄区画D51〜連携の標柱〜【特殊×】【要請×】",
+			"url": "/map/6#opr-38",
+			"map": "d51_f"
+		},
+		{
+			"start_time": "2016-08-22",
+			"end_time": "2016-08-28",
+			"type": "national_battle_low",
+			"title": "【調整あり】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
+			"url": "/map/25#opr-163",
+			"map": "25_a"
 		}
 	];
 
