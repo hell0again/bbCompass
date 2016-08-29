@@ -98,6 +98,7 @@
     {"value":"highrisesite_c", "dataset": {"layer": "[\"1F\",\"2F\",\"3F\",\"全表示\"]", "stage": "highrisesite"}, "text": "雲上死線"},
     {"value":"highrisesite_d", "dataset": {"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]", "stage": "highrisesite"}, "text": "天を突く一閃"},
     {"value":"highrisesite_e", "dataset": {"layer": "[]", "stage": "highrisesite"}, "text": "高空立体戦"},
+    {"value":"highrisesite_f", "dataset": {"layer": "[]", "stage": "highrisesite"}, "text": "奇策縦横"},
     {"value":"highrisesite_ea", "dataset": {"layer": "[\"B1F/1F\",\"2F\",\"3F\",\"全表示\"]", "stage": "highrisesite"}, "text": "激闘の高楼", "class": "event"},
     {"value":"navar_a", "dataset": {"layer": "[\"通路表示あり\"]", "stage": "navar"}, "text": "戦端の大鉄橋"},
     {"value":"navar_b", "dataset": {"layer": "[\"通路表示あり\"]", "stage": "navar"}, "text": "断崖の相克"},

@@ -4,7 +4,7 @@ var OreController = React.createClass({
   getInitialState() {
     return {
       visibility: "visible",
-      opacity: 0.5,
+      opacity: 0.6,
       scale: 1.00,
       x: 0,
       y: 0,
@@ -55,7 +55,12 @@ var OreController = React.createClass({
   getControllerStyle() {
     var css = {
       position: "fixed",
-      top: (this.props.label == "base") ? 8: 32,
+      top:
+          (this.props.label == "layer1") ? 8:
+          (this.props.label == "layer2") ? 8 +24:
+          (this.props.label == "layer3") ? 8 +24 +24:
+          (this.props.label == "layer4") ? 8 +24 +24 +24:
+          0,
       left: 10,
     };
     return css;
@@ -68,7 +73,7 @@ var OreController = React.createClass({
     var css = {
       visibility: this.state.visibility,
       position: "absolute",
-      top: 60,
+      top: 120,
       left: 10,
       opacity: this.state.opacity,
       transform: transform,
@@ -101,8 +106,10 @@ var OreController = React.createClass({
 });
 ReactDOM.render(
   <div className="react-Root">
-    <OreController label="base" />
-    <OreController label="compare" />
+    <OreController label="layer1" />
+    <OreController label="layer2" />
+    <OreController label="layer3" />
+    <OreController label="layer4" />
   </div>,
   document.getElementById('content')
 );

@@ -7,9 +7,9 @@ DEFAULT_BUILD_VERSION=master
 : ${BUILD_VERSION:=${DEFAULT_BUILD_VERSION}}
 echo "BUILD_VERSION=${BUILD_VERSION}"
 SRC_DIR=${SCRIPT_DIR}/src
-TMP_DIR=${SCRIPT_DIR}/public/_tmp
+TMP_DIR=${SCRIPT_DIR}/docs/_tmp
 BAK_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t bbc-build)
-DST_DIR=${SCRIPT_DIR}/public/${BUILD_VERSION}
+DST_DIR=${SCRIPT_DIR}/docs/${BUILD_VERSION}
 
 ## let $TMP_DIR exists and is empty
 mv -f ${TMP_DIR} ${BAK_DIR}/_tmp 2>/dev/null ||:

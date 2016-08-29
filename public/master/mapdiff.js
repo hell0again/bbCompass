@@ -18944,7 +18944,7 @@ var OreController = React.createClass({ displayName: 'OreController',
   getInitialState: function getInitialState() {
     return { 
       visibility: "visible", 
-      opacity: 0.5, 
+      opacity: 0.6, 
       scale: 1.00, 
       x: 0, 
       y: 0, 
@@ -18995,7 +18995,12 @@ var OreController = React.createClass({ displayName: 'OreController',
   getControllerStyle: function getControllerStyle() {
     var css = { 
       position: "fixed", 
-      top: this.props.label == "base" ? 8 : 32, 
+      top: 
+      this.props.label == "layer1" ? 8 : 
+      this.props.label == "layer2" ? 8 + 24 : 
+      this.props.label == "layer3" ? 8 + 24 + 24 : 
+      this.props.label == "layer4" ? 8 + 24 + 24 + 24 : 
+      0, 
       left: 10 };
 
     return css;}, 
@@ -19008,7 +19013,7 @@ var OreController = React.createClass({ displayName: 'OreController',
     var css = { 
       visibility: this.state.visibility, 
       position: "absolute", 
-      top: 60, 
+      top: 120, 
       left: 10, 
       opacity: this.state.opacity, 
       transform: transform, 
@@ -19041,8 +19046,10 @@ var OreController = React.createClass({ displayName: 'OreController',
 
 ReactDOM.render(
 React.createElement('div', { className: 'react-Root' }, 
-React.createElement(OreController, { label: 'base' }), 
-React.createElement(OreController, { label: 'compare' })), 
+React.createElement(OreController, { label: 'layer1' }), 
+React.createElement(OreController, { label: 'layer2' }), 
+React.createElement(OreController, { label: 'layer3' }), 
+React.createElement(OreController, { label: 'layer4' })), 
 
 document.getElementById('content'));
 

@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 module.exports = {
     output: {
-        filename: "public/_tmp/bundle.js"
+        filename: "docs/_tmp/bundle.js"
     },
     module: {
         preLoaders: [

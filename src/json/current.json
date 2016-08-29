@@ -1,56 +1,41 @@
 [
     {
-        "start_time": "2016-08-15",
-        "end_time": "2016-08-21",
-        "type": "union_battle",
-        "title": "【ユニオンバトル】極地観測所セクター9〜駆動壁の迎撃戦〜",
-        "url": "news/487"
+        "start_time": "2016-08-29",
+        "end_time": "2016-09-04",
+        "type": "rush_challenge",
+        "title": "ラッシュチャレンジ",
+        "url": ""
     },
     {
-        "start_time": "2016-08-15",
-        "end_time": "2016-08-21",
+        "start_time": "2016-08-29",
+        "end_time": "2016-09-04",
         "type": "national_battle_high",
-        "title": "【全国A】ロンシャ深山〜山門の抗衡〜【特殊×】",
-        "url": "/map/17#opr-116",
-        "map": "longsha_a"
+        "title": "第19号高層サイト〜奇策縦横〜【特殊×】",
+        "url": "",
+        "map": "highrisesite_f"
     },
     {
-        "start_time": "2016-08-15",
-        "end_time": "2016-08-21",
-        "type": "national_battle_high",
-        "title": "【全国B】【14時〜22時】トラザ山岳基地〜砂塵の死線〜【特殊×】【要請×】",
-        "url": "/map/4#opr-19",
-        "map": "tlaza_a"
-    },
-    {
-        "start_time": "2016-08-15",
-        "end_time": "2016-08-21",
+        "start_time": "2016-08-29",
+        "end_time": "2016-09-04",
         "type": "national_battle_low",
-        "title": "放棄区画Ｄ51〜白銀死都〜【特殊×】",
-        "url": "/map/6#opr-33",
-        "map": "d51_b"
+        "title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
+        "url": "/map/2#opr-3",
+        "map": "blouer_a"
     },
     {
-        "start_time": "2016-08-22",
-        "end_time": "2016-08-28",
+        "start_time": "2016-09-02",
+        "end_time": "2016-09-04",
         "type": "event",
-        "title": "【拠点制圧戦】【初公開】極洋基地ベルスク〜極寒衝突戦〜",
-        "url": "/news/498"
+        "title": "【スカッドバトル】マグメル操練場〜PLAN−U2〜",
+        "url": "/news/514",
+        "map": "26_a"
     },
     {
-        "start_time": "2016-08-22",
-        "end_time": "2016-08-28",
-        "type": "national_battle_high",
-        "title": "放棄区画D51〜連携の標柱〜【特殊×】【要請×】",
-        "url": "/map/6#opr-38",
-        "map": "d51_f"
-    },
-    {
-        "start_time": "2016-08-22",
-        "end_time": "2016-08-28",
-        "type": "national_battle_low",
-        "title": "【調整あり】第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
-        "url": "/map/25#opr-163",
-        "map": "25_a"
+        "start_time": "2016-09-05",
+        "end_time": "2016-09-11",
+        "type": "event",
+        "title": "【大攻防戦】マデルロンド大空洞〜激闘の岩窟〜",
+        "url": "/news/515",
+        "map": "madelrond_ea"
     }
 ]
