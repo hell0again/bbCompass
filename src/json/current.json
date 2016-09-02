@@ -37,5 +37,21 @@
         "title": "【大攻防戦】マデルロンド大空洞〜激闘の岩窟〜",
         "url": "/news/515",
         "map": "madelrond_ea"
+    },
+    {
+        "start_time": "2016-09-05",
+        "end_time": "2016-09-11",
+        "type": "national_battle_high",
+        "title": "ベネヴィス高原地帯〜湧水の波紋〜",
+        "url": "/map/22#opr-139",
+        "map": "beanavis_a"
+    },
+    {
+        "start_time": "2016-09-05",
+        "end_time": "2016-09-11",
+        "type": "national_battle_low",
+        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
+        "url": "/map/4#opr-19",
+        "map": "tlaza_a"
     }
 ]

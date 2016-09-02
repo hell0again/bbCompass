@@ -69,7 +69,7 @@
     "_deploy": "git subtree push --prefix public/ origin gh-pages",
     "_deploy-force": "git push origin $(git subtree split --prefix public/ origin gh-pages):gh-pages --force",
     "postinstall": "./node_modules/bower/bin/bower --config.interactive=false --allow-root install",
-    "start": "http-server --port ${PORT:-8000} ./docs",
+    "start": "http-server -p ${PORT:-8000} ./docs",
     "test": "tape test/*.js",
     "update": "./update.sh"
   },
