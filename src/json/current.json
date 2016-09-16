@@ -1,37 +1,5 @@
 [
     {
-        "start_time": "2016-09-05",
-        "end_time": "2016-09-11",
-        "type": "event",
-        "title": "【大攻防戦】マデルロンド大空洞〜激闘の岩窟〜",
-        "url": "/news/515",
-        "map": "madelrond_ea"
-    },
-    {
-        "start_time": "2016-09-05",
-        "end_time": "2016-09-11",
-        "type": "national_battle_high",
-        "title": "ベネヴィス高原地帯〜湧水の波紋〜",
-        "url": "/map/22#opr-139",
-        "map": "beanavis_a"
-    },
-    {
-        "start_time": "2016-09-05",
-        "end_time": "2016-09-11",
-        "type": "national_battle_low",
-        "title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-        "url": "/map/4#opr-19",
-        "map": "tlaza_a"
-    },
-    {
-        "start_time": "2016-09-10",
-        "end_time": "2016-09-10",
-        "type": "national_battle_high",
-        "title": "【全国B】【時間制限あり】スカービ渓谷〜砂上の激突〜【特殊×】【要請×】",
-        "url": "/map/1#opr-2",
-        "map": "map_b"
-    },
-    {
         "start_time": "2016-09-12",
         "end_time": "2016-09-19",
         "type": "national_battle_high",
@@ -46,5 +14,36 @@
         "title": "放棄区画D51〜白銀死都〜【特殊×】",
         "url": "/map/6#opr-33",
         "map": "d51_b"
+    },
+    {
+        "start_time": "2016-09-17",
+        "end_time": "2016-09-19",
+        "type": "rush_challenge",
+        "title": "ラッシュチャレンジ",
+        "url": ""
+    },
+    {
+        "start_time": "2016-09-19",
+        "end_time": "2016-09-25",
+        "type": "union_battle",
+        "title": "【ユニオンバトル】第三採掘島〜黄昏の連合戦〜",
+        "url": "/map/3#opr-16",
+        "map": "island_ua"
+    },
+    {
+        "start_time": "2016-09-20",
+        "end_time": "2016-09-25",
+        "type": "national_battle_high",
+        "title": "ホープサイド市街地〜都市侵襲〜",
+        "url": "/map/18#opr-121",
+        "map": "hopeside_a"
+    },
+    {
+        "start_time": "2016-09-20",
+        "end_time": "2016-09-25",
+        "type": "national_battle_low",
+        "title": "第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
+        "url": "/map/25#opr-163",
+        "map": "25_a"
     }
 ]
