@@ -27165,66 +27165,57 @@
 
 	module.exports = [
 		{
-			"start_time": "2016-09-26",
-			"end_time": "2016-10-02",
-			"type": "national_battle_low",
-			"title": "旧ブロア市街地〜熱戦の河畔〜【特殊×】",
-			"url": "/map/2#opr-3",
-			"map": "blouer_a"
-		},
-		{
-			"start_time": "2016-09-26",
-			"end_time": "2016-10-02",
-			"type": "national_battle_high",
-			"title": "【全国A】第3採掘島〜夕暮れの戦火〜",
-			"url": "/map/3#opr-12",
-			"map": "island_b"
-		},
-		{
-			"start_time": "2016-09-30",
-			"end_time": "2016-10-02",
+			"start_time": "2016-10-10",
+			"end_time": "2016-10-16",
 			"type": "event",
-			"title": "【スカッドバトル】【初公開】マグメル操練場〜PLAN−K〜",
-			"url": "/news/548"
+			"title": "【拠点制圧戦】【初公開】ネソス島実験ドーム〜構造β−07〜",
+			"url": "/news/555"
 		},
 		{
-			"start_time": "2016-10-01",
-			"end_time": "2016-10-02",
-			"type": "national_battle_high",
-			"title": "【全国B】】ネソス島実験ドーム〜構造β−05〜【時間制限あり】【特殊×】",
-			"url": "/map/20#opr-135"
-		},
-		{
-			"start_time": "2016-10-03",
-			"end_time": "2016-10-07",
-			"type": "national_battle_high",
-			"title": "旧ブロア市街地〜激戦の丘〜【特殊×】",
-			"url": "/map/2#opr-4",
-			"map": "blouer_b"
-		},
-		{
-			"start_time": "2016-10-03",
-			"end_time": "2016-10-09",
-			"type": "event",
-			"title": "【大攻防戦】ウーハイ産業港〜激闘の港湾〜",
-			"url": "/news/549",
-			"map": "wuhai_ea"
-		},
-		{
-			"start_time": "2016-10-03",
-			"end_time": "2016-10-09",
+			"start_time": "2016-10-11",
+			"end_time": "2016-10-16",
 			"type": "national_battle_low",
-			"title": "トラザ山岳基地〜砂塵の死線〜【特殊×】",
-			"url": "/map/4#opr-19",
-			"map": "tlaza_a"
+			"title": "放棄区画D51〜白銀死都〜【特殊×】",
+			"url": "/map/6#opr-33",
+			"map": "d51_b"
 		},
 		{
-			"start_time": "2016-10-08",
-			"end_time": "2016-10-10",
+			"start_time": "2016-10-15",
+			"end_time": "2016-10-16",
 			"type": "national_battle_high",
-			"title": "極地観測所セクター9 〜軋轢の天望坐〜【特殊×】",
-			"url": "/map/23#opr-146",
-			"map": "sector_a"
+			"title": "【全国B】ベネヴィス高原地帯〜祝福なき礼拝堂〜【時間制限あり】",
+			"url": "/map/22#opr-140",
+			"map": "beanavis_b"
+		},
+		{
+			"start_time": "2016-10-15",
+			"end_time": "2016-10-16",
+			"type": "national_battle_high",
+			"title": "【全国A】第3採掘島〜前線猛爆〜",
+			"url": "/map/3#opr-15",
+			"map": "island_d"
+		},
+		{
+			"start_time": "2016-10-17",
+			"end_time": "2016-10-23",
+			"type": "union_battle",
+			"title": "【ユニオンバトル】【初公開】第5再開発島ラナクア〜海端迎撃戦〜",
+			"url": "/news/565"
+		},
+		{
+			"start_time": "2016-10-17",
+			"end_time": "2016-10-23",
+			"type": "national_battle_high",
+			"title": "【初公開】第5再開発島ラナクア〜疾風迅炎〜",
+			"url": ""
+		},
+		{
+			"start_time": "2016-10-17",
+			"end_time": "2016-10-23",
+			"type": "national_battle_low",
+			"title": "第5再開発島ラナクア〜晴空下の熱風〜【特殊×】",
+			"url": "/map/25#opr-163",
+			"map": "25_a"
 		}
 	];
 
